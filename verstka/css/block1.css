@@ -311,9 +311,9 @@ body {
     border: 1px solid #dfe6e7;
     text-align: center;
 }
-.video-section-video-container video{
-    height: 100%;
-    width: auto;
+.video-section-video-container iframe{
+    height: 80%;
+    width: 90%;
 }
 .video-section-text-container{
     position: relative;
@@ -357,6 +357,19 @@ footer .container{
 .comments{
     padding-top: 75px;
     padding-bottom: 50px;
+}
+.comment-content{
+    color: #85d6de;
+}
+.author-name{
+    color: white;
+}
+.comment-text{
+    color: white;
+}
+.twitter-actions ul li{
+    display: inline;
+    list-style-type: none;
 }
 .footer-hr{
     color:#2c3e50;
