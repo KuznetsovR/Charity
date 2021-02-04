@@ -1,7 +1,38 @@
-.row{
+.rows{
     margin-top: 100px;
     margin-left: 100px;
     margin-right: 100px;
+}
+.add-note{
+    border: 1px solid black;
+    margin-right: 50px;
+    position: relative;
+    height: 150px;
+    width: 250px;
+    display: inline-block;
+    background-color: rgb(9, 255, 0);
+    cursor: pointer;
+}
+.plus{
+    width: 100px;
+    height: 100px;
+    margin-top:25px;
+    margin-left:75px;
+    text-align: center;
+}
+.plus div{
+    background-color: white;
+}
+.vertical{
+    width: 3px;
+    height: 100px;
+    margin-left: 47px;
+}
+.horizontal{
+    position: relative;
+    width: 100px;
+    top: -50px;
+    height: 3px;
 }
 .note{
     border: 1px solid black;
@@ -10,6 +41,7 @@
     height: 150px;
     width: 250px;
     display: inline-block;
+    cursor: pointer;
 }
 .note:last-child {
     margin-right: 0;
@@ -26,7 +58,7 @@
     bottom: 10%;
     width: 90%;
     background-color: cadetblue;
-    border-radius: 10%;
+    border-radius: 20px;
     text-align: center;
 }
 .note-content{
@@ -39,7 +71,7 @@
     right: 5%;
     bottom: 10%;
     background-color: cadetblue;
-    border-radius: 5%;
+    border-radius: 5px;
     width: 90%;
     height: 80%;
 }
@@ -60,7 +92,7 @@
     max-height: 100%;
     z-index: 1010;
     background-color: white;
-    border-radius: 10%;
+    border-radius: 5px;
 }
 .opened{
     display: flex;
@@ -70,12 +102,12 @@
 }
 
 .modal-inner{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    padding: 20px 50px 20px 20px;
+    margin: 40px;
+}
+.modal-inner-top{
+    display: flex;
+    justify-content: space-between;
 }
 .modal-overlay{
     z-index: 1000;
@@ -85,4 +117,28 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.505);
+    cursor: pointer;
+}
+.note-name-modal{
+    border-radius: 5px;
+    width:40%;
+    border: 2px solid rgb(77, 124, 255);
+}
+.submit-button{
+    background-color: rgb(0, 255, 42);
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.note-content-modal{
+    width:520px;
+    margin-top: 30px;
+}
+.textarea{
+    width:100%;
+}
+.ck-editor__editable_inline{
+    height: 200px;
 }
