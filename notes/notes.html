@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="notes-styles.css" type="text/css">
     <title>Document</title>
 </head>
+
 <body>
     <div class='container'>
-        <div class='notes'>
-            <div class='row'>
-                <div class='note'>
-                    <div class='note-heading'>
-                        <div class='note-heading-text'>
-                            ss
-                        </div>
-                    </div>
-                    <div class='note-content'>
-                        <div class='note-content-text'>
-                            sds
-                        </div>
+        <div class='rows'>
+            <div class='notes'>
+                <div class="add-note">
+                    <div class="plus">
+                        <div class="vertical"></div>
+                        <div class="horizontal"></div>
                     </div>
                 </div>
-                <div class='note'>
-                    <div class='note-heading'>
-                        <div class='note-heading-text'>
-                            ss
-                        </div>
-                    </div>
-                    <div class='note-content'>
-                        <div class='note-content-text'>
-                            sds
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
     <div class='modal closed' id='modal'>
         <div class='modal-inner'>
+            <div class="modal-inner-top">
+                <input type="text" class="note-name-modal" placeholder="Название заметки">
+                <button class='submit-button'>Submit</button>
+            </div>
+            <div class='note-content-modal'>
+                <textarea name="" id="" rows="15" class="textarea"></textarea>
+            </div>
+            <div class="delete-btn-wrapper">
+                <button class="delete-button">Delete</button>
+            </div>
         </div>
     </div>
     <div class='modal-overlay closed' id='modal-overlay'></div>
     <script src="notes.js"></script>
+    <!--
+        <div id="editor"></div>
+     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor                                                                      //wysiwyg для заметки, но можно сделать textarea
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>   
+    -->
+    
 </body>
+
 </html>
