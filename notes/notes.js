@@ -17,161 +17,174 @@ let notesArr = [];
 let noteViews = [];
 
 class Note {
-    constructor(id, heading, content) {
-        this.id = id;
-        this.heading = heading;
-        this.content = content;
-    }
+  constructor(id, heading, content) {
+    this.id = id;
+    this.heading = heading;
+    this.content = content;
+  }
 }
 
 class NoteView {
-    constructor(note) {
-        this.note = note;
-    }
-    renderTo(parent) {
-        const newNote = document.createElement(`div`);
-        newNote.classList.add("note");
+  constructor(note) {
+    this.note = note;
+    console.log(note)
+  }
+  renderTo(parent) {
+    const newNote = document.createElement(`div`);
+    newNote.classList.add("note");
 
-        const newHeadingText = document.createElement(`div`);
-        newHeadingText.classList.add("note-heading-text");
-        newHeadingText.textContent = this.note.heading;
+    const newHeadingText = document.createElement(`div`);
+    newHeadingText.classList.add("note-heading-text");
+    newHeadingText.textContent = this.note.heading;
 
-        const newHeading = document.createElement(`div`);
-        newHeading.classList.add("note-heading");
+    const newHeading = document.createElement(`div`);
+    newHeading.classList.add("note-heading");
 
-        const newContentText = document.createElement(`div`);
-        newContentText.classList.add("note-content-text");
-        newContentText.textContent = this.note.content;
+    const newContentText = document.createElement(`div`);
+    newContentText.classList.add("note-content-text");
+    newContentText.textContent = this.note.content;
 
-        const newContent = document.createElement(`div`);
-        newContent.classList.add("note-content");
+    const newContent = document.createElement(`div`);
+    newContent.classList.add("note-content");
 
-        newHeading.appendChild(newHeadingText);
-        newContent.appendChild(newContentText);
-        newNote.appendChild(newHeading);
-        newNote.appendChild(newContent);
-        parent.appendChild(newNote);
-    }
+    newHeading.appendChild(newHeadingText);
+    newContent.appendChild(newContentText);
+    newNote.appendChild(newHeading);
+    newNote.appendChild(newContent);
+    parent.appendChild(newNote);
+  }
 }
-
-
 
 function renderNotes() {
-    for (let note of notesArr) {
-        const view = new NoteView(note)
-        view.renderTo(fragment);
-        noteViews.push(view);
+  for (let note of notesArr) {
+    const view = new NoteView(note);
+    view.renderTo(fragment);
+    noteViews.push(view);
+  }
+  notesField.appendChild(fragment);
+
+  Changenotes();
+  noteName = document.querySelector(".note-name-modal"); //сделать апдейт переменных;
+  noteHeading = document.querySelector(".note-heading-text"); //not in modal
+  noteContent = document.querySelector(".note-content-text"); //not in modal
+  textarea = document.querySelector(".textarea");
+}
+
+function localStorageLoad() {
+  //вытаскивание из localstorage
+  let localStorageNotes = localStorage.getItem("notes");
+  if (localStorageNotes === null) {
+    return;
+  }
+  notesArr = JSON.parse(localStorageNotes);
+  notesId = notesArr.length++;
+}
+
+function opener() {                         //открытие
+  modal.classList.remove("closed");
+  modalOverlay.classList.remove("closed");
+  modal.classList.add("opened");
+  modalOverlay.classList.add("opened");
+}
+
+function insertTextInModal(){ 
+  findtargetId();
+  noteName.value = notesArr[targetId-1].heading;
+  textarea.value = notesArr[targetId-1].content;
+}
+
+
+function clearInputs() {
+  noteName.value = "";
+  textarea.value = "";
+}
+
+adder.onclick = function () {  //добавление
+  opener();
+  btn.onclick = function () {
+    if(noteName.value===''||textarea.value===''){
+      return
     }
-    notesField.appendChild(fragment);
-
-
-    notesChanger();
-    noteName = document.querySelector(".note-name-modal");              //сделать апдейт переменных;
-    noteHeading = document.querySelector(".note-heading-text"); //not in modal
-    noteContent = document.querySelector(".note-content-text"); //not in modal
-    textarea = document.querySelector(".textarea");
-}
-
-
-
-function localStorageLoad() {                               //вытаскивание из localstorage
-    let localStorageNotes = localStorage.getItem('notes');
-    if(localStorageNotes===null){
-        return
-    };
-    notesArr = JSON.parse(localStorageNotes);
-}
-
-
-
-
-
-function opener() {                                         //открытие
-    modal.classList.remove("closed");
-    modalOverlay.classList.remove("closed");
-    modal.classList.add("opened");
-    modalOverlay.classList.add("opened");
-}
-
-function modalContentChange() {
-    if (noteName.value === null) {
-        noteName.value = '';
-        textarea.value = '';
-    } else {
-        noteName.value = noteHeading.textContent;
-        textarea.value = noteContent.textContent;
-    }
-}
-
-adder.onclick = function () {                             //добавление
-    opener();
-    noteName.value = '';
-    textarea.value = '';
-    btn.onclick = function () {
-        adder.insertAdjacentHTML(
-            "afterend",
-            `<div class='note' id='note-${notesId}'>
-        <div class='note-heading'>
-            <div class='note-heading-text'>
+    adder.insertAdjacentHTML(
+      "afterend",
+      `<div class='note' id='${notesId}'>
+        <div class='note-heading' id='${notesId}'>
+            <div class='note-heading-text' id='${notesId}'>
             ${noteName.value}
             </div>
         </div>
-        <div class='note-content'>
-            <div class='note-content-text'>
+        <div class='note-content' id='${notesId}'>
+            <div class='note-content-text' id='${notesId}'>
             ${textarea.value}
             </div>
         </div>
     </div>`
-        );
-        let JSONnote = {
-            id: notesId,
-            heading: noteName.value,
-            content: textarea.value,
-        };
-        notesArr.push(JSONnote)
-        localStorage.setItem("notes", JSON.stringify(notesArr));                    //gtgrtfr
-        notesId++;
-        notesChanger()
-    };
+    );
+    const note = new Note(notesId, noteName.value, textarea.value);
+    notesArr.push(note);
+    localStorage.setItem("notes", JSON.stringify(notesArr)); //gtgrtfr
+    notesId++;
+  };
 };
 
-modalOverlay.onclick = function () {        //закрытие
-    modal.classList.remove("opened");
-    modalOverlay.classList.remove("opened");
-    modal.classList.add("closed");
-    modalOverlay.classList.add("closed");
+modalOverlay.onclick = function () {
+  //закрытие
+  modal.classList.remove("opened");
+  modalOverlay.classList.remove("opened");
+  modal.classList.add("closed");
+  modalOverlay.classList.add("closed");
+  clearInputs();
+  Changenotes();
 };
 
-function notesChanger() {
-    notes = document.querySelectorAll(".note");       //изменение
-    for (note of notes) {
-        note.addEventListener("click", opener);
-        btn.onclick = function () {
-            if (noteHeading === null) {
-                noteHeading.textContent = '';
-                noteContent.textContent = '';
-            } else {
-                noteHeading.textContent = noteName.value;
-                noteContent.textContent = textarea.value;
-            }
+let targetId;
 
-        };
+function Changenotes() {                    //изменение
+  notes = document.querySelectorAll(".note");
+  for (note of notes) {
+    
+    note.onclick = function(){
+      opener();
+      insertTextInModal();
     }
+
+    btn.onclick = function () {
+      if (noteHeading === null) {
+        return
+      } else {
+        noteHeading = noteName.value;
+        noteContent = textarea.value;
+      }
+    };
+  }
 }
-deleteBtn.onclick = function () {                 //удаление. чтобы по нажатию находился id и уже по нему удалять и из localstorage и из дома
+deleteBtn.onclick = function () {
+  delete notesArr[targetId-1];
+  document.getElementById(`${targetId}`).remove;
+  localStorage.removeItem("notes");
+  localStorage.setItem("notes", JSON.stringify(notesArr)); 
+  //удаление. чтобы по нажатию находился id и уже по нему удалять и из localstorage и из дома
+};
 
+function findtargetId(){
+  document.addEventListener('click',e => targetId = e.target)
+  if(targetId.id===''){
+    return;
+  }
+  targetId = targetId.id;
 }
 
-
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    localStorageLoad()
-    renderNotes()
-})
-notesChanger();
+document.addEventListener("DOMContentLoaded", function () {
+  localStorageLoad();
+  renderNotes();
+});
+Changenotes();
 
 /*
+
+notesArr.find(Note => Note.name === targetId).heading;
+noteHeading = notesArr.find(x => x.id === id).heading;
+    noteContent = notesArr.find(x => x.id === id).content;
 let textarea = document.querySelector('.ck-editor__editable_inline');
 btn.onclick = function(){
     console.log(textarea)

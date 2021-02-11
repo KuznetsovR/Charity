@@ -43,9 +43,7 @@
     display: inline-block;
     cursor: pointer;
 }
-.note:last-child {
-    margin-right: 0;
-}
+
 .note-heading{
     background-color: aqua;
     height: 30%;
