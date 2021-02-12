@@ -5,8 +5,6 @@ const adder = document.querySelector(".add-note");
 const btn = document.querySelector(".submit-button");
 const deleteBtn = document.querySelector(".delete-button");
 let noteName = document.querySelector(".note-name-modal");
-let noteHeading = document.querySelector(".note-heading-text"); //not in modal
-let noteContent = document.querySelector(".note-content-text"); //not in modal
 let textarea = document.querySelector(".textarea");
 let notesId = 1;
 const notesField = document.querySelector(".notes");
@@ -32,6 +30,7 @@ class NoteView {
   renderTo(parent) {
     const newNote = document.createElement(`div`);
     newNote.classList.add("note");
+    newNote.id = this.note.id;
 
     const newHeadingText = document.createElement(`div`);
     newHeadingText.classList.add("note-heading-text");
@@ -63,11 +62,7 @@ function renderNotes() {
   }
   notesField.appendChild(fragment);
 
-  Changenotes();
-  noteName = document.querySelector(".note-name-modal"); //сделать апдейт переменных;
-  noteHeading = document.querySelector(".note-heading-text"); //not in modal
-  noteContent = document.querySelector(".note-content-text"); //not in modal
-  textarea = document.querySelector(".textarea");
+  addFunctional();
 }
 
 function localStorageLoad() {
@@ -77,7 +72,7 @@ function localStorageLoad() {
     return;
   }
   notesArr = JSON.parse(localStorageNotes);
-  notesId = notesArr.length++;
+  notesId = notesArr.length + 1;
 }
 
 function opener() {                         //открытие
@@ -87,12 +82,16 @@ function opener() {                         //открытие
   modalOverlay.classList.add("opened");
 }
 
-function insertTextInModal(){ 
-  findtargetId();
-  noteName.value = notesArr[targetId-1].heading;
-  textarea.value = notesArr[targetId-1].content;
+function insertTextInModal(noteElement){ 
+  const note = findNoteByElement(noteElement)
+  noteName.value = note.heading;
+  textarea.value = note.content;
 }
 
+function findNoteByElement(element){
+  const targetId = +findtargetId(element);
+  return notesArr.find(note => note.id === targetId);
+}
 
 function clearInputs() {
   noteName.value = "";
@@ -126,63 +125,75 @@ adder.onclick = function () {  //добавление
     notesId++;
   };
 };
-
-modalOverlay.onclick = function () {
+function close() {
   //закрытие
   modal.classList.remove("opened");
   modalOverlay.classList.remove("opened");
   modal.classList.add("closed");
   modalOverlay.classList.add("closed");
   clearInputs();
-  Changenotes();
+  addFunctional();
 };
 
 let targetId;
 
-function Changenotes() {                    //изменение
+function change(noteElement){
+  const noteHeading  = noteElement.querySelector(".note-heading-text");
+  const noteContent  = noteElement.querySelector(".note-content-text");
+  const note = findNoteByElement(noteElement)
+
+  note.heading = noteName.value;
+  note.content = textarea.value;
+  noteHeading.textContent = noteName.value;
+  noteContent.textContent = textarea.value;
+  localStorage.setItem("notes", JSON.stringify(notesArr));
+}
+
+function addFunctional() {                    //изменение
   notes = document.querySelectorAll(".note");
-  for (note of notes) {
+  for (const note of notes) {
     
     note.onclick = function(){
       opener();
-      insertTextInModal();
+      insertTextInModal(note);
+      btn.onclick = function () {
+        change(note);
+      }
+      deleteBtn.onclick = function () {
+        remove(note);
+      }
     }
 
-    btn.onclick = function () {
-      if (noteHeading === null) {
-        return
-      } else {
-        noteHeading = noteName.value;
-        noteContent = textarea.value;
-      }
-    };
+    modalOverlay.addEventListener("click", close)
   }
 }
-deleteBtn.onclick = function () {
-  delete notesArr[targetId-1];
-  document.getElementById(`${targetId}`).remove;
-  localStorage.removeItem("notes");
+function remove(noteElement) {
+  const targetId = +findtargetId(noteElement);
+  const i = notesArr.findIndex(note => note.id === targetId);
+  notesArr.splice(i,1);
+  noteElement.remove();
   localStorage.setItem("notes", JSON.stringify(notesArr)); 
+  close()
   //удаление. чтобы по нажатию находился id и уже по нему удалять и из localstorage и из дома
 };
 
-function findtargetId(){
-  document.addEventListener('click',e => targetId = e.target)
-  if(targetId.id===''){
-    return;
-  }
-  targetId = targetId.id;
+function findtargetId(noteElement){
+    return noteElement.id;
+//   document.addEventListener('click',e => targetId = e.target)
+//   if(targetId.id===''){
+//     return;
+//   }
+//   targetId = targetId.id;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   localStorageLoad();
   renderNotes();
 });
-Changenotes();
+addFunctional();
 
 /*
 
-notesArr.find(Note => Note.name === targetId).heading;
 noteHeading = notesArr.find(x => x.id === id).heading;
     noteContent = notesArr.find(x => x.id === id).content;
 let textarea = document.querySelector('.ck-editor__editable_inline');
