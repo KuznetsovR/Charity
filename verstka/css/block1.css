@@ -152,10 +152,19 @@ body {
 }
 .phone-link {
   width: 170px;
-  height: 52px;
+  height: 50px;
   position: absolute;
-  margin-left: -208px;
+  margin-left: -209px;
   margin-top: 270px;
+  background: #ffd47b;
+  border-radius: 100px;
+  text-decoration: none;
+}
+.phone-link-text {
+  text-align: center;
+  color: white;
+  position: relative;
+  top: 14px;
 }
 .subheader {
   background-color: #85d6de;
@@ -193,7 +202,6 @@ body {
   left: 0;
   position: relative;
 
-
   transition: all 0.3s ease-out;
 }
 
@@ -204,7 +212,6 @@ body {
   color: white;
   display: inline-block;
   padding: 0 15px;
-  
 }
 
 .subheader-text p {
@@ -213,7 +220,7 @@ body {
 
 .subheader-icon {
   color: #ffffff;
-  padding-top: 13%;
+  padding-top: 26px;
 }
 
 /***************************/
@@ -317,18 +324,47 @@ body {
   color: #34495e;
   font-size: 25px;
 }
+.services-container{
+  overflow: hidden;
+  position: relative;
+}
 .services {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  position: relative;
+  transition: all 0.3s ease-out;
+  width: 10000px;
 }
 .service {
   position: relative;
-  width: 21%;
+  display: inline-block;
+  padding-right: 30px;
 }
 
-.service-hidden {
-  width: 12.5%;
+
+.service-switcher {
+  background-color: rgba(255, 255, 255, 0.644);
+  width: 15%;
+  position: absolute;
+  height: 300px;
+  z-index: 100;
+}
+
+.right-switcher{
+  right: 0;
+}
+.service-switcher-button{
+  height: 75px;
+  width: 75px;
+  border: 0;
+  background-color: #85d6de;
+  margin-top: 110px;
+  color: white;
+  cursor: pointer;
+}
+.right-service-btn{
+  right:0;
+  position: absolute;
 }
 .service-top {
   display: flex;
@@ -346,6 +382,11 @@ body {
   color: #dfe6e7;
   z-index: 1;
   position: relative;
+  width: 70%;
+}
+
+.hr-1:last-child {
+  width: 100%;
 }
 
 .hr-1::before {
@@ -359,6 +400,9 @@ body {
   background-color: #86d6df;
   display: block;
 }
+
+
+/******************/
 .video-section-heading {
   text-align: center;
   padding-top: 100px;
