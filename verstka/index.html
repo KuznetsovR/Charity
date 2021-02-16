@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
     <link rel="stylesheet" href="css/block1.css" type="text/css">
+    <link rel="stylesheet" href="css/mobile.css" type="text/css">
     <script src="https://kit.fontawesome.com/8702590b0c.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
@@ -14,10 +16,9 @@
 
 <body>
     <header class='header'>
-        <div class='container'>
-            <div class='row'>
-                <div class='header-top'>
-                    <div class='top'></div>
+        <div class='header-top'>
+            <div class='container'>
+                <div class='row'>
                     <div class='header-info'>
                         <div class='header-info-items'>
                             <span class='header-info-item'>
@@ -36,6 +37,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class='container'>
+            <div class='row'>
+
                 <div class='header-main'>
                     <div class='header-logo'>
                         <a href="#">
@@ -54,12 +60,13 @@
                         </ul>
                     </nav>
                 </div>
-                <div class='line'></div>
+                
             </div>
         </div>
+        <div class='line'></div>
     </header>
 
-    <main>
+    <main style="display: none;">
         <section>
             <div class='illustrations'>
                 <div class='main-top'>
@@ -67,43 +74,32 @@
                         Just Awesome & Worth to Try
                     </div>
                     <div class='main-top-phone-wrapper'>
-                        <p>
-                            <img src="img/phone.png" alt="">
-                            <a href="#" class='phone-link'><span class='phone-link-text'>Download Now</span></a>
-                        </p>
-                        <!--
-                            <div class='main-top-phone'>
-
-                            </div>
-                        -->
+                        <a href="#" class='phone-link'>
+                            Download Now
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="subheader">
-                <div id="subheaderContainer"></div>
                 <a href="#" class='subheader-switcher' id="switchSubheaderLeft">
-                    <div class='subheader-button-left'>
-                        <i class="subheader-icon fas fa-chevron-left fa-lg"></i>
-                    </div>
+                    <i class="subheader-icon subheader-icon_left fas fa-chevron-left fa-lg"></i>
                 </a>
                 <div class="subheader-text-caruosel" id="subheaderCaroosel">
-                    
+                        <div class="subheader-text subheader-text_zero">&nbsp;</div>
                         <div class='subheader-text'>
-                            <p>Great pixel perfect template which suites any needs. Some subheader text goes here.</p>
+                            Great pixel perfect template which suites any needs. Some subheader text goes here.
                         </div>
                         <div class='subheader-text'>
-                            <p>Great pixel perfect template which suites any needs.Some subheader text goes here. Some
-                                subheader text goes here.</p>
+                            Great pixel perfect template which suites any needs.Some subheader text goes here. Some
+                                subheader text goes here.
                         </div>
                         <div class='subheader-text'>
-                            <p>Great pixel perfect template which suites any needs. </p>
+                            Great pixel perfect template which suites any needs.
                         </div>
 
                 </div>
-                <a href="#" class='subheader-switcher'  id="switchSubheaderRight">
-                    <div class='subheader-button-right'>
-                        <i class="subheader-icon fas fa-chevron-right fa-lg"></i>
-                    </div>
+                <a href="#" class='subheader-switcher '  id="switchSubheaderRight">
+                    <i class="subheader-icon subheader-icon_right fas fa-chevron-right fa-lg"></i>
                 </a>
             </div>
         </section>
@@ -376,7 +372,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer  style="display: none;">
         <div class='line'></div>
         <div class='container'>
             <div class="row">
