@@ -1,18 +1,15 @@
 const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal-overlay");
 let notes = document.querySelectorAll(".note");
-const adder = document.querySelector(".add-note");
-const btn = document.querySelector(".submit-button");
+
 const deleteBtn = document.querySelector(".delete-button");
+const btn = document.querySelector(".submit-button");
 let noteName = document.querySelector(".note-name-modal");
 let textarea = document.querySelector(".textarea");
-let notesId = 1;
-const notesField = document.querySelector(".notes");
 
-const fragment = new DocumentFragment();
+let notesId = 1;              //obj for modal info
 
 let notesArr = [];
-let noteViews = [];
 
 class Note {
   constructor(id, heading, content) {
@@ -21,11 +18,11 @@ class Note {
     this.content = content;
   }
 }
-
+////////////////////// view
 class NoteView {
   constructor(note) {
     this.note = note;
-    console.log(note)
+    console.log(note);
   }
   renderTo(parent) {
     const newNote = document.createElement(`div`);
@@ -53,8 +50,19 @@ class NoteView {
     parent.appendChild(newNote);
   }
 }
-
-function renderNotes() {
+/*
+function getModalElement (noteElement, el){
+const deleteBtn = noteElement.querySelector(".delete-button");
+const btn = noteElement.querySelector(".submit-button");
+const noteName = noteElement.querySelector(".note-name-modal");
+const textarea = noteElement.querySelector(".textarea");
+return ${el}
+}
+*/
+function renderNotes() {                                //рендер из локалки
+  const fragment = new DocumentFragment();
+  const notesField = document.querySelector(".notes");
+  let noteViews = [];
   for (let note of notesArr) {
     const view = new NoteView(note);
     view.renderTo(fragment);
@@ -65,8 +73,7 @@ function renderNotes() {
   addFunctional();
 }
 
-function localStorageLoad() {
-  //вытаскивание из localstorage
+function localStorageLoad() {                           //вытаскивание из localstorage
   let localStorageNotes = localStorage.getItem("notes");
   if (localStorageNotes === null) {
     return;
@@ -75,38 +82,54 @@ function localStorageLoad() {
   notesId = notesArr.length + 1;
 }
 
-function opener() {                         //открытие
+function opener() {                                   //открытие модального окна
   modal.classList.remove("closed");
   modalOverlay.classList.remove("closed");
   modal.classList.add("opened");
   modalOverlay.classList.add("opened");
 }
 
-function insertTextInModal(noteElement){ 
-  const note = findNoteByElement(noteElement)
+function insertTextInModal(noteElement) {             //вставка текста из дома
+  const note = findNoteByElement(noteElement);
   noteName.value = note.heading;
   textarea.value = note.content;
 }
 
-function findNoteByElement(element){
-  const targetId = +findtargetId(element);
-  return notesArr.find(note => note.id === targetId);
-}
-
-function clearInputs() {
+function clearInputs() {                              //очистка полей ввода
   noteName.value = "";
   textarea.value = "";
 }
 
-adder.onclick = function () {  //добавление
-  opener();
-  btn.onclick = function () {
-    if(noteName.value===''||textarea.value===''){
-      return
-    }
-    adder.insertAdjacentHTML(
-      "afterend",
-      `<div class='note' id='${notesId}'>
+function close() {                                       //закрытие
+  //закрытие
+  modal.classList.remove("opened");
+  modalOverlay.classList.remove("opened");
+  modal.classList.add("closed");
+  modalOverlay.classList.add("closed");
+  clearInputs();
+  addFunctional();
+}
+
+///////////////////////////////////////  controller
+
+function findNoteByElement(element) {                 //поиск элемента по идентификатору   model
+  const targetId = +findtargetId(element);
+  return notesArr.find((note) => note.id === targetId);
+}
+
+
+
+function add() {                                              //добавление
+  const adder = document.querySelector(".add-note");
+  adder.onclick = function () {
+    opener();
+    btn.onclick = function () {
+      if (noteName.value === "" || textarea.value === "") {
+        return;
+      }
+      adder.insertAdjacentHTML(
+        "afterend",
+        `<div class='note' id='${notesId}'>
         <div class='note-heading' id='${notesId}'>
             <div class='note-heading-text' id='${notesId}'>
             ${noteName.value}
@@ -118,29 +141,19 @@ adder.onclick = function () {  //добавление
             </div>
         </div>
     </div>`
-    );
-    const note = new Note(notesId, noteName.value, textarea.value);
-    notesArr.push(note);
-    localStorage.setItem("notes", JSON.stringify(notesArr)); //gtgrtfr
-    notesId++;
+      );
+      const note = new Note(notesId, noteName.value, textarea.value);
+      notesArr.push(note);
+      localStorage.setItem("notes", JSON.stringify(notesArr));
+      notesId++;
+    };
   };
-};
-function close() {
-  //закрытие
-  modal.classList.remove("opened");
-  modalOverlay.classList.remove("opened");
-  modal.classList.add("closed");
-  modalOverlay.classList.add("closed");
-  clearInputs();
-  addFunctional();
-};
+}
 
-let targetId;
-
-function change(noteElement){
-  const noteHeading  = noteElement.querySelector(".note-heading-text");
-  const noteContent  = noteElement.querySelector(".note-content-text");
-  const note = findNoteByElement(noteElement)
+function change(noteElement) {                            //изменение
+  let noteHeading = noteElement.querySelector(".note-heading-text");
+  let noteContent = noteElement.querySelector(".note-content-text");
+  let note = findNoteByElement(noteElement);
 
   note.heading = noteName.value;
   note.content = textarea.value;
@@ -149,48 +162,42 @@ function change(noteElement){
   localStorage.setItem("notes", JSON.stringify(notesArr));
 }
 
-function addFunctional() {                    //изменение
+function addFunctional() {                              //добавление элементам в доме функциональности    modal
   notes = document.querySelectorAll(".note");
   for (const note of notes) {
-    
-    note.onclick = function(){
+    note.onclick = function () {
       opener();
       insertTextInModal(note);
       btn.onclick = function () {
         change(note);
-      }
+      };
       deleteBtn.onclick = function () {
         remove(note);
-      }
-    }
+      };
+    };
 
-    modalOverlay.addEventListener("click", close)
+    modalOverlay.addEventListener("click", close);
   }
 }
-function remove(noteElement) {
+function remove(noteElement) {                    //удаление              model
   const targetId = +findtargetId(noteElement);
-  const i = notesArr.findIndex(note => note.id === targetId);
-  notesArr.splice(i,1);
+  const i = notesArr.findIndex((note) => note.id === targetId);
+  notesArr.splice(i, 1);
   noteElement.remove();
-  localStorage.setItem("notes", JSON.stringify(notesArr)); 
-  close()
-  //удаление. чтобы по нажатию находился id и уже по нему удалять и из localstorage и из дома
-};
-
-function findtargetId(noteElement){
-    return noteElement.id;
-//   document.addEventListener('click',e => targetId = e.target)
-//   if(targetId.id===''){
-//     return;
-//   }
-//   targetId = targetId.id;
+  localStorage.setItem("notes", JSON.stringify(notesArr));
+  close();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function findtargetId(noteElement) {                    //зачем это
+  return noteElement.id;
+}
+
+document.addEventListener("DOMContentLoaded", function () {       //типа общее
   localStorageLoad();
   renderNotes();
+  add();
+  addFunctional();
 });
-addFunctional();
 
 /*
 
@@ -204,4 +211,5 @@ for (area of textarea){
     btn.onclick = function(){
         console.log(textarea)
     };
+         
 }*/
