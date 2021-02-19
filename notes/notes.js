@@ -1,3 +1,17 @@
+import {NotesModel}from './notes/notes-model.js'
+import {NotesView}from './notes/notes-view.js'
+import {Note}from './shared/note.js'
+import {NoteEditController}from './note-edit/note-edit-controller.js'
+
+const notesModel = new NotesModel();
+const notesField = document.querySelector(".notes");
+const notesView = new NotesView(notesModel, notesField);
+const noteEditController = new NoteEditController(notesModel);
+
+notesModel.addNote('21q3', '2314qawesr')
+notesModel.addNote('21q3', '231asdasdasdasdesr')
+notesModel.addNote('21q3', '2316t24tdsfdsxzfsdwesr')
+
 const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal-overlay");
 let notes = document.querySelectorAll(".note");
@@ -11,54 +25,6 @@ let notesId = 1;              //obj for modal info
 
 let notesArr = [];
 
-class Note {
-  constructor(id, heading, content) {
-    this.id = id;
-    this.heading = heading;
-    this.content = content;
-  }
-}
-////////////////////// view
-class NoteView {
-  constructor(note) {
-    this.note = note;
-    console.log(note);
-  }
-  renderTo(parent) {
-    const newNote = document.createElement(`div`);
-    newNote.classList.add("note");
-    newNote.id = this.note.id;
-
-    const newHeadingText = document.createElement(`div`);
-    newHeadingText.classList.add("note-heading-text");
-    newHeadingText.textContent = this.note.heading;
-
-    const newHeading = document.createElement(`div`);
-    newHeading.classList.add("note-heading");
-
-    const newContentText = document.createElement(`div`);
-    newContentText.classList.add("note-content-text");
-    newContentText.textContent = this.note.content;
-
-    const newContent = document.createElement(`div`);
-    newContent.classList.add("note-content");
-
-    newHeading.appendChild(newHeadingText);
-    newContent.appendChild(newContentText);
-    newNote.appendChild(newHeading);
-    newNote.appendChild(newContent);
-    parent.appendChild(newNote);
-  }
-}
-/*
-function getModalElement (noteElement, el){
-const deleteBtn = noteElement.querySelector(".delete-button");
-const btn = noteElement.querySelector(".submit-button");
-const noteName = noteElement.querySelector(".note-name-modal");
-const textarea = noteElement.querySelector(".textarea");
-return ${el}
-}
-*/
 function renderNotes() {                                //рендер из локалки
   const fragment = new DocumentFragment();
   const notesField = document.querySelector(".notes");
@@ -192,12 +158,12 @@ function findtargetId(noteElement) {                    //зачем это
   return noteElement.id;
 }
 
-document.addEventListener("DOMContentLoaded", function () {       //типа общее
-  localStorageLoad();
-  renderNotes();
-  add();
-  addFunctional();
-});
+// document.addEventListener("DOMContentLoaded", function () {       //типа общее
+//   localStorageLoad();
+//   // renderNotes();
+//   add();
+//   addFunctional();
+// });
 
 /*
 
