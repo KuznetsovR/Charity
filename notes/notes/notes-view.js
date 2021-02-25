@@ -2,11 +2,24 @@ export class NotesView {
     constructor(model, container) {
         this.model = model;
         this.model.onAdd(this.onAddNote.bind(this));
+        this.model.onEdit(this.onEditNote.bind(this));
+        this.model.onRemove(this.onRemoveNote.bind(this));
         this.container = container;
     }
     onAddNote(note) {
         const view = new NoteView(note);
         view.renderTo(this.container)
+    }
+    onEditNote(note) {
+        const i = this.notes.findIndex((n) => note.id === n.id);
+        let element = document.getElementById(i);
+        let heading = element.querySelector(".note-heading-text");
+        let content = element.querySelector(".note-content-text");
+        heading.textContent = note.heading;
+        content.textContent = note.content;
+    }
+    onRemoveNote(note) {
+        note.remove();
     }
 }
 

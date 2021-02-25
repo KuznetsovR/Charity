@@ -1,7 +1,7 @@
-import {NotesModel}from './notes/notes-model.js'
-import {NotesView}from './notes/notes-view.js'
-import {Note}from './shared/note.js'
-import {NoteEditController}from './note-edit/note-edit-controller.js'
+import { NotesModel } from './notes/notes-model.js'
+import { NotesView } from './notes/notes-view.js'
+import { Note } from './shared/note.js'
+import { NoteEditController } from './note-edit/note-edit-controller.js'
 
 const notesModel = new NotesModel();
 const notesField = document.querySelector(".notes");
@@ -177,5 +177,5 @@ for (area of textarea){
     btn.onclick = function(){
         console.log(textarea)
     };
-         
+
 }*/
