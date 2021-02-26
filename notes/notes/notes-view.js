@@ -5,21 +5,30 @@ export class NotesView {
         this.model.onEdit(this.onEditNote.bind(this));
         this.model.onRemove(this.onRemoveNote.bind(this));
         this.container = container;
+        this.initialRender();
     }
     onAddNote(note) {
         const view = new NoteView(note);
         view.renderTo(this.container)
     }
     onEditNote(note) {
-        const i = this.notes.findIndex((n) => note.id === n.id);
-        let element = document.getElementById(i);
+        let element = document.getElementById(note.id);
         let heading = element.querySelector(".note-heading-text");
         let content = element.querySelector(".note-content-text");
         heading.textContent = note.heading;
         content.textContent = note.content;
     }
     onRemoveNote(note) {
-        note.remove();
+        let element = document.getElementById(note.id);
+        element.remove();
+    }
+    initialRender(){
+        const fragment = new DocumentFragment;
+        for (const note of this.model.notes){
+            const view = new NoteView(note);
+            view.renderTo(fragment)
+        }
+        this.container.appendChild(fragment)
     }
 }
 

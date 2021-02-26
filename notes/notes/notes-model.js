@@ -58,8 +58,12 @@ export class NotesModel {
         if (i !== -1) {
             this.notes.splice(i, 1)
             for (const observer of this.onRemoveObservers) {
-                observer(i)
+                observer(note)
             }
         }
+    }
+    //////////////////////////////////
+    getNoteById(id){
+        return this.notes.find((n) => n.id === id);
     }
 }

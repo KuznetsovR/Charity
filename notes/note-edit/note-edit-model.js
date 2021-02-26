@@ -1,29 +1,71 @@
-class NoteEditModel {
-    constructor(note) {
-        this.modal = document.querySelector(".modal");
-        this.modalOverlay = document.querySelector(".modal-overlay");
+import { Note } from "../shared/note.js";
+
+export class NoteEditModel {
+    constructor() {
+        this.openStatusObservers = [];
+        this.onSetHeadingObservers = [];
+        this.onSetContentObservers = [];
     }
+    onOpenChange(observer){
+        this.openStatusObservers.push(observer)
+    }
+    onSetHeading (observer){
+        this.onSetHeadingObservers.push(observer)
+    }
+    onSetContent(observer){
+        this.onSetContentObservers.push(observer)
+    }
+    removeOnOpenChange(observer) {
+        const index = this.openStatusObservers.indexOf(observer)
+        if (index !== -1) {
+            this.openStatusObservers.splice(index, 1)
+        }
+    }
+    removeOnSetHeading(observer) {
+        const index = this.onSetHeadingObservers.indexOf(observer)
+        if (index !== -1) {
+            this.onSetHeadingObservers.splice(index, 1)
+        }
+    }
+    removeOnSetContent(observer) {
+        const index = this.onSetContentObservers.indexOf(observer)
+        if (index !== -1) {
+            this.onSetContentObservers.splice(index, 1)
+        }
+    }
+
+
     open(note) {
-        const markerOpened = true;
-        if (note !== -1) {
-            id = note.id
-            heading = note.heading;
-            content = note.content;
+        for (const observer of this.openStatusObservers) {
+            observer(true)
+        }
+        if (note !== undefined) {
+            this.id = note.id
+            this.setHeading(note.heading)
+            this.setContent(note.content)
         }
     }
     close() {
-        const markerOpened = false;
-    }
-    setHeading(note, noteNameValue) {
-        if (noteNameValue !== -1) {
-            note.heading = noteNameValue;
+        for (const observer of this.openStatusObservers) {
+            observer(false)
         }
-        return note;
+        this.id = undefined
+        this.setHeading('')
+        this.setContent('')
     }
-    setContent(note, textareaValue) {
-        if (textareaValue !== -1) {
-            note.content = textareaValue;
+    setHeading(heading) {
+        for (const observer of this.onSetHeadingObservers) {
+            observer(heading)
         }
-        return note;
+        this.heading = heading;
+    }
+    setContent(content) {
+        for (const observer of this.onSetContentObservers) {
+            observer(content)
+        }
+        this.content = content;
+    }
+    getNote(){
+        return new Note(this.id, this.heading, this.content);
     }
 }

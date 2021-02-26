@@ -1,24 +1,31 @@
-class NoteEditView{
-    constructor(){
-                                                            //observers
-
+export class NoteEditView{
+    constructor(model){
+        this.model = model;
+        this.modal = document.querySelector(".modal");
+        this.modalOverlay = document.querySelector(".modal-overlay");
+        this.noteName = document.querySelector(".note-name-modal");
+        this.textarea = document.querySelector(".textarea");
+        this.model.onOpenChange(this.onOpenChange.bind(this));
+        this.model.onSetHeading(this.onHeadingChange.bind(this));
+        this.model.onSetContent(this.onContentChange.bind(this));
     }
-    onOpen(stuffFromModel){
-        modal.classList.add("opened");
-        modalOverlay.classList.add("opened");
-        noteName.value = heading;
-        textarea.value = content;
+    onOpenChange(open){
+        if(open){
+            this.modal.classList.add("opened");
+            this.modalOverlay.classList.add("opened");
+        }else{
+            this.modal.classList.remove("opened");
+            this.modalOverlay.classList.remove("opened");
+            this.noteName.value = "";
+            this.textarea.value = "";
+        }
+        // noteName.value = heading;
+        // textarea.value = content;
     }
-    onClose(){
-        noteName.value = "";
-        textarea.value = "";
-        modal.classList.remove("opened");
-        modalOverlay.classList.remove("opened");
+    onHeadingChange(heading){
+        this.noteName.value = heading;
     }
-    onHeadingChange(){
-        setHeading(heading)
-    }
-    onContentChange(){
-        setContent(content)
+    onContentChange(content){
+        this.textarea.value = content;
     }
 }

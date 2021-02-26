@@ -1,31 +1,43 @@
 export class NoteEditController{
-    constructor(notesModel, noteEditModel, note){
+    constructor(notesModel, noteEditModel){
         this.notesModel = notesModel;
         this.noteEditModel = noteEditModel;
-        this.note = note;
         const deleteBtn = document.querySelector(".delete-button");
         const btn = document.querySelector(".submit-button");
-        btn.addEventListener('click', this.addNote.bind(this))
-        deleteBtn.addEventListener('click', this.addNote.bind(this))
+        deleteBtn.addEventListener('click', this.removeNote.bind(this))
+        btn.addEventListener('click', this.onSave.bind(this))
         this.noteName = document.querySelector(".note-name-modal");
-        this.textarea = document.querySelector(".textarea"); 
+        this.textarea = document.querySelector(".textarea");
+        this.noteName.addEventListener('input', this.setHeading.bind(this))
+        this.textarea.addEventListener('input', this.setContent.bind(this))
+        const modalOverlay = document.querySelector(".modal-overlay");
+        modalOverlay.addEventListener('click', this.close.bind(this))
     }
     addNote(){
-        this.notesModel.addNote(this.noteName.value, this.textarea.value)
+        this.notesModel.addNote(this.noteEditModel.heading, this.noteEditModel.content)
     }
     editNote(){
-        this.notesModel.editNote(note)
+        this.notesModel.editNote(this.noteEditModel.getNote())
     }
     setHeading(){
-        this.noteEditModel.setHeading(note, this.noteName.value)
+        this.noteEditModel.setHeading(this.noteName.value)
     }
     setContent(){
-        this.noteEditModel.setContent(note, this.textarea.value)
+        this.noteEditModel.setContent(this.textarea.value)
     }
     close(){
         this.noteEditModel.close()
     }
     removeNote(){
-        this.notesModel.removeNote(note)
+        this.notesModel.removeNote(this.noteEditModel.getNote());
+        this.close();
+    }
+    onSave(){
+        if(this.noteEditModel.id !== undefined){
+            this.editNote()
+        }else{
+            this.addNote()
+        }
+        this.close();
     }
 }

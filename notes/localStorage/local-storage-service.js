@@ -1,12 +1,10 @@
-class LocalStorageService {
-    constructor() {
-        this.localStorageNotes = localStorage.getItem("notes");
-    }
+export class LocalStorageService {
     loadNotes() {
-        if (this.localStorageNotes === null) {
+        const localStorageNotes = localStorage.getItem('notes');
+        if (localStorageNotes === null) {
             return;
         }
-        return this.localStorageNotes;
+        return JSON.parse(localStorageNotes);
     }
     saveNotes(notes) {
         localStorage.setItem("notes", JSON.stringify(notes));

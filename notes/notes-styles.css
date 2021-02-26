@@ -91,11 +91,6 @@
     z-index: 1010;
     background-color: white;
     border-radius: 5px;
-}
-.opened{
-    display: flex;
-}
-.closed{
     display: none;
 }
 
@@ -116,6 +111,10 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.505);
     cursor: pointer;
+    display: none;
+}
+.opened{
+    display: flex;
 }
 .note-name-modal{
     border-radius: 5px;

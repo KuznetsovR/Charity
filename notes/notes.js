@@ -2,15 +2,39 @@ import { NotesModel } from './notes/notes-model.js'
 import { NotesView } from './notes/notes-view.js'
 import { Note } from './shared/note.js'
 import { NoteEditController } from './note-edit/note-edit-controller.js'
+import { NotesController } from './notes/notes-controller.js'
+import { NoteEditModel } from './note-edit/note-edit-model.js'
+import { NoteEditView } from './note-edit/note-edit-view.js'
+import { LocalStorageService } from './localStorage/local-storage-service.js'
 
-const notesModel = new NotesModel();
+
+const localStorageService = new LocalStorageService();
+
+const notesModel = new NotesModel(localStorageService.loadNotes());
+const noteEditModel = new NoteEditModel();
+
 const notesField = document.querySelector(".notes");
-const notesView = new NotesView(notesModel, notesField);
-const noteEditController = new NoteEditController(notesModel);
 
-notesModel.addNote('21q3', '2314qawesr')
-notesModel.addNote('21q3', '231asdasdasdasdesr')
-notesModel.addNote('21q3', '2316t24tdsfdsxzfsdwesr')
+const noteEditView = new NoteEditView(noteEditModel);
+const notesView = new NotesView(notesModel, notesField);
+
+const notesController = new NotesController(noteEditModel, notesModel,  notesField);
+const noteEditController = new NoteEditController(notesModel, noteEditModel);
+
+
+function localStorageUpdate(){
+  localStorageService.saveNotes(notesModel.notes)
+}
+
+notesModel.onAdd(localStorageUpdate)
+notesModel.onEdit(localStorageUpdate)
+notesModel.onRemove(localStorageUpdate)
+
+
+
+// notesModel.addNote('21q3', '2314qawesr')
+// notesModel.addNote('21q3', '231asdasdasdasdesr')
+// notesModel.addNote('21q3', '2316t24tdsfdsxzfsdwesr')
 
 const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal-overlay");
