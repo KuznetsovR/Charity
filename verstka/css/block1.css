@@ -59,10 +59,13 @@ body {
   outline: none;
   color: #fff;
 }
-
+.header-search button{
+  background: none;
+  border: none;
+}
 .icon-search {
   position: relative;
-  right: 10px;
+  cursor: pointer;
   color: #607080;
 }
 
@@ -97,10 +100,7 @@ body {
 
 .header-menu {
   text-align: end;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  height: 100px;
 }
 
 .header-menu-item {
@@ -110,10 +110,12 @@ body {
 
 .header-menu-link {
   color: #f4f5f6;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  padding-top: 40px;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 10px; 
 }
 
 .header-menu-item a:link {
@@ -188,6 +190,8 @@ body {
   width: 15%;
   background-color: #7dc8d1;
   text-align: center;
+  border: none;
+  cursor: pointer;;
 }
 
 .subheader-switcher:last-child {
@@ -290,11 +294,16 @@ body {
 
 .feature-inner-content h3 {
   font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 20px;
 }
 
 .feature-inner-content p {
   color: #737c85;
   font-size: 14px;
+  line-height: 26px;
 }
 
 /***************************/
@@ -306,8 +315,9 @@ body {
 .counter-heading {
   text-align: center;
   color: #34495e;
-  font-size: 25px;
-  padding-top: 20px;
+  font-size: 28px;
+  padding-top: 60px;
+  padding-bottom: 30px;
 }
 
 .counters-field {
@@ -319,7 +329,7 @@ body {
 
 .counter {
   position: relative;
-  /*сделать, чтобы сами элементы не изменялись*/
+  /*сделать, чтобы сами элементы не изменялись фон тожe*/
   border: 7px solid white;
   border-radius: 100px;
   width: 186px;
@@ -331,12 +341,16 @@ body {
 }
 
 .counter-text {
-  margin-top: 60px;
+  margin-top: 50px;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .counter-number {
+  font-weight: bold;
   font-size: 40px;
-  margin-top: -10px;
+  line-height: 26px;
+  margin-top: 10px;
   color: white;
 }
 
@@ -361,6 +375,8 @@ body {
   position: relative;
 }
 .services {
+  padding-top: 40px;
+  padding-bottom: 60px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -405,9 +421,14 @@ body {
 .service-top h4 {
   color: #34495e;
   margin-left: 20px;
+  font-weight: bold;
+  padding-top: 25px;
+  font-size: 18px;
 }
 .service-text {
   color: #737c85;
+  font-size: 14px;
+  line-height: 26px;
 }
 
 .hr-1 {
@@ -417,7 +438,7 @@ body {
   width: 70%;
 }
 
-.hr-1:last-child {
+.row .hr-1 {
   width: 100%;
 }
 
@@ -440,6 +461,7 @@ body {
   padding-top: 100px;
   font-family: "Varela Round", sans-serif;
   font-size: 28px;
+  padding-bottom: 30px;
 }
 .video-section-content {
   display: flex;
@@ -462,11 +484,15 @@ body {
   border: 1px solid #dfe6e7;
   width: 20%;
 }
+.video-section-text-container ul{
+  margin: 20px;
+}
 .video-section-text-container ul li {
-  margin-left: -10px;
-  list-style-type: none;
   color: #34495e;
-  padding-top: 10%;
+  padding-top: 30px;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
 }
 .video-section-text-container ul li:first-child {
   padding-top: 0%;
@@ -477,16 +503,21 @@ body {
 .ending {
   padding-top: 75px;
   padding-left: 25%;
-  width: 50%;
+  padding-right: 25%;
   text-align: center;
   margin-bottom: 150px;
 }
 .ending-header h4 {
-  margin-top: 0%;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 26px;
 }
 .ending-content {
   padding-bottom: 30px;
   color: #737c85;
+  font-size: 14px;
+  line-height: 26px;
 }
 .ending-btn a {
   color: #85d6de;
@@ -501,6 +532,8 @@ footer .container {
   padding-bottom: 50px;
 }
 .comment-content {
+  font-size: 14px;
+  line-height: 26px;
   color: #85d6de;
 }
 .author-name {
@@ -523,6 +556,9 @@ footer .container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.footer-info-item h4{
+  padding-bottom: 20px;
 }
 .footer-info-item {
   position: relative;

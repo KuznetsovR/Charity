@@ -37,27 +37,29 @@ $(document).ready(() => {
       $("#subheaderCaroosel").css("left", leftChord + "px");
     });
   
-    //DZ: left btn event
-  
+    
     $(window).resize(() => {
       containerWidth = Math.ceil($(window).width() * 0.7);
+      containerWidthServices = Math.ceil($(window).width() * 0.7)
       $(".subheader-text").width(containerWidth + "px");
-      $(".service").width(containerWidth/3 - 30 + "px");
-  
-      leftSide = containerWidth/(-9);
+      $(".service").width(containerWidthServices/3 - 30 + "px");
+      
+      leftSide = containerWidthServices/(-9);
       $("#services").css("left", leftSide + "px");
     });
+    ////////////// services
+    let containerWidthServices = ($(window).width() * 0.7)
+    
+    $(".service").width(containerWidthServices/3 - 30 + "px");
   
-    $(".service").width(containerWidth/3 - 30 + "px");
-  
-    let leftSide = containerWidth/(-9);
+    let leftSide = containerWidthServices/(-9);
     $("#services").css("left", leftSide + "px");
     
     $("#rightServiceBtn").on("click", (e) => {
       e.preventDefault();
-      leftSide -= containerWidth/3;
+      leftSide -= containerWidthServices/3;
       /*if (currentFrame < framesCount) {
-        leftChord = leftChord - containerWidth;
+        leftChord = leftChord - containerWidthServices;
         currentFrame++;
       } else {
         leftChord = 0;
@@ -68,16 +70,16 @@ $(document).ready(() => {
     });
     $("#leftServiceBtn").on("click", (e) => {
       e.preventDefault();
-      leftSide += containerWidth/3;
+      leftSide += containerWidthServices/3;
       /*if (currentFrame <= 1) {
-        leftChord = containerWidth * -2;
+        leftChord = containerWidthServices * -2;
         currentFrame = framesCount;
       } else {
-        leftChord += containerWidth;
+        leftChord += containerWidthServices;
         currentFrame--;
       }*/
   
       $("#services").css("left", leftSide + "px");
     });
-  });
+  });                                       //1 сервис на экран для мобилки
   

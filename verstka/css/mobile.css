@@ -1,10 +1,64 @@
 @media screen and (max-width: 1024px) {
-    body .container {
-        width: 100%;
+    .container {
+        min-width: 0px;
+        width: 100%; 
+                                               
     }
-
+                                            /*удалить двоеточия, сделать по 1 элементу в сервисах*/
     body .container .row {
         padding-left: 25px;
-        padding-right: 25px;;
+        padding-right: 25px;
+    }
+    .ending{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .features{
+        flex-direction: column;
+    }
+    .feature{
+        width: 100%;
+    }
+    .video-section-text-container{
+        width: 100%;
+    }
+    .counters-field {
+        flex-direction: column;
+    }
+    .counter-heading{
+        
+    }
+    .video-section-content{
+        flex-direction: column;
+    }
+
+    .video-section-content div{
+        margin-bottom: 20px;
+    }
+    .video-section-content div:last-child{
+        margin-bottom: 0px;
+    }
+    .video-section-video-container{
+        width: 100%;
+    }
+    .footer-info{
+        flex-direction: column;
+    }
+    .footer-info-item{
+        width: 100%;
+    }
+    .post-text{
+        padding: 10px 0px;
+    }
+    .post-date{
+        padding-top: 10px;
+    }
+    .counters-field{
+        text-align: center;
+    }
+    .counter{
+        position: relative;
+        left: 50%;
+        margin-left: -93px;
     }
 }
