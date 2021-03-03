@@ -61,4 +61,31 @@
         left: 50%;
         margin-left: -93px;
     }
+
+
+
+
+    .header-info, nav {
+        display: none;
+    }
+
+    .header-main {
+        height: 100px;
+    }
+
+    
+
+    .mobile-nav {
+        display: block;
+        right: -100%;
+        width: 100%;
+        position: absolute;
+    }
+    .mobile-nav__title {
+        background-color: red;
+    }
+
+    .mob-nav {
+
+    }
 }

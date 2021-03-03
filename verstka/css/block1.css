@@ -224,9 +224,16 @@ body {
   color: white;
   display: inline-block;
   opacity: 0;
-  padding: 25px 15px;
+  padding: 25px 0px;
   line-height: 1.5;
   vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.subheader-text div {
+  padding: 0 15px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .subheader-text.shown {
@@ -338,6 +345,7 @@ body {
   color: #34495e;
   font-size: 17px;
   background-image: url(../img/counter.jpg);
+  background-size: cover;
 }
 
 .counter-text {
@@ -605,3 +613,12 @@ footer .container {
   padding-bottom: 20px;
 }
 
+
+.body-wrapper {
+  overflow: hidden;
+  width: 100%;;
+}
+
+.mobile-nav {
+  displaY: none
+}

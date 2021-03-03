@@ -5,6 +5,99 @@ $(document).ready(() => {
     $(".subheader-text").width(containerWidth + "px");
     $(".subheader-text").addClass("shown");
     $(".subheader-text_zero").addClass("hidden");
+
+
+
+    const blockCntTop = $(".counter-heading").offset().top;
+    const blockCntHeight = $(".counter-heading").height();
+
+
+
+    
+    let alreadyStarted = false;
+
+    function moveCnt() {
+      if (!alreadyStarted) {
+
+
+        $(".dwl-counter").each((index, el) => {
+          const element = $(el);
+          const start = element.attr('data-start');
+          const finish = element.attr('data-finish');
+    
+          console.log(element, start, finish);
+
+
+          const interval = setInterval(() => {
+            
+            for (let i = start; i<finish; i++) {
+              console.log(i);
+              element.html(i);
+            }
+
+            clearInterval(interval);
+          }, 10000)
+        });
+
+
+
+
+        //
+        alreadyStarted = true;
+      }
+    }
+
+
+
+
+
+    $(window).scroll(() => {
+
+      const blockCntScrollTop = $(window).scrollTop();
+
+      if ((blockCntScrollTop >= blockCntTop) && (blockCntScrollTop < blockCntTop + blockCntHeight)) {
+        console.log("InTo");
+
+        moveCnt();
+
+
+
+      } else {
+        console.log("Out");
+      }
+
+      
+      
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
     console.log(framesCount);
   
