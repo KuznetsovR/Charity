@@ -2,7 +2,7 @@ export class NoteEditController{
     constructor(notesModel, noteEditModel){
         this.notesModel = notesModel;
         this.noteEditModel = noteEditModel;
-        const deleteBtn = document.querySelector(".delete-button");
+        const deleteBtn = document.querySelector(".delete-button-modal");
         const btn = document.querySelector(".submit-button");
         deleteBtn.addEventListener('click', this.removeNote.bind(this))
         btn.addEventListener('click', this.onSave.bind(this))

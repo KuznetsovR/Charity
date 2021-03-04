@@ -5,6 +5,7 @@ export class NoteEditModel {
         this.openStatusObservers = [];
         this.onSetHeadingObservers = [];
         this.onSetContentObservers = [];
+        this.removeBtnStatusObservers = [];
     }
     onOpenChange(observer){
         this.openStatusObservers.push(observer)
@@ -14,6 +15,9 @@ export class NoteEditModel {
     }
     onSetContent(observer){
         this.onSetContentObservers.push(observer)
+    }
+    onDeleteBtnChange(observer){
+        this.removeBtnStatusObservers.push(observer)
     }
     removeOnOpenChange(observer) {
         const index = this.openStatusObservers.indexOf(observer)
@@ -33,6 +37,12 @@ export class NoteEditModel {
             this.onSetContentObservers.splice(index, 1)
         }
     }
+    removeOnDeleteBtnChange(observer){
+        const index = this.removeBtnStatusObservers.indexOf(observer)
+        if (index !== -1) {
+            this.removeBtnStatusObservers.splice(index, 1)
+        }
+    }
 
 
     open(note) {
@@ -40,9 +50,12 @@ export class NoteEditModel {
             observer(true)
         }
         if (note !== undefined) {
-            this.id = note.id
+            this.id = note.id;
+            this.addRemoveBtn();
             this.setHeading(note.heading)
             this.setContent(note.content)
+        }else{
+            this.deleteRemoveBtn();
         }
     }
     close() {
@@ -64,6 +77,16 @@ export class NoteEditModel {
             observer(content)
         }
         this.content = content;
+    }
+    addRemoveBtn(){
+        for (const observer of this.removeBtnStatusObservers) {
+            observer(true)
+        }
+    }
+    deleteRemoveBtn(){
+        for (const observer of this.removeBtnStatusObservers) {
+            observer(false)
+        }
     }
     getNote(){
         return new Note(this.id, this.heading, this.content);

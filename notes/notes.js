@@ -13,7 +13,7 @@ const localStorageService = new LocalStorageService();
 const notesModel = new NotesModel(localStorageService.loadNotes());
 const noteEditModel = new NoteEditModel();
 
-const notesField = document.querySelector(".notes");
+const notesField = document.querySelector(".add-note");
 
 const noteEditView = new NoteEditView(noteEditModel);
 const notesView = new NotesView(notesModel, notesField);

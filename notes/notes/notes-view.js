@@ -1,65 +1,85 @@
 export class NotesView {
-    constructor(model, container) {
-        this.model = model;
-        this.model.onAdd(this.onAddNote.bind(this));
-        this.model.onEdit(this.onEditNote.bind(this));
-        this.model.onRemove(this.onRemoveNote.bind(this));
-        this.container = container;
-        this.initialRender();
+  constructor(model, container) {
+    this.model = model;
+    this.model.onAdd(this.onAddNote.bind(this));
+    this.model.onEdit(this.onEditNote.bind(this));
+    this.model.onRemove(this.onRemoveNote.bind(this));
+    this.container = container;
+    this.initialRender();
+  }
+  onAddNote(note) {
+    const view = new NoteView(note);
+    view.renderTo(this.container);
+  }
+  onEditNote(note) {
+    let element = document.getElementById(note.id);
+    let heading = element.querySelector(".note-heading-text");
+    let content = element.querySelector(".note-content-text");
+    heading.textContent = note.heading;
+    content.textContent = note.content;
+  }
+  onRemoveNote(note) {
+    let element = document.getElementById(note.id);
+    element.remove();
+  }
+  initialRender() {
+    // const fragment = new DocumentFragment();
+    for (const note of this.model.notes) {
+      const view = new NoteView(note);
+      view.renderTo(this.container);
     }
-    onAddNote(note) {
-        const view = new NoteView(note);
-        view.renderTo(this.container)
-    }
-    onEditNote(note) {
-        let element = document.getElementById(note.id);
-        let heading = element.querySelector(".note-heading-text");
-        let content = element.querySelector(".note-content-text");
-        heading.textContent = note.heading;
-        content.textContent = note.content;
-    }
-    onRemoveNote(note) {
-        let element = document.getElementById(note.id);
-        element.remove();
-    }
-    initialRender(){
-        const fragment = new DocumentFragment;
-        for (const note of this.model.notes){
-            const view = new NoteView(note);
-            view.renderTo(fragment)
-        }
-        this.container.appendChild(fragment)
-    }
+    // this.container.appendChild(fragment);
+  }
 }
 
 class NoteView {
-    constructor(note) {
-        this.note = note;
-        console.log(note);
-    }
-    renderTo(parent) {
-        const newNote = document.createElement(`div`);
-        newNote.classList.add("note");
-        newNote.id = this.note.id;
+  constructor(note) {
+    this.note = note;
+    console.log(note);
+  }
+  renderTo(parent) {
+    parent.insertAdjacentHTML(
+      "afterend",
+      `<div class='note' id='${this.note.id}'>
+            <div class='note-heading'>
+                <div class="delete-button"></div>
+                <div class='note-heading-text'>
+                ${this.note.heading}
+                </div>
+            </div>
+            <div class='note-content'>
+                <div class='note-content-text'>
+                ${this.note.content}
+                </div>
+            </div>
+        </div>`
+    );
+    // const newNote = document.createElement(`div`);
+    // newNote.classList.add("note");
+    // newNote.id = this.note.id;
 
-        const newHeadingText = document.createElement(`div`);
-        newHeadingText.classList.add("note-heading-text");
-        newHeadingText.textContent = this.note.heading;
+    // const newHeadingText = document.createElement(`div`);
+    // newHeadingText.classList.add("note-heading-text");
+    // newHeadingText.textContent = this.note.heading;
 
-        const newHeading = document.createElement(`div`);
-        newHeading.classList.add("note-heading");
+    // const newHeading = document.createElement(`div`);
+    // newHeading.classList.add("note-heading");
 
-        const newContentText = document.createElement(`div`);
-        newContentText.classList.add("note-content-text");
-        newContentText.textContent = this.note.content;
+    // const deleteBtn = document.createElement(`div`);
+    // deleteBtn.classList.add("delete-button");
 
-        const newContent = document.createElement(`div`);
-        newContent.classList.add("note-content");
+    // const newContentText = document.createElement(`div`);
+    // newContentText.classList.add("note-content-text");
+    // newContentText.textContent = this.note.content;
 
-        newHeading.appendChild(newHeadingText);
-        newContent.appendChild(newContentText);
-        newNote.appendChild(newHeading);
-        newNote.appendChild(newContent);
-        parent.appendChild(newNote);
-    }
+    // const newContent = document.createElement(`div`);
+    // newContent.classList.add("note-content");
+
+    // newHeading.appendChild(deleteBtn);
+    // newHeading.appendChild(newHeadingText);
+    // newContent.appendChild(newContentText);
+    // newNote.appendChild(newHeading);
+    // newNote.appendChild(newContent);
+    // parent.appendChild(newNote);
+  }
 }

@@ -5,6 +5,9 @@ export class NotesController {
         container.addEventListener('click', this.onClick.bind(this))
         this.adder = document.querySelector('.add-note');
     }
+    delete(note){
+        this.notesModel.removeNote(note);
+    }
     open(note) {
         this.noteEditModel.open(note)
     }
@@ -16,7 +19,12 @@ export class NotesController {
             const notes = document.querySelectorAll('.note')
             for(const note of notes){
                 if (note.contains(event.target)){
-                    this.open(this.notesModel.getNoteById(+note.id))
+                    const deleteBtn = note.querySelector(".delete-button")
+                    if(deleteBtn.contains(event.target)){
+                        this.delete(note)
+                    }else{
+                        this.open(this.notesModel.getNoteById(+note.id))
+                    }
                     return
                 }
             }
