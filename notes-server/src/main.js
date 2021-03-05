@@ -12,16 +12,17 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/notes', (req, res) => {
-  res.send(notes);
+  
+  setTimeout(() => res.send(notes), 1000)
 });
 
 app.post('/notes', (req, res) => {
-  const {title, text} = req.body;
-  if (!title || !isDefined(text)) {
+  const {heading, content} = req.body;
+  if (!heading || !isDefined(content)) {
     res.status(400).send();
     return;
   }
-  const note = new Note(counter, req.body.title, req.body.text);
+  const note = new Note(counter, req.body.heading, req.body.content);
   notes.push(note);
   res.status(201).send(counter.toString());
   counter++;
@@ -29,18 +30,18 @@ app.post('/notes', (req, res) => {
 
 app.put('/notes/:id', (req, res) => {
   const id = +req.params.id;
-  const {title, text} = req.body;
-  if (!title || !isDefined(text) || !isDefined(id)) {
+  const {heading, content} = req.body;
+  if (!heading || !isDefined(content) || !isDefined(id)) {
     res.status(400).send();
     return;
   }
   const i = notes.findIndex((n) => n.id === id);
   if (i !== -1) {
-    const note = new Note(id, req.body.title, req.body.text);
+    const note = new Note(id, req.body.heading, req.body.content);
     notes.splice(i, 1, note);
     res.send();
   } else {
-    const note = new Note(counter, req.body.title, req.body.text);
+    const note = new Note(counter, req.body.heading, req.body.content);
     notes.push(note);
     res.status(201).send(counter.toString());
     counter++;
