@@ -3,13 +3,16 @@
     margin-left: 100px;
     margin-right: 100px;
 }
+.notes{
+    display: flex;
+    flex-wrap: wrap;
+}
 .add-note{
     border: 1px solid black;
     margin-right: 50px;
     position: relative;
     height: 150px;
     width: 250px;
-    display: inline-block;
     background-color: rgb(9, 255, 0);
     cursor: pointer;
 }
@@ -40,7 +43,6 @@
     position: relative;
     height: 150px;
     width: 250px;
-    display: inline-block;
     cursor: pointer;
 }
 
