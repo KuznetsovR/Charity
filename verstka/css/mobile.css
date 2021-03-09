@@ -13,6 +13,48 @@
         padding-left: 25px;
         padding-right: 25px;
     }
+    .menu-bars{
+        display: block;
+    }
+    .main-top{
+        height: 350px;
+        background-position-x: -180px;
+    }
+    .main-top-phone-wrapper{
+        background: none;
+        height: 50px;
+        top:200px;
+    }
+    .main-top-phone-wrapper a{
+        top:0 ;
+    }
+    .features-container{
+        overflow: hidden;
+        position: relative;
+    }
+    .features{
+        display: block;
+        width: 10000px;
+        position: relative;
+    }
+    .feature{
+        width: 400px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .hr-1{
+        width: 100%;
+    }
+
+
+
+
+
+
+    .subheader-switcher{
+        display: none;
+    }
     .features{
         flex-direction: column;
     }
@@ -22,11 +64,29 @@
     .video-section-text-container{
         width: 100%;
     }
+    .video-section-video-container {
+        order: -1;
+    }
     .counters-field {
         flex-direction: column;
+        text-align: center;
     }
     .counter-heading{
         
+    }
+    
+    .counter{
+        position: relative;
+        left: 50%;
+        margin-left: -93px;
+        margin-bottom: 20px;
+    }
+    .counter:last-child {
+        margin-bottom: 0px;
+    }
+    
+    .separator{
+        display: none;
     }
     .video-section-content{
         flex-direction: column;
@@ -47,32 +107,31 @@
     .footer-info-item{
         width: 100%;
     }
+    .post{
+        justify-content: left;
+    }
     .post-text{
         padding: 10px 0px;
     }
     .post-date{
         padding-top: 10px;
     }
-    .counters-field{
-        text-align: center;
-    }
-    .counter{
-        position: relative;
-        left: 50%;
-        margin-left: -93px;
-    }
 
 
 
 
-    .header-info, nav {
+    .header-info-items, nav {
         display: none;
     }
-
+    .header-top{
+        margin-top: 0px;
+    }
     .header-main {
         height: 100px;
     }
-
+    .header-search{
+        width: 100%;
+    }
     
 
     .mobile-nav {
