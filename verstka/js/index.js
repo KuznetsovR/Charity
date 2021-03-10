@@ -151,7 +151,7 @@ $(document).ready(() => {
   if (containerWidth<1024){
     $(".feature").width(containerWidth + "px")
   }
-  //////////////////////// menu scroll
+  //////////////////////// menu scroll 777
 
   $(".menu-bars").on("click", (e) => {
     e.preventDefault();
