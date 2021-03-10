@@ -151,6 +151,18 @@ $(document).ready(() => {
   if (containerWidth<1024){
     $(".feature").width(containerWidth + "px")
   }
+  //////////////////////// menu scroll
+
+  $(".menu-bars").on("click", (e) => {
+    e.preventDefault();
+    $(".body-wrapper").toggleClass("mobile-nav_active")
+  })
+
+  $(".mob-nav-point").on("click", (e) =>{
+    e.preventDefault();
+
+  })
+
   ////////////// services
   let containerWidthServices = ($(window).width() * 0.7)
   

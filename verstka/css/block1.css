@@ -5,6 +5,7 @@ body {
   margin-bottom: 0%;
   text-align: left;
   font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
@@ -635,10 +636,14 @@ footer .container {
 
 
 .body-wrapper {
-  overflow: hidden;
-  width: 100%;;
+  width: 100%;
+  /* background-color: #86d6df; */
+  left: 0;
+  position: relative;
+  transition: all 1s ease-out;
 }
-
-.mobile-nav {
-  displaY: none
+.body-wrapper.mobile-nav_active{
+  transition: all 1s ease-out;
+  left: -80%;
+  width: 100%;
 }
