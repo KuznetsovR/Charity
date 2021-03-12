@@ -110,8 +110,8 @@ export class NotesModel {
     const heading = note.heading
     const content = note.content
     if (i !== -1) {
-        fetch("http://localhost:3000/notes", {
-        method: "POST",
+        fetch(`http://localhost:3000/notes/${note.id}`, {
+        method: "PUT",
         headers: {
           ["Content-type"]: "application/json",
         },
@@ -139,15 +139,11 @@ export class NotesModel {
     }
     if (i !== -1) {
       this.setLoadingStatus(true);
-      fetch("http://localhost:3000/notes", {
-        method: "POST",
+      fetch(`http://localhost:3000/notes/${note.id}`, {
+        method: "DELETE",
         headers: {
           ["Content-type"]: "application/json",
-          // Access-Control-Allow-Origin: *
         },
-        body: {},/*JSON.stringify({
-          i,
-        }),*/
       })
         .then((res) => res.text())
         .then(() => {
