@@ -32,7 +32,8 @@ export class NotesModel {
     this.onSet.next(notes)
   }
 
-  addNote(heading, content) {
+  addNote(heading, content) {                         //todo: no empty content heading
+    if (heading == undefined || heading == '' || content == undefined || content == '') return
     this.setLoadingStatus(true);
     fetch("http://localhost:3000/notes", {
       method: "POST",

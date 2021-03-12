@@ -144,12 +144,12 @@ $(document).ready(() => {
 
 
     if (containerWidth<1024){
-      $(".feature").width(containerWidth + "px")
+      $(".feature").width(Math.ceil($(window).width()))
     }
   });
 
   if (containerWidth<1024){
-    $(".feature").width(containerWidth + "px")
+    $(".feature").width(Math.ceil($(window).width()))
   }
   //////////////////////// menu scroll 777
 
