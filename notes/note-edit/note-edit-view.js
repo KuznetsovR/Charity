@@ -6,10 +6,10 @@ export class NoteEditView{
         this.noteName = document.querySelector(".note-name-modal");
         this.textarea = document.querySelector(".textarea");
         this.deleteBtn = document.querySelector(".delete-button-modal");
-        this.model.onOpenChange(this.onOpenChange.bind(this));
-        this.model.onSetHeading(this.onHeadingChange.bind(this));
-        this.model.onSetContent(this.onContentChange.bind(this));
-        this.model.onDeleteBtnChange(this.onDeleteBtnChange.bind(this));
+        this.model.openStatus.subscribe(this.onOpenChange.bind(this));
+        this.model.heading.subscribe(this.onHeadingChange.bind(this));
+        this.model.content.subscribe(this.onContentChange.bind(this));
+        this.model.removeBtnStatus.subscribe(this.onDeleteBtnChange.bind(this));
     }
     onOpenChange(open){
         if(open){

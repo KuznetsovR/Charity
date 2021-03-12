@@ -1,16 +1,17 @@
 import { Note } from "../shared/note.js";
+import { Observable } from '../shared/observable.js'
+
 export class NotesModel {
   constructor(notes = [], apiService) {
     this.notes = notes;
-    this.onAddObservers = [];
-    this.onEditObservers = [];
-    this.onRemoveObservers = [];
-    this.onSetObservers = [];
-    this.onLoadingStatusObservers = [];
     this.apiService = apiService;
     this.currentId =
       notes.reduce((max, note) => (note.id > max ? note.id : max), 0) + 1;
-    this.loadingStatus = false;
+    this.onAdd = new Observable();
+    this.onEdit = new Observable();
+    this.onRemove = new Observable();
+    this.onSet = new Observable();
+    this.loadingStatus = new Observable(false);
   }
   loadNotes() {
     this.setLoadingStatus(true);
@@ -19,67 +20,16 @@ export class NotesModel {
       this.setLoadingStatus(false);
     });
   }
-  //////////////////////////////добавление функций(подписок)
-  onLoadingStatus(observer) {
-    this.onLoadingStatusObservers.push(observer);
-  }
-  onSet(observer) {
-    this.onSetObservers.push(observer);
-  }
-  onAdd(observer) {
-    this.onAddObservers.push(observer);
-  }
-  onEdit(observer) {
-    this.onEditObservers.push(observer);
-  }
-  onRemove(observer) {
-    this.onRemoveObservers.push(observer);
-  }
-  //////////////////////////////удаление функций(подписок)
-  removeOnLoadingStatus(observer) {
-    const index = this.onLoadingStatusObservers.indexOf(observer);
-    if (index !== -1) {
-      this.onLoadingStatusObservers.splice(index, 1);
-    }
-  }
-  removeOnSet(observer) {
-    const index = this.onSetObservers.indexOf(observer);
-    if (index !== -1) {
-      this.onSetObservers.splice(index, 1);
-    }
-  }
-  removeOnAdd(observer) {
-    const index = this.onAddObservers.indexOf(observer);
-    if (index !== -1) {
-      this.onAddObservers.splice(index, 1);
-    }
-  }
-  removeOnEdit(observer) {
-    const index = this.onEditObservers.indexOf(observer);
-    if (index !== -1) {
-      this.onEditObservers.splice(index, 1);
-    }
-  }
-  removeOnRemove(observer) {
-    const index = this.onRemoveObservers.indexOf(observer);
-    if (index !== -1) {
-      this.onRemoveObservers.splice(index, 1);
-    }
-  }
+   
   //////////////////////////////изменение данных и вызов(оповещение) функций(подписок)
   setLoadingStatus(status) {
-    this.loadingStatus = status;
-    for (const observer of this.onLoadingStatusObservers) {
-      observer(status);
-    }
+    this.loadingStatus.next(status)
   }
   setNotes(notes) {
     this.notes = notes;
     this.currentId =
       notes.reduce((max, note) => (note.id > max ? note.id : max), 0) + 1;
-    for (const observer of this.onSetObservers) {
-      observer(notes);
-    }
+    this.onSet.next(notes)
   }
 
   addNote(heading, content) {
@@ -98,9 +48,8 @@ export class NotesModel {
       .then((id) => {
         const note = new Note(+id, heading, content);
         this.notes.push(note);
-        for (const observer of this.onAddObservers) {
-          observer(note);
-        }
+        this.onAdd.next(note)
+
         this.setLoadingStatus(false);
       });
   }
@@ -122,9 +71,7 @@ export class NotesModel {
         .then((res) => res.text())
         .then(() => {
           this.notes.splice(i, 1, note);
-          for (const observer of this.onEditObservers) {
-            observer(note, i);
-          }
+          this.onEdit.next(note)
           this.setLoadingStatus(false);
         });
     }
@@ -140,9 +87,7 @@ export class NotesModel {
       .then((res) => res.text())
       .then(() => {
         this.notes.splice(note.id, 1);
-        for (const observer of this.onRemoveObservers) {
-          observer(note);
-        }
+        this.onRemove.next(note)
         this.setLoadingStatus(false);
       });
   }

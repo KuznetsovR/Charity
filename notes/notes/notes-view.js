@@ -1,11 +1,11 @@
 export class NotesView {
     constructor(model, container) {
         this.model = model;
-        this.model.onSet(this.initialRender.bind(this))
-        this.model.onAdd(this.onAddNote.bind(this));
-        this.model.onEdit(this.onEditNote.bind(this));
-        this.model.onRemove(this.onRemoveNote.bind(this));
-        this.model.onLoadingStatus(this.onLoadingStatus.bind(this));
+        this.model.onSet.subscribe(this.initialRender.bind(this))
+        this.model.onAdd.subscribe(this.onAddNote.bind(this));
+        this.model.onEdit.subscribe(this.onEditNote.bind(this));
+        this.model.onRemove.subscribe(this.onRemoveNote.bind(this));
+        this.model.loadingStatus.subscribe(this.onLoadingStatus.bind(this));
         this.loadingModal = document.getElementById("modal2");
         this.modalOverlay = document.querySelector(".modal-overlay");
         this.container = container;
@@ -35,7 +35,7 @@ export class NotesView {
         element.remove();
     }
     initialRender() {
-        this.onLoadingStatus(this.model.loadingStatus)
+        this.onLoadingStatus(this.model.loadingStatus.value)
         // this.container
         // const fragment = new DocumentFragment();
         for (const note of this.model.notes) {

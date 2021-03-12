@@ -14,7 +14,7 @@ export class NoteEditController{
         modalOverlay.addEventListener('click', this.close.bind(this))
     }
     addNote(){
-        this.notesModel.addNote(this.noteEditModel.heading, this.noteEditModel.content)
+        this.notesModel.addNote(this.noteEditModel.heading.value, this.noteEditModel.content.value)
     }
     editNote(){
         this.notesModel.editNote(this.noteEditModel.getNote())

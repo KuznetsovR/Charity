@@ -1,54 +1,18 @@
 import { Note } from "../shared/note.js";
+import { Observable } from '../shared/observable.js'
+
 
 export class NoteEditModel {
     constructor() {
-        this.openStatusObservers = [];
-        this.onSetHeadingObservers = [];
-        this.onSetContentObservers = [];
-        this.removeBtnStatusObservers = [];
+        this.openStatus = new Observable(false);
+        this.heading = new Observable()
+        this.content = new Observable()
+        this.removeBtnStatus = new Observable(false)
     }
-    onOpenChange(observer){
-        this.openStatusObservers.push(observer)
-    }
-    onSetHeading (observer){
-        this.onSetHeadingObservers.push(observer)
-    }
-    onSetContent(observer){
-        this.onSetContentObservers.push(observer)
-    }
-    onDeleteBtnChange(observer){
-        this.removeBtnStatusObservers.push(observer)
-    }
-    removeOnOpenChange(observer) {
-        const index = this.openStatusObservers.indexOf(observer)
-        if (index !== -1) {
-            this.openStatusObservers.splice(index, 1)
-        }
-    }
-    removeOnSetHeading(observer) {
-        const index = this.onSetHeadingObservers.indexOf(observer)
-        if (index !== -1) {
-            this.onSetHeadingObservers.splice(index, 1)
-        }
-    }
-    removeOnSetContent(observer) {
-        const index = this.onSetContentObservers.indexOf(observer)
-        if (index !== -1) {
-            this.onSetContentObservers.splice(index, 1)
-        }
-    }
-    removeOnDeleteBtnChange(observer){
-        const index = this.removeBtnStatusObservers.indexOf(observer)
-        if (index !== -1) {
-            this.removeBtnStatusObservers.splice(index, 1)
-        }
-    }
-
+    
 
     open(note) {
-        for (const observer of this.openStatusObservers) {
-            observer(true)
-        }
+        this.openStatus.next(true)
         if (note !== undefined) {
             this.id = note.id;
             this.addRemoveBtn();
@@ -59,36 +23,27 @@ export class NoteEditModel {
         }
     }
     close() {
-        for (const observer of this.openStatusObservers) {
-            observer(false)
-        }
+        this.openStatus.next(false)
+
         this.id = undefined
         this.setHeading('')
         this.setContent('')
     }
     setHeading(heading) {
-        for (const observer of this.onSetHeadingObservers) {
-            observer(heading)
-        }
-        this.heading = heading;
+        this.heading.next(heading)
     }
     setContent(content) {
-        for (const observer of this.onSetContentObservers) {
-            observer(content)
-        }
-        this.content = content;
+        this.content.next(content)
     }
     addRemoveBtn(){
-        for (const observer of this.removeBtnStatusObservers) {
-            observer(true)
-        }
+        this.removeBtnStatus.next(true)
+
     }
     deleteRemoveBtn(){
-        for (const observer of this.removeBtnStatusObservers) {
-            observer(false)
-        }
+        this.removeBtnStatus.next(false)
+
     }
     getNote(){
-        return new Note(this.id, this.heading, this.content);
+        return new Note(this.id, this.heading.value, this.content.value);
     }
 }
