@@ -11,7 +11,6 @@ export class NotesModel {
     this.currentId =
       notes.reduce((max, note) => (note.id > max ? note.id : max), 0) + 1;
     this.loadingStatus = false;
-    this.loadNotes();
   }
   loadNotes() {
     this.setLoadingStatus(true);
@@ -95,7 +94,7 @@ export class NotesModel {
         content,
       }),
     })
-      .then((res) => res.text())
+      .then((res) => res.text())          //перенести в апи
       .then((id) => {
         const note = new Note(+id, heading, content);
         this.notes.push(note);
@@ -110,7 +109,7 @@ export class NotesModel {
     const heading = note.heading
     const content = note.content
     if (i !== -1) {
-        fetch(`http://localhost:3000/notes/${note.id}`, {
+      fetch(`http://localhost:3000/notes/${note.id}`, {
         method: "PUT",
         headers: {
           ["Content-type"]: "application/json",
@@ -131,29 +130,21 @@ export class NotesModel {
     }
   }
   removeNote(note) {
-    let i;
-    if (note.id === -1) {
-      i = this.notes.findIndex((n) => note.id === n.id);
-    } else {
-      i = note.id - 1;
-    }
-    if (i !== -1) {
-      this.setLoadingStatus(true);
-      fetch(`http://localhost:3000/notes/${note.id}`, {
-        method: "DELETE",
-        headers: {
-          ["Content-type"]: "application/json",
-        },
-      })
-        .then((res) => res.text())
-        .then(() => {
-          this.notes.splice(i, 1);
-          for (const observer of this.onRemoveObservers) {
-            observer(note);
-          }
-          this.setLoadingStatus(false);
-        });
-    }
+    this.setLoadingStatus(true);
+    fetch(`http://localhost:3000/notes/${note.id}`, {
+      method: "DELETE",
+      headers: {
+        ["Content-type"]: "application/json",
+      },
+    })
+      .then((res) => res.text())
+      .then(() => {
+        this.notes.splice(note.id, 1);
+        for (const observer of this.onRemoveObservers) {
+          observer(note);
+        }
+        this.setLoadingStatus(false);
+      });
   }
   //////////////////////////////////
   getNoteById(id) {

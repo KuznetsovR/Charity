@@ -9,7 +9,6 @@ export class NotesView {
         this.loadingModal = document.getElementById("modal2");
         this.modalOverlay = document.querySelector(".modal-overlay");
         this.container = container;
-        this.initialRender();
     }
     onLoadingStatus(status) {
         if(status){
@@ -54,7 +53,7 @@ class NoteView {
     }
     renderTo(parent) {
         parent.insertAdjacentHTML(
-            "beforeend",
+            "afterbegin",
             `<div class='note' id='${this.note.id}'>
             <div class='note-heading'>
                 <div class="delete-button"></div>

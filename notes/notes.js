@@ -6,6 +6,7 @@ import { NotesController } from './notes/notes-controller.js'
 import { NoteEditModel } from './note-edit/note-edit-model.js'
 import { NoteEditView } from './note-edit/note-edit-view.js'
 import { ApiService } from './shared/api-service.js'
+
 // import { LocalStorageService } from './localStorage/local-storage-service.js'
 
 
@@ -24,7 +25,9 @@ const notesView = new NotesView(notesModel, notesField);
 const notesController = new NotesController(noteEditModel, notesModel,  notesField);
 const noteEditController = new NoteEditController(notesModel, noteEditModel);
 
+notesModel.loadNotes();
 
+notesView.initialRender()
 // function localStorageUpdate(){
 //   localStorageService.saveNotes(notesModel.notes)
 // }
