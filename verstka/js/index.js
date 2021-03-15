@@ -4,32 +4,31 @@ $(document).ready(() => {
 
   let alreadyStarted = false;
 
-  function moveCnt() {
-    if (!alreadyStarted) {
-      $(".dwl-counter").each((index, el) => {
-        const element = $(el);
-        const start = element.attr("data-start");
-        const finish = element.attr("data-finish");
-
-        console.log(element, start, finish);
-
-        const interval = setInterval(() => {
-          for (let i = start; i < finish; i++) {
-            console.log(i);
-            element.html(i);
-          }
-
-          clearInterval(interval);
-        }, 10000);
-      });
-
-      //
-      alreadyStarted = true;
-    }
+  function moveCnt() { 
+    if (!alreadyStarted) { 
+      $(".dwl-counter").each(function () { 
+        $(this) 
+          .prop("Counter", 0) 
+          .animate( 
+            { 
+              Counter: $(this).attr("data-finish"), 
+            }, 
+            { 
+              duration: 3000, 
+              easing: "swing", 
+              step: function (now) { 
+                $(this).text(Math.ceil(now)); 
+              }, 
+            } 
+          ); 
+      }); 
+ 
+      alreadyStarted = true; 
+    } 
   }
 
   $(window).scroll(() => {
-    const blockCntScrollTop = $(window).scrollTop();
+    const blockCntScrollTop = $(window).scrollTop() + $(window).height();
 
     if (
       blockCntScrollTop >= blockCntTop &&
@@ -108,6 +107,7 @@ $(document).ready(() => {
       leftSide = containerWidthServices / -9;
       $("#services").css("left", leftSide + "px");
     } else {
+        $(".feature").width(windowWidth - 40 + "px");
       $("#subheaderCaroosel").css("padding", 0);
       $(".subheader-text").width(windowWidth + "px");
     }
