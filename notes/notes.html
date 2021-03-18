@@ -30,7 +30,8 @@
                 <button class='submit-button'>Submit</button>
             </div>
             <div class='note-content-modal'>
-                <textarea name="" id="" rows="15" class="textarea"></textarea>
+                <!-- <textarea name="" id="" rows="15" class="textarea"></textarea> -->
+                <div id="editor" class="textarea"></div>
             </div>
             <div class="delete-btn-wrapper">
                 <button class="delete-button-modal">Delete</button>
@@ -48,17 +49,26 @@
     </div>
     <div class='modal-overlay' id='modal-overlay'></div>
     <script type='module' src="notes.js"></script>
-    <!--
-        <div id="editor"></div>
-     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor                                                                      //wysiwyg для заметки, но можно сделать textarea
+        let editor;
+
+        ClassicEditor
             .create(document.querySelector('#editor'))
+            .then(newEditor => {
+                editor = newEditor;
+            })
             .catch(error => {
                 console.error(error);
             });
-    </script>   
-    -->
+
+        // Assuming there is a <button id="submit">Submit</button> in your application.
+        document.querySelector('.submit-button').addEventListener('click', () => {
+            const editorData = editor.getData();
+            console.log(editorData)
+            // html elemets https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/saving-data.html
+        });
+    </script>
 
 </body>
 
