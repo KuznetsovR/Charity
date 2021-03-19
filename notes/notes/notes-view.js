@@ -28,7 +28,7 @@ export class NotesView {
         let heading = element.querySelector(".note-heading-text");
         let content = element.querySelector(".note-content-text");
         heading.textContent = note.heading;
-        content.textContent = note.content;
+        content.innerHTML = note.content;
     }
     onRemoveNote(note) {
         let element = document.getElementById(note.id);

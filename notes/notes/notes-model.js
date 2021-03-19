@@ -33,13 +33,13 @@ export class NotesModel {
   }
 
   addNote(heading, content) {
-    if (
-      heading == undefined ||
-      heading == "" ||
-      content == undefined ||
-      content == ""
-    )
-      return;
+    // if (
+    //   heading == undefined ||
+    //   heading == "" ||
+    //   content == undefined ||
+    //   content == ""
+    // )
+    //   return;
     this.setLoadingStatus(true);
     this.apiService.addNote(heading, content).then((id) => {
       const note = new Note(+id, heading, content);

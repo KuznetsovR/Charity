@@ -18,8 +18,8 @@ export class NoteEditView{
         }else{
             this.modal.classList.remove("opened");
             this.modalOverlay.classList.remove("opened");
-            this.noteName.value = "";
-            this.textarea.value = "";
+            this.onHeadingChange("");
+            this.onContentChange("");
         }
     }
     onHeadingChange(heading){

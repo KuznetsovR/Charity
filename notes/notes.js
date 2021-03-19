@@ -6,7 +6,8 @@ import { NotesController } from './notes/notes-controller.js'
 import { NoteEditModel } from './note-edit/note-edit-model.js'
 import { NoteEditView } from './note-edit/note-edit-view.js'
 import { ApiService } from './shared/api-service.js'
-
+import { NoteEditWysiwygView } from './note-edit/note-edit-wysiwyg-view.js'
+import { NoteEditWysiwygController } from './note-edit/note-edit-wysiwyg-controller.js'
 // import { LocalStorageService } from './localStorage/local-storage-service.js'
 
 
@@ -19,11 +20,23 @@ const noteEditModel = new NoteEditModel();
 
 const notesField = document.querySelector(".notes");
 
-const noteEditView = new NoteEditView(noteEditModel);
+let editor;
+
+ClassicEditor
+  .create(document.querySelector('#editor'))
+  .then(newEditor => {
+    editor = newEditor;
+    const noteEditView = new NoteEditWysiwygView(noteEditModel, editor);
+    const noteEditController = new NoteEditWysiwygController(notesModel, noteEditModel, editor);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
 const notesView = new NotesView(notesModel, notesField);
 
-const notesController = new NotesController(noteEditModel, notesModel,  notesField);
-const noteEditController = new NoteEditController(notesModel, noteEditModel);
+
+const notesController = new NotesController(noteEditModel, notesModel, notesField);
 
 notesModel.loadNotes();
 

@@ -48,27 +48,9 @@
         </div>
     </div>
     <div class='modal-overlay' id='modal-overlay'></div>
-    <script type='module' src="notes.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
-    <script>
-        let editor;
+    <script type='module' src="notes.js"></script>
 
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .then(newEditor => {
-                editor = newEditor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        // Assuming there is a <button id="submit">Submit</button> in your application.
-        document.querySelector('.submit-button').addEventListener('click', () => {
-            const editorData = editor.getData();
-            console.log(editorData)
-            // html elemets https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/saving-data.html
-        });
-    </script>
 
 </body>
 
