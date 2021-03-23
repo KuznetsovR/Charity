@@ -4,28 +4,92 @@ $(document).ready(() => {
 
   let alreadyStarted = false;
 
-  function moveCnt() { 
-    if (!alreadyStarted) { 
-      $(".dwl-counter").each(function () { 
-        $(this) 
-          .prop("Counter", 0) 
-          .animate( 
-            { 
-              Counter: $(this).attr("data-finish"), 
-            }, 
-            { 
-              duration: 3000, 
-              easing: "swing", 
-              step: function (now) { 
-                $(this).text(Math.ceil(now)); 
-              }, 
-            } 
-          ); 
-      }); 
- 
-      alreadyStarted = true; 
-    } 
+
+
+  function moveCnt() {
+    if (!alreadyStarted) {
+      $(".dwl-counter").each(function () {
+        $(this)
+          .prop("Counter", 0)
+          .animate(
+            {
+              Counter: $(this).attr("data-finish"),
+            },
+            {
+              duration: 3000,
+              easing: "swing",
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+
+      alreadyStarted = true;
+    }
   }
+
+
+
+
+
+
+  function switchSubheader(framesCount, containerWidth) {
+    let leftChord = 0;
+    let currentFrame = 1;
+
+    $("#switchSubheaderRight").on("click", (e) => {
+      e.preventDefault();
+
+      if (currentFrame < framesCount) {
+        leftChord = leftChord - containerWidth;
+        currentFrame++;
+      } else {
+        leftChord = 0;
+        currentFrame = 1;
+      }
+
+      $("#subheaderCaroosel").css("left", leftChord + "px");
+    });
+
+    $("#switchSubheaderLeft").on("click", (e) => {
+      e.preventDefault();
+
+      if (currentFrame <= 1) {
+        leftChord = containerWidth * -2;
+        currentFrame = framesCount;
+      } else {
+        leftChord += containerWidth;
+        currentFrame--;
+      }
+      $("#subheaderCaroosel").css("left", leftChord + "px");
+    });
+  }
+
+
+
+
+
+
+
+  function setServiceWidth(windowWidth) {
+    if (windowWidth >= 1024) {
+      let containerWidthServices = $(window).width() * 0.7;
+      $(".service").width(containerWidthServices / 3 - 30 + "px");
+
+      let leftSide = containerWidthServices / -9;
+      $("#services").css("left", leftSide + "px");
+    } else {
+      $(".service").width(windowWidth - 30 + "px");
+      $("#services").css("left", 0 + "px");
+    }
+  }
+
+
+
+
+
+
 
   $(window).scroll(() => {
     const blockCntScrollTop = $(window).scrollTop() + $(window).height();
@@ -34,13 +98,19 @@ $(document).ready(() => {
       blockCntScrollTop >= blockCntTop &&
       blockCntScrollTop < blockCntTop + blockCntHeight
     ) {
-      console.log("InTo");
-
+      console.log("InTo"); //работает так себе
       moveCnt();
     } else {
       console.log("Out");
     }
   });
+
+
+
+
+
+
+  
   //////subheader
   let windowWidth = Math.ceil($(window).width());
   let containerWidth = windowWidth * 0.7;
@@ -62,34 +132,7 @@ $(document).ready(() => {
   $(".subheader-text_zero").addClass("hidden");
   console.log(framesCount);
 
-  let leftChord = 0;
-  let currentFrame = 1;
-
-  $("#switchSubheaderRight").on("click", (e) => {
-    e.preventDefault();
-
-    if (currentFrame < framesCount) {
-      leftChord = leftChord - containerWidth;
-      currentFrame++;
-    } else {
-      leftChord = 0;
-      currentFrame = 1;
-    }
-
-    $("#subheaderCaroosel").css("left", leftChord + "px");
-  });
-  $("#switchSubheaderLeft").on("click", (e) => {
-    e.preventDefault();
-
-    if (currentFrame <= 1) {
-      leftChord = containerWidth * -2;
-      currentFrame = framesCount;
-    } else {
-      leftChord += containerWidth;
-      currentFrame--;
-    }
-    $("#subheaderCaroosel").css("left", leftChord + "px");
-  });
+  switchSubheader(framesCount, containerWidth);
 
   ////features
   $(".feature").width(windowWidth - 40 + "px");
@@ -107,10 +150,12 @@ $(document).ready(() => {
       leftSide = containerWidthServices / -9;
       $("#services").css("left", leftSide + "px");
     } else {
-        $(".feature").width(windowWidth - 40 + "px");
+      $(".feature").width(windowWidth - 40 + "px");
       $("#subheaderCaroosel").css("padding", 0);
       $(".subheader-text").width(windowWidth + "px");
     }
+    switchSubheader(framesCount, containerWidth);
+    setServiceWidth(windowWidth);
   });
 
   //////////////////////// menu scroll
@@ -152,15 +197,7 @@ $(document).ready(() => {
   };
 
   ////////////// services
-  if (windowWidth >= 1024) {
-    let containerWidthServices = $(window).width() * 0.7;
-    $(".service").width(containerWidthServices / 3 - 30 + "px");
-
-    let leftSide = containerWidthServices / -9;
-    $("#services").css("left", leftSide + "px");
-  } else {
-    $(".service").width(windowWidth - 30 + "px");
-  }
+  setServiceWidth(windowWidth);
 
   $("#rightServiceBtn").on("click", (e) => {
     e.preventDefault();
