@@ -73,7 +73,7 @@ $(document).ready(() => {
 
 
   function setServiceWidth(windowWidth) {
-    if (windowWidth >= 1024) {
+    if (windowWidth+16 >= 1024) {
       let containerWidthServices = $(window).width() * 0.7;
       $(".service").width(containerWidthServices / 3 - 30 + "px");
 
@@ -125,8 +125,8 @@ $(document).ready(() => {
     $("#subheaderCaroosel").css("padding", 0);
     $(".subheader-text").width(windowWidth + "px");
   }
-  containerWidth = $(window).width() * 0.7 - 30;
-  const framesCount = $(".subheader-text").length;
+  containerWidth = windowWidth * 0.7;
+  const framesCount = $(".subheader-text").length - 1;
 
   $(".subheader-text").addClass("shown");
   $(".subheader-text_zero").addClass("hidden");
@@ -146,6 +146,7 @@ $(document).ready(() => {
       containerWidthServices = containerWidth;
       $(".subheader-text").width(containerWidth + "px");
       $(".service").width(containerWidthServices / 3 - 30 + "px");
+      $("#subheaderCaroosel").css("padding-left", 15 + "%");
 
       leftSide = containerWidthServices / -9;
       $("#services").css("left", leftSide + "px");

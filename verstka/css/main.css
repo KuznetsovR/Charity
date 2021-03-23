@@ -1,0 +1,20 @@
+@import "reset.css";
+@import "block1.css";
+@import "mobile.css";
+@import "blocks/main.css";
+
+body {
+    margin: 0;
+    text-align: left;
+    font-family: "Open Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+/*colors*/
+:root {
+    --red: red;
+}
+
+* {
+    border: 1px solid var(--red);
+}
