@@ -1,8 +1,28 @@
 body{
     background-color: rgb(37, 37, 37);
 }
+.login-btn-link{
+    position: absolute;
+    right: 20px;
+    border: 1px solid white;
+    text-align: center;
+    transition: 1s;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+
+    display: inline-block;
+    transition: ease-out 1s;
+    padding: 10px 20px;
+}
+.login-btn-link:hover{
+    color: black;
+    background-color: white;
+
+}
+
 .rows{
-    margin-top: 100px;
+    padding-top: 100px;
     margin-left: 100px;
     margin-right: 100px;
 }
@@ -143,6 +163,17 @@ body{
     border-radius: 5px;
     width:40%;
     border: 2px solid rgb(77, 124, 255);
+}
+.note-name-modal-error{
+    color: red;
+    margin-top: 38px;
+    font-size: 13px;
+    position: absolute;
+}
+.note-content-modal-error{
+    color: red;
+    font-size: 13px;
+    position: absolute;
 }
 .submit-button{
     background-color: rgb(0, 255, 42);

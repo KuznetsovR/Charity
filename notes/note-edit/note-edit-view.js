@@ -35,4 +35,7 @@ export class NoteEditView{
             this.deleteBtn.style.display = "none";
         }
     }
+    onErrorChange(){
+        
+    }
 }

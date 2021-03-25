@@ -1,13 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const {Note} = require('./note');
+const router = express.Router();        
+router.use(function(req, res){
 
+});
+router.get('/notes', function(req, res){
+  
+});                                                             //на этом мои полномочия всё
 const notes = [];
 let counter = 0;
 
 const isDefined = (val) => val !== undefined && val !== null && !(typeof value === 'number' && isNaN(val));
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 

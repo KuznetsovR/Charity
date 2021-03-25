@@ -13,7 +13,7 @@ export class Observable {
     next(value){
         this.value = value;
         for(const observer of this._observers){
-            observer(value)
+            observer(value)                                                 //observer - функция, которая передается через subscribe вo view !!!
         }
     }
 }

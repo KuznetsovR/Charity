@@ -7,7 +7,8 @@ export class NoteEditModel {
         this.openStatus = new Observable(false);
         this.heading = new Observable()
         this.content = new Observable()
-        this.removeBtnStatus = new Observable(false)
+        this.removeBtnStatus = new Observable(false);
+        this.errorStatus = new Observable(true);
     }
     
 
@@ -41,7 +42,12 @@ export class NoteEditModel {
     }
     deleteRemoveBtn(){
         this.removeBtnStatus.next(false)
-
+    }
+    adderrorStatus(){
+        this.errorStatus.next(true)
+    }
+    removeerrorStatus(){
+        this.errorStatus.next(false)
     }
     getNote(){
         return new Note(this.id, this.heading.value, this.content.value);
