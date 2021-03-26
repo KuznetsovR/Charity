@@ -2,6 +2,7 @@
 @import "block1.css";
 @import "mobile.css";
 @import "blocks/main.css";
+@import "icons.css";
 
 body {
     margin: 0;
@@ -12,9 +13,18 @@ body {
 
 /*colors*/
 :root {
-    --red: red;
+    --light-black: #2c3e50;
+    --dark-gray: #34495e;
+    --very-dark-gray: #607080;
+    --yellow-button: #ffd47b;
+    --light-blue: #7dc8d1;
+    --very-light-blue: #85d6de;
+    --regular-gray: #737c85;
+    --light-gray: #758594;
+    --very-light-gray: #dfe6e7;
+    --dark-white: #f4f5f6;
 }
 
 * {
-    border: 1px solid var(--red);
+    /* border: 1px solid var(--yelllow); */
 }

@@ -1,0 +1,44 @@
+.video-section-heading {
+    text-align: center;
+    padding-top: 100px;
+    font-family: "Varela Round", sans-serif;
+    font-size: 28px;
+    padding-bottom: 30px;
+  }
+  .video-section-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 75px;
+  }
+  .video-section-video-container {
+    width: 50%;
+    border: 1px solid var(--very-light-gray);
+    text-align: center;
+  }
+  .video-section-video-container iframe {
+    padding-top: 10px;
+    height: 80%;
+    width: 90%;
+  }
+  .video-section-text-container {
+    position: relative;
+    border: 1px solid var(--very-light-gray);
+    width: 20%;
+  }
+  .video-section-text-container ul{
+    margin: 20px;
+  }
+  .video-section-text-container ul li {
+    color: var(--dark-gray);
+    padding-top: 30px;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .video-section-text-container ul li:first-child {
+    padding-top: 0%;
+  }
+  .video-section-text-container ul li i {
+    padding-right: 5px;
+  }

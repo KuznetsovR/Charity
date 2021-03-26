@@ -1,0 +1,48 @@
+.counters-container {
+  background-color: var(--very-light-blue);
+}
+
+.counter-heading {
+  text-align: center;
+  color: var(--dark-gray);
+  font-size: 28px;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.counters-field {
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.counter {
+  position: relative;
+  /*сделать, чтобы сами элементы не изменялись фон тожe*/
+  border: 7px solid white;
+  border-radius: 100px;
+  width: 186px;
+  height: 186px;
+  text-align: center;
+  color: var(--dark-gray);
+  font-size: 17px;
+  background-image: url(../../img/counter.jpg);
+  background-size: cover;
+}
+.counter-text {
+  margin-top: 50px;
+  font-size: 18px;
+  line-height: 26px;
+}
+.counter-number {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 26px;
+  margin-top: 10px;
+  color: white;
+}
+.separator {
+  color: white;
+  font-size: 50px;
+  padding-top: 50px;
+}
