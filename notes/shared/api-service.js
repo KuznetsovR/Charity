@@ -3,7 +3,7 @@ export class ApiService {
     this.baseUrl = baseUrl;
   }
   getNotes() {
-    return fetch("http://localhost:3000/notes").then((res) => res.json());
+    return fetch("http://localhost:3000/notes", {credentials: 'include'}).then((res) => res.json());
   }
   addNote(heading, content) {
     return fetch("http://localhost:3000/notes", {
@@ -15,7 +15,8 @@ export class ApiService {
         heading,
         content,
       }),
-    }).then((res) => res.text()); //перенести в апи
+      credentials: 'include',
+    }).then((res) => res.text());
   }
   editNote(heading, content, id) {
     return fetch(`http://localhost:3000/notes/${id}`, {
@@ -27,15 +28,14 @@ export class ApiService {
         heading,
         content,
       }),
+      credentials: 'include',
     }).then((res) => res.text());
   }
 
   removeNote(id){
     return fetch(`http://localhost:3000/notes/${id}`, {
         method: "DELETE",
-        headers: {
-          ["Content-type"]: "application/json",
-        },
+        credentials: 'include',
       }).then((res) => res.text())
   }
 }

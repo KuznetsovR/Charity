@@ -2,8 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const {Note} = require('./note');
 const router = express.Router();        
-router.use(function(req, res){
+const cookieParser = require('cookie-parser')
+const {authHandler, authRouter} = require('./auth-service')
 
+router.use(function(req, res){
+  
 });
 router.get('/notes', function(req, res){
   
@@ -14,9 +17,14 @@ let counter = 0;
 const isDefined = (val) => val !== undefined && val !== null && !(typeof value === 'number' && isNaN(val));
 
 const app = express();
+app.use(cors({origin: 'http://127.0.0.1:8080', credentials: true}));
+
+app.use(cookieParser())
 
 app.use(express.json());
-app.use(cors());
+app.use('/api/auth', authRouter)
+
+// app.use(authHandler)
 
 app.get('/notes', (req, res) => {
   
