@@ -1,3 +1,6 @@
+.menu-bars{
+  display: none;
+}
 .header {
   background-color: #34495e;
   overflow: hidden;

@@ -1,5 +1,6 @@
 @import "reset.css";
-@import "block1.css";
+@import "layout.css";
+@import "layout.mobile.css";
 @import "mobile.css";
 @import "blocks/main.css";
 @import "icons.css";
@@ -11,7 +12,6 @@ body {
     overflow-x: hidden;
 }
 
-/*colors*/
 :root {
     --light-black: #2c3e50;
     --dark-gray: #34495e;
@@ -23,8 +23,4 @@ body {
     --light-gray: #758594;
     --very-light-gray: #dfe6e7;
     --dark-white: #f4f5f6;
-}
-
-* {
-    /* border: 1px solid var(--yelllow); */
 }

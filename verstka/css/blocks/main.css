@@ -1,8 +1,24 @@
 @import "header.css";
+@import "header.mobile.css";
+
 @import "illustrations.css";
+@import "illustrations.mobile.css";
+
 @import "features.css";
+@import "features.mobile.css";
+
 @import "counters.css";
+@import "counters.mobile.css";
+
 @import "services.css";
+@import "services.mobile.css";
+
 @import "video-section.css";
+@import "video-section.mobile.css";
+
 @import "learn-more.css";
+
 @import "footer.css";
+@import "footer.mobile.css";
+
+@import "mobile-nav.css";

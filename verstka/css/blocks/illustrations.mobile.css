@@ -1,0 +1,17 @@
+@media screen and (max-width: 1023px) {
+  .main-top {
+    height: 350px;
+    background-position-x: -180px;
+  }
+  .main-top-phone-wrapper {
+    background: none;
+    height: 50px;
+    top: 200px;
+  }
+  .main-top-phone-wrapper a {
+    top: 0;
+  }
+  .subheader-switcher {
+    display: none;
+  }
+}

@@ -1,0 +1,50 @@
+.container {
+    min-width: 1024px;
+    margin: 0 auto;
+  }
+  
+  .container .row {
+    box-sizing: border-box;
+    padding: 0 15%;
+  }
+  
+  
+  .line {
+    background-image: url(../img/2.png);
+    background-repeat: repeat-x;
+    height: 3px;
+    margin-left: -100px;
+  }
+  
+  .hr-1 {
+    color: var(--very-light-gray);
+    z-index: 1;
+    position: relative;
+    width: 70%;
+  }
+  
+  .row .hr-1 {
+    width: 100%;
+  }
+  
+  .hr-1::before {
+    content: "";
+    width: 80px;
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    margin-left: -40px;
+    height: 3px;
+    background-color: var(--very-light-blue);
+    display: block;
+  }
+  
+  
+  /******************/
+  .body-wrapper {
+    width: 100%;
+    left: 0;
+    position: relative;
+    transition: all 1s ease-out;
+  }
+  

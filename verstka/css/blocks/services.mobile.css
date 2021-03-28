@@ -1,0 +1,11 @@
+@media screen and (max-width: 1023px) {
+  .service {
+    text-align: center;
+  }
+  .service-top {
+    justify-content: center;
+  }
+  .service-switcher {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+@media screen and (max-width: 1023px) {
+    .counters-field {
+        flex-direction: column;
+        text-align: center;
+      }
+    
+      .counter {
+        position: relative;
+        left: 50%;
+        margin-left: -93px;
+        margin-bottom: 20px;
+      }
+      .counter:last-child {
+        margin-bottom: 0px;
+      }
+    
+      .separator {
+        display: none;
+      }
+}
