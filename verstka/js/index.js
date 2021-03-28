@@ -181,16 +181,21 @@ $(document).ready(() => {
     for (const point of mobNavPoints) {
       counter++;
       if (point.contains(event.target)) {
+        
         if (openPointsArr.indexOf(counter) !== -1) {
-          if (point.getElementsByTagName("ul")[0] !== undefined) {
-            if (point.getElementsByTagName("ul")[0].contains(event.target))
+          if (point.getElementsByTagName("ul")[0] !== undefined && point.getElementsByTagName("ul")[0].contains(event.target)) {
               return;
           }
           const index = openPointsArr.indexOf(counter);
           openPointsArr.splice(index, 1);
           point.style.background = "#2d3e50";
+          console.log(point.getElementsByTagName("ul")[0])
+          point.getElementsByTagName("ul")[0].classList.add('closed')
+
         } else {
           point.style.background = "#273747"; //toggleClass не работает
+          point.getElementsByTagName("ul")[0].classList.remove('closed');
+
           openPointsArr.push(counter);
         }
       }

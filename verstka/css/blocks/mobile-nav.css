@@ -25,12 +25,23 @@
 
   .mob-nav-point {
     justify-content: space-between;
-    padding: 21px;
     position: relative;
+    cursor: pointer;
+  }
+  .li-name{
+    padding: 21px;
   }
   .mob-nav-point ul li {
     position: relative;
+    cursor: auto;
     padding: 20px;
+    background-color: var(--dark-blue);
+  }
+  .mob-nav-point ul{
+    padding-left: 20px;
+  }
+  .closed{
+    display: none;
   }
   .mob-nav-chevron {
     position: absolute;
@@ -40,7 +51,6 @@
     padding: 2px;
     z-index: 1000;
   }
-
   .mob-nav-chevron::after {
     background-color: white;
     padding: 8px;
