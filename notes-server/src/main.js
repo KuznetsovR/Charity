@@ -1,16 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const {Note} = require('./note');
-const router = express.Router();        
+const router = express.Router();
 const cookieParser = require('cookie-parser')
 const {authHandler, authRouter} = require('./auth-service')
 
-router.use(function(req, res){
+// router.use(function(req, res){
   
-});
-router.get('/notes', function(req, res){
+// });
+// router.get('/notes', function(req, res){
   
-});                                                             //на этом мои полномочия всё
+// });                                                             на этом мои полномочия всё
 const notes = [];
 let counter = 0;
 
@@ -28,7 +28,7 @@ app.use('/api/auth', authRouter)
 
 app.get('/notes', (req, res) => {
   
-  setTimeout(() => res.send(notes), 1000)
+  setTimeout(() => res.send(notes), 1000)             //здесь надо еще объект со статикой
 });
 
 app.post('/notes', (req, res) => {
