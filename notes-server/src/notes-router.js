@@ -1,4 +1,13 @@
 const router = require("express").Router();
+const notes = [];
+let counter = 0;
+const isDefined = (val) => val !== undefined && val !== null && !(typeof value === 'number' && isNaN(val));
+
+
+router.get('/', (req, res) => {
+  
+  setTimeout(() => res.send(notes), 1000)
+});
 
 router.post('/', (req, res) => {
   const { heading, content } = req.body;
@@ -12,7 +21,7 @@ router.post('/', (req, res) => {
   counter++;
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = +req.params.id;
   const { heading, content } = req.body;
   if (!heading || !isDefined(content) || !isDefined(id)) {
@@ -32,7 +41,7 @@ router.put('/', (req, res) => {
   }
 });
 
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = +req.params.id;
   if (!isDefined(id)) {
     res.sendStatus(404);
@@ -46,3 +55,5 @@ router.delete('/', (req, res) => {
   notes.splice(i, 1);
   res.sendStatus(204);
 });
+
+module.exports = {notesRouter : router}

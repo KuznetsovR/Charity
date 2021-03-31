@@ -3,10 +3,10 @@ export class ApiService {
     this.baseUrl = baseUrl;
   }
   getNotes() {
-    return fetch("http://localhost:3000/notes", {credentials: 'include'}).then((res) => res.json());
+    return fetch(this.baseUrl, {credentials: 'include'}).then((res) => res.json());
   }
   addNote(heading, content) {
-    return fetch("http://localhost:3000/notes", {
+    return fetch(this.baseUrl, {
       method: "POST",
       headers: {
         ["Content-type"]: "application/json",
@@ -19,7 +19,7 @@ export class ApiService {
     }).then((res) => res.text());
   }
   editNote(heading, content, id) {
-    return fetch(`http://localhost:3000/notes/${id}`, {
+    return fetch(`${this.baseUrl}/${id}`, {
       method: "PUT",
       headers: {
         ["Content-type"]: "application/json",
@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   removeNote(id){
-    return fetch(`http://localhost:3000/notes/${id}`, {
+    return fetch(`${this.baseUrl}/${id}`, {
         method: "DELETE",
         credentials: 'include',
       }).then((res) => res.text())

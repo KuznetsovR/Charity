@@ -13,7 +13,7 @@ import { NoteEditWysiwygController } from './note-edit/note-edit-wysiwyg-control
 
 // const localStorageService = new LocalStorageService();
 
-const apiService = new ApiService("http://localhost:3000")
+const apiService = new ApiService("http://127.0.0.1:3000/api/notes")
 
 const notesModel = new NotesModel([], apiService);
 const noteEditModel = new NoteEditModel();
