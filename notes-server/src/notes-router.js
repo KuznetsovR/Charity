@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const {Note} = require('./note');
+
 const notes = [];
 let counter = 0;
 const isDefined = (val) => val !== undefined && val !== null && !(typeof value === 'number' && isNaN(val));

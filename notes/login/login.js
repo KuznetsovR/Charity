@@ -4,7 +4,7 @@ const passwordInput = document.getElementById('passwordInput');
 
 form.onsubmit = function(e){
     e.preventDefault();
-    fetch("http://localhost:3000/api/auth/login", {
+    fetch("http://127.0.0.1:3000/api/auth/login", {
       method: "POST",
       headers: {
         ["Content-type"]: "application/json",

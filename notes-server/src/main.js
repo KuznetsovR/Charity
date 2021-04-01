@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const {Note} = require('./note');
 const router = express.Router();
 const cookieParser = require('cookie-parser')
 const {authHandler, authRouter} = require('./auth-service')
@@ -15,6 +14,14 @@ app.use(cookieParser())
 app.use(express.json());
 app.use('/api/auth', authRouter)
 
+
+router.use(express.static(__dirname + '../../notes/notes.html' ));
+router.use(express.static(__dirname + '../../notes/notes-styles.css' ));
+router.use(express.static(__dirname + '../../notes/notes.js' ));
+// console.log(__dirname)
+// router.use('*', (req, res) => {
+//   res.sendFile("notes.html", { root: __dirname + "/../public/"});
+// })
 // app.use(authHandler)
 
 app.use('/api/notes', notesRouter)
