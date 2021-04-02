@@ -4,6 +4,7 @@ const router = express.Router();
 const cookieParser = require('cookie-parser')
 const {authHandler, authRouter} = require('./auth-service')
 const {notesRouter} = require('./notes-router')
+const path = require('path')
 
 
 const app = express();
@@ -14,14 +15,12 @@ app.use(cookieParser())
 app.use(express.json());
 app.use('/api/auth', authRouter)
 
+const pathStatic = path.join(__dirname + '../../../notes/')
+console.log(pathStatic)
 
-router.use(express.static(__dirname + '../../notes/notes.html' ));
-router.use(express.static(__dirname + '../../notes/notes-styles.css' ));
-router.use(express.static(__dirname + '../../notes/notes.js' ));
+app.get('*', express.static(pathStatic));
 // console.log(__dirname)
-// router.use('*', (req, res) => {
-//   res.sendFile("notes.html", { root: __dirname + "/../public/"});
-// })
+
 // app.use(authHandler)
 
 app.use('/api/notes', notesRouter)
