@@ -21,7 +21,7 @@ console.log(pathStatic)
 app.get('*', express.static(pathStatic));
 // console.log(__dirname)
 
-// app.use(authHandler)
+app.use(authHandler)
 
 app.use('/api/notes', notesRouter)
 

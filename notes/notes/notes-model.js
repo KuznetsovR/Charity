@@ -69,6 +69,9 @@ export class NotesModel {
       this.setLoadingStatus(false);
     });
   }
+  redirectToLoginPage(){
+    
+  }
   //////////////////////////////////
   getNoteById(id) {
     return this.notes.find((n) => n.id === id);
