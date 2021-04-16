@@ -1,26 +1,23 @@
 const router = require("express").Router();
 const {Note} = require('./note');
+const {NotesInMemoryRepository} = require("./repository/inMemory")
+const {NotesExpressController} = require("./notesController")
+const {NotesInteractor} = require("./notesInteractor")
 
-const notes = [];
-let counter = 0;
-const isDefined = (val) => val !== undefined && val !== null && !(typeof value === 'number' && isNaN(val));
+const notesInMemoryRepository = new NotesInMemoryRepository()
+const notesInteractor = new NotesInteractor(notesInMemoryRepository)
+const notesExpressController = new NotesExpressController(notesInteractor)
+
+// const notes = [];
+// let counter = 0;
 
 
 router.get('/', (req, res) => {
-  
-  setTimeout(() => res.send(notes), 1000)
+  notesExpressController.getAll(req, res);
 });
 
 router.post('/', (req, res) => {
-  const { heading, content } = req.body;
-  if (!heading || !isDefined(content)) {
-    res.status(400).send();
-    return;
-  }
-  const note = new Note(counter, req.body.heading, req.body.content);
-  notes.push(note);
-  res.status(201).send(counter.toString());
-  counter++;
+  notesExpressController.addNote(req, res);
 });
 
 router.put('/:id', (req, res) => {
