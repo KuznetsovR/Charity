@@ -8,7 +8,7 @@ function authHandler(req, res, next) {
     next();
   } else {
       if (req.originalUrl !== '/api/notes') return
-    res.redirect(401, 'http://127.0.0.1:3000/login-page');
+    res.status(401).send('http://127.0.0.1:3000/login-page.html');
     // res.status(401).send({});
     // return;
   }

@@ -2,8 +2,20 @@ export class ApiService {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
   }
+  doRequest(url, options) {
+    return fetch(url, options).then(async (res) => {
+      if (res.status === 401) {
+        const redirectUrl = await res.text();
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+        throw Error ('unauthorized');
+      }
+      return res;
+    });
+  }
   getNotes() {
-    return fetch(this.baseUrl, {credentials: 'include'}).then((res) => res.json());
+    return this.doRequest(this.baseUrl, { credentials: 'include' }).then((res) => res.json());
   }
   addNote(heading, content) {
     return fetch(this.baseUrl, {
@@ -32,10 +44,10 @@ export class ApiService {
     }).then((res) => res.text());
   }
 
-  removeNote(id){
+  removeNote(id) {
     return fetch(`${this.baseUrl}/${id}`, {
-        method: "DELETE",
-        credentials: 'include',
-      }).then((res) => res.text())
+      method: "DELETE",
+      credentials: 'include',
+    }).then((res) => res.text())
   }
 }
