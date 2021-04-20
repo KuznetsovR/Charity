@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -6,20 +7,32 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jpg|jpe?g|gif)$/i,
         use: [
-          "file-loader",
           {
-            loader: "image-webpack-loader",
+            loader: 'file-loader',
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
-            },
+              outputPath: 'images',
+              name: '[name].[ext]'
+            },    
           },
-        ],
+        ],    
       },
       // { test: /\.svg$/, use: "svg-inline-loader" },
-      { test: /\.css$/i, use: ["style-loader", "css-loader"] },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: (resourcePath, context) => {
+                return path.relative(path.dirname(resourcePath), context) + '/';
+              },
+            },
+          },
+          'css-loader',
+        ],
+      },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
@@ -37,6 +50,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "index_bundle.js",
   },
-  plugins: [],
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
   mode: "production",
 };

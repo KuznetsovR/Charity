@@ -1,0 +1,42 @@
+button{
+    margin: 100px;
+    background: none;
+    border: none;
+    animation: sk;
+    animation-iteration-count: infinite;
+}
+button  div{
+    width: 200px;
+    height: 100px;
+}
+button .l1{
+    background-color: green;
+    transition: 1s;
+
+}
+button .l2{
+    background-color: red;
+    transition: 1s;
+
+    transform: rotate3d(1, 0, 0, 90deg);
+    transform-origin: top;
+}
+button .l1:hover{
+    transition: 1s;
+    transform: rotate3d(1, 0, 0, 90deg);
+    transform-origin: top;
+}
+button .l2:hover{
+    transition: 1s;
+    transform: rotate3d(1, 0, 0, 0deg);
+}
+
+@keyframes sk {
+    0% {
+        border: 1px solid red;
+    }
+
+    100% {
+        border: 1px solid rgb(0, 0, 0);
+    }
+}

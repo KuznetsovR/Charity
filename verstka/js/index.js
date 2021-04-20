@@ -1,3 +1,4 @@
+import css from '../css/main.css'
 $(document).ready(() => {
   const blockCntTop = $(".counter-heading").offset().top;
   const blockCntHeight = $(".counter-heading").height();

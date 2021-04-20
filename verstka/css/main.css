@@ -1,9 +1,9 @@
 @import "reset.css";
 @import "layout.css";
-@import "layout.mobile.css";
-@import "mobile.css";
+/* @import "mobile.css"; */
 @import "blocks/main.css";
 @import "icons.css";
+@import "layout.mobile.css";
 
 body {
     margin: 0;
