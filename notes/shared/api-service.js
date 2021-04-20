@@ -18,7 +18,7 @@ export class ApiService {
     return this.doRequest(this.baseUrl, { credentials: 'include' }).then((res) => res.json());
   }
   addNote(heading, content) {
-    return fetch(this.baseUrl, {
+    return this.doRequest(this.baseUrl, {
       method: "POST",
       headers: {
         ["Content-type"]: "application/json",
@@ -31,7 +31,7 @@ export class ApiService {
     }).then((res) => res.text());
   }
   editNote(heading, content, id) {
-    return fetch(`${this.baseUrl}/${id}`, {
+    return this.doRequest(`${this.baseUrl}/${id}`, {
       method: "PUT",
       headers: {
         ["Content-type"]: "application/json",
@@ -45,7 +45,7 @@ export class ApiService {
   }
 
   removeNote(id) {
-    return fetch(`${this.baseUrl}/${id}`, {
+    return this.doRequest(`${this.baseUrl}/${id}`, {
       method: "DELETE",
       credentials: 'include',
     }).then((res) => res.text())
