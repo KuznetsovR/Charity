@@ -1,0 +1,25 @@
+<ng-container [ngSwitch]="element.tag">
+    <header *ngSwitchCase="'header'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </header>
+    <nav *ngSwitchCase="'nav'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+        
+    </nav>
+    <ul *ngSwitchCase="'ul'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+        
+    </ul>
+    <li *ngSwitchCase="'li'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+        
+    </li>
+</ng-container>
+<ng-template #content>
+    <ng-container *ngFor="let child of element.children">
+        <ng-container *ngIf="isText(child)">
+            {{ child }}
+        </ng-container>
+        <app-element-renderer *ngIf="!isText(child)" [element]="child"></app-element-renderer>
+    </ng-container>
+</ng-template>
