@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EXAMPLE_PAGE } from '../entities/mock';
-import { Page } from '../entities/page';
+import { Page, PageElement } from '../entities/page';
+import { ActiveElementService } from '../services/active-element.service';
 
 @Component({
   selector: 'app-page-renderer',
@@ -9,7 +10,11 @@ import { Page } from '../entities/page';
 })
 export class PageRendererComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activeElementService: ActiveElementService) { }
+
+  onSelectElement(el: PageElement){
+    this.activeElementService.selectElement(el);
+  }
 
   ngOnInit(): void {
   }

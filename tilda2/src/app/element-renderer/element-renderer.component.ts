@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageElement } from '../entities/page';
 
 @Component({
@@ -13,7 +13,12 @@ export class ElementRendererComponent implements OnInit {
   ngOnInit(): void {
   }
   @Input() element: PageElement
+  @Output() selectElement = new EventEmitter<PageElement>()
 
+  onElementClick(event: MouseEvent){
+    event.stopPropagation();
+    this.selectElement.emit(this.element);
+  }
   isText(e: string | PageElement): e is string {
     return typeof e === 'string'
   }

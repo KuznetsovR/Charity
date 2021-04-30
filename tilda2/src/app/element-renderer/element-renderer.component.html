@@ -1,29 +1,29 @@
 <ng-container [ngSwitch]="element.tag">
-    <header *ngSwitchCase="'header'">
+    <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </header>
-    <main *ngSwitchCase="'main'">
+    <main *ngSwitchCase="'main'"(click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </main>
-    <footer *ngSwitchCase="'footer'">
+    <footer *ngSwitchCase="'footer'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </footer>
-    <nav *ngSwitchCase="'nav'">
+    <nav *ngSwitchCase="'nav'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </nav>
-    <section *ngSwitchCase="'section'">
+    <section *ngSwitchCase="'section'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </section>
-    <ul *ngSwitchCase="'ul'">
+    <ul *ngSwitchCase="'ul'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </ul>
-    <li *ngSwitchCase="'li'">
+    <li *ngSwitchCase="'li'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </li>
-    <p *ngSwitchCase="'p'">
+    <p *ngSwitchCase="'p'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </p>
-    <h1 *ngSwitchCase="'h1'">
+    <h1 *ngSwitchCase="'h1'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </h1>
 </ng-container>
@@ -32,6 +32,6 @@
         <ng-container *ngIf="isText(child)">
             {{ child }}
         </ng-container>
-        <app-element-renderer *ngIf="!isText(child)" [element]="child"></app-element-renderer>
+        <app-element-renderer *ngIf="!isText(child)" [element]="child" (selectElement)="selectElement.emit($event)"></app-element-renderer>
     </ng-container>
 </ng-template>
