@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page, PageElement } from '../entities/page';
 import { ActiveElementService } from '../services/active-element.service';
+import { PageService } from '../services/page.service';
 
 @Component({
   selector: 'app-page-renderer',
@@ -10,14 +10,16 @@ import { ActiveElementService } from '../services/active-element.service';
 })
 export class PageRendererComponent implements OnInit {
 
-  constructor(private activeElementService: ActiveElementService) { }
+  constructor(private activeElementService: ActiveElementService,
+    private pageService: PageService
+    ) { }
 
   onSelectElement(el: PageElement){
     this.activeElementService.selectElement(el);
   }
-
   ngOnInit(): void {
+    this.pageService.page$.subscribe((page) => {this.page = page})
   }
 
-  page: Page = EXAMPLE_PAGE;
+  page: Page;
 }

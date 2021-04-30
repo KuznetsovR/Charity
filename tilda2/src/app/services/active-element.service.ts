@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PageElement } from '../entities/page';
 
 @Injectable({
@@ -8,9 +8,11 @@ import { PageElement } from '../entities/page';
 export class ActiveElementService {
 
   constructor() { }
-  activeElement$ = new BehaviorSubject<PageElement>(null)
-
+  private _activeElement$ = new BehaviorSubject<PageElement>(null);
   selectElement(el : PageElement){
-    this.activeElement$.next(el)
+    this._activeElement$.next(el)
+  }
+  get activeElement$(): Observable<PageElement>{
+    return this._activeElement$
   }
 }
