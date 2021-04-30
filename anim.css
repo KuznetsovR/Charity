@@ -1,34 +1,40 @@
+body{
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
 button{
-    margin: 100px;
     background: none;
     border: none;
     animation: sk;
     animation-iteration-count: infinite;
+    margin-top: 50px;
 }
 button  div{
     width: 200px;
-    height: 100px;
+    height: 50px;
 }
 button .l1{
     background-color: green;
     transition: 1s;
-
+    position: absolute;
+    transform-origin: bottom;
 }
 button .l2{
     background-color: red;
     transition: 1s;
-
     transform: rotate3d(1, 0, 0, 90deg);
-    transform-origin: top;
+    transform-origin: bottom;
 }
-button .l1:hover{
+button:hover .l1{
     transition: 1s;
     transform: rotate3d(1, 0, 0, 90deg);
-    transform-origin: top;
+    margin-top: -50px;
 }
-button .l2:hover{
+button:hover .l2{
     transition: 1s;
     transform: rotate3d(1, 0, 0, 0deg);
+
 }
 
 @keyframes sk {
