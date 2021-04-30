@@ -2,18 +2,30 @@
     <header *ngSwitchCase="'header'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </header>
+    <main *ngSwitchCase="'main'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </main>
+    <footer *ngSwitchCase="'footer'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </footer>
     <nav *ngSwitchCase="'nav'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
-        
     </nav>
+    <section *ngSwitchCase="'section'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </section>
     <ul *ngSwitchCase="'ul'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
-        
     </ul>
     <li *ngSwitchCase="'li'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
-        
     </li>
+    <p *ngSwitchCase="'p'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </p>
+    <h1 *ngSwitchCase="'h1'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </h1>
 </ng-container>
 <ng-template #content>
     <ng-container *ngFor="let child of element.children">
