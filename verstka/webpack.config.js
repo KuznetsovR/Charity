@@ -30,7 +30,7 @@ module.exports = {
               },
             },
           },
-          'css-loader',
+          'css-loader',                     //import css files and imgs in js
         ],
       },
       {
