@@ -2,7 +2,6 @@
 $(document).ready(() => {
   const blockCntTop = $(".counter-heading").offset().top;
   const blockCntHeight = $(".counter-heading").height();
-
   let alreadyStarted = false;
 
 
@@ -29,11 +28,6 @@ $(document).ready(() => {
       alreadyStarted = true;
     }
   }
-
-
-
-
-
 
   function switchSubheader(framesCount, containerWidth) {
     let leftChord = 0;
@@ -67,12 +61,6 @@ $(document).ready(() => {
     });
   }
 
-
-
-
-
-
-
   function setServiceWidth(windowWidth) {
     if (windowWidth+16 >= 1024) {
       let containerWidthServices = $(window).width() * 0.7;
@@ -87,19 +75,14 @@ $(document).ready(() => {
   }
 
 
-
-
-
-
-
   $(window).scroll(() => {
     const blockCntScrollTop = $(window).scrollTop() + $(window).height();
 
     if (
-      blockCntScrollTop >= blockCntTop &&
-      blockCntScrollTop < blockCntTop + blockCntHeight
+      blockCntScrollTop >= blockCntTop 
+      // && blockCntScrollTop - $(window).height() < blockCntTop + blockCntHeight
     ) {
-      console.log("InTo"); //работает так себе
+      console.log("InTo"); 
       moveCnt();
     } else {
       console.log("Out");
@@ -138,7 +121,7 @@ $(document).ready(() => {
   ////features
   $(".feature").width(windowWidth - 40 + "px");
 
-  ///////////////////
+  /////////////////// resize
 
   $(window).resize(() => {
     windowWidth = Math.ceil($(window).width());
@@ -176,7 +159,6 @@ $(document).ready(() => {
   const menuList = document.getElementById("mob-nav-list");
   let openPointsArr = [];
   menuList.onclick = function () {
-    //console.log(event.target)
     let counter = 0;
     const mobNavPoints = document.querySelectorAll(".mob-nav-point");
     for (const point of mobNavPoints) {
@@ -192,11 +174,9 @@ $(document).ready(() => {
           point.style.background = "#2d3e50";
           console.log(point.getElementsByTagName("ul")[0])
           point.getElementsByTagName("ul")[0].classList.add('closed')
-
         } else {
-          point.style.background = "#273747"; //toggleClass не работает
+          point.style.background = "#273747"; 
           point.getElementsByTagName("ul")[0].classList.remove('closed');
-
           openPointsArr.push(counter);
         }
       }
@@ -209,13 +189,12 @@ $(document).ready(() => {
   $("#rightServiceBtn").on("click", (e) => {
     e.preventDefault();
     leftSide -= containerWidthServices / 3;
-
     $("#services").css("left", leftSide + "px");
   });
+
   $("#leftServiceBtn").on("click", (e) => {
     e.preventDefault();
     leftSide += containerWidthServices / 3;
-
     $("#services").css("left", leftSide + "px");
   });
 });
