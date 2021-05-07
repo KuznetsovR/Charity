@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { BlockType } from '../entities/blocks';
+import { BlockType, ElementBlock } from '../entities/blocks';
 import { ActiveElementService } from '../services/active-element.service';
 
 @Component({
@@ -11,14 +11,11 @@ import { ActiveElementService } from '../services/active-element.service';
 })
 export class ElementOptionsComponent implements OnInit {
 
+  element: ElementBlock;
   constructor(private activeElementService: ActiveElementService) { }
-  tag$: Observable<BlockType>
-
-
+  BlockType = BlockType
   ngOnInit(): void {
-    this.tag$ = this.activeElementService.activeElement$.pipe(
-      map((el) => el && el.type)
-    )
+    this.activeElementService.activeElement$.subscribe((element) => this.element = element)
   }
 
 }

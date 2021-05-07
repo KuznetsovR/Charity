@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular//platform-browser/animations';
 import { TextBlockRendererComponent } from './element-renderer/block-renderers/text-block.renderer/text-block.renderer.component';
 import { HeadingBlockRendererComponent } from './element-renderer/block-renderers/heading-block.renderer/heading-block.renderer.component';
 import { SectionBlockRendererComponent } from './element-renderer/block-renderers/section-block.renderer/section-block.renderer.component';
+import { HeadingOptionsComponent } from './element-options/heading-options/heading-options.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SectionBlockRendererComponent } from './element-renderer/block-renderer
     TextBlockRendererComponent,
     HeadingBlockRendererComponent,
     SectionBlockRendererComponent,
+    HeadingOptionsComponent,
     
   ],
   imports: [

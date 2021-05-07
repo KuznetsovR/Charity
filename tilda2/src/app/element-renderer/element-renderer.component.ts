@@ -9,15 +9,15 @@ import { BlockType, ElementBlock } from '../entities/blocks';
 })
 export class ElementRendererComponent implements OnInit {
   @Input() element: ElementBlock
-  @Output() selectElement = new EventEmitter<ElementBlock>()
+  @Output() selectElement = new EventEmitter<{block: ElementBlock, id:string}>()
   BlockType = BlockType  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSelectElement(block: ElementBlock){
-    this.selectElement.emit(block);
+  onSelectElement(block: ElementBlock, id = ''){
+    this.selectElement.emit({block, id: `${this.element.id}-${id}`});
   }
   isText(e: string | ElementBlock): e is string {
     return typeof e === 'string'

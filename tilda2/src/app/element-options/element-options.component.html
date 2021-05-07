@@ -1,3 +1,6 @@
-<ng-container *ngIf="tag$ | async">
-    {{ tag$ | async }}
+<ng-container *ngIf="element">
+<div [ngSwitch]='element.type'>
+    <app-heading-options *ngSwitchCase='BlockType.Heading' [block]='element'>
+    </app-heading-options>
+</div>    
 </ng-container>

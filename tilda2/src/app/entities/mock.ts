@@ -6,28 +6,35 @@ export const EXAMPLE_PAGE: Page = {
     sections: [
         {
             type: BlockType.Section,
+            id: '0000',
             children: [
                 {
                     type: BlockType.Heading,
                     content: 'tt',
                     level: 1,
+                    id: '0000'
                 },
                 {
                     type: BlockType.Text,
-                    content: '123'
+                    content: '123',
+                    id: '0001'
                 }
             ]
         }, {
             type: BlockType.Section,
+            id: '0001',
             children: [
                 {
                     type: BlockType.Heading,
                     content: 'tt',
                     level: 1,
+                    id: '0000'
+
                 },
                 {
                     type: BlockType.Text,
-                    content: '123'
+                    content: '123',
+                    id: '0001'
                 }
             ]
         }

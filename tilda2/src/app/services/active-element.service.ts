@@ -9,8 +9,13 @@ export class ActiveElementService {
 
   constructor() { }
   private _activeElement$ = new BehaviorSubject<ElementBlock>(null);
-  selectElement(el : ElementBlock){
+  private _path = ''
+  selectElement(el : ElementBlock, path: string){
+    this._path = path;
     this._activeElement$.next(el)
+  }
+  get path(){
+    return this._path;
   }
   get activeElement$(): Observable<ElementBlock>{
     return this._activeElement$

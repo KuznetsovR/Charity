@@ -3,6 +3,7 @@ export enum BlockType {
 }
 export interface ElementBlock {
     type: BlockType;
+    id: string;
 }
 export interface TextBlock extends ElementBlock{
     type: BlockType.Text;
@@ -11,8 +12,10 @@ export interface TextBlock extends ElementBlock{
 export interface HeadingBlock extends ElementBlock {
     type: BlockType.Heading
     content: string;
-    level: 1 | 2 | 3 | 4 | 5 | 6;
+    level: HeadingLevel
 }
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 export interface ImageBlock extends ElementBlock{
     type: BlockType.Image;
     src: string
@@ -28,7 +31,7 @@ export interface GridBlock extends ElementBlock{
     rows: number;
     cols: number;
 }
-export interface SectionBlock {
+export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;
     children: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock)[];
 }
