@@ -1,5 +1,11 @@
-<ng-container [ngSwitch]="element.tag">
-    <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
+<ng-container [ngSwitch]="element.type" >
+    <app-section-block-renderer *ngSwitchCase="BlockType.Section" (click)="onElementClick($event)" [block]='element'>
+    </app-section-block-renderer>
+    <app-text-block-renderer *ngSwitchCase="BlockType.Text" (click)="onElementClick($event)"  [block]='element'>
+    </app-text-block-renderer>
+    <app-heading-block-renderer *ngSwitchCase="BlockType.Heading" (click)="onElementClick($event)" [block]='element'>
+    </app-heading-block-renderer>
+    <!-- <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </header>
     <main *ngSwitchCase="'main'"(click)="onElementClick($event)">
@@ -25,13 +31,13 @@
     </p>
     <h1 *ngSwitchCase="'h1'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
-    </h1>
+    </h1> -->
 </ng-container>
-<ng-template #content>
+<!-- <ng-template #content>
     <ng-container *ngFor="let child of element.children">
         <ng-container *ngIf="isText(child)">
             {{ child }}
         </ng-container>
         <app-element-renderer *ngIf="!isText(child)" [element]="child" (selectElement)="selectElement.emit($event)"></app-element-renderer>
     </ng-container>
-</ng-template>
+</ng-template> -->

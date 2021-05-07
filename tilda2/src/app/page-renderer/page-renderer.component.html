@@ -1,3 +1,6 @@
-<app-element-renderer [element]="page.header" (selectElement)="onSelectElement($event)"></app-element-renderer>
+<!-- <app-element-renderer [element]="page.header" (selectElement)="onSelectElement($event)"></app-element-renderer>
 <app-element-renderer [element]="page.main" (selectElement)="onSelectElement($event)"></app-element-renderer>
-<app-element-renderer [element]="page.footer" (selectElement)="onSelectElement($event)"></app-element-renderer>
+<app-element-renderer [element]="page.footer" (selectElement)="onSelectElement($event)"></app-element-renderer> -->
+<app-element-renderer *ngFor='let section of page.sections' [element]='section' (selectElement)="onSelectElement($event)">
+
+</app-element-renderer>

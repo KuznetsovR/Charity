@@ -8,6 +8,9 @@ import { ActiveElementService } from './services/active-element.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular//platform-browser/animations';
+import { TextBlockRendererComponent } from './element-renderer/block-renderers/text-block.renderer/text-block.renderer.component';
+import { HeadingBlockRendererComponent } from './element-renderer/block-renderers/heading-block.renderer/heading-block.renderer.component';
+import { SectionBlockRendererComponent } from './element-renderer/block-renderers/section-block.renderer/section-block.renderer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { BrowserAnimationsModule } from '@angular//platform-browser/animations';
     PageRendererComponent,
     ElementRendererComponent,
     ElementOptionsComponent,
+    TextBlockRendererComponent,
+    HeadingBlockRendererComponent,
+    SectionBlockRendererComponent,
     
   ],
   imports: [

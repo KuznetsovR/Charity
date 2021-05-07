@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PageElement } from '../entities/page';
+import { BlockType, ElementBlock } from '../entities/blocks';
+
 
 @Component({
   selector: 'app-element-renderer',
@@ -7,19 +8,19 @@ import { PageElement } from '../entities/page';
   styleUrls: ['./element-renderer.component.css']
 })
 export class ElementRendererComponent implements OnInit {
-
+  @Input() element: ElementBlock
+  @Output() selectElement = new EventEmitter<ElementBlock>()
+  BlockType = BlockType  
   constructor() { }
 
   ngOnInit(): void {
   }
-  @Input() element: PageElement
-  @Output() selectElement = new EventEmitter<PageElement>()
 
   onElementClick(event: MouseEvent){
     event.stopPropagation();
     this.selectElement.emit(this.element);
   }
-  isText(e: string | PageElement): e is string {
+  isText(e: string | ElementBlock): e is string {
     return typeof e === 'string'
   }
 
