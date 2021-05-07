@@ -16,9 +16,8 @@ export class ElementRendererComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onElementClick(event: MouseEvent){
-    event.stopPropagation();
-    this.selectElement.emit(this.element);
+  onSelectElement(block: ElementBlock){
+    this.selectElement.emit(block);
   }
   isText(e: string | ElementBlock): e is string {
     return typeof e === 'string'

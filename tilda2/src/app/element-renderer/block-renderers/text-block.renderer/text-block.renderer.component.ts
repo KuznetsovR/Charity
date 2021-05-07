@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextBlock } from 'src/app/entities/blocks';
 
 @Component({
@@ -8,8 +8,15 @@ import { TextBlock } from 'src/app/entities/blocks';
 })
 export class TextBlockRendererComponent implements OnInit {
   @Input() block: TextBlock;
+  @Output() selectElement = new EventEmitter<TextBlock>()
+
   constructor() { }
 
+  onElementClick(event: MouseEvent){
+    event.stopPropagation();
+    this.selectElement.emit(this.block);
+  }
+  
   ngOnInit(): void {
   }
 

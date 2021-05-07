@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HeadingBlock } from 'src/app/entities/blocks';
 
 @Component({
@@ -8,8 +8,14 @@ import { HeadingBlock } from 'src/app/entities/blocks';
 })
 export class HeadingBlockRendererComponent implements OnInit {
   @Input() block: HeadingBlock;
+  @Output() selectElement = new EventEmitter<HeadingBlock>()
+
   constructor() { }
 
+  onElementClick(event: MouseEvent){
+    event.stopPropagation();
+    this.selectElement.emit(this.block);
+  }
   ngOnInit(): void {
   }
 

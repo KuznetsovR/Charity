@@ -1,9 +1,9 @@
 <ng-container [ngSwitch]="element.type" >
-    <app-section-block-renderer *ngSwitchCase="BlockType.Section" (click)="onElementClick($event)" [block]='element'>
+    <app-section-block-renderer *ngSwitchCase="BlockType.Section" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-section-block-renderer>
-    <app-text-block-renderer *ngSwitchCase="BlockType.Text" (click)="onElementClick($event)"  [block]='element'>
+    <app-text-block-renderer *ngSwitchCase="BlockType.Text" (selectElement)="onSelectElement($event)"  [block]='element'>
     </app-text-block-renderer>
-    <app-heading-block-renderer *ngSwitchCase="BlockType.Heading" (click)="onElementClick($event)" [block]='element'>
+    <app-heading-block-renderer *ngSwitchCase="BlockType.Heading" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-heading-block-renderer>
     <!-- <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>

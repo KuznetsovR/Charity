@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SectionBlock } from 'src/app/entities/blocks';
 
 @Component({
@@ -8,9 +8,14 @@ import { SectionBlock } from 'src/app/entities/blocks';
 })
 export class SectionBlockRendererComponent implements OnInit {
   @Input() block: SectionBlock;
+  @Output() selectElement = new EventEmitter<SectionBlock>()
 
   constructor() { }
 
+  onElementClick(event: MouseEvent){
+    event.stopPropagation();
+    this.selectElement.emit(this.block);
+  }
   ngOnInit(): void {
   }
 
