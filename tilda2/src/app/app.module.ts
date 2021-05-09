@@ -12,6 +12,7 @@ import { TextBlockRendererComponent } from './element-renderer/block-renderers/t
 import { HeadingBlockRendererComponent } from './element-renderer/block-renderers/heading-block.renderer/heading-block.renderer.component';
 import { SectionBlockRendererComponent } from './element-renderer/block-renderers/section-block.renderer/section-block.renderer.component';
 import { HeadingOptionsComponent } from './element-options/heading-options/heading-options.component';
+import { ChoosePanelComponent } from './choose-panel/choose-panel.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeadingOptionsComponent } from './element-options/heading-options/headi
     HeadingBlockRendererComponent,
     SectionBlockRendererComponent,
     HeadingOptionsComponent,
+    ChoosePanelComponent,
     
   ],
   imports: [

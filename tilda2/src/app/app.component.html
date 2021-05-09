@@ -1,54 +1,6 @@
 <div fxLayout='row' class="zero" fxLayoutGap="50px">
     <div fxFlex="20" class="one">           <!--можно сделать chooser component-->
-        <mat-accordion>                                 <!--при нажатии на элемент - в консоль выводится его объект-->
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  UI Library
-                </mat-panel-title>
-                <mat-panel-description>
-                  smth
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <ul>
-                  <li>Type Text</li>
-                  <li>Type Heading</li>
-                  <li>Img</li>
-                  <li>List</li>
-                  <li>Grid (table)</li>
-              </ul>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  grid
-                </mat-panel-title>
-                <mat-panel-description>
-                  smth
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <ul>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-              </ul>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Templates
-                </mat-panel-title>
-                <mat-panel-description>
-                  smth
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <ul>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-              </ul>
-            </mat-expansion-panel>
-          </mat-accordion>
+        <app-choose-panel></app-choose-panel>
     </div>
     <div fxFlex fxLayout="direction" class="two">
         <app-page-renderer></app-page-renderer>
