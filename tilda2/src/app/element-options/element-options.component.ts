@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { BlockType, ElementBlock } from '../entities/blocks';
 import { ActiveElementService } from '../services/active-element.service';
+import { PageService } from '../services/page.service';
 
 @Component({
   selector: 'app-element-options',
@@ -12,10 +11,13 @@ import { ActiveElementService } from '../services/active-element.service';
 export class ElementOptionsComponent implements OnInit {
 
   element: ElementBlock;
-  constructor(private activeElementService: ActiveElementService) { }
+  constructor(private activeElementService: ActiveElementService,
+    private pageService: PageService) { }
+
   BlockType = BlockType
   ngOnInit(): void {
     this.activeElementService.activeElement$.subscribe((element) => this.element = element)
+    this.pageService.changeBlock(this.element)
   }
 
 }

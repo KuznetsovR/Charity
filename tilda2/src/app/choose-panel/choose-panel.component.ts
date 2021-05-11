@@ -12,12 +12,12 @@ export class ChoosePanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectElement(type){
+    console.log({
+      type: type,
+      options:{
+        
+      }
+    })
+  }
 }
-// type element = {
-//   id: number;
-//   elName: string;
-//   content: string;
-// }
-// listItem.onclick = function(){
-//   const el = {id: }
-// }

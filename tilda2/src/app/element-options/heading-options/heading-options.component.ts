@@ -18,6 +18,7 @@ export class HeadingOptionsComponent implements OnInit {
       ...this.block,
       level
     })
+    this.block.level = level;
   }
 
   ngOnInit(): void {
