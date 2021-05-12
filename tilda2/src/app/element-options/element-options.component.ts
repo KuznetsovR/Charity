@@ -13,11 +13,13 @@ export class ElementOptionsComponent implements OnInit {
   element: ElementBlock;
   constructor(private activeElementService: ActiveElementService,
     private pageService: PageService) { }
-
-  BlockType = BlockType
-  ngOnInit(): void {
-    this.activeElementService.activeElement$.subscribe((element) => this.element = element)
-    this.pageService.changeBlock(this.element)
+    
+    BlockType = BlockType
+    ngOnInit(): void {
+      this.activeElementService.activeElement$.subscribe((element) => this.element = element)
   }
-
+  onChange(block: ElementBlock){
+    console.log(block)
+    this.pageService.changeBlock(block)
+  }
 }

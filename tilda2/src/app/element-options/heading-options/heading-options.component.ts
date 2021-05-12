@@ -8,17 +8,16 @@ import { HeadingBlock, HeadingLevel } from 'src/app/entities/blocks';
 })
 export class HeadingOptionsComponent implements OnInit {
   @Input() block: HeadingBlock
-  @Output() change = new EventEmitter<HeadingBlock>()
+  @Output() optionsChange = new EventEmitter<HeadingBlock>()
   constructor() { }
 
   onLevelChange(event: Event) {
     const level = (event.target as HTMLInputElement).valueAsNumber as HeadingLevel;
     if (level === this.block.level) return;
-    this.change.emit({
+    this.optionsChange.emit({
       ...this.block,
       level
     })
-    this.block.level = level;
   }
 
   ngOnInit(): void {

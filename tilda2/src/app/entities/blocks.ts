@@ -35,3 +35,6 @@ export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;
     children: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock)[];
 }
+export function isSectionBlock(block: ElementBlock): block is SectionBlock{
+    return block.type === BlockType.Section
+}

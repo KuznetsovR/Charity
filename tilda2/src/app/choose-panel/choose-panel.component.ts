@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlockType } from '../entities/blocks';
 
 @Component({
   selector: 'app-choose-panel',
@@ -12,9 +13,11 @@ export class ChoosePanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectElement(type){
+  selectElement(type: BlockType){
+    // pageService.addBlock(type)
+    // switch (type) {}
     console.log({
-      type: type,
+      type,
       options:{
         
       }
