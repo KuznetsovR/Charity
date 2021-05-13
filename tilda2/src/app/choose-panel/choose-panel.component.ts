@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlockType, TextBlock, TextBlockClass } from '../entities/blocks';
-import { EXAMPLE_PAGE } from '../entities/mock';
+import { BlockType } from '../entities/blocks';
+import { GridBlockClass, HeadingBlockClass, ImageBlockClass, ListBlockClass, TextBlockClass } from '../entities/classes';
 import { PageService } from '../services/page.service';
 
 @Component({
@@ -21,17 +21,26 @@ export class ChoosePanelComponent implements OnInit {
     // pageService.addBlock(type)
     switch (type) {
       case 1:
-        const block = new TextBlockClass('0002', 'sss', BlockType.Text)
-
-        //this.pageService.setItem(block, node);
-        console.log(block, EXAMPLE_PAGE);
-
-
-
-        return block;
+        const textBlock = new TextBlockClass('0002', 'sss', BlockType.Text)
+        //this.pageService.setItem(block, path);              dynamic id
+        console.log(textBlock);
+        return textBlock;
       case 2:
-        console.log(BlockType)
-        break
+        const headingBlock = new HeadingBlockClass('0002', 'sss', 1, BlockType.Heading)
+        console.log(headingBlock)
+        return headingBlock;
+      case 3:
+        const imageBlock = new ImageBlockClass('0002', 'src', 'alt', BlockType.Image)
+        console.log(imageBlock)
+        return imageBlock;
+      case 4:
+        const listBlock = new ListBlockClass('0002', false, 'pathToMarker', BlockType.List)
+        console.log(listBlock)
+        return listBlock;
+      case 5:
+        const gridBlock = new GridBlockClass('0002', 5, 2, BlockType.Grid)
+        console.log(gridBlock)
+        return gridBlock;
     }
   }
 }

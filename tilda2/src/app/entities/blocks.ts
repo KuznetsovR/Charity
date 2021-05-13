@@ -9,17 +9,6 @@ export interface TextBlock extends ElementBlock{
     type: BlockType.Text;
     content: string;
 }
-export class TextBlockClass implements TextBlock {
-    constructor(
-        public id, 
-        public content, 
-        public type
-    ){
-        // this.id = id;
-        // this.content = content;
-        // this.type = type;
-    }
-}
 export interface HeadingBlock extends ElementBlock {
     type: BlockType.Heading
     content: string;
