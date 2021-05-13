@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BlockType, TextBlock } from '../entities/blocks';
+import { BlockType, TextBlock, TextBlockClass } from '../entities/blocks';
+import { EXAMPLE_PAGE } from '../entities/mock';
+import { PageService } from '../services/page.service';
 
 @Component({
   selector: 'app-choose-panel',
@@ -8,21 +10,28 @@ import { BlockType, TextBlock } from '../entities/blocks';
 })
 export class ChoosePanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private pageService: PageService
+  ) { }
 
   ngOnInit(): void {
   }
 
   selectElement(type: BlockType){
     // pageService.addBlock(type)
-    // switch (type) {
-    //   case 1:
-    //     console.log(BlockType[0])
-    //     break
-    //   case 2:
-    //     console.log(BlockType)
-    //     break
-    // }
-    console.log(BlockType[type-1])
+    switch (type) {
+      case 1:
+        const block = new TextBlockClass('0002', 'sss', BlockType.Text)
+
+        //this.pageService.setItem(block, node);
+        console.log(block, EXAMPLE_PAGE);
+
+
+
+        return block;
+      case 2:
+        console.log(BlockType)
+        break
+    }
   }
 }

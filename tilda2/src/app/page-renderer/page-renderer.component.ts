@@ -20,7 +20,10 @@ export class PageRendererComponent implements OnInit {
     this.activeElementService.selectElement(block, path);
   }
   ngOnInit(): void {
-    this.pageService.page$.subscribe((page) => {this.page = page})
+    this.pageService.page$.subscribe((page) => {
+      console.log("Page", page);
+      this.page = page;
+    })
   }
 
 }

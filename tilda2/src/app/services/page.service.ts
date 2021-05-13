@@ -22,6 +22,10 @@ export class PageService {
     return this._page$
   }
 
+  setItem() {
+    console.log("123");
+  }
+
   changeBlock(block: ElementBlock){
     const path = this.activeElementService.path;
     const arr = path.split('-');
