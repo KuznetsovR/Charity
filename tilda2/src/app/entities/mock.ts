@@ -27,7 +27,7 @@ export const EXAMPLE_PAGE: Page = {
                 {
                     type: BlockType.Heading,
                     content: 'tt',
-                    level: 2,
+                    level: 1,
                     id: '0000'
 
                 },
