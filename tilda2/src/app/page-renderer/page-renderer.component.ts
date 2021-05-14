@@ -16,8 +16,8 @@ export class PageRendererComponent implements OnInit {
     private pageService: PageService
     ) { }
 
-  onSelectElement(block: ElementBlock, path: string){
-    this.activeElementService.selectElement(block, path);
+  onSelectElement(block: ElementBlock, path: number[], index: number){
+    this.activeElementService.selectElement(block, [index, ...path]);
   }
   ngOnInit(): void {
     this.pageService.page$.subscribe((page) => {

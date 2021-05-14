@@ -1,5 +1,5 @@
 <ng-container [ngSwitch]="element.type" >
-    <app-section-block-renderer *ngSwitchCase="BlockType.Section" (selectElement)="onSelectElement($event.block, $event.id)" [block]='element'>
+    <app-section-block-renderer *ngSwitchCase="BlockType.Section" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
     </app-section-block-renderer>
     <app-text-block-renderer *ngSwitchCase="BlockType.Text" (selectElement)="onSelectElement($event)"  [block]='element'>
     </app-text-block-renderer>

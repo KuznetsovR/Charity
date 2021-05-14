@@ -1,3 +1,3 @@
-<app-element-renderer *ngFor='let child of block.children' [element]='child' (selectElement)="selectElement.emit($event)">
+<app-element-renderer *ngFor='let child of block.children; let i = index' [element]='child' (selectElement)="onChildClick($event.block, $event.path, i)" >
 
 </app-element-renderer>

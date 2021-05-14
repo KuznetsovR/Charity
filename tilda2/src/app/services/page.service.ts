@@ -29,12 +29,9 @@ export class PageService {
 
   changeBlock(block: ElementBlock){
     const path = this.activeElementService.path;
-    const arr = path.split('-');
-    arr.pop();
     const sections = this._page$.value.sections;
     let parent: ElementBlock[] = sections;
-    for(let id of arr){
-      const index = parent.findIndex((e) => e.id === id)
+    for(let index of path){
       const child: ElementBlock = parent[index];
       if (isSectionBlock(child)){
         parent = child.children;
