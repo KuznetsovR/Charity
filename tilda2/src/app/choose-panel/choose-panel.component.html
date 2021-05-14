@@ -9,11 +9,12 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <ul>
-          <li (click)='selectElement(1)'>Type Text</li>
-          <li (click)='selectElement(2)'>Type Heading</li>
-          <li (click)='selectElement(3)'>Img</li>
-          <li (click)='selectElement(4)'>List</li>
-          <li (click)='selectElement(5)'>Grid (table)</li>
+          <li (click)='selectElement(BlockType.Text)'>Type Text</li>
+          <li (click)='selectElement(BlockType.Heading)'>Type Heading</li>
+          <li (click)='selectElement(BlockType.Image)'>Img</li>
+          <li (click)='selectElement(BlockType.List)'>List</li>
+          <li (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
+          <li (click)='selectElement(BlockType.Section)'>Section</li>
       </ul>
     </mat-expansion-panel>
     <mat-expansion-panel>

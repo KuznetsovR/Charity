@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BlockType, ElementBlock, isSectionBlock } from '../entities/blocks';
+import { BlockType, ElementBlock, GridBlock, HeadingBlock, ImageBlock, isSectionBlock, ListBlock, SectionBlock, TextBlock } from '../entities/blocks';
+import { SectionBlockClass } from '../entities/classes';
 import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page } from '../entities/page';
 import { ActiveElementService } from './active-element.service';
@@ -39,7 +40,26 @@ export class PageService {
         parent = child.children;
       }else{
         parent[index] = block;
+        this.activeElementService.selectElement(block, path)
       }
+    }
+  }
+  appendElement(block: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock|SectionBlock)){
+    console.log(block)
+    if(isSectionBlock(block)){
+      this._page$.next({
+        ...this._page$.value,
+        sections: this._page$.value.sections.concat(block)
+      })
+      console.log(this._page$.value)
+    }else{
+      const sections = this._page$.value.sections.slice();
+      const section = sections[sections.length-1];
+      sections[sections.length-1] = new SectionBlockClass(section.id, section.children.concat(block))
+      this._page$.next({
+        ...this._page$.value,
+        sections
+      })
     }
   }
 }

@@ -13,12 +13,11 @@ export class HeadingOptionsComponent implements OnInit {
 
   onLevelChange(event: Event) {
     const level = (event.target as HTMLInputElement).valueAsNumber as HeadingLevel;
-    // if (level === this.block.level) return; иначе обратно на 1 не идет
+    if (level === this.block.level) return;
     this.optionsChange.emit({
       ...this.block,
       level
     })
-    this.block.level = level;
   }
 
   ngOnInit(): void {

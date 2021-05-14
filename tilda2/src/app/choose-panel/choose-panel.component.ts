@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlockType } from '../entities/blocks';
-import { GridBlockClass, HeadingBlockClass, ImageBlockClass, ListBlockClass, TextBlockClass } from '../entities/classes';
+import { GridBlockClass, HeadingBlockClass, ImageBlockClass, ListBlockClass, SectionBlockClass, TextBlockClass } from '../entities/classes';
 import { PageService } from '../services/page.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PageService } from '../services/page.service';
   styleUrls: ['./choose-panel.component.css']
 })
 export class ChoosePanelComponent implements OnInit {
-
+  BlockType = BlockType;
   constructor(
     private pageService: PageService
   ) { }
@@ -20,27 +20,31 @@ export class ChoosePanelComponent implements OnInit {
   selectElement(type: BlockType){
     // pageService.addBlock(type)
     switch (type) {
-      case 1:
-        const textBlock = new TextBlockClass('0002', 'sss', BlockType.Text)
+      case BlockType.Text:
+        const textBlock = new TextBlockClass('0002', 'sss')
         //this.pageService.setItem(block, path);              dynamic id
-        console.log(textBlock);
-        return textBlock;
-      case 2:
-        const headingBlock = new HeadingBlockClass('0002', 'sss', 1, BlockType.Heading)
-        console.log(headingBlock)
-        return headingBlock;
-      case 3:
-        const imageBlock = new ImageBlockClass('0002', 'src', 'alt', BlockType.Image)
-        console.log(imageBlock)
-        return imageBlock;
-      case 4:
-        const listBlock = new ListBlockClass('0002', false, 'pathToMarker', BlockType.List)
-        console.log(listBlock)
-        return listBlock;
-      case 5:
-        const gridBlock = new GridBlockClass('0002', 5, 2, BlockType.Grid)
-        console.log(gridBlock)
-        return gridBlock;
+        this.pageService.appendElement(textBlock)
+        return
+      case BlockType.Heading:
+        const headingBlock = new HeadingBlockClass('0002', 'sss', 1)
+        this.pageService.appendElement(headingBlock)
+        return
+      case BlockType.Image:
+        const imageBlock = new ImageBlockClass('0002', 'https://cdn.icon-icons.com/icons2/2699/PNG/512/angular_logo_icon_169595.png', 'alt')
+        this.pageService.appendElement(imageBlock)
+        return
+      case BlockType.List:
+        const listBlock = new ListBlockClass('0002', false, 'pathToMarker')
+        this.pageService.appendElement(listBlock)
+        return
+      case BlockType.Grid:
+        const gridBlock = new GridBlockClass('0002', 5, 2)
+        this.pageService.appendElement(gridBlock)
+        return
+      case BlockType.Section:
+        const sectionsBlock = new SectionBlockClass('0002', [])
+        this.pageService.appendElement(sectionsBlock)
+        return
     }
   }
 }

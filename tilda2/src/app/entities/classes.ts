@@ -1,45 +1,52 @@
-import { BlockType, GridBlock, HeadingBlock, ImageBlock, ListBlock, TextBlock } from "./blocks";
+import { BlockType, GridBlock, HeadingBlock, HeadingLevel, ImageBlock, ListBlock, SectionBlock, TextBlock } from "./blocks";
 
 export class TextBlockClass implements TextBlock {
+    public type: BlockType.Text = BlockType.Text;
     constructor(
-        public id, 
-        public content, 
-        public type: BlockType.Text
-    ){
+        public id: string,
+        public content: string,
+    ) {
         // this.id = id;
         // this.content = content;
         // this.type = type;
     }
 }
 export class HeadingBlockClass implements HeadingBlock {
+    public type: BlockType.Heading = BlockType.Heading;
     constructor(
-        public id, 
-        public content, 
-        public level,
-        public type: BlockType.Heading
-    ){}
+        public id: string,
+        public content: string,
+        public level: HeadingLevel,
+    ) { }
 }
 export class ImageBlockClass implements ImageBlock {
+    public type: BlockType.Image = BlockType.Image;
     constructor(
-        public id, 
-        public src,
-        public alt, 
-        public type: BlockType.Image,
-    ){}
+        public id: string,
+        public src: string,
+        public alt: string,
+    ) { }
 }
 export class ListBlockClass implements ListBlock {
+    public type: BlockType.List = BlockType.List;
     constructor(
-        public id, 
-        public ordered,
-        public marker, 
-        public type: BlockType.List,
-    ){}
+        public id: string,
+        public ordered: boolean,
+        public marker: string,
+    ) { }
 }
 export class GridBlockClass implements GridBlock {
+    public type: BlockType.Grid = BlockType.Grid;
     constructor(
-        public id, 
-        public rows,
-        public cols, 
-        public type: BlockType.Grid,
-    ){}
+        public id: string,
+        public rows: number,
+        public cols: number,
+    ) { }
+}
+export class SectionBlockClass implements SectionBlock {
+    public type: BlockType.Section = BlockType.Section
+    constructor(
+        public id: string,
+        public children: (TextBlock | HeadingBlock | ImageBlock | ListBlock | GridBlock)[],
+    ) { }
 }
