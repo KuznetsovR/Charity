@@ -5,6 +5,8 @@
     </app-text-block-renderer>
     <app-heading-block-renderer *ngSwitchCase="BlockType.Heading" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-heading-block-renderer>
+    <app-img-renderer *ngSwitchCase="BlockType.Image" (selectElement)="onSelectElement($event)" [block]='element'>
+    </app-img-renderer>
     <!-- <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </header>

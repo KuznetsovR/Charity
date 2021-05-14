@@ -13,6 +13,7 @@ import { HeadingBlockRendererComponent } from './element-renderer/block-renderer
 import { SectionBlockRendererComponent } from './element-renderer/block-renderers/section-block.renderer/section-block.renderer.component';
 import { HeadingOptionsComponent } from './element-options/heading-options/heading-options.component';
 import { ChoosePanelComponent } from './choose-panel/choose-panel.component';
+import { ImgRendererComponent } from './element-renderer/block-renderers/img-renderer/img-renderer.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChoosePanelComponent } from './choose-panel/choose-panel.component';
     SectionBlockRendererComponent,
     HeadingOptionsComponent,
     ChoosePanelComponent,
+    ImgRendererComponent,
     
   ],
   imports: [
