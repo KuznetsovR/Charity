@@ -1,0 +1,73 @@
+.row {
+  width: 100%;
+  text-align: center;
+}
+.box {
+  position: relative;
+  margin-left: 50%;
+  left: -250px;
+  background-color: rgb(247, 205, 211);
+  width: 500px;
+}
+.add-new {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.add-new input {
+  border: 0;
+}
+
+.btn {
+  border: 0;
+  padding: 5px 10px;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+  font-size: 20px;
+}
+.btn:active{
+    font-weight: bold;
+}
+svg {
+  width: 56px;
+  height: 34px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+rect {
+  stroke: red;
+  stroke-width: 2px;
+  transition: 1s;
+  stroke-dasharray: 200, 0;
+}
+.btn:hover {
+    color: red;
+}
+.btn:hover rect{
+    stroke-width: 5px;
+    stroke-dasharray: 35, 100;
+    stroke-dashoffset: 35px;
+}
+.list {
+  background-color: rgb(255, 147, 147);
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style-type: none;
+  text-align: center;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+.delete-btn {
+  float: right;
+  cursor: pointer;
+}
+.delete-btn::selection{
+  background: transparent;
+}
