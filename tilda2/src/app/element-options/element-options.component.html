@@ -3,4 +3,7 @@
     <app-heading-options *ngSwitchCase='BlockType.Heading' [block]='element' (optionsChange)="onChange($event)">
     </app-heading-options>
 </div>    
+<button mat-icon-button (click)="deselect()">
+    <mat-icon>close</mat-icon>
+</button>
 </ng-container>

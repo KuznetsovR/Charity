@@ -41,6 +41,21 @@ export class PageService {
       }
     }
   }
+  deleteBlock(){
+    const path = this.activeElementService.path;
+    const sections = this._page$.value.sections;
+    let parent: ElementBlock[] = sections;
+    console.log(path)
+    for(let index of path){
+      const child: ElementBlock = parent[index];
+      if (isSectionBlock(child)){
+        parent = child.children;
+      }else{
+        parent.splice(index, 1)
+        //снять селект
+      }
+    } 
+  }
   //deleter
   appendElement(block: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock|SectionBlock)){
     console.log(block)

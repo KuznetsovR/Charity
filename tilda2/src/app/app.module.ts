@@ -15,8 +15,8 @@ import { HeadingOptionsComponent } from './element-options/heading-options/headi
 import { ChoosePanelComponent } from './choose-panel/choose-panel.component';
 import { ImgRendererComponent } from './element-renderer/block-renderers/img-renderer/img-renderer.component';
 import { QuillModule } from 'ngx-quill';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [

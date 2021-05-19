@@ -35,7 +35,7 @@
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </h1> -->
     <div class="buttons-container" *ngIf='isActive$ | async'>
-        <button mat-icon-button>
+        <button mat-icon-button (click)='onDelete()'>
             <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button *ngIf='isEditable'>
