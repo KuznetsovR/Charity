@@ -31,4 +31,5 @@ export class ElementRendererComponent implements OnInit {
   get isEditable(){
     return [BlockType.Text, BlockType.Heading, BlockType.List].includes(this.element.type)
   }
+  //delete eventlistener
 }

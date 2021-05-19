@@ -41,6 +41,7 @@ export class PageService {
       }
     }
   }
+  //deleter
   appendElement(block: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock|SectionBlock)){
     console.log(block)
     if(isSectionBlock(block)){
