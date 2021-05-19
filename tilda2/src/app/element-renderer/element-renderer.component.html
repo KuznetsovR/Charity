@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="element.type" >
+<div [ngSwitch]="element.type" [class.active]='isActive$ | async'>
     <app-section-block-renderer *ngSwitchCase="BlockType.Section" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
     </app-section-block-renderer>
     <app-text-block-renderer *ngSwitchCase="BlockType.Text" (selectElement)="onSelectElement($event)"  [block]='element'>
@@ -34,7 +34,15 @@
     <h1 *ngSwitchCase="'h1'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </h1> -->
-</ng-container>
+    <div class="buttons-container" *ngIf='isActive$ | async'>
+        <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf='isEditable'>
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+</div>
 <!-- <ng-template #content>
     <ng-container *ngFor="let child of element.children">
         <ng-container *ngIf="isText(child)">
