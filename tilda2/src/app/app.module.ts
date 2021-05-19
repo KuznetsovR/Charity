@@ -14,6 +14,8 @@ import { SectionBlockRendererComponent } from './element-renderer/block-renderer
 import { HeadingOptionsComponent } from './element-options/heading-options/heading-options.component';
 import { ChoosePanelComponent } from './choose-panel/choose-panel.component';
 import { ImgRendererComponent } from './element-renderer/block-renderers/img-renderer/img-renderer.component';
+import { QuillModule } from 'ngx-quill';
+
 
 @NgModule({
   declarations: [
@@ -26,14 +28,14 @@ import { ImgRendererComponent } from './element-renderer/block-renderers/img-ren
     SectionBlockRendererComponent,
     HeadingOptionsComponent,
     ChoosePanelComponent,
-    ImgRendererComponent,
-    
+    ImgRendererComponent
   ],
   imports: [
     BrowserModule,
     FlexLayoutModule,
     MatExpansionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    QuillModule.forRoot()
   ],
   providers: [ActiveElementService],
   bootstrap: [AppComponent]
