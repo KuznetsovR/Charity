@@ -52,11 +52,10 @@ export class PageService {
         parent = child.children;
       }else{
         parent.splice(index, 1)
-        //снять селект
+        this.activeElementService.deselectElement();
       }
     } 
   }
-  //deleter
   appendElement(block: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock|SectionBlock)){
     console.log(block)
     if(isSectionBlock(block)){

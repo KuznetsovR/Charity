@@ -23,6 +23,6 @@ export class ElementOptionsComponent implements OnInit {
     this.pageService.changeBlock(block)
   }
   deselect(){
-    this.element = undefined
+    this.activeElementService.deselectElement();
   }
 }

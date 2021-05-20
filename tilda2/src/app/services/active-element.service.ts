@@ -15,6 +15,9 @@ export class ActiveElementService {
     this._path = path;
     this._activeElement$.next(el)
   }
+  deselectElement(){
+    this.selectElement(null, null)
+  }
   get path(){
     return this._path;
   }

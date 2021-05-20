@@ -18,8 +18,7 @@ export class ElementRendererComponent implements OnInit {
   BlockType = BlockType
   isActive$: Observable<boolean>;
   constructor(private activeElementService: ActiveElementService,
-     private pageService: PageService,
-     private elementOptions: ElementOptionsComponent) { }
+     private pageService: PageService) { }
 
   ngOnInit(): void {
     this.isActive$ = this.activeElementService.activeElement$.pipe(map((el) => this.element === el));
@@ -38,5 +37,4 @@ export class ElementRendererComponent implements OnInit {
   onDelete() {
     this.pageService.deleteBlock()
   }
-  //delete eventlistener
 }
