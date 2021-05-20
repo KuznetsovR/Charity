@@ -1,0 +1,27 @@
+@import "null.scss";
+
+%rowtemplt{
+    border: 2px solid red;
+}
+
+@mixin fontz($size: false){
+    @if $size{
+        font-size: $size;
+    } @else{
+        font-size: 20px;
+    }
+}
+
+body{
+    .row{
+        @include fontz();
+        // background-color: black;
+        height: 20px;
+        width: 325px / 900px * 100%;
+        padding-bottom: 20px;
+        &.big{
+            background-color: blue;
+        }
+        @extend %rowtemplt;
+    }
+}
