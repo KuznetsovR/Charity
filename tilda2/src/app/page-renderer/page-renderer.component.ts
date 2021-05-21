@@ -7,7 +7,7 @@ import { PageService } from '../services/page.service';
 @Component({
   selector: 'app-page-renderer',
   templateUrl: './page-renderer.component.html',
-  styleUrls: ['./page-renderer.component.css']
+  styleUrls: ['./page-renderer.component.scss']
 })
 export class PageRendererComponent implements OnInit {
   page: Page;

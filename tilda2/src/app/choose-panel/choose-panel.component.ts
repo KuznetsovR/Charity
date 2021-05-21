@@ -6,7 +6,7 @@ import { PageService } from '../services/page.service';
 @Component({
   selector: 'app-choose-panel',
   templateUrl: './choose-panel.component.html',
-  styleUrls: ['./choose-panel.component.css']
+  styleUrls: ['./choose-panel.component.scss']
 })
 export class ChoosePanelComponent implements OnInit {
   BlockType = BlockType;

@@ -4,7 +4,7 @@ import { ImageBlock } from 'src/app/entities/blocks';
 @Component({
   selector: 'app-img-renderer',
   templateUrl: './img-renderer.component.html',
-  styleUrls: ['./img-renderer.component.css']
+  styleUrls: ['./img-renderer.component.scss']
 })
 export class ImgRendererComponent implements OnInit {
   @Input() block: ImageBlock

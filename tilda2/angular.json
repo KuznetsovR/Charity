@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/reset.css"
             ],
             "scripts": []
@@ -119,6 +119,22 @@
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss",
+      "changeDetection": "OnPush",
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true
     }
   },
   "defaultProject": "tilda2"

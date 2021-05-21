@@ -10,7 +10,7 @@ import { PageService } from '../services/page.service';
 @Component({
   selector: 'app-element-renderer',
   templateUrl: './element-renderer.component.html',
-  styleUrls: ['./element-renderer.component.css']
+  styleUrls: ['./element-renderer.component.scss']
 })
 export class ElementRendererComponent implements OnInit {
   @Input() element: ElementBlock

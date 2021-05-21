@@ -4,7 +4,7 @@ import { TextBlock } from 'src/app/entities/blocks';
 @Component({
   selector: 'app-text-block-renderer',
   templateUrl: './text-block.renderer.component.html',
-  styleUrls: ['./text-block.renderer.component.css']
+  styleUrls: ['./text-block.renderer.component.scss']
 })
 export class TextBlockRendererComponent implements OnInit {
   @Input() block: TextBlock;

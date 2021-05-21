@@ -6,7 +6,7 @@ import { PageService } from '../services/page.service';
 @Component({
   selector: 'app-element-options',
   templateUrl: './element-options.component.html',
-  styleUrls: ['./element-options.component.css']
+  styleUrls: ['./element-options.component.scss']
 })
 export class ElementOptionsComponent implements OnInit {
 

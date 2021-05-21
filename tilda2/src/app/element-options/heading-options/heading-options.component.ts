@@ -4,7 +4,7 @@ import { HeadingBlock, HeadingLevel } from 'src/app/entities/blocks';
 @Component({
   selector: 'app-heading-options',
   templateUrl: './heading-options.component.html',
-  styleUrls: ['./heading-options.component.css']
+  styleUrls: ['./heading-options.component.scss']
 })
 export class HeadingOptionsComponent implements OnInit {
   @Input() block: HeadingBlock
