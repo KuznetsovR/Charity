@@ -1,4 +1,4 @@
-<div [ngSwitch]="element.type" [class.active]='isActive$ | async'>
+<div [ngSwitch]="element.type" [class.active]='isActive$ | async' class='container'>
     <app-section-block-renderer *ngSwitchCase="BlockType.Section" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
     </app-section-block-renderer>
     <app-text-block-renderer *ngSwitchCase="BlockType.Text" (selectElement)="onSelectElement($event)"  [block]='element'>
@@ -35,7 +35,7 @@
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </h1> -->
     <div class="buttons-container" *ngIf='isActive$ | async'>
-        <button mat-icon-button (click)='onDelete()'>
+        <button mat-icon-button (click)='onDelete($event)'>
             <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button *ngIf='isEditable'>

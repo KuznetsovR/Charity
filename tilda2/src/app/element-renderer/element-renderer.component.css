@@ -1,3 +1,12 @@
 :host .active{
     border: 1px solid black;
 }
+:host .buttons-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+:host .container {
+    box-sizing: border-box;
+    position: relative;
+}

@@ -34,7 +34,8 @@ export class ElementRendererComponent implements OnInit {
   get isEditable() {
     return [BlockType.Text, BlockType.Heading, BlockType.List].includes(this.element.type)
   }
-  onDelete() {
+  onDelete(event: MouseEvent) {
+    event.stopPropagation();
     this.pageService.deleteBlock()
   }
 }

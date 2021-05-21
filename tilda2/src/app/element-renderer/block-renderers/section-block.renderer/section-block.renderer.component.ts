@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementBlock, SectionBlock } from 'src/app/entities/blocks';
 
 @Component({
   selector: 'app-section-block-renderer',
   templateUrl: './section-block.renderer.component.html',
-  styleUrls: ['./section-block.renderer.component.css']
+  styleUrls: ['./section-block.renderer.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SectionBlockRendererComponent implements OnInit {
   @Input() block: SectionBlock;
