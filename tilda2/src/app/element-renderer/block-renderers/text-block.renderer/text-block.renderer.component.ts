@@ -8,7 +8,11 @@ import { TextBlock } from 'src/app/entities/blocks';
 })
 export class TextBlockRendererComponent implements OnInit {
   @Input() block: TextBlock;
+  @Input() isEditing: boolean;
   @Output() selectElement = new EventEmitter<TextBlock>()
+  @Output() save = new EventEmitter<string>()
+  @Output() cancel = new EventEmitter<void>()
+
 
   constructor() { }
 
@@ -16,8 +20,12 @@ export class TextBlockRendererComponent implements OnInit {
     event.stopPropagation();
     this.selectElement.emit(this.block);
   }
-  
   ngOnInit(): void {
   }
-
+  onSave(content: string){
+    this.save.emit(content)
+  }
+  onCancel(){
+    this.cancel.emit()
+  }
 }

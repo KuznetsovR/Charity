@@ -17,6 +17,8 @@ import { ImgRendererComponent } from './element-renderer/block-renderers/img-ren
 import { QuillModule } from 'ngx-quill';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ElementTextEditorComponent } from './element-text-editor/element-text-editor.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     SectionBlockRendererComponent,
     HeadingOptionsComponent,
     ChoosePanelComponent,
-    ImgRendererComponent
+    ImgRendererComponent,
+    ElementTextEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     QuillModule.forRoot(),
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [ActiveElementService],
   bootstrap: [AppComponent]

@@ -1,1 +1,2 @@
-<p (click)="onElementClick($event)">{{ block.content }}</p>
+<div *ngIf='!isEditing' (click)="onElementClick($event)" [innerHTML]="block.content"></div>
+<app-element-text-editor *ngIf='isEditing' [sourceText]="block.content" (save)='onSave($event)' (cancel)='onCancel()'></app-element-text-editor>
