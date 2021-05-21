@@ -1,20 +1,15 @@
-<ng-container [ngSwitch]='block.level'>
-    <h1 *ngSwitchCase='1' (click)="onElementClick($event)">
-        {{block.content}}
+<ng-container [ngSwitch]='block.level' *ngIf='!isEditing'>
+    <h1 *ngSwitchCase='1' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h1>
-    <h2 *ngSwitchCase='2' (click)="onElementClick($event)">
-        {{block.content}}
+    <h2 *ngSwitchCase='2' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h2>
-    <h3 *ngSwitchCase='3' (click)="onElementClick($event)">
-        {{block.content}}
+    <h3 *ngSwitchCase='3' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h3>
-    <h4 *ngSwitchCase='4' (click)="onElementClick($event)">
-        {{block.content}}
+    <h4 *ngSwitchCase='4' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h4>
-    <h5 *ngSwitchCase='5' (click)="onElementClick($event)">
-        {{block.content}}
+    <h5 *ngSwitchCase='5' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h5>
-    <h6 *ngSwitchCase='6' (click)="onElementClick($event)">
-        {{block.content}}
+    <h6 *ngSwitchCase='6' (click)="onElementClick($event)" [innerHTML]="block.content">
     </h6>
 </ng-container>
+<app-element-text-editor *ngIf='isEditing' [sourceText]="block.content" (save)='onSave($event)' (cancel)='onCancel()' [isHeading]='true'></app-element-text-editor>

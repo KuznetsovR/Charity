@@ -6,7 +6,7 @@
         [isEditing]="isEditing" (save)="onSave($event)" (cancel)="cancelEditing()">
     </app-text-block-renderer>
     <app-heading-block-renderer *ngSwitchCase="BlockType.Heading" (selectElement)="onSelectElement($event)"
-        [block]='element'>
+        [block]='element' [isEditing]="isEditing" (save)="onSave($event)" (cancel)="cancelEditing()">
     </app-heading-block-renderer>
     <app-img-renderer *ngSwitchCase="BlockType.Image" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-img-renderer>

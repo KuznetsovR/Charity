@@ -9,6 +9,7 @@ import { ContentChange } from 'ngx-quill';
 })
 export class ElementTextEditorComponent implements OnInit {
   @Input() sourceText: string;
+  @Input() isHeading = false;
   @Output() save = new EventEmitter<string>()
   @Output() cancel = new EventEmitter<void>()
   content = '';

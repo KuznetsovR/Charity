@@ -9,7 +9,10 @@ import { HeadingBlock } from 'src/app/entities/blocks';
 })
 export class HeadingBlockRendererComponent implements OnInit {
   @Input() block: HeadingBlock;
+  @Input() isEditing: boolean;
   @Output() selectElement = new EventEmitter<HeadingBlock>()
+  @Output() save = new EventEmitter<string>()
+  @Output() cancel = new EventEmitter<void>()
 
   constructor() { }
 
@@ -18,6 +21,12 @@ export class HeadingBlockRendererComponent implements OnInit {
     this.selectElement.emit(this.block);
   }
   ngOnInit(): void {
+  }
+  onSave(content: string){
+    this.save.emit(content)
+  }
+  onCancel(){
+    this.cancel.emit()
   }
 
 }

@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ElementOptionsComponent } from '../element-options/element-options.component';
-import { BlockType, ElementBlock } from '../entities/blocks';
-import { TextBlockClass } from '../entities/classes';
+import { BlockType, ElementBlock, isHeadingBlock } from '../entities/blocks';
+import { HeadingBlockClass, TextBlockClass } from '../entities/classes';
 import { ActiveElementService } from '../services/active-element.service';
 import { PageService } from '../services/page.service';
 
@@ -46,7 +46,12 @@ export class ElementRendererComponent implements OnInit {
     this.activeElementService.blockActivation()
   }
   onSave(content: string){
-    const element = new TextBlockClass(this.element.id, content)
+    let element: ElementBlock;
+    if(this.element.type === BlockType.Text){
+      element = new TextBlockClass(this.element.id, content)
+    }else if (isHeadingBlock(this.element)){
+      element = new HeadingBlockClass(this.element.id, content.replace("</p><p>", "<br>").replace(/<\/?p>/g, ''), this.element.level)
+    }
     this.pageService.changeBlock(element)
     this.cancelEditing();
   }

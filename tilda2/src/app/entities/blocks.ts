@@ -38,3 +38,6 @@ export interface SectionBlock extends ElementBlock {
 export function isSectionBlock(block: ElementBlock): block is SectionBlock{
     return block.type === BlockType.Section
 }
+export function isHeadingBlock(block: ElementBlock): block is HeadingBlock{
+    return block.type === BlockType.Heading
+}
