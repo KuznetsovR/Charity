@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ElementTextEditorComponent } from './element-text-editor/element-text-editor.component';
 import { FormsModule } from '@angular/forms';
+import { ImageOptionsComponent } from './element-options/image-options/image-options.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     HeadingOptionsComponent,
     ChoosePanelComponent,
     ImgRendererComponent,
-    ElementTextEditorComponent
+    ElementTextEditorComponent,
+    ImageOptionsComponent
   ],
   imports: [
     BrowserModule,
