@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ElementTextEditorComponent } from './element-text-editor/element-text-editor.component';
 import { FormsModule } from '@angular/forms';
 import { ImageOptionsComponent } from './element-options/image-options/image-options.component';
+import { GridBlockRendererComponent } from './element-renderer/block-renderers/grid-block.renderer/grid-block.renderer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ImageOptionsComponent } from './element-options/image-options/image-opt
     ChoosePanelComponent,
     ImgRendererComponent,
     ElementTextEditorComponent,
-    ImageOptionsComponent
+    ImageOptionsComponent,
+    GridBlockRendererComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@
     </app-heading-block-renderer>
     <app-img-renderer *ngSwitchCase="BlockType.Image" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-img-renderer>
+    <app-grid-block-renderer *ngSwitchCase="BlockType.Grid" (selectElement)="onSelectElement($event)" [block]='element'>
+    </app-grid-block-renderer>
     <!-- <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </header>
