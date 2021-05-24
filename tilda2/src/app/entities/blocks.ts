@@ -1,5 +1,5 @@
 export enum BlockType {
-    Text, Heading, Image, List, Grid, Section
+    Text, Heading, Image, Grid, Section
 }
 export interface ElementBlock {
     type: BlockType;
@@ -18,13 +18,10 @@ export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface ImageBlock extends ElementBlock{
     type: BlockType.Image;
-    src: string
-    alt: string
-}
-export interface ListBlock extends ElementBlock{
-    type: BlockType.List
-    ordered: boolean;
-    marker: string;
+    src: string;
+    alt: string;
+    width: string;
+    height: string;
 }
 export interface GridBlock extends ElementBlock{
     type: BlockType.Grid
@@ -33,7 +30,7 @@ export interface GridBlock extends ElementBlock{
 }
 export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;
-    children: (TextBlock|HeadingBlock|ImageBlock|ListBlock|GridBlock)[];
+    children: (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
 }
 export function isSectionBlock(block: ElementBlock): block is SectionBlock{
     return block.type === BlockType.Section

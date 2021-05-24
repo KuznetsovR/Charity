@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BlockType, ElementBlock, GridBlock, HeadingBlock, ImageBlock, isSectionBlock, ListBlock, SectionBlock, TextBlock } from '../entities/blocks';
+import { BlockType, ElementBlock, GridBlock, HeadingBlock, ImageBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
 import { SectionBlockClass } from '../entities/classes';
 import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page } from '../entities/page';
@@ -57,7 +57,7 @@ export class PageService {
     parent.splice(lastIndex, 1)
     this.activeElementService.deselectElement();
   }
-  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | ListBlock | GridBlock | SectionBlock)) {
+  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock)) {
     console.log(block)
     if (isSectionBlock(block)) {
       this._page$.next({

@@ -1,4 +1,4 @@
-import { BlockType, GridBlock, HeadingBlock, HeadingLevel, ImageBlock, ListBlock, SectionBlock, TextBlock } from "./blocks";
+import { BlockType, GridBlock, HeadingBlock, HeadingLevel, ImageBlock, SectionBlock, TextBlock } from "./blocks";
 
 export class TextBlockClass implements TextBlock {
     public type: BlockType.Text = BlockType.Text;
@@ -25,14 +25,8 @@ export class ImageBlockClass implements ImageBlock {
         public id: string,
         public src: string,
         public alt: string,
-    ) { }
-}
-export class ListBlockClass implements ListBlock {
-    public type: BlockType.List = BlockType.List;
-    constructor(
-        public id: string,
-        public ordered: boolean,
-        public marker: string,
+        public width: string,
+        public height: string,
     ) { }
 }
 export class GridBlockClass implements GridBlock {
@@ -47,6 +41,6 @@ export class SectionBlockClass implements SectionBlock {
     public type: BlockType.Section = BlockType.Section
     constructor(
         public id: string,
-        public children: (TextBlock | HeadingBlock | ImageBlock | ListBlock | GridBlock)[],
+        public children: (TextBlock | HeadingBlock | ImageBlock | GridBlock)[],
     ) { }
 }

@@ -5,3 +5,11 @@
 <label>alternative text</label>
 <br>
 <input type="text" [value]='block.alt' (input)='onAltChange($event)'>
+<br>
+<label>width (with px)</label>
+<br>
+<input type="text" [value]='block.width' (input)='onWidthChange($event)'>
+<br>
+<label>height (with px)</label>
+<br>
+<input type="text" [value]='block.height' (input)='onHeightChange($event)'>

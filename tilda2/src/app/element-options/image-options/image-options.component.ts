@@ -28,4 +28,18 @@ export class ImageOptionsComponent implements OnInit {
       alt
     })
   }
+  onWidthChange(event){
+    const width = event.target.value
+    this.optionsChange.emit({
+      ...this.block,
+      width
+    })
+  }
+  onHeightChange(event){
+    const height = event.target.value
+    this.optionsChange.emit({
+      ...this.block,
+      height
+    })
+  }
 }
