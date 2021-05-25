@@ -4,6 +4,8 @@
     </app-heading-options>
     <app-image-options *ngSwitchCase='BlockType.Image' [block]='element' (optionsChange)="onChange($event)">
     </app-image-options>
+    <app-grid-options *ngSwitchCase='BlockType.Grid' [block]='element' (optionsChange)="onChange($event)">
+    </app-grid-options>
 </div>    
 <button mat-icon-button (click)="deselect()">
     <mat-icon>close</mat-icon>

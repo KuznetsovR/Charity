@@ -21,6 +21,7 @@ import { ElementTextEditorComponent } from './element-text-editor/element-text-e
 import { FormsModule } from '@angular/forms';
 import { ImageOptionsComponent } from './element-options/image-options/image-options.component';
 import { GridBlockRendererComponent } from './element-renderer/block-renderers/grid-block.renderer/grid-block.renderer.component';
+import { GridOptionsComponent } from './element-options/grid-options/grid-options.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { GridBlockRendererComponent } from './element-renderer/block-renderers/g
     ElementTextEditorComponent,
     ImageOptionsComponent,
     GridBlockRendererComponent,
+    GridOptionsComponent,
   ],
   imports: [
     BrowserModule,
