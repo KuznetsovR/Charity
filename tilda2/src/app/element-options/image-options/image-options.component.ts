@@ -14,29 +14,29 @@ export class ImageOptionsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSourceChange(event){
-    const src = event.target.value
+  onSourceChange(event: Event){
+    const src = (event.target as HTMLInputElement).value
     this.optionsChange.emit({
       ...this.block,
       src
     })
   }
-  onAltChange(event){
-    const alt = event.target.value
+  onAltChange(event: Event){
+    const alt = (event.target as HTMLInputElement).value
     this.optionsChange.emit({
       ...this.block,
       alt
     })
   }
-  onWidthChange(event){
-    const width = event.target.value
+  onWidthChange(event: Event){
+    const width = (event.target as HTMLInputElement).value
     this.optionsChange.emit({
       ...this.block,
       width
     })
   }
-  onHeightChange(event){
-    const height = event.target.value
+  onHeightChange(event: Event){
+    const height = (event.target as HTMLInputElement).value
     this.optionsChange.emit({
       ...this.block,
       height
