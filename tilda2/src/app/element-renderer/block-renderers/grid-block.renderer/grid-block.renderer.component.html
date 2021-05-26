@@ -1,4 +1,4 @@
-<div class="grid"  (click)="onSelectElement($event)" >
+<div class="grid"  (click)="onSelectElement($event)" [style.grid-template-columns]="'repeat('+ block.cols + ', 1fr)'">
     <div>One</div>
     <div>Two</div>
     <div>Three</div>
