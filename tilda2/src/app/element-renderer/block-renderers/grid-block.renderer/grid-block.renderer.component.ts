@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { GridBlock } from 'src/app/entities/blocks';
+import { TextBlockClass } from 'src/app/entities/classes';
 
 @Component({
   selector: 'app-grid-block-renderer',
@@ -19,4 +20,5 @@ export class GridBlockRendererComponent implements OnInit {
     event.stopPropagation();
     this.selectElement.emit(this.block)
   }
+  
 }

@@ -35,6 +35,7 @@ export class GridBlockClass implements GridBlock {
         public id: string,
         public rows: number,
         public cols: number,
+        public children: []
     ) { }
 }
 export class SectionBlockClass implements SectionBlock {

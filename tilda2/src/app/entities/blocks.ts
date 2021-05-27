@@ -27,6 +27,7 @@ export interface GridBlock extends ElementBlock{
     type: BlockType.Grid
     rows: number;
     cols: number;
+    children: (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
 }
 export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;

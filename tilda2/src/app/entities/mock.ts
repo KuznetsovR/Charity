@@ -35,6 +35,40 @@ export const EXAMPLE_PAGE: Page = {
                     type: BlockType.Text,
                     content: '123',
                     id: '0001'
+                },
+                {
+                    type: BlockType.Grid,
+                    rows: 2,
+                    cols:3,
+                    id: '0002', 
+                    children: [
+                        {
+                            type: BlockType.Text,
+                            content: '123',
+                            id: '0000'
+                        },
+                        {
+                            type: BlockType.Text,
+                            content: '2',
+                            id: '0001'
+                        },
+                        {
+                            type: BlockType.Text,
+                            content: '3',
+                            id: '0002'
+                        },
+                        {
+                            type: BlockType.Text,
+                            content: '4',
+                            id: '0003'
+                        },
+                        {
+                            type: BlockType.Text,
+                            content: '5',
+                            id: '0004'
+                        },
+                        
+                    ]
                 }
             ]
         }

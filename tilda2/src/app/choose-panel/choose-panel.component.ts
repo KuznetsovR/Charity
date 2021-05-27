@@ -34,7 +34,7 @@ export class ChoosePanelComponent implements OnInit {
         this.pageService.appendElement(imageBlock)
         return
       case BlockType.Grid:
-        const gridBlock = new GridBlockClass('0002', 3, 2)
+        const gridBlock = new GridBlockClass('0002', 3, 2, [])
         this.pageService.appendElement(gridBlock)
         return
       case BlockType.Section:
