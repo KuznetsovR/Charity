@@ -19,7 +19,6 @@ export class ElementOptionsComponent implements OnInit {
       this.activeElementService.activeElement$.subscribe((element) => this.element = element)
   }
   onChange(block: ElementBlock){
-    console.log(block)
     this.pageService.changeBlock(block)
   }
   deselect(){
