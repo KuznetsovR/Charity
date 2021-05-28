@@ -27,12 +27,13 @@ export interface GridBlock extends ElementBlock{
     type: BlockType.Grid
     rows: number;
     cols: number;
-    children: (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
+    children: BlockChildren;
 }
 export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;
-    children: (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
+    children: BlockChildren;
 }
+export type BlockChildren = (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
 export function isSectionBlock(block: ElementBlock): block is SectionBlock{
     return block.type === BlockType.Section
 }

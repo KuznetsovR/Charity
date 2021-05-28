@@ -67,7 +67,13 @@ export const EXAMPLE_PAGE: Page = {
                             content: '5',
                             id: '0004'
                         },
-                        
+                        {
+                            type: BlockType.Heading,
+                            content: 'tt',
+                            level: 1,
+                            id: '0006'
+        
+                        },
                     ]
                 }
             ]

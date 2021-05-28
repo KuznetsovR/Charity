@@ -15,6 +15,7 @@ export class ActiveElementService {
     if (!this._canActivate$.value) return;
     this._path = path;
     this._activeElement$.next(el)
+    console.log(el, path)
   }
   deselectElement(){
     this.selectElement(null, null)
