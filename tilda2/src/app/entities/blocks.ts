@@ -40,3 +40,6 @@ export function isSectionBlock(block: ElementBlock): block is SectionBlock{
 export function isHeadingBlock(block: ElementBlock): block is HeadingBlock{
     return block.type === BlockType.Heading
 }
+export function isGridBlock(block: ElementBlock): block is GridBlock{
+    return block.type === BlockType.Grid
+}

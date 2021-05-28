@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BlockType, ElementBlock, GridBlock, HeadingBlock, ImageBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
+import { ElementBlock, GridBlock, HeadingBlock, ImageBlock, isGridBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
 import { SectionBlockClass } from '../entities/classes';
 import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page } from '../entities/page';
@@ -28,12 +28,13 @@ export class PageService {
   }
 
   changeBlock(block: ElementBlock) {
+    console.log(block)
     const path = this.activeElementService.path;
     const sections = this._page$.value.sections;
     let parent: ElementBlock[] = sections;
     for (let index of path) {
       const child: ElementBlock = parent[index];
-      if (isSectionBlock(child)) {
+      if (isSectionBlock(child) || (isGridBlock(child) && index===path.length-1)) {
         parent = child.children;
       } else {
         parent[index] = block;
