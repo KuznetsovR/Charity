@@ -37,7 +37,6 @@ export class GridOptionsComponent implements OnInit {
       let i = 0;
       while (i < this.block.rows) {
         children.pop()
-        console.log(children)
         i++
       }
 
@@ -54,12 +53,10 @@ export class GridOptionsComponent implements OnInit {
     const children = this.block.children.slice()
     if (rows === this.block.rows + 1) {
       let i = 0;
-      console.log(children)
       while (i < this.block.cols) {
         children.push(new TextBlockClass('0000', 'asd'))
         i++
       }
-      console.log(children)
 
       this.optionsChange.emit({
         ...this.block,
@@ -71,7 +68,6 @@ export class GridOptionsComponent implements OnInit {
       let i = 0;
       while (i < this.block.cols) {
         children.pop()
-        console.log(children)
         i++
       }
 

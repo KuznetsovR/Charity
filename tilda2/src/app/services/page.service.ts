@@ -28,7 +28,6 @@ export class PageService {
   }
 
   changeBlock(block: ElementBlock) {
-    console.log(block)
     const path = this.activeElementService.path;
     const sections = this._page$.value.sections;
     let parent: ElementBlock[] = sections;
