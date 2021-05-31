@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ElementBlock, GridBlock, HeadingBlock, ImageBlock, isGridBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
-import { SectionBlockClass } from '../entities/classes';
+import { BehaviorSubject, EmptyError, Observable } from 'rxjs';
+import { ElementBlock, EmptyBlock, GridBlock, HeadingBlock, ImageBlock, isGridBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
+import { EmptyBlockClass, SectionBlockClass } from '../entities/classes';
 import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page } from '../entities/page';
 import { ActiveElementService } from './active-element.service';
@@ -41,7 +41,9 @@ export class PageService {
       }
     }
   }
+
   deleteBlock() {
+    let isGrid = false;
     const path = this.activeElementService.path;
     const sections = this._page$.value.sections;
     let parent: ElementBlock[] = sections;
@@ -50,14 +52,20 @@ export class PageService {
 
     for(let index of path.slice(0, path.length-1)){
       const child: ElementBlock = parent[index];
-      if (isSectionBlock(child)){
+      if (isSectionBlock(child) || isGridBlock(child)){
+        isGrid = isGridBlock(child)
         parent = child.children;
       }
-    } 
-    parent.splice(lastIndex, 1)
+    }
+    if (isGrid){
+      parent[lastIndex] = new EmptyBlockClass('1234')
+    }else{
+      parent.splice(lastIndex, 1)
+    }
     this.activeElementService.deselectElement();
   }
-  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock)) {
+  
+  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock| EmptyBlock)) {
     console.log(block)
     if (isSectionBlock(block)) {
       this._page$.next({

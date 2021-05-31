@@ -1,5 +1,5 @@
 export enum BlockType {
-    Text, Heading, Image, Grid, Section
+    Text, Heading, Image, Grid, Section, Empty
 }
 export interface ElementBlock {
     type: BlockType;
@@ -33,7 +33,11 @@ export interface SectionBlock extends ElementBlock {
     type: BlockType.Section;
     children: BlockChildren;
 }
-export type BlockChildren = (TextBlock|HeadingBlock|ImageBlock|GridBlock)[];
+export interface EmptyBlock extends ElementBlock{
+    type: BlockType.Empty
+}
+
+export type BlockChildren = (TextBlock|HeadingBlock|ImageBlock|GridBlock|EmptyBlock)[];
 export function isSectionBlock(block: ElementBlock): block is SectionBlock{
     return block.type === BlockType.Section
 }

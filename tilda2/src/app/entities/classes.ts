@@ -1,4 +1,4 @@
-import { BlockType, GridBlock, HeadingBlock, HeadingLevel, ImageBlock, SectionBlock, TextBlock } from "./blocks";
+import { BlockChildren, BlockType, EmptyBlock, GridBlock, HeadingBlock, HeadingLevel, ImageBlock, SectionBlock, TextBlock } from "./blocks";
 
 export class TextBlockClass implements TextBlock {
     public type: BlockType.Text = BlockType.Text;
@@ -35,13 +35,19 @@ export class GridBlockClass implements GridBlock {
         public id: string,
         public rows: number,
         public cols: number,
-        public children: []
+        public children: BlockChildren
     ) { }
 }
 export class SectionBlockClass implements SectionBlock {
     public type: BlockType.Section = BlockType.Section
     constructor(
         public id: string,
-        public children: (TextBlock | HeadingBlock | ImageBlock | GridBlock)[],
+        public children: BlockChildren,
     ) { }
+}
+export class EmptyBlockClass implements EmptyBlock{
+    public type: BlockType.Empty = BlockType.Empty
+    constructor(
+        public id: string
+    ){ }
 }

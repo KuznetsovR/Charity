@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { GridBlock, ImageBlock } from 'src/app/entities/blocks';
-import { TextBlockClass } from 'src/app/entities/classes';
+import { EmptyBlockClass, TextBlockClass } from 'src/app/entities/classes';
 
 @Component({
   selector: 'app-grid-options',
@@ -23,7 +23,7 @@ export class GridOptionsComponent implements OnInit {
     if (cols === this.block.cols + 1) {
       let i = 0;
       while (i < this.block.rows) {
-        children.push(new TextBlockClass('0000', 'asd'))
+        children.push(new EmptyBlockClass('1234'))
         i++
       }
 
@@ -54,7 +54,7 @@ export class GridOptionsComponent implements OnInit {
     if (rows === this.block.rows + 1) {
       let i = 0;
       while (i < this.block.cols) {
-        children.push(new TextBlockClass('0000', 'asd'))
+        children.push(new EmptyBlockClass('1234'))
         i++
       }
 
