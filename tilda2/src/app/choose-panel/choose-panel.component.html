@@ -9,11 +9,11 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <ul>
-          <li (click)='selectElement(BlockType.Text)'>Type Text</li>
-          <li (click)='selectElement(BlockType.Heading)'>Type Heading</li>
-          <li (click)='selectElement(BlockType.Image)'>Img</li>
-          <li (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
-          <li (click)='selectElement(BlockType.Section)'>Section</li>
+          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Text)'>Type Text</li>
+          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Heading)'>Type Heading</li>
+          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Image)'>Img</li>
+          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
+          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Section)'>Section</li>
       </ul>
     </mat-expansion-panel>
     <mat-expansion-panel>
