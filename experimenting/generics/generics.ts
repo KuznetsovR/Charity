@@ -21,26 +21,41 @@
 
 // const newVar = new GenericClass<string>("123321")
 // newVar.getIdentity()
+//////////////////////////////////////////////////
+// class Car {
+//     label: string = 'Generic Car'
+//     numWheels: Number = 4
+//     horn() {
+//         return "beep beep!"
+//     }
+// }
 
-class Car {
-    label: string = 'Generic Car'
-    numWheels: Number = 4
-    horn() {
-        return "beep beep!"
+// class Truck extends Car {
+//     label = 'Truck'
+//     numWheels = 18
+// }
+
+// class Vespa extends Car {
+//     label = 'Vespa'
+//     numWheels = 2
+// }
+// function washCar<T extends Car>(car: T): T {
+//     return car
+// }
+// const truck = new Truck()
+// washCar<Truck>(truck)
+
+interface Form {
+    name: string,
+    password: string
+}
+
+type M = keyof Form // 'name' | 'password'
+
+type ValidationScheme<T> = {
+    [K in keyof T]:{                //like "for K of T" in js
+        value: T[K],
+        check: boolean,
+        rules?: []
     }
 }
-
-class Truck extends Car {
-    label = 'Truck'
-    numWheels = 18
-}
-
-class Vespa extends Car {
-    label = 'Vespa'
-    numWheels = 2
-}
-function washCar<T extends Car>(car: T): T {
-    return car
-}
-const truck = new Truck()
-washCar<Truck>(truck)
