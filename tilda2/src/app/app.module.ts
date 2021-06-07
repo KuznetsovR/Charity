@@ -22,6 +22,9 @@ import { FormsModule } from '@angular/forms';
 import { ImageOptionsComponent } from './element-options/image-options/image-options.component';
 import { GridBlockRendererComponent } from './element-renderer/block-renderers/grid-block.renderer/grid-block.renderer.component';
 import { GridOptionsComponent } from './element-options/grid-options/grid-options.component';
+import { DroppedPanelComponent } from './dropped-panel/dropped-panel.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { GridOptionsComponent } from './element-options/grid-options/grid-option
     ImageOptionsComponent,
     GridBlockRendererComponent,
     GridOptionsComponent,
+    DroppedPanelComponent, 
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { GridOptionsComponent } from './element-options/grid-options/grid-option
     QuillModule.forRoot(),
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [ActiveElementService],
   bootstrap: [AppComponent]
