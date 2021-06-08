@@ -1,10 +1,10 @@
-<div fxLayout='row' class="zero" fxLayoutGap="50px" cdkDropList>
+<div fxLayout='row' class="zero" fxLayoutGap="50px">
     <div fxFlex="20" class="one"> 
         <app-choose-panel></app-choose-panel>
     </div>
     <div fxFlex fxLayout="column" class="two">
         <app-page-renderer></app-page-renderer>
-        <app-dropped-panel></app-dropped-panel>
+        <app-dropped-panel cdkDropList></app-dropped-panel>
     </div>
     <div fxFlex="20" class="three">
         <app-element-options></app-element-options>

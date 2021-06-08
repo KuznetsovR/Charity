@@ -1,49 +1,35 @@
-<mat-accordion>                                 <!--при нажатии на элемент - в консоль выводится его объект-->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          UI Library
-        </mat-panel-title>
-        <mat-panel-description>
-          smth
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <ul>
-          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Text)'>Type Text</li>
-          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Heading)'>Type Heading</li>
-          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Image)'>Img</li>
-          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
-          <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Section)'>Section</li>
-      </ul>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          grid
-        </mat-panel-title>
-        <mat-panel-description>
-          smth
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-      </ul>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Templates
-        </mat-panel-title>
-        <mat-panel-description>
-          smth
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-      </ul>
-    </mat-expansion-panel>
-  </mat-accordion>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        UI Library
+      </mat-panel-title>
+      <mat-panel-description>
+        smth
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul>
+      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Text)'>Type Text</li>
+      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Heading)'>Type Heading</li>
+      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Image)'>Img</li>
+      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
+      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Section)'>Section</li>
+    </ul>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Templates
+      </mat-panel-title>
+      <mat-panel-description>
+        smth
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>
+<li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Text)'>Type Text</li>
