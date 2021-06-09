@@ -1,5 +1,9 @@
 <div class='container' (click)="onElementClick($event)">
-    <app-element-renderer *ngFor='let child of block.children; let i = index' [element]='child' (selectElement)="onChildClick($event.block, $event.path, i)" >
+    <app-drop-area (blockDrop)="onBlockDrop([], 0)"></app-drop-area>
+    <ng-container *ngFor='let child of block.children; let i = index'>
+        <app-element-renderer [element]='child' (selectElement)="onChildClick($event.block, $event.path, i)" (blockDrop)='onBlockDrop($event, i)'>
 
-    </app-element-renderer>
+        </app-element-renderer>
+        <app-drop-area (blockDrop)="onBlockDrop([], i+1)"></app-drop-area>
+    </ng-container>
 </div>

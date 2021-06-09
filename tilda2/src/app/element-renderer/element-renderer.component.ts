@@ -16,6 +16,8 @@ import { PageService } from '../services/page.service';
 export class ElementRendererComponent implements OnInit {
   @Input() element: ElementBlock
   @Output() selectElement = new EventEmitter<{ block: ElementBlock, path: number[] }>()
+  @Output() blockDrop = new EventEmitter<number[]>()
+
   BlockType = BlockType
   isActive$: Observable<boolean>;
   isEditing = false;

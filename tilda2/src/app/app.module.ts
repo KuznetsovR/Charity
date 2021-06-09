@@ -22,8 +22,8 @@ import { FormsModule } from '@angular/forms';
 import { ImageOptionsComponent } from './element-options/image-options/image-options.component';
 import { GridBlockRendererComponent } from './element-renderer/block-renderers/grid-block.renderer/grid-block.renderer.component';
 import { GridOptionsComponent } from './element-options/grid-options/grid-options.component';
-import { DroppedPanelComponent } from './dropped-panel/dropped-panel.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DropAreaComponent } from './drop-area/drop-area.component';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ImageOptionsComponent,
     GridBlockRendererComponent,
     GridOptionsComponent,
-    DroppedPanelComponent, 
+    DropAreaComponent, 
   ],
   imports: [
     BrowserModule,

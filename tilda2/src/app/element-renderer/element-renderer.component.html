@@ -1,6 +1,7 @@
 <div [ngSwitch]="element.type" [class.active]='isActive$ | async' class='container'>
     <app-section-block-renderer *ngSwitchCase="BlockType.Section"
-        (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
+        (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'
+        (blockDrop)='blockDrop.emit($event)'>
     </app-section-block-renderer>
     <app-text-block-renderer *ngSwitchCase="BlockType.Text" (selectElement)="onSelectElement($event)" [block]='element'
         [isEditing]="isEditing" (save)="onSave($event)" (cancel)="cancelEditing()">

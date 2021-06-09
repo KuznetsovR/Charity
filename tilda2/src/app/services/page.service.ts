@@ -83,4 +83,17 @@ export class PageService {
       })
     }
   }
+  addElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock| EmptyBlock), path: number[]){
+    const sections = this._page$.value.sections;
+    let parent: ElementBlock[] = sections;
+    const insertIndex = path[path.length - 1]       //insertIndex = last in path
+    for(let index of path.slice(0, path.length-1)){
+      const child = parent[index];
+      if (isSectionBlock(child) || isGridBlock(child)){
+        parent = child.children;
+      }
+    }
+    parent.splice(insertIndex, 0, block)
+    console.log(block, path)
+  }
 }
