@@ -1,5 +1,6 @@
-<div class="grid"  (click)="onSelectElement($event)" [style.grid-template-columns]="'repeat('+ block.cols + ', 1fr)'">
-    <app-element-renderer *ngFor='let gridBlock of block.children; let i = index' [element]='gridBlock' (selectElement)="onChildClick($event.block, $event.path, i)">
-
+<div class="grid" (click)="onSelectElement($event)" [style.grid-template-columns]="'repeat('+ block.cols + ', 1fr)'">
+    <app-element-renderer *ngFor='let gridBlock of block.children; let i = index' [element]='gridBlock'
+        (selectElement)="onChildClick($event.block, $event.path, i)" (blockDrop)='onBlockDrop($event, i)'>
     </app-element-renderer>
 </div>
+<!-- <app-drop-area (blockDrop)="onBlockDrop([], i+1)"></app-drop-area> -->

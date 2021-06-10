@@ -24,6 +24,7 @@ import { GridBlockRendererComponent } from './element-renderer/block-renderers/g
 import { GridOptionsComponent } from './element-options/grid-options/grid-options.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DropAreaComponent } from './drop-area/drop-area.component';
+import { EmptyBlockRendererComponent } from './element-renderer/block-renderers/empty-block.renderer/empty-block.renderer.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DropAreaComponent } from './drop-area/drop-area.component';
     ImageOptionsComponent,
     GridBlockRendererComponent,
     GridOptionsComponent,
-    DropAreaComponent, 
+    DropAreaComponent,
+    EmptyBlockRendererComponent, 
   ],
   imports: [
     BrowserModule,

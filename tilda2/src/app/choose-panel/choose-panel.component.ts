@@ -46,6 +46,9 @@ export class ChoosePanelComponent implements OnInit {
         return
     }
   }
+  onDragEnd(){
+    this.dndService.dragend()
+  }
   // selectElement(type: BlockType){
   //   // pageService.addBlock(type)
   //   switch (type) {

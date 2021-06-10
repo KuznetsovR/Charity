@@ -19,6 +19,8 @@ export class DndService {
   }
   drop(path: number[]){
     this.pageService.addElement(this._draggedBlock$.value, path)
+  }
+  dragend(){
     this._draggedBlock$.next(null)
   }
   get draggedBlock$(): Observable<ElementBlock>{

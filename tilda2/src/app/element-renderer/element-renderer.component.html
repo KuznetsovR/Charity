@@ -13,33 +13,10 @@
     </app-img-renderer>
     <app-grid-block-renderer *ngSwitchCase="BlockType.Grid" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
     </app-grid-block-renderer>
-    <!-- <header *ngSwitchCase="'header'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </header>
-    <main *ngSwitchCase="'main'"(click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </main>
-    <footer *ngSwitchCase="'footer'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </footer>
-    <nav *ngSwitchCase="'nav'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </nav>
-    <section *ngSwitchCase="'section'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </section>
-    <ul *ngSwitchCase="'ul'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </ul>
-    <li *ngSwitchCase="'li'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </li>
-    <p *ngSwitchCase="'p'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </p>
-    <h1 *ngSwitchCase="'h1'" (click)="onElementClick($event)">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-    </h1> -->
+    <app-empty-block-renderer *ngSwitchCase="BlockType.Empty" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
+
+    </app-empty-block-renderer>
+    
     <div class="buttons-container" *ngIf='!isEditing && isActive$ | async'>
         <button mat-icon-button (click)='onDelete($event)'>
             <mat-icon>delete</mat-icon>

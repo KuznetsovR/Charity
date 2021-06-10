@@ -11,6 +11,8 @@ import { TextBlockClass } from 'src/app/entities/classes';
 export class GridBlockRendererComponent implements OnInit {
   @Input() block:GridBlock
   @Output() selectElement = new EventEmitter<{block: ElementBlock, path: number[]}>()
+  @Output() blockDrop = new EventEmitter<number[]>()
+
   constructor() { }
 
   ngOnInit(): void {
@@ -22,5 +24,8 @@ export class GridBlockRendererComponent implements OnInit {
   }
   onChildClick(block: ElementBlock, path: number[], index: number){
     this.selectElement.emit({block, path: [index, ...path]});
+  }
+  onBlockDrop(path: number[], index: number){
+    this.blockDrop.emit([index, ...path])
   }
 }

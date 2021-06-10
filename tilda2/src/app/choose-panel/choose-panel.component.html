@@ -14,11 +14,11 @@
       <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Image)'>Img</li>
       <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
       <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Section)'>Section</li> -->
-      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Text)">Type Text</li>
-      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Heading)">Type Heading</li>
-      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Image)">Img</li>
-      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Grid)">Grid (table)</li>
-      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Section)">Section</li>
+      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Text)" (dragend)="onDragEnd()">Type Text</li>
+      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Heading)" (dragend)="onDragEnd()">Type Heading</li>
+      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Image)" (dragend)="onDragEnd()">Img</li>
+      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Grid)" (dragend)="onDragEnd()">Grid (table)</li>
+      <li draggable="true" (dragstart)="onBlockDrag(BlockType.Section)" (dragend)="onDragEnd()">Section</li>
     </ul>
   </mat-expansion-panel>
   <mat-expansion-panel>
