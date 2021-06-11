@@ -1,6 +1,11 @@
 <div class="grid" (click)="onSelectElement($event)" [style.grid-template-columns]="'repeat('+ block.cols + ', 1fr)'">
-    <app-element-renderer *ngFor='let gridBlock of block.children; let i = index' [element]='gridBlock'
-        (selectElement)="onChildClick($event.block, $event.path, i)" (blockDrop)='onBlockDrop($event, i)'>
-    </app-element-renderer>
+    <div *ngFor='let gridBlock of block.children; let i = index'>
+        <app-element-renderer  [element]='gridBlock'
+            (selectElement)="onChildClick($event.block, $event.path, i)" (blockDrop)='onBlockDrop($event, i)' *ngIf="gridBlock.type !== BlockType.Empty; else dropArea" >
+        </app-element-renderer>
+        <ng-template #dropArea>
+            <app-drop-area (blockDrop)="onBlockDrop([], i)"></app-drop-area>
+        </ng-template>
+    </div>
 </div>
 <!-- <app-drop-area (blockDrop)="onBlockDrop([], i+1)"></app-drop-area> -->

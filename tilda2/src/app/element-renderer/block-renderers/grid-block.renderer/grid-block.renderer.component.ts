@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { ElementBlock, GridBlock } from 'src/app/entities/blocks';
+import { BlockType, ElementBlock, GridBlock } from 'src/app/entities/blocks';
 import { TextBlockClass } from 'src/app/entities/classes';
 
 @Component({
@@ -13,6 +13,7 @@ export class GridBlockRendererComponent implements OnInit {
   @Output() selectElement = new EventEmitter<{block: ElementBlock, path: number[]}>()
   @Output() blockDrop = new EventEmitter<number[]>()
 
+  BlockType = BlockType
   constructor() { }
 
   ngOnInit(): void {

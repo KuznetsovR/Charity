@@ -7,12 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyBlockRendererComponent implements OnInit {
-  @Output() blockDrop = new EventEmitter<number[]>()
 
   constructor() { }
-  onBlockDrop(path: number[], index: number){
-    this.blockDrop.emit([index, ...path])
-  }
+  
   ngOnInit(): void {
   }
 

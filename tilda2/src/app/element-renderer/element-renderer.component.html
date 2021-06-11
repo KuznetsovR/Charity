@@ -11,7 +11,7 @@
     </app-heading-block-renderer>
     <app-img-renderer *ngSwitchCase="BlockType.Image" (selectElement)="onSelectElement($event)" [block]='element'>
     </app-img-renderer>
-    <app-grid-block-renderer *ngSwitchCase="BlockType.Grid" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
+    <app-grid-block-renderer *ngSwitchCase="BlockType.Grid" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element' (blockDrop)='blockDrop.emit($event)'>
     </app-grid-block-renderer>
     <app-empty-block-renderer *ngSwitchCase="BlockType.Empty" (selectElement)="onSelectElement($event.block, $event.path)" [block]='element'>
 

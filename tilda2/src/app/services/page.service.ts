@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EmptyError, Observable } from 'rxjs';
-import { ElementBlock, EmptyBlock, GridBlock, HeadingBlock, ImageBlock, isGridBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
+import { BlockType, ElementBlock, EmptyBlock, GridBlock, HeadingBlock, ImageBlock, isGridBlock, isSectionBlock, SectionBlock, TextBlock } from '../entities/blocks';
 import { EmptyBlockClass, SectionBlockClass } from '../entities/classes';
 import { EXAMPLE_PAGE } from '../entities/mock';
 import { Page } from '../entities/page';
@@ -93,7 +93,7 @@ export class PageService {
         parent = child.children;
       }
     }
-    parent.splice(insertIndex, 0, block)
+    parent.splice(insertIndex, +(parent[insertIndex].type === BlockType.Empty), block)
     console.log(block, path)
   }
 }
