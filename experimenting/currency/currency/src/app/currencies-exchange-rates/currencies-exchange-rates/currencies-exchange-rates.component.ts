@@ -17,6 +17,6 @@ export class CurrenciesExchangeRatesComponent implements OnInit {
       this.currencies = currencies;
     })
     this.currenciesService.updateRates()
-    setInterval(()=> this.currenciesService.updateRates(), 60 * 1000)
+    // setInterval(()=> this.currenciesService.updateRates(), 60 * 1000)
   }
 }
