@@ -1,5 +1,26 @@
 :host{
+    .logo{
+        font-size: 2rem;
+        text-align: center;
+        margin: 1rem 0 2rem ;
+    }
+    .mat-expanded{
+        background:#2b4f67;
+    }
+    .expansion-panel{
+        padding-top: .5rem;
+    }
+    .expansion-panel-title{
+        margin-bottom: .5rem;
+        font-size: 1.5rem;
+    }
+    .mat-expansion-panel-spacing{
+        margin: 0;
+    }
     li{
+        margin: 0 0 0 .5rem;
+        padding: 0.5rem 0;
+        list-style-type: none;
         &:active{
             font-size: 20px;
             border: 1px solid black;

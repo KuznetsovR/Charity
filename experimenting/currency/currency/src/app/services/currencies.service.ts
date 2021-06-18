@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { defaultCurrencies } from '../entities/mock';
 import { Currencies } from '../entities/types';
-import * as obj from '../asd'
+// import * as obj from '../asd'
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class CurrenciesService {
       }
       this.changeValue(this._currencies$.value.currentPriceInUsd, 1)
     })
-    obj.func()
+    // obj.func()
     // uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5&convert=USD',
   }
 }

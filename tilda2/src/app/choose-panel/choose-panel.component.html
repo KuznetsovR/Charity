@@ -1,19 +1,14 @@
+<div class="logo">Tilda2Pro</div>
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel class='expansion-panel'>
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title class="expansion-panel-title">
         UI Library
       </mat-panel-title>
-      <mat-panel-description>
-        smth
-      </mat-panel-description>
+
     </mat-expansion-panel-header>
     <ul>
-      <!-- <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Text)'>Type Text</li>
-      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Heading)'>Type Heading</li>
-      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Image)'>Img</li>
-      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Grid)'>Grid (table)</li>
-      <li cdkDrag (cdkDragEnded)="drop($event)" (click)='selectElement(BlockType.Section)'>Section</li> -->
+
       <li draggable="true" (dragstart)="onBlockDrag(BlockType.Text)" (dragend)="onDragEnd()">Type Text</li>
       <li draggable="true" (dragstart)="onBlockDrag(BlockType.Heading)" (dragend)="onDragEnd()">Type Heading</li>
       <li draggable="true" (dragstart)="onBlockDrag(BlockType.Image)" (dragend)="onDragEnd()">Img</li>
@@ -21,14 +16,12 @@
       <li draggable="true" (dragstart)="onBlockDrag(BlockType.Section)" (dragend)="onDragEnd()">Section</li>
     </ul>
   </mat-expansion-panel>
-  <mat-expansion-panel>
+  <mat-expansion-panel class='expansion-panel'>
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title class="expansion-panel-title">
         Templates
       </mat-panel-title>
-      <mat-panel-description>
-        smth
-      </mat-panel-description>
+
     </mat-expansion-panel-header>
     <ul>
       <li>1</li>

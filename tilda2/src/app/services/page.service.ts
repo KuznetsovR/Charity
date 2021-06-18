@@ -33,7 +33,7 @@ export class PageService {
     let parent: ElementBlock[] = sections;
     for (let index of path) {
       const child: ElementBlock = parent[index];
-      if (isSectionBlock(child) || (isGridBlock(child) && index===path.length-1)) {
+      if (isSectionBlock(child) || (isGridBlock(child) && index === path.length - 1)) {
         parent = child.children;
       } else {
         parent[index] = block;
@@ -50,22 +50,22 @@ export class PageService {
     console.log(path)
     const lastIndex = path[path.length - 1]
 
-    for(let index of path.slice(0, path.length-1)){
+    for (let index of path.slice(0, path.length - 1)) {
       const child: ElementBlock = parent[index];
-      if (isSectionBlock(child) || isGridBlock(child)){
+      if (isSectionBlock(child) || isGridBlock(child)) {
         isGrid = isGridBlock(child)
         parent = child.children;
       }
     }
-    if (isGrid){
+    if (isGrid) {
       parent[lastIndex] = new EmptyBlockClass('1234')
-    }else{
+    } else {
       parent.splice(lastIndex, 1)
     }
     this.activeElementService.deselectElement();
   }
-  
-  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock| EmptyBlock)) {
+
+  appendElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock | EmptyBlock)) {
     console.log(block)
     if (isSectionBlock(block)) {
       this._page$.next({
@@ -83,17 +83,21 @@ export class PageService {
       })
     }
   }
-  addElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock| EmptyBlock), path: number[]){
+  addElement(block: (TextBlock | HeadingBlock | ImageBlock | GridBlock | SectionBlock | EmptyBlock), path: number[]) {
     const sections = this._page$.value.sections;
     let parent: ElementBlock[] = sections;
-    const insertIndex = path[path.length - 1]       //insertIndex = last in path
-    for(let index of path.slice(0, path.length-1)){
+    let insertIndex = path[path.length - 1]       //insertIndex = last in path
+    for (let index of path.slice(0, path.length - 1)) {
       const child = parent[index];
-      if (isSectionBlock(child) || isGridBlock(child)){
+      if (isSectionBlock(child) || isGridBlock(child)) {
         parent = child.children;
       }
     }
-    parent.splice(insertIndex, +(parent[insertIndex].type === BlockType.Empty), block)
+    if (parent[insertIndex] === undefined){
+      parent.splice(insertIndex, +(parent[insertIndex-1].type === BlockType.Empty), block)
+    } else{
+      parent.splice(insertIndex, +(parent[insertIndex].type === BlockType.Empty), block)
+    }
     console.log(block, path)
   }
 }

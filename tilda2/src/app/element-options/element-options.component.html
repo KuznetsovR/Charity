@@ -1,4 +1,10 @@
-<ng-container *ngIf="element">
+<div *ngIf="element" class="element-options">
+    <div class="deselect">
+        <button mat-icon-button (click)="deselect()" class="deselect-button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
 <div [ngSwitch]='element.type'>
     <app-heading-options *ngSwitchCase='BlockType.Heading' [block]='element' (optionsChange)="onChange($event)">
     </app-heading-options>
@@ -7,7 +13,5 @@
     <app-grid-options *ngSwitchCase='BlockType.Grid' [block]='element' (optionsChange)="onChange($event)">
     </app-grid-options>
 </div>    
-<button mat-icon-button (click)="deselect()">
-    <mat-icon>close</mat-icon>
-</button>
-</ng-container>
+
+</div>
