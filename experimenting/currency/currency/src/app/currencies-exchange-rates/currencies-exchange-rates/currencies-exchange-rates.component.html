@@ -1,1 +1,6 @@
-<app-currency *ngFor="let currency of currencies.currencies" [currency]="currency"></app-currency>
+<div class="currencyContainer">
+    <app-currency *ngFor="let currency of currencies.currencies" [currency]="currency"></app-currency>
+</div>
+<div class="currencyContainer">
+    <app-currency *ngFor="let cryptoCurrency of currencies.cryptoCurrencies" [currency]="cryptoCurrency"></app-currency>
+</div>

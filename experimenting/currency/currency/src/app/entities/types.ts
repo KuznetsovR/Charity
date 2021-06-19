@@ -1,11 +1,12 @@
 export interface CurrencyListItem {
     imgSrc: string
     imgAlt: string
-    value: number
+    value: number | undefined
     rateToUsd: number
     name: string
 }
 export interface Currencies {
     currencies: CurrencyListItem[]
+    cryptoCurrencies: CurrencyListItem[]
     currentPriceInUsd: number
 }
