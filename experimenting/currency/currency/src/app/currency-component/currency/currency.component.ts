@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CurrencyListItem } from 'src/app/entities/types';
 import { CurrenciesService } from 'src/app/services/currencies.service';
 
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.scss']
+  styleUrls: ['./currency.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrencyComponent implements OnInit {
   @Input() currency!: CurrencyListItem

@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
         uri: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
         qs: {
             start: "1",
-            limit: "15",
+            limit: "20",
             convert: "USD",
         },
         headers: {
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     };
     rp(requestOptions)
     .then((response) => {
-        console.log("API call response:", response.data[0].quote.USD.price);
+        console.log("API call response:", response);
         res.status(201).send(response.data)
     })
     .catch((err) => {

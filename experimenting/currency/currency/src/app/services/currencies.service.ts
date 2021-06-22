@@ -16,14 +16,16 @@ export class CurrenciesService {
   }
   changeValue(value: number, rateToUsd: number = 1) {
     this._currencies$.value.currentPriceInUsd = value * (1/rateToUsd)
-    
+    const currencies = []
     // console.log(this._currencies$.value.currentPriceInUsd)
     for (let currency of this._currencies$.value.currencies) {
-      currency.value = +(this._currencies$.value.currentPriceInUsd * currency.rateToUsd).toFixed(2)
+      this._currencies$.value.currencies[this._currencies$.value.currencies.indexOf(currency)] = {imgSrc: currency.imgSrc, imgAlt: currency.imgAlt,value: +(this._currencies$.value.currentPriceInUsd * currency.rateToUsd).toFixed(2),name: currency.name, rateToUsd: currency.rateToUsd}
     }
     for (let currency of this._currencies$.value.cryptoCurrencies) {
-      currency.value = +(this._currencies$.value.currentPriceInUsd * currency.rateToUsd).toFixed(5)
+      this._currencies$.value.cryptoCurrencies[this._currencies$.value.cryptoCurrencies.indexOf(currency)] = {imgSrc: currency.imgSrc, imgAlt: currency.imgAlt,value: +(this._currencies$.value.currentPriceInUsd * currency.rateToUsd).toFixed(5 ),name: currency.name, rateToUsd: currency.rateToUsd}
     }
+    console.log(this._currencies$.value);
+    
   }
   updateRates() {
     fetch('http://www.floatrates.com/daily/usd.json', { method: "GET" }).then((res) => res.json()).then((res) => {
@@ -35,7 +37,7 @@ export class CurrenciesService {
     })
     fetch('http://localhost:3000/', { method: "GET" }).then((res) => res.json()).then(((res) => {
       const cryptoCurrenciesArr: any[] = res
-      console.log(  );
+      console.log(cryptoCurrenciesArr);
       
       for (let currency of this._currencies$.value.cryptoCurrencies) {
         const cryptoValuta = cryptoCurrenciesArr.find((value: any)=> currency.name === value.name)
@@ -49,7 +51,6 @@ export class CurrenciesService {
         // if (currency.name === "USD") continue
         // currency.rateToUsd = cryptoCurrenciesArr[currency.name.toLowerCase()].rate
       }
-      console.log(this._currencies$.value.cryptoCurrencies);
       this.changeValue(this._currencies$.value.currentPriceInUsd)
     }))
     // obj.func()
