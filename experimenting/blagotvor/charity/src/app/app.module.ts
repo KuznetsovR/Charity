@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BlogItemComponent } from './blog-item/blog-item.component';
-import { StyleDirective } from './directives/style.directive';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BlogItemComponent,
-    StyleDirective
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
