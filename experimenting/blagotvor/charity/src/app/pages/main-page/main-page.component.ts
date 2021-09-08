@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SECTIONS } from '../../constants/sections';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { GetCardModalComponent } from '../get-card-modal/get-card-modal.component';
+import { GetCardModalComponent } from '../../components/get-card-modal/get-card-modal.component';
 
 @Component({
 	selector: 'app-main-page',
