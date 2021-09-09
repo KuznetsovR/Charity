@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '../../interfaces/interfaces';
+import { STORES } from '../../constants/sections';
 
 @Component({
-  selector: 'app-add-page',
-  templateUrl: './add-page.component.html',
-  styleUrls: ['./add-page.component.scss']
+	selector: 'app-add-page',
+	templateUrl: './add-page.component.html',
+	styleUrls: ['./add-page.component.scss']
 })
 export class AddPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	selectedStore: Store | null = null;
+	stores = STORES;
+	constructor() {}
+	selectStore(store: Store): void {
+		this.selectedStore = store;
+	}
+	ngOnInit(): void {}
 }

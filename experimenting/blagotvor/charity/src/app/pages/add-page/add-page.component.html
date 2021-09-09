@@ -1,1 +1,35 @@
 <app-header [currentTab]="'add'"></app-header>
+<div>
+  <div class="action-name">
+    Добавить карту постоянного клиента
+  </div>
+  <div class="input-group">
+    <div class="btn-group dropdown-btn-group" dropdown>
+      <button
+        id="button-animated"
+        dropdownToggle
+        type="button"
+        class="btn dropdown-toggle dropdown-btn"
+        aria-controls="dropdown-animated"
+      >
+        Выберите магазин <span class="caret"></span>
+      </button>
+      <ul
+        id="dropdown-animated"
+        *dropdownMenu
+        class="dropdown-menu w-100"
+        role="menu"
+        aria-labelledby="button-animated"
+      >
+        <li role="menuitem" *ngFor="let store of stores, index as i">
+          <span class="dropdown-item" (click)="selectStore(stores[i])">{{store.name}}</span>
+        </li>
+      </ul>
+    </div>
+    <input type="text" placeholder="Введите номер карты">
+    <input type="text" placeholder="Введите ФИО">
+  </div>
+  <div class="btn-container">
+    <button type="button" class="button btn btn-danger">ДОБАВИТЬ</button>
+  </div>
+</div>
