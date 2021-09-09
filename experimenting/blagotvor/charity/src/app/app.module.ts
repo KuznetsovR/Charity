@@ -18,7 +18,18 @@ import { RemovePageComponent } from './pages/remove-page/remove-page.component';
 import { FindCardPageComponent } from './pages/find-card-page/find-card-page.component';
 
 @NgModule({
-	declarations: [AppComponent, MainPageComponent, SectionComponent, GetCardModalComponent, BarcodeModalComponent, ProfilePageComponent, HeaderComponent, AddPageComponent, RemovePageComponent, FindCardPageComponent],
+	declarations: [
+		AppComponent,
+		MainPageComponent,
+		SectionComponent,
+		GetCardModalComponent,
+		BarcodeModalComponent,
+		ProfilePageComponent,
+		HeaderComponent,
+		AddPageComponent,
+		RemovePageComponent,
+		FindCardPageComponent
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
