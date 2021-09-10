@@ -1,7 +1,7 @@
 <app-header [currentTab]="'remove'"></app-header>
 <div class="add-card-page">
 	<h2 class="page-name">Удалить карту постоянного клиента</h2>
-	<form action="">
+	<form (ngSubmit)="onSubmit()" [formGroup]="removeDataForm">
 		<div class="input-group">
 			<div class="btn-group dropdown-btn-group" dropdown>
 				<button
@@ -32,15 +32,40 @@
 				</div>
 				<ng-template #notSelected> Вы не выбрали магазин </ng-template>
 			</div>
-			<input required type="text" placeholder="Введите номер карты" class="data-input" />
-			<span class="input-hint">Это поле обязательно</span>
-			<!--make them green when validation added and user input is valid-->
-			<input required type="text" placeholder="Введите Причину удаления" class="data-input" />
-			<span class="input-hint">Это поле обязательно</span>
-			<!--make them green when validation added and user input is valid-->
+			<input
+				required
+				type="number"
+				min="0"
+				step="1"
+				placeholder="Введите номер карты"
+				class="data-input"
+				formControlName="cardNumber"
+        (input)="checkLength($event)"
+			/>
+			<span class="input-hint valid" *ngIf="cardNumber.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="cardNumber.invalid" >
+				Это поле невалидно (разрешены только 8-20 цифр)
+			</span>
+			<input
+				required
+				type="text"
+				placeholder="Введите Причину удаления"
+				class="data-input"
+				formControlName="reason"
+			/>
+			<span class="input-hint valid" *ngIf="reason.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="reason.invalid">
+				Это поле невалидно (разрешена только кириллица и пробел)
+			</span>
 		</div>
 		<div class="btn-container">
-			<button type="submit" class="add-button btn btn-danger">ДОБАВИТЬ</button>
+			<button
+				type="submit"
+				class="add-button btn btn-danger"
+				[disabled]="removeDataForm.invalid || selectedStore === null"
+			>
+				ДОБАВИТЬ
+			</button>
 		</div>
 	</form>
 </div>

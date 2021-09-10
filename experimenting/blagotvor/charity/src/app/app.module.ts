@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { RemovePageComponent } from './pages/remove-page/remove-page.component';
 import { FindCardPageComponent } from './pages/find-card-page/find-card-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,7 @@ import { FindCardPageComponent } from './pages/find-card-page/find-card-page.com
 		HeaderComponent,
 		AddPageComponent,
 		RemovePageComponent,
-		FindCardPageComponent
+		FindCardPageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -36,7 +37,8 @@ import { FindCardPageComponent } from './pages/find-card-page/find-card-page.com
 		BrowserAnimationsModule,
 		ButtonsModule.forRoot(),
 		ModalModule.forRoot(),
-		BsDropdownModule.forRoot()
+		BsDropdownModule.forRoot(),
+		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

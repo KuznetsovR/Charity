@@ -21,6 +21,9 @@
 .dropdown-btn{
   border: 1px solid gray;
 }
+.selected-store{
+  margin-top: 15px;
+}
 .selected-store-name{
   font-size: 1.2rem;
   margin-left: 15px;
@@ -44,5 +47,18 @@
 .input-hint{
   text-align: start;
   font-size: 0.7rem;
-  color: gray;
+}
+.valid{
+  color: green;
+}
+.invalid{
+  color: red;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
