@@ -16,16 +16,29 @@ import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { RemovePageComponent } from './pages/remove-page/remove-page.component';
 import { FindCardPageComponent } from './pages/find-card-page/find-card-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-	declarations: [AppComponent, MainPageComponent, SectionComponent, GetCardModalComponent, BarcodeModalComponent, ProfilePageComponent, HeaderComponent, AddPageComponent, RemovePageComponent, FindCardPageComponent],
+	declarations: [
+		AppComponent,
+		MainPageComponent,
+		SectionComponent,
+		GetCardModalComponent,
+		BarcodeModalComponent,
+		ProfilePageComponent,
+		HeaderComponent,
+		AddPageComponent,
+		RemovePageComponent,
+		FindCardPageComponent,
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		ButtonsModule.forRoot(),
 		ModalModule.forRoot(),
-		BsDropdownModule.forRoot()
+		BsDropdownModule.forRoot(),
+		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

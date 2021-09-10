@@ -15,7 +15,7 @@ export class GetCardModalComponent implements OnInit {
 	selectedStore: Store | null = null;
 	stores = STORES;
 
-	constructor(private modalService: BsModalService, public bsModalRef: BsModalRef ) {}
+	constructor(private modalService: BsModalService, public bsModalRef: BsModalRef) {}
 
 	ngOnInit(): void {}
 	selectStore(store: Store): void {
