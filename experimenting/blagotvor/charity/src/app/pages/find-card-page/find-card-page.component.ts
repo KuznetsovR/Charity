@@ -26,6 +26,6 @@ export class FindCardPageComponent implements OnInit {
 	}
 	ngOnInit(): void {}
 	onSubmit(): void {
-		console.log('Form submitted');
+		console.log('Form submitted', this.cardNumber.value, this.selectedStore.name);
 	}
 }

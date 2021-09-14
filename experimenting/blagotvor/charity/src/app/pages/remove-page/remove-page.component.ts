@@ -28,6 +28,6 @@ export class RemovePageComponent implements OnInit {
 		}
 	}
 	onSubmit(): void {
-		console.log('Form submitted');
+		console.log('Form submitted', this.cardNumber.value, this.reason.value, this.selectedStore.name);
 	}
 }

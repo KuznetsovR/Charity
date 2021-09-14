@@ -24,7 +24,7 @@ export class AddPageComponent implements OnInit {
 	ngOnInit(): void {}
 
 	onSubmit(): void {
-		console.log('Form submitted');
+		console.log('Form submitted', this.cardNumber.value, this.name.value, this.selectedStore.name);
 	}
 	checkLength(event: Event): void {
 		if ((event.target as HTMLInputElement).value.length > 21) {
