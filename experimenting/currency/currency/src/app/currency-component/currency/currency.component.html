@@ -1,8 +1,0 @@
-<div class="currency">
-    <img [src]="currency.imgSrc" [alt]="currency.imgAlt" height="30px">
-    <input type="number" (input)="changeValue($event)" [value]="currency.value">
-   <span>{{ currency.name }}</span> 
-</div>
-<div *ngIf="valueIsNan">
-    Enter a number value
-</div>
