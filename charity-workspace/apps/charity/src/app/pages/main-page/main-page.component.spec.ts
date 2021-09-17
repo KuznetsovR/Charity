@@ -3,10 +3,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SECTIONS } from '../../constants/sections';
 import { MainPageComponent } from './main-page.component';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { jest } from '@jest/globals';
 
-TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 describe('MainPageComponent', () => {
 	let component: MainPageComponent;
