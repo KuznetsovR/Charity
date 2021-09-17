@@ -1,0 +1,46 @@
+{
+  "npmScope": "charity-workspace",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "ZTFmOWNkMmMtNWZlYS00MmQ5LTgxZTAtZjU0ZjhhZDgxMTFkfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "charity": {
+      "tags": []
+    },
+    "charity-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "charity"
+      ]
+    }
+  }
+}
