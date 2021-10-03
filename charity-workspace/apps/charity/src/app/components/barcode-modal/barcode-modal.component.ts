@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
 	templateUrl: './barcode-modal.component.html',
 	styleUrls: ['./barcode-modal.component.scss']
 })
-export class BarcodeModalComponent {}
+export class BarcodeModalComponent {
+	barcodeUrl: string;
+}
