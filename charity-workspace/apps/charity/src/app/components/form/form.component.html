@@ -1,0 +1,101 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="findCardDataForm">
+	<div class="input-group">
+		<div class="btn-group dropdown-btn-group" dropdown *ngIf="formInputs?.includes('store')">
+			<button
+				id="button-animated"
+				dropdownToggle
+				type="button"
+				class="btn dropdown-toggle dropdown-btn"
+				aria-controls="dropdown-animated"
+			>
+				Выберите магазин <span class="caret"></span>
+			</button>
+			<ul
+				id="dropdown-animated"
+				*dropdownMenu
+				class="dropdown-menu w-100"
+				role="menu"
+				aria-labelledby="button-animated"
+			>
+				<li role="menuitem" *ngFor="let store of stores, index as i">
+					<span class="dropdown-item" (click)="selectStore(stores[i])">{{store.name}}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="selected-store" *ngIf="formInputs?.includes('store')">
+			<div *ngIf="selectedStore else notSelected">
+				<img [src]="selectedStore.image" alt="store-image" class="store-image" />
+				<span class="selected-store-name">{{selectedStore.name}}</span>
+			</div>
+			<ng-template #notSelected> Вы не выбрали магазин </ng-template>
+		</div>
+
+		<div class="input-wrapper" *ngIf="formInputs?.includes('cardNumber')">
+			<input
+				required
+				type="number"
+				min="0"
+				step="1"
+				placeholder="Введите номер карты"
+				class="data-input"
+				formControlName="cardNumber"
+			/>
+			<span class="input-hint valid" *ngIf="cardNumber.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="cardNumber.invalid">
+				Это поле невалидно (разрешены только 8-20 цифр)
+			</span>
+		</div>
+
+		<div class="input-wrapper" *ngIf="formInputs?.includes('passportNumber')">
+			<input
+				required
+				type="number"
+				min="0"
+				step="1"
+				placeholder="Введите номер паспорта"
+				class="data-input"
+				formControlName="passportNumber"
+			/>
+			<span class="input-hint valid" *ngIf="passportNumber.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="passportNumber.invalid">
+				Это поле невалидно (разрешены только 10 цифр)
+			</span>
+		</div>
+
+		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
+			<input required type="text" placeholder="Введите ФИО" class="data-input" formControlName="name" />
+			<span class="input-hint valid" *ngIf="name.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="name.invalid">
+				Это поле невалидно (разрешена только кириллица и пробел)
+			</span>
+		</div>
+
+		<div class="input-wrapper" *ngIf="formInputs?.includes('reason')">
+			<input
+				required
+				type="text"
+				placeholder="Введите Причину удаления"
+				class="data-input"
+				formControlName="reason"
+			/>
+			<span class="input-hint valid" *ngIf="reason.valid">Это поле валидно</span>
+			<span class="input-hint invalid" *ngIf="reason.invalid">
+				Это поле невалидно (разрешена только кириллица и пробел)
+			</span>
+		</div>
+	</div>
+	<div class="loader-wrapper" *ngIf="!dataIsAvailable">
+		<div class="loader">Loading...</div>
+	</div>
+
+	<div class="btn-container">
+		<button
+			type="submit"
+			class="add-button btn btn-danger"
+			[disabled]="findCardDataForm.invalid || ( formInputs.includes('store') && !selectedStore)"
+		>
+			{{actionName}}
+		</button>
+	</div>
+</form>

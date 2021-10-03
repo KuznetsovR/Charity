@@ -17,6 +17,11 @@ import { AddPageComponent } from './pages/add-page/add-page.component';
 import { RemovePageComponent } from './pages/remove-page/remove-page.component';
 import { FindCardPageComponent } from './pages/find-card-page/find-card-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FormComponent } from './components/form/form.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
+import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +34,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 		HeaderComponent,
 		AddPageComponent,
 		RemovePageComponent,
-		FindCardPageComponent
+		FindCardPageComponent,
+		FormComponent,
+		ErrorPageComponent,
+		FoundCardModalComponent,
+		FoundClientModalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -38,7 +47,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 		ButtonsModule.forRoot(),
 		ModalModule.forRoot(),
 		BsDropdownModule.forRoot(),
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		TabsModule.forRoot(),
+		BrowserModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
