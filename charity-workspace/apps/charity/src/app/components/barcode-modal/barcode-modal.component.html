@@ -1,8 +1,7 @@
 <div class="barcode-modal">
 	<h4>Покажите этот код кассиру</h4>
-	<img
-		class="barcode-image"
-		[src]="barcodeUrl"
-		alt="штрих-код"
-	/>
+	<div class="loader-wrapper" *ngIf="!dataIsAvailable">
+		<div class="loader">Loading...</div>
+	</div>
+		<img class="barcode-image" [src]="barcodeUrl" (load)="dataIsAvailable = true" alt="штрих-код" [hidden]="!dataIsAvailable" />
 </div>
