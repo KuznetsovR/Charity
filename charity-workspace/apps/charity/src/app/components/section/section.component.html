@@ -3,7 +3,7 @@
 	<div class="section-text" *ngIf="section.text else images">{{section.text}}</div>
 	<ng-template #images>
 		<div class="images-container">
-			<ng-container *ngFor="let image of section.images">
+			<ng-container *ngFor="let image of imageUrls">
 				<img [src]="image" alt="image" class="image" />
 			</ng-container>
 		</div>

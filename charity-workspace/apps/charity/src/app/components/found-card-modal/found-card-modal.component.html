@@ -1,1 +1,16 @@
-{{card}}
+<div class="found-card-modal">
+	<div *ngFor="let card of cards">
+    <div>
+      Number: {{card.number}}
+    </div>
+    <div>
+      ID: {{card.id}}
+    </div>
+    <div>
+      Owner: {{card.owner}}
+    </div>
+    <div>
+      Shop: {{card.shop}}
+    </div>
+  </div>
+</div>

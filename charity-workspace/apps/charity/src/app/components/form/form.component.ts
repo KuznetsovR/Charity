@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormControls, RequestBody, Store } from '../../interfaces/interfaces';
-import { STORES } from '../../constants/sections';
 import { ApiService } from '../../services/api.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
@@ -26,11 +25,10 @@ export class FormComponent implements OnInit {
 	controls: FormControls = {};
 
 	selectedStore: Store | null = null;
-	stores = STORES;
-	dataIsAvailable = true;
+	stores: Store[];
 	constructor(private apiService: ApiService, private modalService: BsModalService) {}
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
 		for (const input of this.formInputs) {
 			switch (input) {
 				case 'cardNumber':
@@ -38,7 +36,7 @@ export class FormComponent implements OnInit {
 					this.controls.cardNumber = this.cardNumber;
 					break;
 				case 'passportNumber':
-					this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]);
+					this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]);
 					this.controls.passportNumber = this.passportNumber;
 					break;
 				case 'name':
@@ -72,30 +70,33 @@ export class FormComponent implements OnInit {
 			case 'Добавить клиента':
 				this.apiService.postRequest(`path`, reqBody);
 				break;
+
 			case 'Найти карту':
-				this.dataIsAvailable = false;
-				this.apiService.getRequest(`path`).then((res: string) => {
-					const initialState: ModalOptions = {
-						initialState: {
-							card: res,
-							class: 'modal-lg modal-dialog-centered'
-						}
-					};
-					this.dataIsAvailable = true;
-					this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
-				});
+				this.apiService
+					.getRequest(`/card/?number=${this.cardNumber.value}&shop=${this.selectedStore.id}`)
+					.then((res: string) => {
+						const initialState: ModalOptions = {
+							initialState: {
+								cards: res,
+								class: 'modal-lg modal-dialog-centered'
+							}
+						};
+						this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
+					});
 				break;
+
 			case 'Найти клиента':
-				this.apiService.getRequest(`path`).then((res: string) => {
+				this.apiService.getRequest(`/owner/${this.passportNumber.value}`).then((res: string) => {
 					const initialState: ModalOptions = {
 						initialState: {
-							client: res,
+							clients: res,
 							class: 'modal-lg modal-dialog-centered'
 						}
 					};
 					this.bsModalRef = this.modalService.show(FoundClientModalComponent, initialState);
 				});
 				break;
+
 			case 'Удалить карту':
 				this.apiService.deleteRequest(`path`, reqBody);
 				break;

@@ -22,6 +22,7 @@ import { FormComponent } from './components/form/form.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
+import { StoreSelectComponent } from './components/store-select/store-select.component';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import { FoundClientModalComponent } from './components/found-client-modal/found
 		FormComponent,
 		ErrorPageComponent,
 		FoundCardModalComponent,
-		FoundClientModalComponent
+		FoundClientModalComponent,
+		StoreSelectComponent
 	],
 	imports: [
 		BrowserModule,

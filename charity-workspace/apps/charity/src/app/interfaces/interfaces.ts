@@ -3,9 +3,10 @@ export interface Section {
 	index: number;
 	header: string;
 	text?: string;
-	images?: string[];
+	storesUrl?: string;
 }
 export interface Store {
+	id: number;
 	name: string;
 	image: string;
 }
@@ -23,4 +24,17 @@ export interface RequestBody {
 	name?: string;
 	reason?: string;
 	store?: string;
+}
+export interface Card {
+	owner: number;
+	number: number;
+	shop: number;
+	id: number;
+}
+export interface Client {
+	use_count: number;
+	patronymic: string;
+	surname: string;
+	passport_number: number;
+	name: string;
 }
