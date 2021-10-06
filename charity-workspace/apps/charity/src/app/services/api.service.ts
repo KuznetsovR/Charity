@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestBody, RequestOptions } from '../interfaces/interfaces';
+import { API_PATH } from '../constants/api-path';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +15,7 @@ export class ApiService {
 	constructor(private router: Router) {}
 
 	async doRequest(path: string, options: RequestOptions): Promise<any> {
-		const response = await fetch(path, options);
+		const response = await fetch(API_PATH + path, options);
 		if (response.ok) {
 			return response.json();
 		} else {
