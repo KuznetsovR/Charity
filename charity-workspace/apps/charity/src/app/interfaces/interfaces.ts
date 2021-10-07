@@ -19,11 +19,14 @@ export interface RequestOptions {
 	body?: string;
 }
 export interface RequestBody {
-	cardNumber?: number;
-	passportNumber?: number;
+	number?: number;
+	owner?: number;
 	name?: string;
+	surname?: string;
+	patronymic?: string;
 	reason?: string;
-	store?: string;
+	shop?: number;
+	passport_number?: string;
 }
 export interface Card {
 	owner: number;

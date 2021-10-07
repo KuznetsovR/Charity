@@ -19,9 +19,9 @@
 				class="data-input"
 				formControlName="cardNumber"
 			/>
-			<span class="input-hint valid" *ngIf="cardNumber.valid">Это поле валидно</span>
+			<span class="input-hint valid" *ngIf="cardNumber.valid">Это поле корректно</span>
 			<span class="input-hint invalid" *ngIf="cardNumber.invalid">
-				Это поле невалидно (разрешены только 8-20 цифр)
+				Это поле некорректно (разрешены только 8-20 цифр)
 			</span>
 		</div>
 
@@ -35,19 +35,35 @@
 				class="data-input"
 				formControlName="passportNumber"
 			/>
-			<span class="input-hint valid" *ngIf="passportNumber.valid">Это поле валидно</span>
+			<span class="input-hint valid" *ngIf="passportNumber.valid">Это поле корректно</span>
 			<span class="input-hint invalid" *ngIf="passportNumber.invalid">
-				Это поле невалидно (разрешены только 10 цифр)
+				Это поле некорректно (разрешены только 10 цифр)
 			</span>
 		</div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-			<input required type="text" placeholder="Введите ФИО" class="data-input" formControlName="name" />
-			<span class="input-hint valid" *ngIf="name.valid">Это поле валидно</span>
-			<span class="input-hint invalid" *ngIf="name.invalid">
-				Это поле невалидно (разрешена только кириллица и пробел)
+			<input required type="text" placeholder="Введите Фамилию" class="data-input" formControlName="surname" />
+			<span class="input-hint valid" *ngIf="surname.valid">Это поле корректно</span>
+			<span class="input-hint invalid" *ngIf="surname.invalid">
+				Это поле некорректно (разрешена только кириллица)
 			</span>
 		</div>
+
+    <div class="input-wrapper" *ngIf="formInputs?.includes('name')">
+      <input required type="text" placeholder="Введите Имя" class="data-input" formControlName="name" />
+      <span class="input-hint valid" *ngIf="name.valid">Это поле корректно</span>
+      <span class="input-hint invalid" *ngIf="name.invalid">
+				Это поле некорректно (разрешена только кириллица)
+			</span>
+    </div>
+
+    <div class="input-wrapper" *ngIf="formInputs?.includes('name')">
+      <input required type="text" placeholder="Введите Отчество" class="data-input" formControlName="patronymic" />
+      <span class="input-hint valid" *ngIf="patronymic.valid">Это поле корректно</span>
+      <span class="input-hint invalid" *ngIf="patronymic.invalid">
+				Это поле некорректно (разрешена только кириллица)
+			</span>
+    </div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('reason')">
 			<input
@@ -57,9 +73,9 @@
 				class="data-input"
 				formControlName="reason"
 			/>
-			<span class="input-hint valid" *ngIf="reason.valid">Это поле валидно</span>
+			<span class="input-hint valid" *ngIf="reason.valid">Это поле корректно</span>
 			<span class="input-hint invalid" *ngIf="reason.invalid">
-				Это поле невалидно (разрешена только кириллица и пробел)
+				Это поле некорректно (разрешена только кириллица и пробел)
 			</span>
 		</div>
 	</div>

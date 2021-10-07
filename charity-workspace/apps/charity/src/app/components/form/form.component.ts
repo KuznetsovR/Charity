@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormControls, RequestBody, Store } from '../../interfaces/interfaces';
+import { FormControls, Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
@@ -21,6 +21,8 @@ export class FormComponent implements OnInit {
 	cardNumber: FormControl;
 	passportNumber: FormControl;
 	name: FormControl;
+	surname: FormControl;
+	patronymic: FormControl;
 	reason: FormControl;
 	controls: FormControls = {};
 
@@ -40,8 +42,12 @@ export class FormComponent implements OnInit {
 					this.controls.passportNumber = this.passportNumber;
 					break;
 				case 'name':
-					this.name = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
+					this.name = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
+					this.surname = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
+					this.patronymic = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
 					this.controls.name = this.name;
+					this.controls.surname = this.surname;
+					this.controls.patronymic = this.patronymic;
 					break;
 				case 'reason':
 					this.reason = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
@@ -56,19 +62,21 @@ export class FormComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		const reqBody: RequestBody = {};
-		for (const control of Object.entries(this.controls)) {
-			reqBody[control[0]] = control[1].value;
-		}
-		if (this.formInputs?.includes('store')) {
-			reqBody.store = this.selectedStore.name;
-		}
 		switch (this.action) {
 			case 'Добавить карту':
-				this.apiService.postRequest(`path`, reqBody);
+				this.apiService.postRequest(`/card/`, {
+					number: this.cardNumber.value,
+					owner: this.passportNumber.value,
+					shop: this.selectedStore.id
+				});
 				break;
 			case 'Добавить клиента':
-				this.apiService.postRequest(`path`, reqBody);
+				this.apiService.postRequest('/owner/', {
+					passport_number: this.passportNumber.value,
+					name: this.name.value,
+					surname: this.surname.value,
+					patronymic: this.patronymic.value
+				});
 				break;
 
 			case 'Найти карту':
@@ -98,10 +106,10 @@ export class FormComponent implements OnInit {
 				break;
 
 			case 'Удалить карту':
-				this.apiService.deleteRequest(`path`, reqBody);
+				this.apiService.deleteRequest(`path`, {});
 				break;
 			case 'Удалить клиента':
-				this.apiService.deleteRequest(`path`, reqBody);
+				this.apiService.deleteRequest(`path`, {});
 				break;
 		}
 	}
