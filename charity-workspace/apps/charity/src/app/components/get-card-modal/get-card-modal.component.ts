@@ -24,7 +24,8 @@ export class GetCardModalComponent implements OnInit {
 		this.bsModalRef.hide();
 		const initialState: ModalOptions = {
 			initialState: {
-				class: 'modal-lg modal-dialog-centered'
+				class: 'modal-lg modal-dialog-centered',
+				storeId: this.selectedStore.id
 			}
 		};
 		this.bsModalRef = this.modalService.show(BarcodeModalComponent, initialState);

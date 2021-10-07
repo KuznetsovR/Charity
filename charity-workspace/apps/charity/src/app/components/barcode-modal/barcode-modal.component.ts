@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { API_PATH } from '../../constants/api-path';
 
 @Component({
 	selector: 'app-barcode-modal',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class BarcodeModalComponent implements OnInit {
 	dataIsAvailable = false;
 	barcodeUrl: string;
+	storeId: number;
 	ngOnInit(): void {
-		this.barcodeUrl = 'http://4799-82-151-196-167.ngrok.io/code?shop=1';
+		this.barcodeUrl = `${API_PATH}/code?shop=${this.storeId}`;
 	}
 }
