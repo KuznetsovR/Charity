@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Store } from '../../interfaces/interfaces';
-import { STORES } from '../../constants/sections';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { BarcodeModalComponent } from '../barcode-modal/barcode-modal.component';
+import { ApiService } from '../../services/api.service';
 
 @Component({
 	selector: 'app-get-card-modal',
@@ -11,22 +11,26 @@ import { BarcodeModalComponent } from '../barcode-modal/barcode-modal.component'
 	styleUrls: ['./get-card-modal.component.scss'],
 	providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
-export class GetCardModalComponent {
+export class GetCardModalComponent implements OnInit {
 	selectedStore: Store | null = null;
-	stores = STORES;
+	stores: Store[];
 
-	constructor(private modalService: BsModalService, public bsModalRef: BsModalRef) {}
-
-	selectStore(store: Store): void {
-		this.selectedStore = store;
+	constructor(private modalService: BsModalService, private bsModalRef: BsModalRef, private apiService: ApiService) {}
+	async ngOnInit(): Promise<void> {
+		this.stores = await this.apiService.getRequest('/shop/');
 	}
-	async getCard(): Promise<void> {
+
+	getCard(): void {
 		this.bsModalRef.hide();
 		const initialState: ModalOptions = {
 			initialState: {
-				class: 'modal-lg modal-dialog-centered'
+				class: 'modal-lg modal-dialog-centered',
+				storeId: this.selectedStore.id
 			}
 		};
 		this.bsModalRef = this.modalService.show(BarcodeModalComponent, initialState);
+	}
+	selectStore(store: Store): void {
+		this.selectedStore = store;
 	}
 }

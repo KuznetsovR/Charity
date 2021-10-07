@@ -1,0 +1,23 @@
+<div class="btn-group dropdown-btn-group" dropdown>
+	<button
+		id="button-animated"
+		dropdownToggle
+		type="button"
+		class="btn dropdown-toggle dropdown-btn"
+		aria-controls="dropdown-animated"
+	>
+		Выберите магазин <span class="caret"></span>
+	</button>
+	<ul id="dropdown-animated" *dropdownMenu class="dropdown-menu w-100" role="menu" aria-labelledby="button-animated">
+		<ng-container *ngIf="stores else spinner">
+			<li role="menuitem" *ngFor="let store of stores">
+				<span class="dropdown-item" (click)="selectStore(store)">{{store.name | titlecase}}</span>
+			</li>
+		</ng-container>
+		<ng-template #spinner>
+			<div class="loader-wrapper">
+				<div class="loader">Loading...</div>
+			</div>
+		</ng-template>
+	</ul>
+</div>

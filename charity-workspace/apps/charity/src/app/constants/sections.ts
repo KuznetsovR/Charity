@@ -14,12 +14,7 @@ export const SECTIONS: readonly Section[] = [
 	{
 		index: 2,
 		header: 'Наши партнеры',
-		images: [
-			'https://media.rbcdn.ru/media/upload_tmp/2018/1458359505.jpg',
-			'https://logosklad.ru/photo/logos/616/1582597280.jpg',
-			'https://logosklad.ru/photo/logos/578/1532440894.jpg',
-			'https://play-lh.googleusercontent.com/iCwizB292Wk1N0F5Q78B9ZbO5UGhJLXfvmRWt7bUjrxtrcha8sVqO6e67haX_blMLw'
-		]
+		storesUrl: '/shop/'
 	},
 	{
 		index: 3,
@@ -28,11 +23,12 @@ export const SECTIONS: readonly Section[] = [
 	}
 ];
 export const STORES: readonly Store[] = [
-	{ name: 'Пятерочка', image: 'https://media.rbcdn.ru/media/upload_tmp/2018/1458359505.jpg' },
-	{ name: 'Перекресток', image: 'https://logosklad.ru/photo/logos/616/1582597280.jpg' },
-	{ name: 'Карусель', image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg' },
+	{ name: 'Пятерочка', image: 'https://media.rbcdn.ru/media/upload_tmp/2018/1458359505.jpg', id: 1 },
+	{ name: 'Перекресток', image: 'https://logosklad.ru/photo/logos/616/1582597280.jpg', id: 2 },
+	{ name: 'Карусель', image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg', id: 3 },
 	{
 		name: 'Ашан ',
-		image: 'https://play-lh.googleusercontent.com/iCwizB292Wk1N0F5Q78B9ZbO5UGhJLXfvmRWt7bUjrxtrcha8sVqO6e67haX_blMLw'
+		image: 'https://play-lh.googleusercontent.com/iCwizB292Wk1N0F5Q78B9ZbO5UGhJLXfvmRWt7bUjrxtrcha8sVqO6e67haX_blMLw',
+		id: 4
 	}
 ];

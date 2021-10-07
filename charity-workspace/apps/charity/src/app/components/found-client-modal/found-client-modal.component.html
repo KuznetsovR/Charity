@@ -1,1 +1,7 @@
-<p>found-client-modal works!</p>
+<div class="found-client-modal">
+	<div *ngFor="let client of clients">
+		<div>Name: {{client.name}}</div>
+		<div>Surname: {{client.surname}}</div>
+		<div>Patronymic: {{client.patronymic}}</div>
+	</div>
+</div>
