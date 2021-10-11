@@ -37,17 +37,8 @@ describe('FormComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it(`stores has default value`, () => {
-		expect(component.stores).toEqual(STORES);
-	});
-
-	it(`dataIsAvailable has default value`, () => {
-		expect(component.dataIsAvailable).toEqual(true);
-	});
-
 	describe('selectStore', () => {
 		it('can select store', () => {
-			component.selectStore({ name: 'Карусель', image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg' });
 			expect(component.selectedStore).toEqual({
 				name: 'Карусель',
 				image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg'

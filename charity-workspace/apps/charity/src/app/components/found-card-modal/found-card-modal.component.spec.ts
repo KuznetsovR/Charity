@@ -1,25 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AppComponent } from './app.component';
+import { FoundCardModalComponent } from './found-card-modal.component';
 
-describe('AppComponent', () => {
-	let component: AppComponent;
-	let fixture: ComponentFixture<AppComponent>;
+describe('FoundCardModalComponent', () => {
+	let component: FoundCardModalComponent;
+	let fixture: ComponentFixture<FoundCardModalComponent>;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			schemas: [NO_ERRORS_SCHEMA],
-			declarations: [AppComponent]
+			declarations: [FoundCardModalComponent]
 		});
-		fixture = TestBed.createComponent(AppComponent);
+		fixture = TestBed.createComponent(FoundCardModalComponent);
 		component = fixture.componentInstance;
 	});
 
 	it('can load instance', () => {
 		expect(component).toBeTruthy();
-	});
-
-	it(`title has default value`, () => {
-		expect(component.title).toEqual(`charity`);
 	});
 });

@@ -1,25 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AppComponent } from './app.component';
+import { FoundClientModalComponent } from './found-client-modal.component';
 
-describe('AppComponent', () => {
-	let component: AppComponent;
-	let fixture: ComponentFixture<AppComponent>;
+describe('FoundClientModalComponent', () => {
+	let component: FoundClientModalComponent;
+	let fixture: ComponentFixture<FoundClientModalComponent>;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			schemas: [NO_ERRORS_SCHEMA],
-			declarations: [AppComponent]
+			declarations: [FoundClientModalComponent]
 		});
-		fixture = TestBed.createComponent(AppComponent);
+		fixture = TestBed.createComponent(FoundClientModalComponent);
 		component = fixture.componentInstance;
 	});
 
 	it('can load instance', () => {
 		expect(component).toBeTruthy();
-	});
-
-	it(`title has default value`, () => {
-		expect(component.title).toEqual(`charity`);
 	});
 });
