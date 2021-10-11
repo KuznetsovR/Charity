@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { STORES } from '../../constants/sections';
 import { FormComponent } from './form.component';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
-import { FormControl, Validators } from '@angular/forms';
 
 describe('FormComponent', () => {
 	let component: FormComponent;
