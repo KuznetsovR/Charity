@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { STORES } from '../../constants/sections';
 import { FormComponent } from './form.component';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
-import { FormControl, Validators } from '@angular/forms';
 
 describe('FormComponent', () => {
 	let component: FormComponent;
@@ -37,17 +34,8 @@ describe('FormComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it(`stores has default value`, () => {
-		expect(component.stores).toEqual(STORES);
-	});
-
-	it(`dataIsAvailable has default value`, () => {
-		expect(component.dataIsAvailable).toEqual(true);
-	});
-
 	describe('selectStore', () => {
 		it('can select store', () => {
-			component.selectStore({ name: 'Карусель', image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg' });
 			expect(component.selectedStore).toEqual({
 				name: 'Карусель',
 				image: 'https://logosklad.ru/photo/logos/578/1532440894.jpg'

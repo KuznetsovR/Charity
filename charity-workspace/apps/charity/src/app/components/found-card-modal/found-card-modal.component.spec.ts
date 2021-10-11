@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { BarcodeModalComponent } from './barcode-modal.component';
+import { FoundCardModalComponent } from './found-card-modal.component';
 
-
-describe('BarcodeModalComponent', () => {
-	let component: BarcodeModalComponent;
-	let fixture: ComponentFixture<BarcodeModalComponent>;
+describe('FoundCardModalComponent', () => {
+	let component: FoundCardModalComponent;
+	let fixture: ComponentFixture<FoundCardModalComponent>;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			schemas: [NO_ERRORS_SCHEMA],
-			declarations: [BarcodeModalComponent]
+			declarations: [FoundCardModalComponent]
 		});
-		fixture = TestBed.createComponent(BarcodeModalComponent);
+		fixture = TestBed.createComponent(FoundCardModalComponent);
 		component = fixture.componentInstance;
 	});
 
