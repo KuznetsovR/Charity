@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from '../pages/main-page/main-page.component';
 import { ProfilePageComponent } from '../pages/profile-page/profile-page.component';
 import { AddPageComponent } from '../pages/add-page/add-page.component';
 import { RemovePageComponent } from '../pages/remove-page/remove-page.component';
@@ -10,12 +9,8 @@ import { ErrorPageComponent } from '../pages/error-page/error-page.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/main',
+		redirectTo: '/profile',
 		pathMatch: 'full'
-	},
-	{
-		path: 'main',
-		component: MainPageComponent
 	},
 	{
 		path: 'profile',
