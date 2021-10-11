@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'app-add-page',
 	templateUrl: './add-page.component.html',
-	styleUrls: ['./add-page.component.scss']
+	styleUrls: ['./add-page.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddPageComponent {}

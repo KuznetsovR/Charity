@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Store } from '../../interfaces/interfaces';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -9,7 +9,8 @@ import { ApiService } from '../../services/api.service';
 	selector: 'app-get-card-modal',
 	templateUrl: './get-card-modal.component.html',
 	styleUrls: ['./get-card-modal.component.scss'],
-	providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
+	providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GetCardModalComponent implements OnInit {
 	selectedStore: Store | null = null;
