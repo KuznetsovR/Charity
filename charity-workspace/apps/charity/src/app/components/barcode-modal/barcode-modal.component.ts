@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { API_PATH } from '../../constants/api-path';
 
 @Component({
 	selector: 'app-barcode-modal',
 	templateUrl: './barcode-modal.component.html',
-	styleUrls: ['./barcode-modal.component.scss']
+	styleUrls: ['./barcode-modal.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarcodeModalComponent implements OnInit {
 	dataIsAvailable = false;

@@ -1,11 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 
 @Component({
 	selector: 'app-store-select',
 	templateUrl: './store-select.component.html',
-	styleUrls: ['./store-select.component.scss']
+	styleUrls: ['./store-select.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StoreSelectComponent implements OnInit {
 	@Output() store = new EventEmitter<Store>();

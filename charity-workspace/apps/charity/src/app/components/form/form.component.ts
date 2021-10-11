@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormControls, Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
@@ -9,7 +9,8 @@ import { FoundClientModalComponent } from '../found-client-modal/found-client-mo
 @Component({
 	selector: 'app-form',
 	templateUrl: './form.component.html',
-	styleUrls: ['./form.component.scss']
+	styleUrls: ['./form.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnInit {
 	@Input() formInputs: string[];
