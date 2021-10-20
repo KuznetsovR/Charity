@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="findCardDataForm">
+<form (ngSubmit)="onSubmit()" [formGroup]="dataForm">
 	<div class="input-group">
 		<app-store-select *ngIf="formInputs.includes('store')" (store)="selectStore($event)"></app-store-select>
 		<div class="selected-store" *ngIf="formInputs?.includes('store')">
@@ -18,14 +18,19 @@
 				placeholder="Введите номер карты"
 				class="data-input"
 				formControlName="cardNumber"
+				popover="Номер карты содержит 8-20 цифр "
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && cardNumber.invalid"
 			/>
-			<span class="input-hint valid" *ngIf="cardNumber.valid">Это поле корректно</span>
-			<span class="input-hint invalid" *ngIf="cardNumber.invalid">
-				Это поле некорректно (разрешены только 8-20 цифр)
-			</span>
+			<!--  + (cardNumber.valid? '✔️': '❌') -->
 		</div>
 
-		<div class="input-wrapper" *ngIf="formInputs?.includes('passportNumber')">
+		<div
+			class="input-wrapper"
+			*ngIf="formInputs?.includes('passportNumber')"
+			title="Номер паспорта содержит 10 цифр"
+		>
 			<input
 				required
 				type="number"
@@ -34,36 +39,54 @@
 				placeholder="Введите номер паспорта"
 				class="data-input"
 				formControlName="passportNumber"
+				popover="Номер паспорта содержит 10 цифр "
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
 			/>
-			<span class="input-hint valid" *ngIf="passportNumber.valid">Это поле корректно</span>
-			<span class="input-hint invalid" *ngIf="passportNumber.invalid">
-				Это поле некорректно (разрешены только 10 цифр)
-			</span>
 		</div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-			<input required type="text" placeholder="Введите Фамилию" class="data-input" formControlName="surname" />
-			<span class="input-hint valid" *ngIf="surname.valid">Это поле корректно</span>
-			<span class="input-hint invalid" *ngIf="surname.invalid">
-				Это поле некорректно (разрешена только кириллица)
-			</span>
+			<input
+				required
+				type="text"
+				placeholder="Введите Фамилию"
+				class="data-input"
+				formControlName="surname"
+				popover="Фамилия может состоять только из кириллицы"
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && surname.invalid"
+			/>
 		</div>
 
-    <div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-      <input required type="text" placeholder="Введите Имя" class="data-input" formControlName="name" />
-      <span class="input-hint valid" *ngIf="name.valid">Это поле корректно</span>
-      <span class="input-hint invalid" *ngIf="name.invalid">
-				Это поле некорректно (разрешена только кириллица)
-			</span>
-    </div>
+		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
+			<input
+				required
+				type="text"
+				placeholder="Введите Имя"
+				class="data-input"
+				formControlName="name"
+				popover="Имя может состоять только из кириллицы"
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && name.invalid"
+			/>
+		</div>
 
-    <div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-      <input required type="text" placeholder="Введите Отчество" class="data-input" formControlName="patronymic" />
-      <span class="input-hint valid" *ngIf="patronymic.valid">Это поле корректно</span>
-      <span class="input-hint invalid" *ngIf="patronymic.invalid">
-				Это поле некорректно (разрешена только кириллица)
-			</span>
-    </div>
+		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
+			<input
+				required
+				type="text"
+				placeholder="Введите Отчество"
+				class="data-input"
+				formControlName="patronymic"
+				popover="Отчество может состоять только из кириллицы"
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && patronymic.invalid"
+			/>
+		</div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('reason')">
 			<input
@@ -72,20 +95,14 @@
 				placeholder="Введите Причину удаления"
 				class="data-input"
 				formControlName="reason"
+				popover="Причина может содержать кириллицу, цифры и пробелы"
+				triggers="focus:focusout"
+				placement="left"
+				[class.invalid]="userTriedToSendInvalid && reason.invalid"
 			/>
-			<span class="input-hint valid" *ngIf="reason.valid">Это поле корректно</span>
-			<span class="input-hint invalid" *ngIf="reason.invalid">
-				Это поле некорректно (разрешена только кириллица и пробел)
-			</span>
 		</div>
 	</div>
 	<div class="btn-container">
-		<button
-			type="submit"
-			class="add-button btn btn-danger"
-			[disabled]="findCardDataForm.invalid || ( formInputs.includes('store') && !selectedStore)"
-		>
-			{{actionName}}
-		</button>
+		<button type="submit" class="add-button btn">{{actionName}}</button>
 	</div>
 </form>
