@@ -18,7 +18,7 @@ export class FormComponent implements OnInit {
 	@Input() action: string;
 	bsModalRef?: BsModalRef;
 
-	findCardDataForm: FormGroup;
+	dataForm: FormGroup;
 	cardNumber: FormControl;
 	passportNumber: FormControl;
 	name: FormControl;
@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
 	patronymic: FormControl;
 	reason: FormControl;
 	controls: FormControls = {};
+	userTriedToSendInvalid = false;
 
 	selectedStore: Store | null = null;
 	stores: Store[];
@@ -51,18 +52,31 @@ export class FormComponent implements OnInit {
 					this.controls.patronymic = this.patronymic;
 					break;
 				case 'reason':
-					this.reason = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
+					this.reason = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё\d ]+$/i)]);
 					this.controls.reason = this.reason;
 			}
 		}
-		this.findCardDataForm = new FormGroup(this.controls);
+		this.dataForm = new FormGroup(this.controls);
 	}
 
 	selectStore(store: Store): void {
 		this.selectedStore = store;
 	}
 
+	trimForm(): void {
+		Object.keys(this.dataForm.controls).forEach((key) => {
+			return typeof this.dataForm.get(key).value === 'string'
+				? this.dataForm.get(key).setValue(this.dataForm.get(key).value.trim())
+				: null;
+		});
+	}
+
 	onSubmit(): void {
+		this.trimForm();
+		if (this.dataForm.invalid) {
+			this.userTriedToSendInvalid = true;
+			return;
+		}
 		switch (this.action) {
 			case 'Добавить карту':
 				this.apiService.postRequest(`/card/`, {
