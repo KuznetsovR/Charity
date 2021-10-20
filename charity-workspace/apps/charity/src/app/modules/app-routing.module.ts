@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfilePageComponent } from '../pages/profile-page/profile-page.component';
 import { AddPageComponent } from '../pages/add-page/add-page.component';
 import { RemovePageComponent } from '../pages/remove-page/remove-page.component';
-import { FindCardPageComponent } from '../pages/find-card-page/find-card-page.component';
+import { FindPageComponent } from '../pages/find-page/find-page.component';
 import { ErrorPageComponent } from '../pages/error-page/error-page.component';
 
 const routes: Routes = [
@@ -26,7 +26,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'find',
-		component: FindCardPageComponent
+		component: FindPageComponent
 	},
 	{
 		path: 'error',

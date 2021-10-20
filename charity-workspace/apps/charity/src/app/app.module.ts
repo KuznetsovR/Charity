@@ -11,7 +11,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { RemovePageComponent } from './pages/remove-page/remove-page.component';
-import { FindCardPageComponent } from './pages/find-card-page/find-card-page.component';
+import { FindPageComponent } from './pages/find-page/find-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormComponent } from './components/form/form.component';
@@ -19,6 +19,8 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
 import { StoreSelectComponent } from './components/store-select/store-select.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { DataTableComponent } from './components/data-table/data-table.component';
 
 @NgModule({
 	declarations: [
@@ -27,12 +29,13 @@ import { StoreSelectComponent } from './components/store-select/store-select.com
 		HeaderComponent,
 		AddPageComponent,
 		RemovePageComponent,
-		FindCardPageComponent,
+		FindPageComponent,
 		FormComponent,
 		ErrorPageComponent,
 		FoundCardModalComponent,
 		FoundClientModalComponent,
-		StoreSelectComponent
+		StoreSelectComponent,
+		DataTableComponent
 	],
 	imports: [
 		BrowserModule,
@@ -43,7 +46,8 @@ import { StoreSelectComponent } from './components/store-select/store-select.com
 		BsDropdownModule.forRoot(),
 		ReactiveFormsModule,
 		TabsModule.forRoot(),
-		BrowserModule
+		BrowserModule,
+		PopoverModule.forRoot()
 	],
 	providers: [],
 	bootstrap: [AppComponent]
