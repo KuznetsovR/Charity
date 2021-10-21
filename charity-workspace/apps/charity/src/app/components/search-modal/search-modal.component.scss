@@ -1,19 +1,42 @@
 @import './../../../styles/colors';
 .search-modal{
-  padding: 20px;
+  padding: 20px 60px;
+  text-align: center;
+}
+.info{
+  font-size: .7rem;
+  color: gray;
+  text-align: end;
+  width: 50%;
+  margin-left: 50%;
+}
+.search-input{
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid gray;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  &:focus{
+    outline: none;
+  }
+}
+.search-form{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.store-select-wrapper{
+  width: 100%;
+}
+.btn-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
 }
 .find-btn{
   background-color: $light-blue;
   color: white;
-}
-.input-group{
-  padding: 10px;
-}
-.search-form{
-  width: 65%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
