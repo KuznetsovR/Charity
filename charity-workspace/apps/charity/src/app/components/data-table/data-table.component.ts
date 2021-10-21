@@ -20,7 +20,10 @@ export class DataTableComponent {
 	openSearchModal(): void {
 		const initialState: ModalOptions = {
 			class: 'modal-dialog-centered',
-			animated: true
+			animated: true,
+			initialState: {
+				dataType: this.dataType
+			}
 		};
 		this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
 	}
