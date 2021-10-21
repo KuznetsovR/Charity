@@ -1,0 +1,19 @@
+@import './../../../styles/colors';
+.search-modal{
+  padding: 20px;
+}
+.find-btn{
+  background-color: $light-blue;
+  color: white;
+}
+.input-group{
+  padding: 10px;
+}
+.search-form{
+  width: 65%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
