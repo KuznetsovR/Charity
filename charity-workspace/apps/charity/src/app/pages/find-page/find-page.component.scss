@@ -1,9 +1,12 @@
+@import './../../../styles/colors';
+
 .add-card-page {
 	text-align: center;
 }
 .page-name {
   margin: 30px;
 }
+
 ::ng-deep {
   .nav.nav-tabs {
     margin-top: 20px;
