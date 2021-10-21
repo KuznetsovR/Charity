@@ -29,9 +29,9 @@ export interface RequestBody {
 	passport_number?: string;
 }
 export interface Card {
-	owner: number;
+	owner: string;
 	number: number;
-	shop: number;
+	shop: string;
 	id: number;
 }
 export interface Client {
