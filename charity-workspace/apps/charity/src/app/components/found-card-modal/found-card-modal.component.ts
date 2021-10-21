@@ -8,5 +8,5 @@ import { Card } from '../../interfaces/interfaces';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundCardModalComponent {
-	cards: Card[];
+	data: Card;
 }

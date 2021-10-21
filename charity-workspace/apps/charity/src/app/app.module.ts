@@ -21,6 +21,7 @@ import { FoundClientModalComponent } from './components/found-client-modal/found
 import { StoreSelectComponent } from './components/store-select/store-select.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { DataTableComponent } from './components/data-table/data-table.component';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { DataTableComponent } from './components/data-table/data-table.component
 		FoundCardModalComponent,
 		FoundClientModalComponent,
 		StoreSelectComponent,
-		DataTableComponent
+		DataTableComponent,
+		SearchModalComponent
 	],
 	imports: [
 		BrowserModule,

@@ -8,5 +8,5 @@ import { Client } from '../../interfaces/interfaces';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundClientModalComponent {
-	clients: Client[];
+	data: Client;
 }

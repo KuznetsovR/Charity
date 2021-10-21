@@ -1,0 +1,43 @@
+@import './../../../styles/colors';
+.data-table-page {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+}
+.table-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+table {
+	border-collapse: collapse;
+	min-width: 70vw;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+table td,
+th {
+	border: 1px solid #cccccc;
+	padding: 8px;
+}
+table thead tr {
+	background-color: $light-blue;
+	color: #ffffff;
+	text-align: left;
+}
+.search-button {
+	margin-bottom: 10px;
+	height: 30px;
+	width: 100px;
+	background-color: $light-blue;
+	color: white;
+	padding: 0;
+}
+table td.details-cell {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0;
+	font-size: 0.9rem;
+  cursor: pointer;
+}
+table td.details-cell:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

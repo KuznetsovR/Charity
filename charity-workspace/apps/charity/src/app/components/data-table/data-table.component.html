@@ -1,0 +1,30 @@
+<div class="data-table-page">
+	<div class="table-wrapper">
+		<button type="submit" class="search-button btn" (click)="openSearchModal()">Поиск</button>
+		<table>
+			<thead>
+				<tr>
+					<th *ngFor="let dataKey of dataKeys">{{dataKey}}</th>
+					<th>Подробнее</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ng-container *ngIf="dataType === 'card' else clientTable">
+					<tr *ngFor="let dataRow of data">
+						<td>{{dataRow.number}}</td>
+						<td>{{dataRow.owner}}</td>
+						<td>{{dataRow.shop}}</td>
+						<td class="details-cell" (click)="openModal(dataRow)">Подробнее</td>
+					</tr>
+				</ng-container>
+				<ng-template #clientTable>
+					<tr *ngFor="let dataRow of data">
+						<td>{{dataRow.passport_number}}</td>
+						<td>{{dataRow.name}} {{dataRow.surname}} {{dataRow.patronymic}}</td>
+            <td class="details-cell" (click)="openModal(dataRow)">Подробнее</td>
+          </tr>
+				</ng-template>
+			</tbody>
+		</table>
+	</div>
+</div>
