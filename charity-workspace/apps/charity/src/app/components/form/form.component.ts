@@ -32,7 +32,7 @@ export class FormComponent implements OnInit {
 	stores: Store[];
 	constructor(private apiService: ApiService, private modalService: BsModalService) {}
 
-	async ngOnInit(): Promise<void> {
+	ngOnInit(): void {
 		for (const input of this.formInputs) {
 			switch (input) {
 				case 'cardNumber':

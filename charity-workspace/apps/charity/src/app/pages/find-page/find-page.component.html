@@ -3,16 +3,11 @@
   <tabset>
     <tab heading="Найти карту">
       <h2 class="page-name">Найти карту постоянного клиента</h2>
-      <table>
-        <th *ngFor="let cardKey of cardKeys">{{cardKey}}</th>
-        <tr *ngFor="let card of cards">
-          <td>{{card.shop}}</td><td>{{card.number}}</td><td>{{card.owner}}</td>
-        </tr>
-      </table>
+      <app-data-table [data]="cards" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
 		</tab>
 		<tab heading="Найти клиента">
 			<h2 class="page-name">Найти постоянного клиента</h2>
-			<app-form [formInputs]="['passportNumber']" [actionName]="'Найти'" [action]="'Найти клиента'"></app-form>
+      <app-data-table [data]="clients" [dataKeys]="clientKeys" [dataType]="'client'"></app-data-table>
 		</tab>
 	</tabset>
 </div>

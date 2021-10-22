@@ -1,0 +1,47 @@
+@import './../../../styles/colors';
+.data-table-page {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+}
+.table-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+table {
+	text-align: left;
+	border-collapse: collapse;
+	min-width: 70vw;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	td,
+	th {
+		padding: 8px;
+	}
+	thead tr {
+		background-color: $light-blue;
+		color: #ffffff;
+	}
+	tbody {
+		tr {
+			cursor: pointer;
+			&:nth-of-type(even) {
+				background-color: #eff7ff;
+			}
+			&:last-of-type {
+				border-bottom: 2px solid $very-light-blue;
+			}
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.03);
+			}
+		}
+	}
+}
+.search-button {
+	margin-bottom: 10px;
+	height: 40px;
+	width: 130px;
+	background-color: $light-blue;
+	color: white;
+	padding: 0;
+}

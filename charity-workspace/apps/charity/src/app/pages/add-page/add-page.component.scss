@@ -1,3 +1,5 @@
+@import './../../../styles/colors';
+
 .add-card-page {
 	text-align: center;
 }
@@ -9,5 +11,11 @@
 	.nav.nav-tabs {
 		margin-top: 20px;
 		justify-content: center;
+    .nav-link{
+      color: rgba(0,0,0,.6);
+    }
+    .nav-link.active{
+      color: $light-blue
+    }
 	}
 }
