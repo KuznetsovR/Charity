@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from '../found-client-modal/found-client-modal.component';
 import { SearchModalComponent } from '../search-modal/search-modal.component';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-data-table',
@@ -11,12 +12,11 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
 	styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent {
-	@Input() data: Card[] | Client[];
+	@Input() data: Observable<Card[]> | Observable<Client[]>;
 	@Input() dataKeys: string[];
 	@Input() dataType: string;
 	bsModalRef?: BsModalRef;
 	constructor(private modalService: BsModalService) {}
-
 	openSearchModal(): void {
 		const initialState: ModalOptions = {
 			class: 'modal-dialog-centered',

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Card, Client } from '../../interfaces/interfaces';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 @Component({
 	selector: 'app-find-page',
 	templateUrl: './find-page.component.html',
@@ -7,37 +9,9 @@ import { Card, Client } from '../../interfaces/interfaces';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FindPageComponent {
-	cards: Card[] = [
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 1231233219020193, owner: 'aboba mikhail petrovich', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 },
-		{ number: 123, owner: 'aboba', shop: 'pyaterochka', id: 123 }
-	];
-	clients: Client[] = [
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' },
-		{ use_count: 10, patronymic: 'asd', surname: 'ewq', passport_number: 1020112342, name: 'string' }
-	];
+	cards$: Observable<Card[]> = this.store.select('cards');
+	constructor(private store: Store<{ cards: Card[]; clients: Client[] }>) {}
+	clients$: Observable<Client[]> = this.store.select('clients');
 	cardKeys = ['Номер', 'Владелец', 'Магазин'];
 	clientKeys = ['Номер паспорта', 'ФИО'];
 }

@@ -41,3 +41,7 @@ export interface Client {
 	passport_number: number;
 	name: string;
 }
+export interface AppState {
+	cardsData: readonly Card[];
+	clientsData: readonly Client[];
+}
