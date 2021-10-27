@@ -22,6 +22,11 @@ import { StoreSelectComponent } from './components/store-select/store-select.com
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import { StoreModule } from '@ngrx/store';
+import { cardsReducer } from './reducers/cards.reducer';
+import { clientsReducer } from './reducers/clients.reducer';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
 	declarations: [
@@ -49,7 +54,13 @@ import { SearchModalComponent } from './components/search-modal/search-modal.com
 		ReactiveFormsModule,
 		TabsModule.forRoot(),
 		BrowserModule,
-		PopoverModule.forRoot()
+		PopoverModule.forRoot(),
+		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer }),
+		StoreDevtoolsModule.instrument({
+			maxAge: 25,
+			logOnly: environment.production,
+			autoPause: true
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

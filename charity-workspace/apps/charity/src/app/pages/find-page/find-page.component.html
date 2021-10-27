@@ -3,11 +3,11 @@
   <tabset>
     <tab heading="Найти карту">
       <h2 class="page-name">Найти карту постоянного клиента</h2>
-      <app-data-table [data]="cards" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
+      <app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
 		</tab>
 		<tab heading="Найти клиента">
 			<h2 class="page-name">Найти постоянного клиента</h2>
-      <app-data-table [data]="clients" [dataKeys]="clientKeys" [dataType]="'client'"></app-data-table>
+      <app-data-table [data]="clients$ | async" [dataKeys]="clientKeys" [dataType]="'client'"></app-data-table>
 		</tab>
 	</tabset>
 </div>
