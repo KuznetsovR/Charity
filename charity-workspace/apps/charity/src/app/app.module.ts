@@ -27,6 +27,7 @@ import { cardsReducer } from './reducers/cards.reducer';
 import { clientsReducer } from './reducers/clients.reducer';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -60,7 +61,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 			maxAge: 25,
 			logOnly: environment.production,
 			autoPause: true
-		})
+		}),
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
