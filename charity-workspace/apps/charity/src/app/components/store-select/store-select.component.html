@@ -6,7 +6,7 @@
 		class="btn dropdown-toggle dropdown-btn"
 		aria-controls="dropdown-animated"
 	>
-		Выберите магазин <span class="caret"></span>
+    {{ selectedStore?.name || 'Выберите магазин'}} <span class="caret"></span>
 	</button>
 	<ul id="dropdown-animated" *dropdownMenu class="dropdown-menu w-100" role="menu" aria-labelledby="button-animated">
 		<ng-container *ngIf="stores else spinner">

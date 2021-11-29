@@ -14,10 +14,11 @@ export class StoreSelectComponent implements OnInit {
 	stores: Store[];
 
 	constructor(private apiService: ApiService) {}
-	async ngOnInit(): Promise<void> {
-		this.stores = await this.apiService.getRequest('/shop/');
+	ngOnInit(): void {
+		this.apiService.getRequest('user/shop').subscribe((stores: Store[]) => (this.stores = stores));
 	}
 	selectStore(store: Store): void {
+		this.selectedStore = store;
 		this.store.emit(store);
 	}
 }
