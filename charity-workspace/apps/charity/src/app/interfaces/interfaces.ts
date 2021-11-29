@@ -8,7 +8,6 @@ export interface Section {
 export interface Store {
 	id: number;
 	name: string;
-	image: string;
 }
 export interface FormControls {
 	[key: string]: AbstractControl;
@@ -29,9 +28,9 @@ export interface RequestBody {
 	passportNumber?: string;
 }
 export interface Card {
-	owner: string;
-	cardNumber: number;
-	shop: string;
+	owner: Client;
+	number: number;
+	shop: Store;
 	id: number;
 }
 export interface Client {

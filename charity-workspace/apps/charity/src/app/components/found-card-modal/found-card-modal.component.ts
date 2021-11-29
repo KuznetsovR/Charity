@@ -17,19 +17,16 @@ export class FoundCardModalComponent implements OnInit {
 	dataState: 'changing' | 'static' = 'static';
 	selectedStore: Shop;
 	changeCardForm: FormGroup;
-	cardNumber: FormControl;
+	number: FormControl;
 	ownerId: FormControl;
 	controls: FormControls = {};
 	ngOnInit(): void {
-		this.ownerId = new FormControl(this.data.owner, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
+		this.ownerId = new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
 		this.controls.ownerId = this.ownerId;
-		this.cardNumber = new FormControl(this.data.cardNumber, [
-			Validators.required,
-			Validators.pattern(/^\d{8,20}$/)
-		]);
-		this.controls.cardNumber = this.cardNumber;
+		this.number = new FormControl(this.data.number, [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
+		this.controls.number = this.number;
 		this.changeCardForm = new FormGroup(this.controls);
-		this.selectedStore = { name: this.data.shop, id: 1, image: '123' };
+		this.selectedStore = { name: this.data.shop.name, id: this.data.shop.id };
 	}
 	selectStore(store: Shop): void {
 		this.selectedStore = store;
@@ -42,8 +39,9 @@ export class FoundCardModalComponent implements OnInit {
 			.putRequest('admin/card/put', {
 				id: this.data.id,
 				owner: this.data.owner,
-				cardNumber: this.cardNumber.value,
-				shop: this.selectedStore.name
+				number: this.number.value,
+				shop: this.selectedStore,
+				active: true
 			})
 			.pipe(
 				mergeMap((res) => {
@@ -54,9 +52,6 @@ export class FoundCardModalComponent implements OnInit {
 				})
 			)
 			.subscribe();
-		this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-			this.store.dispatch(getCardList({ cards: data }));
-		});
 		this.changeDataState('static');
 	}
 	deleteCard(): void {}

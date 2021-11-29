@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
 	bsModalRef?: BsModalRef;
 
 	dataForm: FormGroup;
-	cardNumber: FormControl;
+	number: FormControl;
 	passportNumber: FormControl;
 	name: FormControl;
 	surname: FormControl;
@@ -33,9 +33,9 @@ export class FormComponent implements OnInit {
 	ngOnInit(): void {
 		for (const input of this.formInputs) {
 			switch (input) {
-				case 'cardNumber':
-					this.cardNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
-					this.controls.cardNumber = this.cardNumber;
+				case 'number':
+					this.number = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
+					this.controls.number = this.number;
 					break;
 				case 'passportNumber':
 					this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]);
@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
 		switch (this.action) {
 			case 'Добавить карту':
 				this.apiService.postRequest(`admin/card`, {
-					number: this.cardNumber.value,
+					number: this.number.value,
 					owner: this.passportNumber.value,
 					shop: this.selectedStore.id
 				});

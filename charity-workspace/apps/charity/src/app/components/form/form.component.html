@@ -9,7 +9,7 @@
 			<ng-template #notSelected> Вы не выбрали магазин </ng-template>
 		</div>
 
-		<div class="input-wrapper" *ngIf="formInputs?.includes('cardNumber')">
+		<div class="input-wrapper" *ngIf="formInputs?.includes('number')">
 			<input
 				required
 				type="number"
@@ -17,11 +17,11 @@
 				step="1"
 				placeholder="Введите номер карты"
 				class="data-input"
-				formControlName="cardNumber"
+				formControlName="number"
 				popover="Номер карты содержит 8-20 цифр "
 				triggers="focus:focusout"
 				placement="left"
-				[class.invalid]="userTriedToSendInvalid && cardNumber.invalid"
+				[class.invalid]="userTriedToSendInvalid && number.invalid"
 			/>
 		</div>
 

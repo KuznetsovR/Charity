@@ -16,7 +16,7 @@ export class SearchModalComponent implements OnInit {
 	selectedStore: Store;
 
 	searchForm: FormGroup;
-	cardNumber: FormControl;
+	number: FormControl;
 	passport: FormControl;
 	name: FormControl;
 	surname: FormControl;
@@ -32,8 +32,8 @@ export class SearchModalComponent implements OnInit {
 		if (this.dataType === 'card') {
 			this.owner = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
 			this.controls.owner = this.owner;
-			this.cardNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
-			this.controls.cardNumber = this.cardNumber;
+			this.number = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
+			this.controls.number = this.number;
 		} else if (this.dataType === 'client') {
 			this.passport = new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]);
 			this.controls.passport = this.passport;
