@@ -5,7 +5,8 @@
   flex-direction: column;
 }
 .info{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .labels{
   padding-right: 15px;
