@@ -8,5 +8,5 @@ export const clientsReducer = createReducer(
 	initialState,
 	on(getClientList, (state, { clients }) => clients),
 	on(addClient, (state, { client }) => [...state, client]),
-	on(removeClient, (state, { client }) => state.filter((el) => el.passport_number !== client.passport_number))
+	on(removeClient, (state, { client }) => state.filter((el) => el.passportNumber !== client.passportNumber))
 );
