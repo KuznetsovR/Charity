@@ -8,18 +8,22 @@
 			<div [class.label-for-input]="dataState === 'changing'">Идентификатор Владельца:</div>
 		</div>
 		<div class="values" *ngIf="dataState === 'static' else inputs">
-			<div>{{cardNumber.value}}</div>
+			<div>{{number.value}}</div>
 			<div>{{data.id}}</div>
 			<div>{{selectedStore.name}}</div>
-			<div>{{data.owner}}</div>
+			<div>{{data.owner.name}} {{data.owner.surname}} {{data.owner.patronymic}}</div>
 			<div>{{ownerId.value}}</div>
 		</div>
 		<ng-template #inputs>
 			<form [formGroup]="changeCardForm" class="change-card-form">
-				<input type="text" formControlName="cardNumber" />
+				<input type="text" formControlName="number" />
 				<input type="text" disabled [value]="data.id" />
-				<app-store-select (store)="selectStore($event)"></app-store-select>
-				<input type="text" disabled [value]="data.owner" />
+				<app-store-select (store)="selectStore($event)" [selectedStore]="selectedStore"></app-store-select>
+				<input
+					type="text"
+					disabled
+					[value]="data.owner.name + ' ' + data.owner.surname + ' ' + data.owner.patronymic"
+				/>
 				<input type="text" formControlName="ownerId" />
 			</form>
 		</ng-template>
