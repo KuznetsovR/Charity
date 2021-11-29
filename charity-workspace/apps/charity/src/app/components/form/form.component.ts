@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormControls, Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
-import { FoundClientModalComponent } from '../found-client-modal/found-client-modal.component';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
 	selector: 'app-form',
@@ -30,7 +28,7 @@ export class FormComponent implements OnInit {
 
 	selectedStore: Store | null = null;
 	stores: Store[];
-	constructor(private apiService: ApiService, private modalService: BsModalService) {}
+	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
 		for (const input of this.formInputs) {
@@ -40,7 +38,7 @@ export class FormComponent implements OnInit {
 					this.controls.cardNumber = this.cardNumber;
 					break;
 				case 'passportNumber':
-					this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]);
+					this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]);
 					this.controls.passportNumber = this.passportNumber;
 					break;
 				case 'name':
@@ -79,44 +77,18 @@ export class FormComponent implements OnInit {
 		}
 		switch (this.action) {
 			case 'Добавить карту':
-				this.apiService.postRequest(`/card/`, {
+				this.apiService.postRequest(`admin/card`, {
 					number: this.cardNumber.value,
 					owner: this.passportNumber.value,
 					shop: this.selectedStore.id
 				});
 				break;
 			case 'Добавить клиента':
-				this.apiService.postRequest('/owner/', {
-					passport_number: this.passportNumber.value,
+				this.apiService.postRequest('admin/owner', {
+					passportNumber: this.passportNumber.value,
 					name: this.name.value,
 					surname: this.surname.value,
 					patronymic: this.patronymic.value
-				});
-				break;
-
-			case 'Найти карту':
-				this.apiService
-					.getRequest(`/card/?number=${this.cardNumber.value}&shop=${this.selectedStore.id}`)
-					.then((res: string) => {
-						const initialState: ModalOptions = {
-							initialState: {
-								cards: res,
-								class: 'modal-lg modal-dialog-centered'
-							}
-						};
-						this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
-					});
-				break;
-
-			case 'Найти клиента':
-				this.apiService.getRequest(`/owner/${this.passportNumber.value}`).then((res: string) => {
-					const initialState: ModalOptions = {
-						initialState: {
-							clients: res,
-							class: 'modal-lg modal-dialog-centered'
-						}
-					};
-					this.bsModalRef = this.modalService.show(FoundClientModalComponent, initialState);
 				});
 				break;
 
