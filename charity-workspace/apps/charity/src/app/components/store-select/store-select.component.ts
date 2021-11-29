@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 
@@ -9,8 +9,8 @@ import { ApiService } from '../../services/api.service';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StoreSelectComponent implements OnInit {
+	@Input() selectedStore: Store | null = null;
 	@Output() store = new EventEmitter<Store>();
-	selectedStore: Store | null = null;
 	stores: Store[];
 
 	constructor(private apiService: ApiService) {}
