@@ -26,19 +26,21 @@ export interface RequestBody {
 	patronymic?: string;
 	reason?: string;
 	shop?: number;
-	passport_number?: string;
+	passportNumber?: string;
 }
 export interface Card {
 	owner: string;
-	number: number;
+	cardNumber: number;
 	shop: string;
 	id: number;
 }
 export interface Client {
-	use_count: number;
+	id: number;
+	active?: boolean;
+	useCount: number;
 	patronymic: string;
 	surname: string;
-	passport_number: number;
+	passportNumber: number;
 	name: string;
 }
 export interface AppState {
