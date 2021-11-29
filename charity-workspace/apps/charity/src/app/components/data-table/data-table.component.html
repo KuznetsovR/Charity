@@ -9,15 +9,15 @@
 			</thead>
 			<tbody>
 				<ng-container *ngIf="dataType === 'card' else clientTable">
-					<tr *ngFor="let dataRow of data" (click)="openModal(dataRow)">
-						<td>{{dataRow.number}}</td>
-						<td>{{dataRow.owner}}</td>
-						<td>{{dataRow.shop}}</td>
+					<tr *ngFor="let dataRow of data" (click)="openModal(dataRow)" [class.inactive]="!dataRow.active">
+						<td>{{dataRow.cardNumber}} <span *ngIf="!dataRow.active">Неактивно</span></td>
+            <td>{{dataRow.owner.name}} {{dataRow.owner.surname}} {{dataRow.owner.patronymic}}</td>
+						<td>{{dataRow.shop.name}}</td>
 					</tr>
 				</ng-container>
 				<ng-template #clientTable>
-					<tr *ngFor="let dataRow of data" (click)="openModal(dataRow)">
-						<td>{{dataRow.passport_number}}</td>
+					<tr *ngFor="let dataRow of data" (click)="openModal(dataRow)" [class.inactive]="!dataRow.active">
+						<td>{{dataRow.passportNumber}} <span *ngIf="!dataRow.active">Неактивен</span></td>
 						<td>{{dataRow.name}} {{dataRow.surname}} {{dataRow.patronymic}}</td>
           </tr>
 				</ng-template>
