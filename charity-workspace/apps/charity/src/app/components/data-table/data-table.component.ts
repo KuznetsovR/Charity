@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Card, Client } from '../../interfaces/interfaces';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 @Component({
 	selector: 'app-data-table',
 	templateUrl: './data-table.component.html',
-	styleUrls: ['./data-table.component.scss']
+	styleUrls: ['./data-table.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableComponent {
 	@Input() data: Observable<Card[]> | Observable<Client[]>;
