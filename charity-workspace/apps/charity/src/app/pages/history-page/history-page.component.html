@@ -1,1 +1,2 @@
 <app-header [currentTab]="'history'"></app-header>
+<app-data-table [data]="history$ | async" [dataKeys]="historyKeys" [dataType]="'history'"></app-data-table>
