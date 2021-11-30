@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { getCardList } from '../../actions/data-table.actions';
 import { Store } from '@ngrx/store';
 import { mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 @Component({
 	selector: 'app-found-card-modal',
 	templateUrl: './found-card-modal.component.html',
@@ -26,7 +27,7 @@ export class FoundCardModalComponent implements OnInit {
 		this.number = new FormControl(this.data.number, [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
 		this.controls.number = this.number;
 		this.changeCardForm = new FormGroup(this.controls);
-		this.selectedStore = { name: this.data.shop.name, id: this.data.shop.id };
+		this.selectedStore = this.data.shop;
 	}
 	selectStore(store: Shop): void {
 		this.selectedStore = store;
@@ -38,9 +39,9 @@ export class FoundCardModalComponent implements OnInit {
 		this.apiService
 			.putRequest('admin/card/put', {
 				id: this.data.id,
-				owner: this.data.owner,
+				owner: this.ownerId.value,
 				number: this.number.value,
-				shop: this.selectedStore,
+				shop: this.selectedStore.id,
 				active: true
 			})
 			.pipe(
@@ -48,11 +49,36 @@ export class FoundCardModalComponent implements OnInit {
 					this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
 						this.store.dispatch(getCardList({ cards: data }));
 					});
-					return res;
+					return of(res);
 				})
 			)
 			.subscribe();
 		this.changeDataState('static');
 	}
-	deleteCard(): void {}
+	deleteCard(): void {
+		console.log({
+			id: this.data.id,
+			owner: this.data.owner.id,
+			number: this.data.number,
+			shop: this.selectedStore.id,
+			active: false
+		});
+		this.apiService
+			.putRequest('admin/card/put', {
+				id: this.data.id,
+				owner: this.data.owner.id,
+				number: this.data.number,
+				shop: this.selectedStore.id,
+				active: false
+			})
+			.pipe(
+				mergeMap((res) => {
+					this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
+						this.store.dispatch(getCardList({ cards: data }));
+					});
+					return of(res);
+				})
+			)
+			.subscribe();
+	}
 }
