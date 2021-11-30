@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Card, Client } from '../../interfaces/interfaces';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from '../found-client-modal/found-client-modal.component';
 import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Observable } from 'rxjs';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
 
 @Component({
 	selector: 'app-data-table',

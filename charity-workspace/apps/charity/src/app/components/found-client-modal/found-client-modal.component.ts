@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Card, Client, FormControls, ModalState } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, mergeMap } from 'rxjs/operators';
-import { getClientList } from '../../actions/data-table.actions';
+import { getClientList } from '../../state/actions/data-table.actions';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
+import { FormControls } from '../form/form-entities';
+import { ModalState } from 'src/app/interfaces/modal-state.entity';
 
 @Component({
 	selector: 'app-found-client-modal',

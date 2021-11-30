@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormControls, Store } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { FormControls } from './form-entities';
+import { Store } from 'src/app/interfaces/store.entity';
 
 @Component({
 	selector: 'app-form',

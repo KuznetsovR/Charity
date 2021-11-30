@@ -1,10 +1,13 @@
 // TODO: rewrite fetch to httpClient, promise to observable
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {Card, CardChangeDto, Client, RequestBody, RequestOptions} from '../interfaces/interfaces';
 import { API_PATH } from '../constants/api-path';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Card } from '../interfaces/card.entity';
+import { Client } from '../interfaces/client.entity';
+import {RequestBody, RequestOptions } from '../interfaces/api-entities';
+import { CardChangeDto } from '../interfaces/card-change.dto';
 
 @Injectable({
 	providedIn: 'root'

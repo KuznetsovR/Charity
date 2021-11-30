@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Card, Client, FormControls, Store } from '../../interfaces/interfaces';
 import { Store as StateStore } from '@ngrx/store';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { getCardList, getClientList } from '../../actions/data-table.actions';
+import { getCardList, getClientList } from '../../state/actions/data-table.actions';
 import { ApiService } from '../../services/api.service';
+import { Store } from 'src/app/interfaces/store.entity';
+import { FormControls } from '../form/form-entities';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
 
 @Component({
 	selector: 'app-search-modal',

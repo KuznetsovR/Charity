@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Store } from '../../interfaces/interfaces';
+import { Store } from 'src/app/interfaces/store.entity';
 import { ApiService } from '../../services/api.service';
 
 @Component({

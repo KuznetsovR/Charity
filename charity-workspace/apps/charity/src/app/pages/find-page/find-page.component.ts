@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Card, Client } from '../../interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getCardList, getClientList } from '../../actions/data-table.actions';
+import { getCardList, getClientList } from '../../state/actions/data-table.actions';
 import { ApiService } from '../../services/api.service';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
 @Component({
 	selector: 'app-find-page',
 	templateUrl: './find-page.component.html',
