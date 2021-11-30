@@ -27,9 +27,7 @@
 		>
 			<input
 				required
-				type="number"
-				min="0"
-				step="1"
+				type="text"
 				placeholder="Введите номер паспорта"
 				class="data-input"
 				formControlName="passportNumber"
@@ -39,6 +37,23 @@
 				[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
 			/>
 		</div>
+
+    <div
+      class="input-wrapper"
+      *ngIf="formInputs?.includes('ownerId')"
+    >
+      <input
+        required
+        type="text"
+        placeholder="Введите идентификатор владельца"
+        class="data-input"
+        formControlName="ownerId"
+        popover="Идентификатор состоит из цифр"
+        triggers="focus:focusout"
+        placement="left"
+        [class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
+      />
+    </div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
 			<input

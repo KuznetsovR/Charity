@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
 	dataForm: FormGroup;
 	number: FormControl;
 	passportNumber: FormControl;
+	ownerId: FormControl;
 	name: FormControl;
 	surname: FormControl;
 	patronymic: FormControl;
@@ -50,9 +51,14 @@ export class FormComponent implements OnInit {
 					this.controls.surname = this.surname;
 					this.controls.patronymic = this.patronymic;
 					break;
+				case 'ownerId':
+					this.ownerId = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/i)]);
+					this.controls.ownerId = this.ownerId;
+					break;
 				case 'reason':
 					this.reason = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё\d ]+$/i)]);
 					this.controls.reason = this.reason;
+					break;
 			}
 		}
 		this.dataForm = new FormGroup(this.controls);
@@ -79,13 +85,18 @@ export class FormComponent implements OnInit {
 		switch (this.action) {
 			case 'Добавить карту':
 				this.apiService.postRequest(`admin/card`, {
+					id: 0,
 					number: this.number.value,
-					owner: this.passportNumber.value,
-					shop: this.selectedStore.id
+					owner: this.ownerId.value,
+					shop: this.selectedStore.id,
+					active: true
 				});
 				break;
 			case 'Добавить клиента':
 				this.apiService.postRequest('admin/owner', {
+					id: 0,
+					useCount: 0,
+					active: true,
 					passportNumber: this.passportNumber.value,
 					name: this.name.value,
 					surname: this.surname.value,
