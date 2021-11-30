@@ -1,32 +1,38 @@
 <div class="found-card-modal">
 	<div class="info">
-		<div class="labels">
-			<div [class.label-for-input]="dataState === 'changing'">Номер:</div>
-			<div [class.label-for-input]="dataState === 'changing'">ID:</div>
-			<div [class.label-for-input]="dataState === 'changing'">Магазин:</div>
-			<div [class.label-for-input]="dataState === 'changing'">ФИО Владельца:</div>
-			<div [class.label-for-input]="dataState === 'changing'">Идентификатор Владельца:</div>
+		<div [class.label-for-input]="dataState === 'changing'">Номер:</div>
+		<div *ngIf="dataState === 'static' else numberInput">{{number.value}}</div>
+		<div [class.label-for-input]="dataState === 'changing'">ID:</div>
+		<div *ngIf="dataState === 'static' else id">{{data.id}}</div>
+		<div [class.label-for-input]="dataState === 'changing'">Магазин:</div>
+		<div *ngIf="dataState === 'static' else storeSelect">{{selectedStore.name}}</div>
+		<div [class.label-for-input]="dataState === 'changing'">Идентификатор Владельца:</div>
+		<div *ngIf="dataState === 'static' else ownerIdentificator">{{ownerId.value}}</div>
+		<div [class.label-for-input]="dataState === 'changing'">ФИО Владельца:</div>
+		<div *ngIf="dataState === 'static' else name">
+			{{data.owner.name}} {{data.owner.surname}} {{data.owner.patronymic}}
 		</div>
-		<div class="values" *ngIf="dataState === 'static' else inputs">
-			<div>{{number.value}}</div>
-			<div>{{data.id}}</div>
-			<div>{{selectedStore.name}}</div>
-			<div>{{data.owner.name}} {{data.owner.surname}} {{data.owner.patronymic}}</div>
-			<div>{{ownerId.value}}</div>
-		</div>
-		<ng-template #inputs>
-			<form [formGroup]="changeCardForm" class="change-card-form">
+		<form [formGroup]="changeCardForm" class="change-card-form">
+			<ng-template #numberInput>
 				<input type="text" formControlName="number" />
+			</ng-template>
+			<ng-template #id>
 				<input type="text" disabled [value]="data.id" />
+			</ng-template>
+			<ng-template #storeSelect>
 				<app-store-select (store)="selectStore($event)" [selectedStore]="selectedStore"></app-store-select>
+			</ng-template>
+			<ng-template #name>
 				<input
 					type="text"
 					disabled
 					[value]="data.owner.name + ' ' + data.owner.surname + ' ' + data.owner.patronymic"
 				/>
+			</ng-template>
+			<ng-template #ownerIdentificator>
 				<input type="text" formControlName="ownerId" />
-			</form>
-		</ng-template>
+			</ng-template>
+		</form>
 	</div>
 	<div class="btns-container">
 		<button
