@@ -45,11 +45,26 @@
 			class="search-input"
 			type="text"
 			formControlName="passport"
-			class="search-input"
 			placeholder="Номер паспорта"
 		/>
 
 		<app-store-select *ngIf="dataType === 'card'" (store)="selectStore($event)"></app-store-select>
+
+    <input
+      *ngIf="dataType === 'history'"
+      class="search-input"
+      type="text"
+      formControlName="cardId"
+      placeholder="Идентификатор карты"
+    />
+
+    <input
+      *ngIf="dataType === 'history'"
+      class="search-input"
+      type="text"
+      formControlName="customerId"
+      placeholder="Идентификатор владельца"
+    />
 
 		<div class="btn-wrapper">
 			<button type="submit" class="find-btn btn" [disabled]="searchForm.valid">Найти</button>
