@@ -29,6 +29,7 @@ import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryPageComponent } from './pages/history-page/history-page.component';
+import { historyReducer } from './state/reducers/history.reducer';
 
 @NgModule({
 	declarations: [
@@ -58,7 +59,7 @@ import { HistoryPageComponent } from './pages/history-page/history-page.componen
 		TabsModule.forRoot(),
 		BrowserModule,
 		PopoverModule.forRoot(),
-		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer }),
+		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer, history: historyReducer }),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
