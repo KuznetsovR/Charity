@@ -5,10 +5,10 @@ import { catchError, mergeMap } from 'rxjs/operators';
 import { getClientList } from '../../state/actions/data-table.actions';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
+import { AppState } from '../../state/app-state';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -17,11 +17,7 @@ import { ModalState } from 'src/app/interfaces/modal-state.entity';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundClientModalComponent implements OnInit {
-	constructor(
-		private store: Store<{ cards: Card[]; clients: Client[] }>,
-		private apiService: ApiService,
-		private cdr: ChangeDetectorRef
-	) {}
+	constructor(private store: Store<AppState>, private apiService: ApiService, private cdr: ChangeDetectorRef) {}
 	data: Client;
 	changeClientForm: FormGroup;
 	useCount: FormControl;

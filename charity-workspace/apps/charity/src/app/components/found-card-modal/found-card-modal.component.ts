@@ -6,9 +6,9 @@ import { Store } from '@ngrx/store';
 import { mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Card } from 'src/app/interfaces/card.entity';
-import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { Store as Shop } from 'src/app/interfaces/store.entity';
+import { AppState } from '../../state/app-state';
 @Component({
 	selector: 'app-found-card-modal',
 	templateUrl: './found-card-modal.component.html',
@@ -16,7 +16,7 @@ import { Store as Shop } from 'src/app/interfaces/store.entity';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundCardModalComponent implements OnInit {
-	constructor(private store: Store<{ cards: Card[]; clients: Client[] }>, private apiService: ApiService) {}
+	constructor(private store: Store<AppState>, private apiService: ApiService) {}
 	data: Card;
 	dataState: 'changing' | 'static' = 'static';
 	selectedStore: Shop;
