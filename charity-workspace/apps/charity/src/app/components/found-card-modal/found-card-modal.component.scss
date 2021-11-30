@@ -5,7 +5,8 @@
   flex-direction: column;
 }
 .info{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .labels{
   padding-right: 15px;
@@ -13,7 +14,7 @@
 .label-for-input{
   padding: 8px 0;
 }
-.change-client-form{
+.change-card-form{
   input{
     margin: 5px 0;
   }
@@ -26,6 +27,7 @@
   margin-right: 10px;
 }
 .btns-container{
+  margin-top: 10px;
   height: 40px;
   align-self: flex-end;
 }

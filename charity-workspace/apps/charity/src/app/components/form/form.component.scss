@@ -4,16 +4,10 @@
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
+  align-items: center;
 }
 .dropdown-btn {
 	border: 1px solid gray;
-}
-.selected-store {
-	margin: 15px 0;
-}
-.selected-store-name {
-	font-size: 1.2rem;
-	margin-left: 15px;
 }
 .data-input {
 	border: 1px solid gray;
@@ -22,9 +16,11 @@
 	font-size: 18px;
 }
 .input-wrapper {
-	display: flex;
-	flex-direction: column;
+	width: 100%;
 	margin: 10px;
+  input {
+    width: 100%;
+  }
 }
 .input-wrapper > input:focus {
 	outline: none;
@@ -104,4 +100,8 @@ input[type='number'] {
 		-webkit-transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
+}
+.store-select-wrapper{
+  width: 100%;
+  margin: 10px;
 }

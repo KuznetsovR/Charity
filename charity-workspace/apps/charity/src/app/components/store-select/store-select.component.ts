@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Store } from '../../interfaces/interfaces';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from 'src/app/interfaces/store.entity';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -9,15 +9,16 @@ import { ApiService } from '../../services/api.service';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StoreSelectComponent implements OnInit {
+	@Input() selectedStore: Store | null = null;
 	@Output() store = new EventEmitter<Store>();
-	selectedStore: Store | null = null;
 	stores: Store[];
 
 	constructor(private apiService: ApiService) {}
-	async ngOnInit(): Promise<void> {
-		this.stores = await this.apiService.getRequest('/shop/');
+	ngOnInit(): void {
+		this.apiService.getRequest('user/shop').subscribe((stores: Store[]) => (this.stores = stores));
 	}
 	selectStore(store: Store): void {
+		this.selectedStore = store;
 		this.store.emit(store);
 	}
 }

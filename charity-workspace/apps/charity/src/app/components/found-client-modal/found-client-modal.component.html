@@ -1,7 +1,44 @@
 <div class="found-client-modal">
-	<div>Name: {{data.name}}</div>
-	<div>Surname: {{data.surname}}</div>
-	<div>Patronymic: {{data.patronymic}}</div>
-	<div>Use count: {{data.use_count}}</div>
-	<div>Номер паспорта: {{data.passport_number}}</div>
+	<div class="info">
+		<div class="labels">
+			<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Номер паспорта:</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Имя:</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Фамилия:</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Отчество:</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Кол-во использований:</div>
+		</div>
+		<div class="values" *ngIf="modalState.dataState === 'static' else inputs">
+			<div>{{data.id}}</div>
+			<div>{{passportNumber.value}}</div>
+			<div>{{name.value}}</div>
+			<div>{{surname.value}}</div>
+			<div>{{patronymic.value}}</div>
+			<div>{{useCount.value}}</div>
+		</div>
+		<ng-template #inputs>
+			<form [formGroup]="changeClientForm" class="change-card-form">
+				<input type="text" disabled [value]="data.id" />
+				<input type="text" formControlName="passportNumber" />
+				<input type="text" formControlName="name" />
+				<input type="text" formControlName="surname" />
+				<input type="text" formControlName="patronymic" />
+				<input type="text" formControlName="useCount" />
+			</form>
+		</ng-template>
+	</div>
+  <div *ngIf="modalState.isRequestBad">Вы ввели неправильные данные, попробуйте ещё раз</div>
+	<div class="btns-container">
+		<button
+			*ngIf="modalState.dataState === 'static' else approveBtn"
+			class="edit-button btn"
+			(click)="changeDataState('changing')"
+		>
+			Изменить
+		</button>
+		<ng-template #approveBtn>
+			<button type="submit" class="btn btn-success" (click)="changeClient()">Подтвердить изменения</button>
+		</ng-template>
+		<button class="delete-button btn btn-danger" (click)="deleteClient()">Удалить</button>
+	</div>
 </div>

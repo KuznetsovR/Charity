@@ -24,10 +24,23 @@ table {
 	}
 	tbody {
 		tr {
+			&.inactive {
+				background-color: #cccccc;
+				cursor: not-allowed;
+			}
 			cursor: pointer;
+
 			&:nth-of-type(even) {
 				background-color: #eff7ff;
+				&.inactive {
+					background-color: #cccccc;
+					cursor: not-allowed;
+					&:hover {
+						background-color: rgba(0, 0, 0, 0.03);
+					}
+				}
 			}
+
 			&:last-of-type {
 				border-bottom: 2px solid $very-light-blue;
 			}

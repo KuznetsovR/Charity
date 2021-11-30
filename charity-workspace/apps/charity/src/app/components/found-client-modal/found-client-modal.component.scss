@@ -1,3 +1,45 @@
-.found-client-modal{
-  padding: 10px;
+@import './../../../styles/colors';
+.found-client-modal {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.labels{
+  padding-right: 15px;
+}
+.label-for-input{
+  padding: 8px 0;
+}
+.change-card-form{
+  input{
+    margin: 5px 0;
+  }
+}
+.store-select-wrapper{
+  display: flex;
+  align-items: center;
+}
+.selected-store{
+  margin-right: 10px;
+}
+.btns-container{
+  margin-top: 10px;
+  height: 40px;
+  align-self: flex-end;
+}
+.edit-button {
+  height: 100%;
+  background-color: $light-blue;
+  color: #fff;
+}
+.delete-button {
+  margin-left: 10px;
+  height: 100%;
+  background-color: $light-red;
+  color: #fff;
+  border: 0;
 }

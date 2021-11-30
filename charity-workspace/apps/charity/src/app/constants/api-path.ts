@@ -1,1 +1,1 @@
-export const API_PATH = 'http://10d0-82-151-196-167.ngrok.io';
+export const API_PATH = 'https://10.3.21.33:8443/';

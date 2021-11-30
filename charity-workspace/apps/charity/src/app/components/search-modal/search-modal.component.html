@@ -6,51 +6,53 @@
 			type="text"
 			class="search-input"
 			formControlName="name"
-			height="100"
-			[placeholder]="dataType === 'card'? 'Имя владельца': 'Введите имя'"
+			*ngIf="dataType === 'client'"
+			placeholder="Введите имя"
 		/>
 		<input
 			type="text"
 			formControlName="surname"
 			class="search-input"
-			[placeholder]="dataType === 'card'? 'Фамилия владельца': 'Фамилия'"
+			*ngIf="dataType === 'client'"
+			placeholder="Фамилия"
 		/>
 		<input
 			type="text"
 			formControlName="patronymic"
 			class="search-input"
-			[placeholder]="dataType === 'card'? 'Отчество владельца': 'Отчество '"
+			*ngIf="dataType === 'client'"
+			placeholder="Отчество"
 		/>
 
 		<input
 			*ngIf="dataType === 'card'"
 			class="search-input"
 			type="text"
-			formControlName="cardNumber"
+			formControlName="number"
 			placeholder="Номер карты"
 		/>
+
+    <input
+      *ngIf="dataType === 'card'"
+      class="search-input"
+      type="text"
+      formControlName="owner"
+      placeholder="Владелец"
+    />
 
 		<input
 			*ngIf="dataType === 'client'"
 			class="search-input"
 			type="text"
-			formControlName="passportNumber"
+			formControlName="passport"
 			class="search-input"
 			placeholder="Номер паспорта"
 		/>
 
-		<div class="store-select-wrapper">
-			<app-store-select *ngIf="dataType === 'card'" (store)="selectStore($event)"></app-store-select>
-			<div class="selected-store" *ngIf="dataType === 'card'">
-				<div *ngIf="selectedStore else notSelected">
-					<img [src]="selectedStore.image" alt="store-image" class="store-image" />
-					<span class="selected-store-name">{{selectedStore.name | titlecase}}</span>
-				</div>
-				<ng-template #notSelected> Вы не выбрали магазин </ng-template>
-			</div>
-		</div>
+		<app-store-select *ngIf="dataType === 'card'" (store)="selectStore($event)"></app-store-select>
+
 		<div class="btn-wrapper">
-			<button type="submit" class="find-btn btn">Найти</button>
+			<button type="submit" class="find-btn btn" [disabled]="searchForm.valid">Найти</button>
 		</div>
 	</form>
 </div>

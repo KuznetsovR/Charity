@@ -1,7 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormControls, Store } from '../../interfaces/interfaces';
+import { Store as StateStore } from '@ngrx/store';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { getCardList, getClientList } from '../../state/actions/data-table.actions';
+import { ApiService } from '../../services/api.service';
+import { Store } from 'src/app/interfaces/store.entity';
+import { FormControls } from '../form/form-entities';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
 
 @Component({
 	selector: 'app-search-modal',
@@ -13,36 +19,37 @@ export class SearchModalComponent implements OnInit {
 	selectedStore: Store;
 
 	searchForm: FormGroup;
-	cardNumber: FormControl;
-	passportNumber: FormControl;
+	number: FormControl;
+	passport: FormControl;
 	name: FormControl;
 	surname: FormControl;
 	patronymic: FormControl;
+	owner: FormControl;
 	controls: FormControls = {};
-	constructor(public bsModalRef: BsModalRef) {}
+	constructor(
+		public bsModalRef: BsModalRef,
+		private apiService: ApiService,
+		private store: StateStore<{ cards: Card[]; clients: Client[] }>
+	) {}
 	ngOnInit(): void {
-		this.name = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
-		this.surname = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
-		this.patronymic = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
-		this.controls.name = this.name;
-		this.controls.surname = this.surname;
-		this.controls.patronymic = this.patronymic;
 		if (this.dataType === 'card') {
-			this.cardNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
-			this.controls.cardNumber = this.cardNumber;
+			this.owner = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
+			this.controls.owner = this.owner;
+			this.number = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
+			this.controls.number = this.number;
+		} else if (this.dataType === 'client') {
+			this.passport = new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]);
+			this.controls.passport = this.passport;
+			this.name = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
+			this.surname = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
+			this.patronymic = new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
+			this.controls.name = this.name;
+			this.controls.surname = this.surname;
+			this.controls.patronymic = this.patronymic;
 		} else {
-			this.passportNumber = new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]);
-			this.controls.passportNumber = this.passportNumber;
+			throw new Error('Unknown datatype');
 		}
 		this.searchForm = new FormGroup(this.controls);
-	}
-
-	trimForm(): void {
-		Object.keys(this.searchForm.controls).forEach((key) => {
-			return typeof this.searchForm.get(key).value === 'string'
-				? this.searchForm.get(key).setValue(this.searchForm.get(key).value.trim())
-				: null;
-		});
 	}
 
 	selectStore(store: Store): void {
@@ -50,7 +57,17 @@ export class SearchModalComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.trimForm();
+		if (this.dataType === 'client') {
+			this.apiService.getRequest('admin/owner', this.searchForm.value).subscribe((data: Client[]) => {
+				this.store.dispatch(getClientList({ clients: data }));
+			});
+		} else if (this.dataType === 'card') {
+			this.apiService.getRequest('admin/card', this.searchForm.value).subscribe((data: Card[]) => {
+				this.store.dispatch(getCardList({ cards: data }));
+			});
+		} else {
+			throw new Error('Unknown datatype');
+		}
 		this.bsModalRef.hide();
 	}
 }

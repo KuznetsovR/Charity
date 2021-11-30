@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Card, Client } from '../interfaces/interfaces';
+import { Card } from 'src/app/interfaces/card.entity';
+import { Client } from 'src/app/interfaces/client.entity';
 
 export const getCardList = createAction('[Card List/API] Retrieve cards Success', props<{ cards: readonly Card[] }>());
 
