@@ -42,6 +42,13 @@ export interface Client {
 	passportNumber: number;
 	name: string;
 }
+export interface CardChangeDto {
+	id: number;
+	cardNumber: string;
+	shop: number;
+	owner: number;
+	active: boolean;
+}
 export interface AppState {
 	cardsData: readonly Card[];
 	clientsData: readonly Client[];

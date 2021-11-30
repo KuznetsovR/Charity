@@ -1,7 +1,7 @@
 // TODO: rewrite fetch to httpClient, promise to observable
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card, Client, RequestBody, RequestOptions } from '../interfaces/interfaces';
+import {Card, CardChangeDto, Client, RequestBody, RequestOptions} from '../interfaces/interfaces';
 import { API_PATH } from '../constants/api-path';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -41,7 +41,7 @@ export class ApiService {
 		return this.http.get(API_PATH + path, { headers: this.headers, params });
 	}
 
-	putRequest(path: string, newObject: Card | Client): Observable<any> {
+	putRequest(path: string, newObject: Card | Client | CardChangeDto): Observable<any> {
 		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
 	}
 
