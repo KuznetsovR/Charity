@@ -28,6 +28,7 @@ import { clientsReducer } from './state/reducers/clients.reducer';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
+import { HistoryPageComponent } from './pages/history-page/history-page.component';
 
 @NgModule({
 	declarations: [
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
 		FoundClientModalComponent,
 		StoreSelectComponent,
 		DataTableComponent,
-		SearchModalComponent
+		SearchModalComponent,
+		HistoryPageComponent
 	],
 	imports: [
 		BrowserModule,
