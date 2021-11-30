@@ -29,7 +29,7 @@ export interface RequestBody {
 }
 export interface Card {
 	owner: Client;
-	number: number;
+	number: string;
 	shop: Store;
 	id: number;
 }
@@ -44,7 +44,7 @@ export interface Client {
 }
 export interface CardChangeDto {
 	id: number;
-	cardNumber: string;
+	number: string;
 	shop: number;
 	owner: number;
 	active: boolean;
@@ -52,4 +52,8 @@ export interface CardChangeDto {
 export interface AppState {
 	cardsData: readonly Card[];
 	clientsData: readonly Client[];
+}
+export interface ModalState {
+	dataState: 'changing' | 'static';
+	isRequestBad: boolean;
 }
