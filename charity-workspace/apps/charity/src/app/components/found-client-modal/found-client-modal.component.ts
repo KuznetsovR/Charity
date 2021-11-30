@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Card, Client, FormControls } from '../../interfaces/interfaces';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Card, Client, FormControls, ModalState } from '../../interfaces/interfaces';
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { getClientList } from '../../actions/data-table.actions';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -13,9 +14,12 @@ import { Store } from '@ngrx/store';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundClientModalComponent implements OnInit {
-	constructor(private store: Store<{ cards: Card[]; clients: Client[] }>, private apiService: ApiService) {}
+	constructor(
+		private store: Store<{ cards: Card[]; clients: Client[] }>,
+		private apiService: ApiService,
+		private cdr: ChangeDetectorRef
+	) {}
 	data: Client;
-	dataState: 'changing' | 'static' = 'static';
 	changeClientForm: FormGroup;
 	useCount: FormControl;
 	passportNumber: FormControl;
@@ -23,6 +27,10 @@ export class FoundClientModalComponent implements OnInit {
 	surname: FormControl;
 	patronymic: FormControl;
 	controls: FormControls = {};
+	modalState: ModalState = {
+		dataState: 'static',
+		isRequestBad: false
+	};
 	ngOnInit(): void {
 		this.useCount = new FormControl(this.data.useCount, [Validators.required, Validators.pattern(/^[0-9]*$/gm)]);
 		this.controls.useCount = this.useCount;
@@ -45,7 +53,10 @@ export class FoundClientModalComponent implements OnInit {
 		this.changeClientForm = new FormGroup(this.controls);
 	}
 	changeDataState(newState: 'changing' | 'static'): void {
-		this.dataState = newState;
+		this.modalState.dataState = newState;
+	}
+	changeRequestCorrectnessState(newState: boolean): void {
+		this.modalState.isRequestBad = newState;
 	}
 	changeClient(): void {
 		this.apiService
@@ -60,16 +71,25 @@ export class FoundClientModalComponent implements OnInit {
 			})
 			.pipe(
 				mergeMap((res) => {
+					this.changeRequestCorrectnessState(false);
+					this.changeDataState('static');
+					this.cdr.detectChanges();
 					this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
 						this.store.dispatch(getClientList({ clients: data }));
 					});
-					return res;
+					return of(res);
+				}),
+				catchError((err) => {
+					if (err.error.error === 'Bad Request') {
+						this.changeRequestCorrectnessState(true);
+						this.cdr.detectChanges();
+					}
+					return of(err);
 				})
 			)
 			.subscribe();
-		this.changeDataState('static');
 	}
-	deleteCard(): void {
+	deleteClient(): void {
 		this.apiService
 			.putRequest('admin/owner', {
 				...this.data,
@@ -80,7 +100,7 @@ export class FoundClientModalComponent implements OnInit {
 					this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
 						this.store.dispatch(getClientList({ clients: data }));
 					});
-					return res;
+					return of(res);
 				})
 			)
 			.subscribe();
