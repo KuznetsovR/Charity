@@ -1,12 +1,7 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="dataForm">
 	<div class="input-group">
-		<app-store-select *ngIf="formInputs.includes('store')" (store)="selectStore($event)"></app-store-select>
-		<div class="selected-store" *ngIf="formInputs?.includes('store')">
-			<div *ngIf="selectedStore else notSelected">
-				<img [src]="selectedStore.image" alt="store-image" class="store-image" />
-				<span class="selected-store-name">{{selectedStore.name | titlecase}}</span>
-			</div>
-			<ng-template #notSelected> Вы не выбрали магазин </ng-template>
+		<div class="store-select-wrapper">
+			<app-store-select *ngIf="formInputs.includes('store')" (store)="selectStore($event)"></app-store-select>
 		</div>
 
 		<div class="input-wrapper" *ngIf="formInputs?.includes('number')">
