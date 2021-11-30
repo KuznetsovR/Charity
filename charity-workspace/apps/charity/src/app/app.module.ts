@@ -28,6 +28,8 @@ import { clientsReducer } from './state/reducers/clients.reducer';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
+import { HistoryPageComponent } from './pages/history-page/history-page.component';
+import { historyReducer } from './state/reducers/history.reducer';
 
 @NgModule({
 	declarations: [
@@ -43,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
 		FoundClientModalComponent,
 		StoreSelectComponent,
 		DataTableComponent,
-		SearchModalComponent
+		SearchModalComponent,
+		HistoryPageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -56,7 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
 		TabsModule.forRoot(),
 		BrowserModule,
 		PopoverModule.forRoot(),
-		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer }),
+		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer, history: historyReducer }),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

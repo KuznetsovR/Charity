@@ -4,6 +4,7 @@ import { ProfilePageComponent } from '../pages/profile-page/profile-page.compone
 import { AddPageComponent } from '../pages/add-page/add-page.component';
 import { FindPageComponent } from '../pages/find-page/find-page.component';
 import { ErrorPageComponent } from '../pages/error-page/error-page.component';
+import { HistoryPageComponent } from '../pages/history-page/history-page.component';
 
 const routes: Routes = [
 	{
@@ -26,6 +27,10 @@ const routes: Routes = [
 	{
 		path: 'error',
 		component: ErrorPageComponent
+	},
+	{
+		path: 'history',
+		component: HistoryPageComponent
 	}
 ];
 

@@ -6,6 +6,7 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Observable } from 'rxjs';
 import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
+import { HistoryAction } from '../../pages/history-page/historyAction';
 
 @Component({
 	selector: 'app-data-table',
@@ -14,7 +15,7 @@ import { Client } from 'src/app/interfaces/client.entity';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableComponent {
-	@Input() data: Observable<Card[]> | Observable<Client[]>;
+	@Input() data: Observable<Card[]> | Observable<Client[]> | Observable<HistoryAction[]>;
 	@Input() dataKeys: string[];
 	@Input() dataType: string;
 	bsModalRef?: BsModalRef;
