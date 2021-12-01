@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { getHistory } from '../actions/history.actions';
-import { HistoryAction } from '../../pages/history-page/historyAction';
+import { HistoryAction } from '../../interfaces/historyAction';
 
 export const initialState: readonly HistoryAction[] = [];
 
