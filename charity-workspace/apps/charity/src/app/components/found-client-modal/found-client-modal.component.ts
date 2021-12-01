@@ -9,6 +9,7 @@ import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -17,7 +18,12 @@ import { AppState } from '../../state/app-state';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundClientModalComponent implements OnInit {
-	constructor(private store: Store<AppState>, private apiService: ApiService, private cdr: ChangeDetectorRef) {}
+	constructor(
+		private store: Store<AppState>,
+		private apiService: ApiService,
+		private cdr: ChangeDetectorRef,
+		private bsModalRef: BsModalRef
+	) {}
 	data: Client;
 	changeClientForm: FormGroup;
 	useCount: FormControl;
@@ -103,5 +109,8 @@ export class FoundClientModalComponent implements OnInit {
 				})
 			)
 			.subscribe();
+	}
+	closeModal(): void {
+		this.bsModalRef.hide();
 	}
 }

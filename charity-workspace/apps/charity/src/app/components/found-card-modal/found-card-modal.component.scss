@@ -1,45 +1,49 @@
 @import './../../../styles/colors';
 .found-card-modal {
 	padding: 20px;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
-.info{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.info {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
-.labels{
-  padding-right: 15px;
+.labels {
+	padding-right: 15px;
 }
-.label-for-input{
-  padding: 8px 0;
+.label-for-input {
+	padding: 8px 0;
 }
-.change-card-form{
-  input{
-    margin: 5px 0;
-  }
+.change-card-form {
+	input {
+		margin: 5px 0;
+	}
 }
-.store-select-wrapper{
-  display: flex;
-  align-items: center;
+.store-select-wrapper {
+	display: flex;
+	align-items: center;
 }
-.selected-store{
-  margin-right: 10px;
+.selected-store {
+	margin-right: 10px;
 }
-.btns-container{
-  margin-top: 10px;
-  height: 40px;
-  align-self: flex-end;
+.btns-container {
+	margin-top: 10px;
+	height: 40px;
+	align-self: flex-end;
 }
 .edit-button {
-  height: 100%;
+	height: 100%;
 	background-color: $light-blue;
 	color: #fff;
 }
 .delete-button {
-  margin-left: 10px;
-  height: 100%;
-  background-color: $light-red;
+	margin-left: 10px;
+	height: 100%;
+	background-color: $light-red;
 	color: #fff;
-  border: 0;
+	border: 0;
+}
+.close-btn {
+	margin-left: 10px;
+	height: 100%;
 }

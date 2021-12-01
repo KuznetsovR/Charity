@@ -9,6 +9,7 @@ import { Card } from 'src/app/interfaces/card.entity';
 import { FormControls } from '../form/form-entities';
 import { Store as Shop } from 'src/app/interfaces/store.entity';
 import { AppState } from '../../state/app-state';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
 	selector: 'app-found-card-modal',
 	templateUrl: './found-card-modal.component.html',
@@ -16,14 +17,16 @@ import { AppState } from '../../state/app-state';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoundCardModalComponent implements OnInit {
-	constructor(private store: Store<AppState>, private apiService: ApiService) {}
 	data: Card;
 	dataState: 'changing' | 'static' = 'static';
+
 	selectedStore: Shop;
+
 	changeCardForm: FormGroup;
 	number: FormControl;
 	ownerId: FormControl;
 	controls: FormControls = {};
+	constructor(private store: Store<AppState>, private apiService: ApiService, private bsModalRef: BsModalRef) {}
 	ngOnInit(): void {
 		this.ownerId = new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
 		this.controls.ownerId = this.ownerId;
@@ -59,13 +62,6 @@ export class FoundCardModalComponent implements OnInit {
 		this.changeDataState('static');
 	}
 	deleteCard(): void {
-		console.log({
-			id: this.data.id,
-			owner: this.data.owner.id,
-			number: this.data.number,
-			shop: this.selectedStore.id,
-			active: false
-		});
 		this.apiService
 			.putRequest('admin/card/put', {
 				id: this.data.id,
@@ -83,5 +79,8 @@ export class FoundCardModalComponent implements OnInit {
 				})
 			)
 			.subscribe();
+	}
+	closeModal(): void {
+		this.bsModalRef.hide();
 	}
 }
