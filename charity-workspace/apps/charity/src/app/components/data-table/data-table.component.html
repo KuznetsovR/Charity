@@ -30,16 +30,14 @@
 							<td>{{dataRow.name}} {{dataRow.surname}} {{dataRow.patronymic}}</td>
 						</tr>
 					</ng-container>
-          <ng-container *ngSwitchCase="'history'">
-            <tr
-              *ngFor="let dataRow of data"
-            >
-              <td>{{dataRow.id}}</td>
-              <td>{{dataRow.date}}</td>
-              <td>{{dataRow.card}}</td>
-              <td>{{dataRow.customer}}</td>
-            </tr>
-          </ng-container>
+					<ng-container *ngSwitchCase="'history'">
+						<tr *ngFor="let dataRow of data">
+							<td>{{dataRow.id}}</td>
+							<td>{{dataRow.date | date:'fullDate'}}</td>
+							<td>{{dataRow.card}}</td>
+							<td>{{dataRow.customer}}</td>
+						</tr>
+					</ng-container>
 				</ng-container>
 			</tbody>
 		</table>
