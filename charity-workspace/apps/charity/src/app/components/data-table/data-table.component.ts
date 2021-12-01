@@ -6,7 +6,7 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Observable } from 'rxjs';
 import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
-import { HistoryAction } from '../../pages/history-page/historyAction';
+import { HistoryAction } from '../../interfaces/historyAction';
 
 @Component({
 	selector: 'app-data-table',

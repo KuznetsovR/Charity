@@ -68,17 +68,28 @@ export class SearchModalComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		if (this.dataType === 'client') {
-			this.apiService.getRequest('admin/owner', this.searchForm.value).subscribe((data: Client[]) => {
-				this.store.dispatch(getClientList({ clients: data }));
-			});
-		} else if (this.dataType === 'card') {
-			this.apiService.getRequest('admin/card', this.searchForm.value).subscribe((data: Card[]) => {
-				this.store.dispatch(getCardList({ cards: data }));
-			});
-		} else {
-			throw new Error('Unknown datatype');
+		switch (this.dataType) {
+			case 'client':
+				this.apiService.getRequest('admin/owner', this.searchForm.value).subscribe((data: Client[]) => {
+					this.store.dispatch(getClientList({ clients: data }));
+				});
+				break;
+			case 'card':
+				this.apiService.getRequest('admin/card', this.searchForm.value).subscribe((data: Card[]) => {
+					this.store.dispatch(getCardList({ cards: data }));
+				});
+				break;
+			case 'history':
+				// this.apiService.getRequest('admin/history', this.searchForm.value).subscribe((data: HistoryAction[]) => {
+				//   this.store.dispatch(getCardList({ cards: data }));
+				// });
+				break;
+			default:
+				throw new Error('Unknown datatype');
 		}
+		this.bsModalRef.hide();
+	}
+	closeModal(): void {
 		this.bsModalRef.hide();
 	}
 }

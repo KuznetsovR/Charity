@@ -1,6 +1,6 @@
 import { Card } from '../interfaces/card.entity';
 import { Client } from '../interfaces/client.entity';
-import { HistoryAction } from '../pages/history-page/historyAction';
+import { HistoryAction } from '../interfaces/historyAction';
 
 export interface AppState {
 	cards: readonly Card[];
