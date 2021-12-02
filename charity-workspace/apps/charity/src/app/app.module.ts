@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -30,6 +30,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryPageComponent } from './pages/history-page/history-page.component';
 import { historyReducer } from './state/reducers/history.reducer';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu, 'ru');
 
 @NgModule({
 	declarations: [
@@ -46,7 +51,8 @@ import { historyReducer } from './state/reducers/history.reducer';
 		StoreSelectComponent,
 		DataTableComponent,
 		SearchModalComponent,
-		HistoryPageComponent
+		HistoryPageComponent,
+		SuccessModalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -67,7 +73,7 @@ import { historyReducer } from './state/reducers/history.reducer';
 		}),
 		HttpClientModule
 	],
-	providers: [],
+	providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}
