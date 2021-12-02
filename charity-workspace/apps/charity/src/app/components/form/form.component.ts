@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormControls } from './form-entities';
 import { Store } from 'src/app/interfaces/store.entity';
+import { mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { SearchModalComponent } from '../search-modal/search-modal.component';
 
 @Component({
 	selector: 'app-form',
@@ -30,13 +33,13 @@ export class FormComponent implements OnInit {
 
 	selectedStore: Store | null = null;
 	stores: Store[];
-	constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService, private modalService: BsModalService) {}
 
 	ngOnInit(): void {
 		for (const input of this.formInputs) {
 			switch (input) {
 				case 'number':
-					this.number = new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
+					this.number = new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-z\d]*$/)]);
 					this.controls.number = this.number;
 					break;
 				case 'passportNumber':
@@ -84,32 +87,53 @@ export class FormComponent implements OnInit {
 		}
 		switch (this.action) {
 			case 'Добавить карту':
-				this.apiService.postRequest(`admin/card`, {
-					id: 0,
-					number: this.number.value,
-					owner: this.ownerId.value,
-					shop: this.selectedStore.id,
-					active: true
-				});
+				this.apiService
+					.postRequest(`admin/card`, {
+						id: 0,
+						number: this.number.value,
+						owner: this.ownerId.value,
+						shop: this.selectedStore.id,
+						active: true
+					})
+					.pipe(
+						mergeMap((res) => {
+							console.log('pizdec');
+							const initialState: ModalOptions = {
+								class: 'modal-dialog-centered',
+								animated: true
+							};
+							this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
+							return of(res);
+						})
+					)
+					.subscribe();
 				break;
 			case 'Добавить клиента':
-				this.apiService.postRequest('admin/owner', {
-					id: 0,
-					useCount: 0,
-					active: true,
-					passportNumber: this.passportNumber.value,
-					name: this.name.value,
-					surname: this.surname.value,
-					patronymic: this.patronymic.value
-				});
+				this.apiService
+					.postRequest('admin/owner', {
+						id: 0,
+						useCount: 0,
+						active: true,
+						passportNumber: this.passportNumber.value,
+						name: this.name.value,
+						surname: this.surname.value,
+						patronymic: this.patronymic.value
+					})
+					.pipe(
+						mergeMap((res) => {
+							console.log('pizdec');
+							const initialState: ModalOptions = {
+								class: 'modal-dialog-centered',
+								animated: true
+							};
+							this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
+							return of(res);
+						})
+					)
+					.subscribe();
 				break;
-
-			case 'Удалить карту':
-				this.apiService.deleteRequest(`path`, {});
-				break;
-			case 'Удалить клиента':
-				this.apiService.deleteRequest(`path`, {});
-				break;
+			default:
+				throw new Error('unknown action');
 		}
 	}
 }
