@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Card } from '../interfaces/card.entity';
 import { Client } from '../interfaces/client.entity';
-import {RequestBody, RequestOptions } from '../interfaces/api-entities';
+import { RequestBody, RequestOptions } from '../interfaces/api-entities';
 import { CardChangeDto } from '../interfaces/card-change.dto';
 
 @Injectable({
@@ -48,12 +48,8 @@ export class ApiService {
 		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
 	}
 
-	postRequest(path: string, body: RequestBody): Promise<any> {
-		return this.doRequest(path, {
-			method: 'POST',
-			headers: this.headers,
-			body: JSON.stringify(body)
-		});
+	postRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
+		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
 	}
 
 	deleteRequest(path: string, body: RequestBody): Promise<any> {
@@ -63,11 +59,4 @@ export class ApiService {
 			body: JSON.stringify(body)
 		});
 	}
-	// trimForm(): void {
-	//   Object.keys(this.dataForm.controls).forEach((key) => {
-	//     return typeof this.dataForm.get(key).value === 'string'
-	//       ? this.dataForm.get(key).setValue(this.dataForm.get(key).value.trim())
-	//       : null;
-	//   });
-	// }
 }
