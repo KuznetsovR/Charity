@@ -7,13 +7,10 @@
 		<div class="input-wrapper" *ngIf="formInputs?.includes('number')">
 			<input
 				required
-				type="number"
-				min="0"
-				step="1"
 				placeholder="Введите номер карты"
 				class="data-input"
 				formControlName="number"
-				popover="Номер карты содержит 8-20 цифр "
+				popover="Номер карты содержит цифры и/или буквы"
 				triggers="focus:focusout"
 				placement="left"
 				[class.invalid]="userTriedToSendInvalid && number.invalid"
