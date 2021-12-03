@@ -6,7 +6,7 @@ import { FormControls } from './form-entities';
 import { Store } from 'src/app/interfaces/store.entity';
 import { mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { SearchModalComponent } from '../search-modal/search-modal.component';
+import { SuccessModalComponent } from '../success-modal/success-modal.component';
 
 @Component({
 	selector: 'app-form',
@@ -97,12 +97,14 @@ export class FormComponent implements OnInit {
 					})
 					.pipe(
 						mergeMap((res) => {
-							console.log('pizdec');
 							const initialState: ModalOptions = {
 								class: 'modal-dialog-centered',
-								animated: true
+								animated: true,
+								initialState: {
+									additionalText: 'Карта постоянного клиента успешно добавлена'
+								}
 							};
-							this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
+							this.bsModalRef = this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
 						})
 					)
@@ -121,12 +123,14 @@ export class FormComponent implements OnInit {
 					})
 					.pipe(
 						mergeMap((res) => {
-							console.log('pizdec');
 							const initialState: ModalOptions = {
 								class: 'modal-dialog-centered',
-								animated: true
+								animated: true,
+								initialState: {
+									additionalText: 'Постоянный клиент успешно добавлен'
+								}
 							};
-							this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
+							this.bsModalRef = this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
 						})
 					)
