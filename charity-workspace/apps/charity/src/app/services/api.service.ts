@@ -6,7 +6,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Card } from '../interfaces/card.entity';
 import { Client } from '../interfaces/client.entity';
-import { RequestBody, RequestOptions } from '../interfaces/api-entities';
 import { CardChangeDto } from '../interfaces/card-change.dto';
 
 @Injectable({
@@ -19,18 +18,6 @@ export class ApiService {
 	};
 
 	constructor(private router: Router, private http: HttpClient) {}
-
-	async doRequest(path: string, options: RequestOptions): Promise<any> {
-		const response = await fetch(API_PATH + path, options);
-		if (response.ok) {
-			return response.json();
-		} else {
-			if (response.status === 400 || response.status === 403 || response.status === 404) {
-				await this.router.navigate(['/error']);
-			}
-			throw new Error(response.statusText);
-		}
-	}
 
 	getRequest(path: string, parameters?): Observable<any> {
 		let params = new HttpParams();
@@ -49,14 +36,6 @@ export class ApiService {
 	}
 
 	postRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
-		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
-	}
-
-	deleteRequest(path: string, body: RequestBody): Promise<any> {
-		return this.doRequest(path, {
-			method: 'DELETE',
-			headers: this.headers,
-			body: JSON.stringify(body)
-		});
+		return this.http.post(API_PATH + path, newObject, { headers: this.headers });
 	}
 }
