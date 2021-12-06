@@ -34,6 +34,7 @@
 			</ng-template>
 		</form>
 	</div>
+  <div *ngIf="!data.active">Неактивно</div>
 	<div class="btns-container">
 		<button
 			*ngIf="dataState === 'static' else approveBtn"
