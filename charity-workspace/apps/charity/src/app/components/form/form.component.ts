@@ -4,9 +4,10 @@ import { ApiService } from '../../services/api.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormControls } from './form-entities';
 import { Store } from 'src/app/interfaces/store.entity';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SuccessModalComponent } from '../success-modal/success-modal.component';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 
 @Component({
 	selector: 'app-form',
@@ -106,6 +107,16 @@ export class FormComponent implements OnInit {
 							};
 							this.bsModalRef = this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
+						}),
+						catchError((err) => {
+							if (err.error.error === 'Bad Request') {
+								const initialState: ModalOptions = {
+									class: 'modal-dialog-centered',
+									animated: true
+								};
+								this.bsModalRef = this.modalService.show(ErrorModalComponent, initialState);
+							}
+							return of(err);
 						})
 					)
 					.subscribe();
