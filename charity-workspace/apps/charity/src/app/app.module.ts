@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -33,6 +33,7 @@ import { historyReducer } from './state/reducers/history.reducer';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { ErrorModalComponent } from './components/error-modal/error-modal.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -52,7 +53,8 @@ registerLocaleData(localeRu, 'ru');
 		DataTableComponent,
 		SearchModalComponent,
 		HistoryPageComponent,
-		SuccessModalComponent
+		SuccessModalComponent,
+		ErrorModalComponent
 	],
 	imports: [
 		BrowserModule,
