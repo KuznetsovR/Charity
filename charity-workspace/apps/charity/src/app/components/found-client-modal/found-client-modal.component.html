@@ -27,7 +27,7 @@
 			</form>
 		</ng-template>
 	</div>
-  <div *ngIf="modalState.isRequestBad">Вы ввели неправильные данные, попробуйте ещё раз</div>
+	<div *ngIf="modalState.isRequestBad">Вы ввели неправильные данные, попробуйте ещё раз</div>
 	<div class="btns-container">
 		<button
 			*ngIf="modalState.dataState === 'static' else approveBtn"
@@ -37,9 +37,14 @@
 			Изменить
 		</button>
 		<ng-template #approveBtn>
-			<button type="submit" class="btn btn-success" (click)="changeClient()">Подтвердить изменения</button>
+			<button type="submit" class="btn btn-success" (click)="change()">Подтвердить изменения</button>
 		</ng-template>
-		<button class="delete-button btn btn-danger" (click)="deleteClient()">Удалить</button>
-    <button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
-  </div>
+		<button class="delete-button btn btn-danger" (click)="delete()" *ngIf="data.active else restoreBtn">
+			Удалить
+		</button>
+		<ng-template #restoreBtn>
+			<button class="restore-btn btn btn-success" (click)="restore()">Восстановить</button>
+		</ng-template>
+		<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
+	</div>
 </div>
