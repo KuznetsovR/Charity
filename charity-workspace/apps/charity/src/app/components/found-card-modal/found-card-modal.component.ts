@@ -43,8 +43,7 @@ export class FoundCardModalComponent implements OnInit {
 	}
 	changeCard(): void {
 		this.apiService
-			.putRequest('admin/card/put', {
-				id: this.data.id,
+			.putRequest(`admin/card/put/${this.data.id}`, {
 				owner: this.ownerId.value,
 				number: this.number.value,
 				shop: this.selectedStore.id,
@@ -63,8 +62,7 @@ export class FoundCardModalComponent implements OnInit {
 	}
 	deleteCard(): void {
 		this.apiService
-			.putRequest('admin/card/put', {
-				id: this.data.id,
+			.putRequest(`admin/card/put/${this.data.id}`, {
 				owner: this.data.owner.id,
 				number: this.data.number,
 				shop: this.selectedStore.id,

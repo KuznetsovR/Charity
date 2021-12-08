@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { API_PATH } from '../constants/api-path';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Card } from '../interfaces/card.entity';
 import { Client } from '../interfaces/client.entity';
 import { CardChangeDto } from '../interfaces/card-change.dto';
 
@@ -31,7 +30,7 @@ export class ApiService {
 		return this.http.get(API_PATH + path, { headers: this.headers, params });
 	}
 
-	putRequest(path: string, newObject: Card | Client | CardChangeDto): Observable<any> {
+	putRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
 		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
 	}
 

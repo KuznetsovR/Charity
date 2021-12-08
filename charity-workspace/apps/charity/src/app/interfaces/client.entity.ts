@@ -1,5 +1,5 @@
 export interface Client {
-	id: number;
+	id?: number;
 	active?: boolean;
 	useCount: number;
 	patronymic: string;
