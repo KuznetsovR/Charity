@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Card } from 'src/app/interfaces/card.entity';
-import { addCard, getCardList, removeCard } from '../actions/data-table.actions';
+import { addCard, getCardList, removeCard } from '../actions/cards.actions';
 
 export const initialState: readonly Card[] = [];
 

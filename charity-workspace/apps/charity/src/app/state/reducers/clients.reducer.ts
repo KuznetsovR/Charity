@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Client } from 'src/app/interfaces/client.entity';
-import { addClient, getClientList, removeClient } from '../actions/data-table.actions';
+import { addClient, getClientList, removeClient } from '../actions/clients.actions';
 
 export const initialState: readonly Client[] = [];
 

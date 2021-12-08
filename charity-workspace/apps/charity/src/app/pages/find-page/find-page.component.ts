@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getCardList, getClientList } from '../../state/actions/data-table.actions';
+import { getClientList } from '../../state/actions/clients.actions';
+import { getCardList } from '../../state/actions/cards.actions';
 import { ApiService } from '../../services/api.service';
 import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
