@@ -137,7 +137,7 @@ export class FoundClientModalComponent implements OnInit {
 	restore(): void {
 		this.callAPI({
 			...this.data,
-			active: false
+			active: true
 		}).subscribe(() => {
 			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
 				this.store.dispatch(getClientList({ clients: data }));
