@@ -65,8 +65,7 @@ export class FoundClientModalComponent implements OnInit {
 	}
 	changeClient(): void {
 		this.apiService
-			.putRequest('admin/owner', {
-				id: this.data.id,
+			.putRequest(`admin/owner/${this.data.id}`, {
 				active: true,
 				useCount: this.useCount.value,
 				passportNumber: this.passportNumber.value,
@@ -96,7 +95,7 @@ export class FoundClientModalComponent implements OnInit {
 	}
 	deleteClient(): void {
 		this.apiService
-			.putRequest('admin/owner', {
+			.putRequest(`admin/owner/${this.data.id}`, {
 				...this.data,
 				active: false
 			})
