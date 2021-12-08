@@ -2,10 +2,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_PATH } from '../constants/api-path';
-import {HttpClient,  HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../interfaces/client.entity';
 import { CardChangeDto } from '../interfaces/card-change.dto';
+import { ResponseTypes } from '../interfaces/response-types';
 
 @Injectable({
 	providedIn: 'root'
@@ -18,7 +19,7 @@ export class ApiService {
 
 	constructor(private router: Router, private http: HttpClient) {}
 
-	getRequest(path: string, parameters?): Observable<any> {
+	getRequest(path: string, parameters?): Observable<ResponseTypes> {
 		let params = new HttpParams();
 		if (parameters) {
 			for (const param of Object.entries(parameters)) {
@@ -27,14 +28,14 @@ export class ApiService {
 				}
 			}
 		}
-		return this.http.get(API_PATH + path, { headers: {...this.headers, reset: 'true' }, params });
+		return this.http.get<ResponseTypes>(API_PATH + path, { headers: { ...this.headers, reset: 'true' }, params });
 	}
 
-	putRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
-		return this.http.put(API_PATH + path, newObject, { headers: this.headers });
+	putRequest(path: string, newObject: Client | CardChangeDto): Observable<ResponseTypes> {
+		return this.http.put<ResponseTypes>(API_PATH + path, newObject, { headers: this.headers });
 	}
 
-	postRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
-		return this.http.post(API_PATH + path, newObject, { headers: this.headers });
+	postRequest(path: string, newObject: Client | CardChangeDto): Observable<ResponseTypes> {
+		return this.http.post<ResponseTypes>(API_PATH + path, newObject, { headers: this.headers });
 	}
 }
