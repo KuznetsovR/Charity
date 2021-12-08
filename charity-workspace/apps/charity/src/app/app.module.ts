@@ -27,13 +27,14 @@ import { cardsReducer } from './state/reducers/cards.reducer';
 import { clientsReducer } from './state/reducers/clients.reducer';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HistoryPageComponent } from './pages/history-page/history-page.component';
 import { historyReducer } from './state/reducers/history.reducer';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { ErrorModalComponent } from './components/error-modal/error-modal.component';
+import { CacheInterceptor } from './interceptors/cache.interceptor';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -75,7 +76,14 @@ registerLocaleData(localeRu, 'ru');
 		}),
 		HttpClientModule
 	],
-	providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CacheInterceptor,
+			multi: true
+		},
+		{ provide: LOCALE_ID, useValue: 'ru' }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

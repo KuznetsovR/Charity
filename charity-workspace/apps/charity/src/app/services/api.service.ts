@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_PATH } from '../constants/api-path';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient,  HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../interfaces/client.entity';
 import { CardChangeDto } from '../interfaces/card-change.dto';
@@ -27,7 +27,7 @@ export class ApiService {
 				}
 			}
 		}
-		return this.http.get(API_PATH + path, { headers: this.headers, params });
+		return this.http.get(API_PATH + path, { headers: {...this.headers, reset: 'true' }, params });
 	}
 
 	putRequest(path: string, newObject: Client | CardChangeDto): Observable<any> {
