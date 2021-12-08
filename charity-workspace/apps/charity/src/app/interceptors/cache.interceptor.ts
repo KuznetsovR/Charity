@@ -21,8 +21,10 @@ export class CacheInterceptor implements HttpInterceptor {
 		} else {
 			return next.handle(req).pipe(
 				tap((stateEvent) => {
-					if (stateEvent instanceof HttpResponse && stateEvent.ok) {
-						this.cache.set(req, stateEvent.clone());
+					if (stateEvent instanceof HttpResponse) {
+						// this.cache.set(req, stateEvent.clone());
+						// const cache = await caches.open('charity-cache');
+						// await cache.put(req, stateEvent.clone());
 					}
 				}),
 				share()
