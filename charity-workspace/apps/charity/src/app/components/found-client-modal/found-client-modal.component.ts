@@ -2,14 +2,15 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
-import { getClientList } from '../../state/actions/data-table.actions';
+import { getClientList } from '../../state/actions/clients.actions';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -22,7 +23,8 @@ export class FoundClientModalComponent implements OnInit {
 		private store: Store<AppState>,
 		private apiService: ApiService,
 		private cdr: ChangeDetectorRef,
-		private bsModalRef: BsModalRef
+		private bsModalRef: BsModalRef,
+		private modalService: BsModalService
 	) {}
 	data: Client;
 	changeClientForm: FormGroup;
@@ -150,6 +152,12 @@ export class FoundClientModalComponent implements OnInit {
 				if (err.error.error === 'Bad Request') {
 					this.changeRequestCorrectnessState(true);
 					this.cdr.detectChanges();
+				} else {
+					const initialState: ModalOptions = {
+						class: 'modal-dialog-centered',
+						animated: true
+					};
+					this.bsModalRef = this.modalService.show(ErrorModalComponent, initialState);
 				}
 				return of(err);
 			})
