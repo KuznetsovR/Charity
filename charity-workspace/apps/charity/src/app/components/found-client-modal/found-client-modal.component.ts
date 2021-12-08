@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { getClientList } from '../../state/actions/data-table.actions';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
@@ -64,9 +64,25 @@ export class FoundClientModalComponent implements OnInit {
 		this.modalState.isRequestBad = newState;
 	}
 	changeClient(): void {
+		this.callAPI({
+			active: this.data.active,
+			useCount: this.useCount.value,
+			passportNumber: this.passportNumber.value,
+			name: this.name.value,
+			surname: this.surname.value,
+			patronymic: this.patronymic.value
+		}).subscribe(() => {
+			this.changeRequestCorrectnessState(false);
+			this.changeDataState('static');
+			this.cdr.detectChanges();
+			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
+				this.store.dispatch(getClientList({ clients: data }));
+			});
+		});
+
 		this.apiService
 			.putRequest(`admin/owner/${this.data.id}`, {
-				active: true,
+				active: this.data.active,
 				useCount: this.useCount.value,
 				passportNumber: this.passportNumber.value,
 				name: this.name.value,
@@ -94,6 +110,15 @@ export class FoundClientModalComponent implements OnInit {
 			.subscribe();
 	}
 	deleteClient(): void {
+		this.callAPI({
+			...this.data,
+			active: false
+		}).subscribe(() => {
+			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
+				this.store.dispatch(getClientList({ clients: data }));
+			});
+		});
+
 		this.apiService
 			.putRequest(`admin/owner/${this.data.id}`, {
 				...this.data,
@@ -108,6 +133,17 @@ export class FoundClientModalComponent implements OnInit {
 				})
 			)
 			.subscribe();
+	}
+	callAPI(newObject: Client): Observable<Client> {
+		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
+			catchError((err) => {
+				if (err.error.error === 'Bad Request') {
+					this.changeRequestCorrectnessState(true);
+					this.cdr.detectChanges();
+				}
+				return of(err);
+			})
+		);
 	}
 	closeModal(): void {
 		this.bsModalRef.hide();
