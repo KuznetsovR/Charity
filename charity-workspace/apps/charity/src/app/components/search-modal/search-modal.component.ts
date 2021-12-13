@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store as StateStore } from '@ngrx/store';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { getCardList } from '../../state/actions/cards.actions';
-import { getClientList } from '../../state/actions/clients.actions';
+import { getClientsList } from '../../state/actions/clients.actions';
 import { ApiService } from '../../services/api.service';
 import { Store } from 'src/app/interfaces/store.entity';
 import { FormControls } from '../form/form-entities';
@@ -73,17 +73,15 @@ export class SearchModalComponent implements OnInit {
 	onSubmit(): void {
 		switch (this.dataType) {
 			case 'client':
-				this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-					this.store.dispatch(getClientList({ clients: data }));
-				});
+				this.store.dispatch(getClientsList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'card':
 				this.store.dispatch(getCardList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'history':
-				this.apiService.getRequest('admin/history').subscribe((data: HistoryAction[]) => {
-					this.store.dispatch(getHistory({ history: data }));
-				});
+				// this.apiService.getRequest('admin/history').subscribe((data: HistoryAction[]) => {
+				// 	this.store.dispatch(getHistory({ history: data }));
+				// });
 				break;
 			default:
 				throw new Error('Unknown datatype');

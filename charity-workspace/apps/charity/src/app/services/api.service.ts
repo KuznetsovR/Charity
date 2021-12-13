@@ -20,7 +20,7 @@ export class ApiService {
 	lastParams = null;
 	constructor(private router: Router, private http: HttpClient) {}
 
-	getRequest(path: string, actionParameters?: QueryParameters, setNew?: boolean): Observable<ResponseTypes> {
+	getRequest(path: string, actionParameters: QueryParameters, setNew: boolean): Observable<ResponseTypes> {
 		if (setNew === true) {
 			this.lastParams = actionParameters;
 		}

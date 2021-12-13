@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
-import { getClientList } from '../../state/actions/clients.actions';
+import { getClientsList } from '../../state/actions/clients.actions';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Client } from 'src/app/interfaces/client.entity';
@@ -11,6 +11,7 @@ import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ErrorModalComponent } from '../error-modal/error-modal.component';
+import { getCardList } from '../../state/actions/cards.actions';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -77,73 +78,24 @@ export class FoundClientModalComponent implements OnInit {
 			this.changeRequestCorrectnessState(false);
 			this.changeDataState('static');
 			this.cdr.detectChanges();
-			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-				this.store.dispatch(getClientList({ clients: data }));
-			});
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
-
-		// this.apiService
-		// 	.putRequest(`admin/owner/${this.data.id}`, {
-		// 		active: this.data.active,
-		// 		useCount: this.useCount.value,
-		// 		passportNumber: this.passportNumber.value,
-		// 		name: this.name.value,
-		// 		surname: this.surname.value,
-		// 		patronymic: this.patronymic.value
-		// 	})
-		// 	.pipe(
-		// 		mergeMap((res) => {
-		// 			this.changeRequestCorrectnessState(false);
-		// 			this.changeDataState('static');
-		// 			this.cdr.detectChanges();
-		// 			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-		// 				this.store.dispatch(getClientList({ clients: data }));
-		// 			});
-		// 			return of(res);
-		// 		}),
-		// 		catchError((err) => {
-		// 			if (err.error.error === 'Bad Request') {
-		// 				this.changeRequestCorrectnessState(true);
-		// 				this.cdr.detectChanges();
-		// 			}
-		// 			return of(err);
-		// 		})
-		// 	)
-		// 	.subscribe();
 	}
 	delete(): void {
 		this.callAPI({
 			...this.data,
 			active: false
 		}).subscribe(() => {
-			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-				this.store.dispatch(getClientList({ clients: data }));
-			});
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 
-		// this.apiService
-		// 	.putRequest(`admin/owner/${this.data.id}`, {
-		// 		...this.data,
-		// 		active: false
-		// 	})
-		// 	.pipe(
-		// 		mergeMap((res) => {
-		// 			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-		// 				this.store.dispatch(getClientList({ clients: data }));
-		// 			});
-		// 			return of(res);
-		// 		})
-		// 	)
-		// 	.subscribe();
 	}
 	restore(): void {
 		this.callAPI({
 			...this.data,
 			active: true
 		}).subscribe(() => {
-			this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-				this.store.dispatch(getClientList({ clients: data }));
-			});
+			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
 		});
 	}
 	callAPI(newObject: Client): Observable<Client> {

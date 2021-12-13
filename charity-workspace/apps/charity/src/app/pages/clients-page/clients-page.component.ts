@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Client } from '../../interfaces/client.entity';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
-import { getClientList } from '../../state/actions/clients.actions';
+import { getClientsList } from '../../state/actions/clients.actions';
 
 @Component({
 	selector: 'app-clients-page',
@@ -16,6 +16,6 @@ export class ClientsPageComponent implements OnInit {
 	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
-		this.store.dispatch(getClientList({ clients: [] }));
+		this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
 	}
 }
