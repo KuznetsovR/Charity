@@ -8,6 +8,7 @@ import { Client } from '../interfaces/client.entity';
 import { CardChangeDto } from '../interfaces/card-change.dto';
 import { ResponseTypes } from '../interfaces/response-types';
 import { QueryParameters } from '../interfaces/queryParameters';
+import { Store } from '../interfaces/store.entity';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,6 +21,10 @@ export class ApiService {
 	lastParams = null;
 	constructor(private router: Router, private http: HttpClient) {}
 
+	getRequestWithoutParams(path): Observable<Store[]> {
+		return this.http.get<Store[]>(API_PATH + path, { headers: this.headers });
+	}
+
 	getRequest(path: string, actionParameters: QueryParameters, setNew: boolean): Observable<ResponseTypes> {
 		if (setNew === true) {
 			this.lastParams = actionParameters;
@@ -30,9 +35,7 @@ export class ApiService {
 		// 		delete parameters[param];
 		// 	}
 		// }
-		console.log(actionParameters);
 		const params = new HttpParams({ fromObject: this.lastParams });
-		console.log(params);
 		return this.http.get<ResponseTypes>(API_PATH + path, { headers: this.headers, params });
 	}
 
