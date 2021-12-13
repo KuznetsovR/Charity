@@ -73,21 +73,17 @@ export class SearchModalComponent implements OnInit {
 	onSubmit(): void {
 		switch (this.dataType) {
 			case 'client':
-				this.apiService.getRequest('admin/owner', this.searchForm.value).subscribe((data: Client[]) => {
+				this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
 					this.store.dispatch(getClientList({ clients: data }));
 				});
 				break;
 			case 'card':
-				this.apiService.getRequest('admin/card', this.searchForm.value).subscribe((data: Card[]) => {
-					this.store.dispatch(getCardList({ cards: data }));
-				});
+				this.store.dispatch(getCardList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'history':
-				this.apiService
-					.getRequest('admin/history', this.searchForm.value)
-					.subscribe((data: HistoryAction[]) => {
-						this.store.dispatch(getHistory({ history: data }));
-					});
+				this.apiService.getRequest('admin/history').subscribe((data: HistoryAction[]) => {
+					this.store.dispatch(getHistory({ history: data }));
+				});
 				break;
 			default:
 				throw new Error('Unknown datatype');
