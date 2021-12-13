@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPageComponent } from '../pages/add-page/add-page.component';
-import { FindPageComponent } from '../pages/find-page/find-page.component';
 import { ErrorPageComponent } from '../pages/error-page/error-page.component';
 import { HistoryPageComponent } from '../pages/history-page/history-page.component';
+import { CardsPageComponent } from '../pages/cards-page/cards-page.component';
+import { ClientsPageComponent } from '../pages/clients-page/clients-page.component';
 
 const routes: Routes = [
 	{
@@ -16,8 +17,12 @@ const routes: Routes = [
 		component: AddPageComponent
 	},
 	{
-		path: 'find',
-		component: FindPageComponent
+		path: 'cards',
+		component: CardsPageComponent
+	},
+	{
+		path: 'clients',
+		component: ClientsPageComponent
 	},
 	{
 		path: 'error',
@@ -29,7 +34,7 @@ const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: '/find'
+		redirectTo: '/history'
 	}
 ];
 
