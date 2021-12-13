@@ -38,6 +38,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CardsEffects } from './state/effects/cards.effects';
 import { CardsPageComponent } from './pages/cards-page/cards-page.component';
 import { ClientsPageComponent } from './pages/clients-page/clients-page.component';
+import { ClientsEffects } from './state/effects/clients.effects';
+import { HistoryEffects } from './state/effects/history.effects';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -83,7 +85,7 @@ registerLocaleData(localeRu, 'ru');
 			autoPause: true
 		}),
 		HttpClientModule,
-		EffectsModule.forRoot([CardsEffects]),
+		EffectsModule.forRoot([CardsEffects, ClientsEffects, HistoryEffects])
 	],
 	providers: [
 		{
