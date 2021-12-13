@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Client } from '../interfaces/client.entity';
 import { CardChangeDto } from '../interfaces/card-change.dto';
 import { ResponseTypes } from '../interfaces/response-types';
+import { QueryParameters } from '../interfaces/queryParameters';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,19 +17,23 @@ export class ApiService {
 		'Content-Type': 'application/json',
 		Authorization: 'Basic YWRtaW46YWRtaW4='
 	};
-
+	lastParams = null;
 	constructor(private router: Router, private http: HttpClient) {}
 
-	getRequest(path: string, parameters?): Observable<ResponseTypes> {
-		let params = new HttpParams();
-		if (parameters) {
-			for (const param of Object.entries(parameters)) {
-				if (param[1] && (typeof param[1] === 'string' || typeof param[1] === 'number')) {
-					params = params.append(param[0], param[1]);
-				}
-			}
+	getRequest(path: string, actionParameters?: QueryParameters, setNew?: boolean): Observable<ResponseTypes> {
+		if (setNew === true) {
+			this.lastParams = actionParameters;
 		}
-		return this.http.get<ResponseTypes>(API_PATH + path, { headers: { ...this.headers, reset: 'true' }, params });
+		// const parameters = { ...actionParameters };
+		// for (const param in parameters) {
+		// 	if (parameters[param] === '') {
+		// 		delete parameters[param];
+		// 	}
+		// }
+		console.log(actionParameters);
+		const params = new HttpParams({ fromObject: this.lastParams });
+		console.log(params);
+		return this.http.get<ResponseTypes>(API_PATH + path, { headers: this.headers, params });
 	}
 
 	putRequest(path: string, newObject: Client | CardChangeDto): Observable<ResponseTypes> {

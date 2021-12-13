@@ -4,7 +4,7 @@ import { addClient, getClientList, removeClient } from '../actions/clients.actio
 
 export const initialState: readonly Client[] = [];
 
-export const clientsReducer = createReducer(
+export const clientsReducer = createReducer<readonly Client[]>(
 	initialState,
 	on(getClientList, (state, { clients }) => clients),
 	on(addClient, (state, { client }) => [...state, client]),
