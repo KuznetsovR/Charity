@@ -64,26 +64,9 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.selectedStore.id,
 			active: true
 		}).subscribe(() => {
-			this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-				this.store.dispatch(getCardList({ cards: data }));
-			});
+			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
 		});
-		// this.apiService
-		// 	.putRequest(`admin/card/put/${this.data.id}`, {
-		// 		owner: this.ownerId.value,
-		// 		number: this.number.value,
-		// 		shop: this.selectedStore.id,
-		// 		active: true
-		// 	})
-		// 	.pipe(
-		// 		mergeMap((res) => {
-		// 			this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-		// 				this.store.dispatch(getCardList({ cards: data }));
-		// 			});
-		// 			return of(res);
-		// 		})
-		// 	)
-		// 	.subscribe();
+
 		this.changeDataState('static');
 	}
 	delete(): void {
@@ -93,27 +76,8 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.data.shop.id,
 			active: false
 		}).subscribe(() => {
-			this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-				this.store.dispatch(getCardList({ cards: data }));
-			});
+			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
 		});
-
-		// this.apiService
-		// 	.putRequest(`admin/card/put/${this.data.id}`, {
-		// 		owner: this.data.owner.id,
-		// 		number: this.data.number,
-		// 		shop: this.data.shop.id,
-		// 		active: false
-		// 	})
-		// 	.pipe(
-		// 		mergeMap((res) => {
-		// 			this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-		// 				this.store.dispatch(getCardList({ cards: data }));
-		// 			});
-		// 			return of(res);
-		// 		})
-		// 	)
-		// 	.subscribe();
 	}
 	restore(): void {
 		this.callAPI({
@@ -122,9 +86,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.data.shop.id,
 			active: true
 		}).subscribe(() => {
-			this.apiService.getRequest('admin/card').subscribe((data: Card[]) => {
-				this.store.dispatch(getCardList({ cards: data }));
-			});
+			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
 		});
 	}
 	callAPI(newObject: CardChangeDto): Observable<Client> {
