@@ -14,7 +14,7 @@ export class CardsEffects {
 		this.actions$.pipe(
 			ofType(getCardList),
 			mergeMap((action) =>
-				this.apiService.getRequest(`admin/card`, action.parameters, action.setNewParams).pipe(
+				this.apiService.getRequest('admin/card', action.parameters, action.setNewParams).pipe(
 					map((cards: Card[]) => {
 						return getCardListSuccess({ cards });
 					}),
