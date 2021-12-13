@@ -11,7 +11,6 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { RemovePageComponent } from './pages/remove-page/remove-page.component';
-import { FindPageComponent } from './pages/find-page/find-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormComponent } from './components/form/form.component';
@@ -35,6 +34,10 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { ErrorModalComponent } from './components/error-modal/error-modal.component';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
+import { EffectsModule } from '@ngrx/effects';
+import { CardsEffects } from './state/effects/cards.effects';
+import { CardsPageComponent } from './pages/cards-page/cards-page.component';
+import { ClientsPageComponent } from './pages/clients-page/clients-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -45,7 +48,6 @@ registerLocaleData(localeRu, 'ru');
 		HeaderComponent,
 		AddPageComponent,
 		RemovePageComponent,
-		FindPageComponent,
 		FormComponent,
 		ErrorPageComponent,
 		FoundCardModalComponent,
@@ -55,11 +57,13 @@ registerLocaleData(localeRu, 'ru');
 		SearchModalComponent,
 		HistoryPageComponent,
 		SuccessModalComponent,
-		ErrorModalComponent
+		ErrorModalComponent,
+		CardsPageComponent,
+		ClientsPageComponent
 	],
 	imports: [
-		BrowserModule,
 		AppRoutingModule,
+		BrowserModule,
 		BrowserAnimationsModule,
 		ButtonsModule.forRoot(),
 		ModalModule.forRoot(),
@@ -68,13 +72,18 @@ registerLocaleData(localeRu, 'ru');
 		TabsModule.forRoot(),
 		BrowserModule,
 		PopoverModule.forRoot(),
-		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer, history: historyReducer }),
+		StoreModule.forRoot({
+			cards: cardsReducer,
+			clients: clientsReducer,
+			history: historyReducer
+		}),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
 			autoPause: true
 		}),
-		HttpClientModule
+		HttpClientModule,
+		EffectsModule.forRoot([CardsEffects]),
 	],
 	providers: [
 		{
