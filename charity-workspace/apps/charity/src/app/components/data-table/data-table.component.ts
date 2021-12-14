@@ -39,8 +39,15 @@ export class DataTableComponent {
 				data
 			}
 		};
-		this.dataType === 'card'
-			? (this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState))
-			: (this.bsModalRef = this.modalService.show(FoundClientModalComponent, initialState));
+		switch (this.dataType) {
+			case 'card':
+				this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
+				break;
+			case 'client':
+				this.bsModalRef = this.modalService.show(FoundClientModalComponent, initialState);
+				break;
+			default:
+				throw new Error('Unknown data type');
+		}
 	}
 }
