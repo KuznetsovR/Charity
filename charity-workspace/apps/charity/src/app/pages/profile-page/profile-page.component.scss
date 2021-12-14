@@ -1,4 +1,4 @@
-@import '../../../styles/colors';
+@use '../../../styles/colors' as colors;
 .profile {
 	margin-top: 30px;
 	text-align: center;
@@ -13,5 +13,5 @@
 }
 .role {
 	margin-top: 10px;
-	color: $light-gray;
+	color: colors.$light-gray;
 }

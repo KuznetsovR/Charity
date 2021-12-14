@@ -1,6 +1,6 @@
-@import '../../../styles/colors';
+@use '../../../styles/colors' as colors;
 .header {
-	background: $very-light-gray;
+	background: colors.$very-light-gray;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -23,7 +23,7 @@
 }
 .header-link.focus {
 	opacity: 100%;
-	color: $light-blue;
+	color: colors.$light-blue;
 	font-weight: 600;
-	border-bottom: 2px solid $light-blue;
+	border-bottom: 2px solid colors.$light-blue;
 }

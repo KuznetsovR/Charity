@@ -1,4 +1,4 @@
-@import './../../../styles/colors';
+@use './../../../styles/colors' as colors;
 .found-client-modal {
   padding: 20px;
   display: flex;
@@ -33,13 +33,13 @@
 }
 .edit-button {
   height: 100%;
-  background-color: $light-blue;
+  background-color: colors.$light-blue;
   color: #fff;
 }
 .delete-button {
   margin-left: 10px;
   height: 100%;
-  background-color: $light-red;
+  background-color: colors.$light-red;
   color: #fff;
   border: 0;
 }
