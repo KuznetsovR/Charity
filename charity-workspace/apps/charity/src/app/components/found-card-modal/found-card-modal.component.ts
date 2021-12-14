@@ -90,7 +90,7 @@ export class FoundCardModalComponent implements OnInit {
 		});
 	}
 	callAPI(newObject: CardChangeDto): Observable<Client> {
-		return this.apiService.putRequest(`admin/card/put/${this.data.id}`, newObject).pipe(
+		return this.apiService.putRequest(`admin/card/${this.data.id}`, newObject).pipe(
 			catchError((err) => {
 				this.bsModalRef.hide();
 				if (err.error.error === 'Bad Request') {
