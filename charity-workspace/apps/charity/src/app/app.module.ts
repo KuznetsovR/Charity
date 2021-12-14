@@ -7,14 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
-import { RemovePageComponent } from './pages/remove-page/remove-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormComponent } from './components/form/form.component';
-import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
 import { StoreSelectComponent } from './components/store-select/store-select.component';
@@ -46,12 +43,9 @@ registerLocaleData(localeRu, 'ru');
 @NgModule({
 	declarations: [
 		AppComponent,
-		ProfilePageComponent,
 		HeaderComponent,
 		AddPageComponent,
-		RemovePageComponent,
 		FormComponent,
-		ErrorPageComponent,
 		FoundCardModalComponent,
 		FoundClientModalComponent,
 		StoreSelectComponent,
