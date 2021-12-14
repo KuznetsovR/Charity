@@ -7,10 +7,8 @@ import { getClientsList } from '../../state/actions/clients.actions';
 import { ApiService } from '../../services/api.service';
 import { Store } from 'src/app/interfaces/store.entity';
 import { FormControls } from '../form/form-entities';
-import { Card } from 'src/app/interfaces/card.entity';
-import { Client } from 'src/app/interfaces/client.entity';
-import { HistoryAction } from '../../interfaces/historyAction';
 import { getHistory } from '../../state/actions/history.actions';
+import { AppState } from '../../state/app-state';
 
 @Component({
 	selector: 'app-search-modal',
@@ -31,11 +29,7 @@ export class SearchModalComponent implements OnInit {
 	cardId: FormControl;
 	customerId: FormControl;
 	controls: FormControls = {};
-	constructor(
-		public bsModalRef: BsModalRef,
-		private apiService: ApiService,
-		private store: StateStore<{ cards: Card[]; clients: Client[] }>
-	) {}
+	constructor(public bsModalRef: BsModalRef, private apiService: ApiService, private store: StateStore<AppState>) {}
 	ngOnInit(): void {
 		switch (this.dataType) {
 			case 'card':
@@ -79,9 +73,7 @@ export class SearchModalComponent implements OnInit {
 				this.store.dispatch(getCardList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'history':
-				// this.apiService.getRequest('admin/history').subscribe((data: HistoryAction[]) => {
-				// 	this.store.dispatch(getHistory({ history: data }));
-				// });
+				this.store.dispatch(getHistory({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			default:
 				throw new Error('Unknown datatype');
