@@ -70,10 +70,20 @@ export class SearchModalComponent implements OnInit {
 				this.store.dispatch(getClientsList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'card':
-				this.store.dispatch(getCardList({ parameters: this.searchForm.value, setNewParams: true }));
+				this.store.dispatch(
+					getCardList({
+						parameters: { ...this.searchForm.value, shop: this.selectedStore.id },
+						setNewParams: true
+					})
+				);
 				break;
 			case 'history':
-				this.store.dispatch(getHistory({ parameters: this.searchForm.value, setNewParams: true }));
+				this.store.dispatch(
+					getHistory({
+						parameters: { ...this.searchForm.value, shop: this.selectedStore.id },
+						setNewParams: true
+					})
+				);
 				break;
 			default:
 				throw new Error('Unknown datatype');

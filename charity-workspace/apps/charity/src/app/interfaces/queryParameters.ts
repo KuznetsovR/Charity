@@ -4,6 +4,7 @@ export interface QueryParameters {
 	passport?: number;
 	name?: string;
 	surname?: string;
+	shop?: string;
 	patronymic?: string;
 	cardId?: number;
 	customerId?: number;
