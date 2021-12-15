@@ -8,6 +8,16 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr *ngIf="data.length === 0 && isStateInitial === false">
+					<td colspan="3">Не найдено</td>
+				</tr>
+				<tr *ngIf="data.length === 0 && isStateInitial === true">
+					<td colspan="3">
+						<div class="loader-wrapper">
+							<div class="loader">Loading...</div>
+						</div>
+					</td>
+				</tr>
 				<ng-container [ngSwitch]="dataType">
 					<ng-container *ngSwitchCase="'card'">
 						<tr
