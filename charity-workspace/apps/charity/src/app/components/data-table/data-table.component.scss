@@ -1,4 +1,5 @@
-@import './../../../styles/colors';
+//@use './../../../styles/colors';
+@use 'apps/charity/src/styles/colors' as colors;
 .data-table-page {
 	margin: 20px;
 	display: flex;
@@ -19,7 +20,7 @@ table {
 		padding: 8px;
 	}
 	thead tr {
-		background-color: $light-blue;
+		background-color: colors.$light-blue;
 		color: #ffffff;
 	}
 	tbody {
@@ -27,7 +28,7 @@ table {
 			cursor: pointer;
 
 			&:last-of-type {
-				border-bottom: 2px solid $very-light-blue;
+				border-bottom: 2px solid colors.$very-light-blue;
 			}
 			&:hover {
 				background-color: rgba(0, 0, 0, 0.03);
@@ -36,7 +37,7 @@ table {
 				background-color: #cccccc;
 				cursor: not-allowed;
 				&:hover {
-          background-color: #cccccc;
+					background-color: #cccccc;
 				}
 			}
 			&:nth-of-type(even) {
@@ -45,7 +46,7 @@ table {
 					background-color: #cccccc;
 					cursor: not-allowed;
 					&:hover {
-            background-color: #cccccc;
+						background-color: #cccccc;
 					}
 				}
 			}
@@ -56,7 +57,7 @@ table {
 	margin-bottom: 10px;
 	height: 40px;
 	width: 130px;
-	background-color: $light-blue;
+	background-color: colors.$light-blue;
 	color: white;
 	padding: 0;
 }

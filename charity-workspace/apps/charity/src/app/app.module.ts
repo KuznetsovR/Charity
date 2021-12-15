@@ -7,15 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
-import { RemovePageComponent } from './pages/remove-page/remove-page.component';
-import { FindPageComponent } from './pages/find-page/find-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormComponent } from './components/form/form.component';
-import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
 import { StoreSelectComponent } from './components/store-select/store-select.component';
@@ -34,19 +30,21 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { ErrorModalComponent } from './components/error-modal/error-modal.component';
+import { EffectsModule } from '@ngrx/effects';
+import { CardsEffects } from './state/effects/cards.effects';
+import { CardsPageComponent } from './pages/cards-page/cards-page.component';
+import { ClientsPageComponent } from './pages/clients-page/clients-page.component';
+import { ClientsEffects } from './state/effects/clients.effects';
+import { HistoryEffects } from './state/effects/history.effects';
 
 registerLocaleData(localeRu, 'ru');
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ProfilePageComponent,
 		HeaderComponent,
 		AddPageComponent,
-		RemovePageComponent,
-		FindPageComponent,
 		FormComponent,
-		ErrorPageComponent,
 		FoundCardModalComponent,
 		FoundClientModalComponent,
 		StoreSelectComponent,
@@ -54,11 +52,13 @@ registerLocaleData(localeRu, 'ru');
 		SearchModalComponent,
 		HistoryPageComponent,
 		SuccessModalComponent,
-		ErrorModalComponent
+		ErrorModalComponent,
+		CardsPageComponent,
+		ClientsPageComponent
 	],
 	imports: [
-		BrowserModule,
 		AppRoutingModule,
+		BrowserModule,
 		BrowserAnimationsModule,
 		ButtonsModule.forRoot(),
 		ModalModule.forRoot(),
@@ -67,15 +67,22 @@ registerLocaleData(localeRu, 'ru');
 		TabsModule.forRoot(),
 		BrowserModule,
 		PopoverModule.forRoot(),
-		StoreModule.forRoot({ cards: cardsReducer, clients: clientsReducer, history: historyReducer }),
+		StoreModule.forRoot({
+			cards: cardsReducer,
+			clients: clientsReducer,
+			history: historyReducer
+		}),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
 			autoPause: true
 		}),
-		HttpClientModule
+		HttpClientModule,
+		EffectsModule.forRoot([CardsEffects, ClientsEffects, HistoryEffects])
 	],
-	providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
+	providers: [
+		{ provide: LOCALE_ID, useValue: 'ru' }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

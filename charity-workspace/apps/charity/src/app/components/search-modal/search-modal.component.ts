@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store as StateStore } from '@ngrx/store';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { getCardList, getClientList } from '../../state/actions/data-table.actions';
+import { getCardList } from '../../state/actions/cards.actions';
+import { getClientsList } from '../../state/actions/clients.actions';
 import { ApiService } from '../../services/api.service';
 import { Store } from 'src/app/interfaces/store.entity';
 import { FormControls } from '../form/form-entities';
-import { Card } from 'src/app/interfaces/card.entity';
-import { Client } from 'src/app/interfaces/client.entity';
+import { getHistory } from '../../state/actions/history.actions';
+import { AppState } from '../../state/app-state';
 
 @Component({
 	selector: 'app-search-modal',
@@ -28,11 +29,7 @@ export class SearchModalComponent implements OnInit {
 	cardId: FormControl;
 	customerId: FormControl;
 	controls: FormControls = {};
-	constructor(
-		public bsModalRef: BsModalRef,
-		private apiService: ApiService,
-		private store: StateStore<{ cards: Card[]; clients: Client[] }>
-	) {}
+	constructor(public bsModalRef: BsModalRef, private apiService: ApiService, private store: StateStore<AppState>) {}
 	ngOnInit(): void {
 		switch (this.dataType) {
 			case 'card':
@@ -68,21 +65,32 @@ export class SearchModalComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		let params;
 		switch (this.dataType) {
 			case 'client':
-				this.apiService.getRequest('admin/owner', this.searchForm.value).subscribe((data: Client[]) => {
-					this.store.dispatch(getClientList({ clients: data }));
-				});
+				this.store.dispatch(getClientsList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'card':
-				this.apiService.getRequest('admin/card', this.searchForm.value).subscribe((data: Card[]) => {
-					this.store.dispatch(getCardList({ cards: data }));
-				});
+				this.selectedStore
+					? (params = { ...this.searchForm.value, shop: this.selectedStore.id })
+					: (params = { ...this.searchForm.value });
+				this.store.dispatch(
+					getCardList({
+						parameters: params,
+						setNewParams: true
+					})
+				);
 				break;
 			case 'history':
-				// this.apiService.getRequest('admin/history', this.searchForm.value).subscribe((data: HistoryAction[]) => {
-				//   this.store.dispatch(getCardList({ cards: data }));
-				// });
+				this.selectedStore
+					? (params = { ...this.searchForm.value, shop: this.selectedStore.id })
+					: (params = { ...this.searchForm.value });
+				this.store.dispatch(
+					getHistory({
+						parameters: params,
+						setNewParams: true
+					})
+				);
 				break;
 			default:
 				throw new Error('Unknown datatype');

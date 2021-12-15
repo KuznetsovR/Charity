@@ -1,15 +1,15 @@
 <div class="found-card-modal">
 	<div class="info">
-		<div [class.label-for-input]="dataState === 'changing'">Номер:</div>
-		<div *ngIf="dataState === 'static' else numberInput">{{number.value}}</div>
-		<div [class.label-for-input]="dataState === 'changing'">ID:</div>
-		<div *ngIf="dataState === 'static' else identificator">{{data.id}}</div>
-		<div [class.label-for-input]="dataState === 'changing'">Магазин:</div>
-		<div *ngIf="dataState === 'static' else storeSelect">{{selectedStore.name}}</div>
-		<div [class.label-for-input]="dataState === 'changing'">Идентификатор Владельца:</div>
-		<div *ngIf="dataState === 'static' else ownerIdentificator">{{ownerId.value}}</div>
-		<div [class.label-for-input]="dataState === 'changing'">ФИО Владельца:</div>
-		<div *ngIf="dataState === 'static' else name">
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Номер:</div>
+		<div *ngIf="modalState.dataState === 'static' else numberInput">{{number.value}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
+		<div *ngIf="modalState.dataState === 'static' else identificator">{{data.id}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Магазин:</div>
+		<div *ngIf="modalState.dataState === 'static' else storeSelect">{{selectedStore.name}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Идентификатор Владельца:</div>
+		<div *ngIf="modalState.dataState === 'static' else ownerIdentificator">{{ownerId.value}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">ФИО Владельца:</div>
+		<div *ngIf="modalState.dataState === 'static' else name">
 			{{data.owner.name}} {{data.owner.surname}} {{data.owner.patronymic}}
 		</div>
 		<form [formGroup]="changeCardForm" class="change-card-form">
@@ -37,16 +37,21 @@
   <div *ngIf="!data.active">Неактивно</div>
 	<div class="btns-container">
 		<button
-			*ngIf="dataState === 'static' else approveBtn"
+			*ngIf="modalState.dataState === 'static' else approveBtn"
 			class="edit-button btn"
 			(click)="changeDataState('changing')"
 		>
 			Изменить
 		</button>
 		<ng-template #approveBtn>
-			<button type="submit" class="btn btn-success" (click)="changeCard()">Подтвердить изменения</button>
+			<button type="submit" class="btn btn-success" (click)="change()">Подтвердить изменения</button>
 		</ng-template>
-		<button class="delete-button btn btn-danger" (click)="deleteCard()">Удалить</button>
+    <button class="delete-button btn btn-danger" (click)="delete()" *ngIf="data.active else restoreBtn">
+      Удалить
+    </button>
+    <ng-template #restoreBtn>
+      <button class="restore-btn btn btn-success" (click)="restore()">Восстановить</button>
+    </ng-template>
 		<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
 	</div>
 </div>

@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, mergeMap } from 'rxjs/operators';
-import { getClientList } from '../../state/actions/data-table.actions';
+import { catchError } from 'rxjs/operators';
+import { getClientsList } from '../../state/actions/clients.actions';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Client } from 'src/app/interfaces/client.entity';
 import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -22,7 +23,8 @@ export class FoundClientModalComponent implements OnInit {
 		private store: Store<AppState>,
 		private apiService: ApiService,
 		private cdr: ChangeDetectorRef,
-		private bsModalRef: BsModalRef
+		private bsModalRef: BsModalRef,
+		private modalService: BsModalService
 	) {}
 	data: Client;
 	changeClientForm: FormGroup;
@@ -63,51 +65,61 @@ export class FoundClientModalComponent implements OnInit {
 	changeRequestCorrectnessState(newState: boolean): void {
 		this.modalState.isRequestBad = newState;
 	}
-	changeClient(): void {
-		this.apiService
-			.putRequest(`admin/owner/${this.data.id}`, {
-				active: true,
-				useCount: this.useCount.value,
-				passportNumber: this.passportNumber.value,
-				name: this.name.value,
-				surname: this.surname.value,
-				patronymic: this.patronymic.value
-			})
-			.pipe(
-				mergeMap((res) => {
-					this.changeRequestCorrectnessState(false);
-					this.changeDataState('static');
-					this.cdr.detectChanges();
-					this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-						this.store.dispatch(getClientList({ clients: data }));
-					});
-					return of(res);
-				}),
-				catchError((err) => {
-					if (err.error.error === 'Bad Request') {
-						this.changeRequestCorrectnessState(true);
-						this.cdr.detectChanges();
-					}
-					return of(err);
-				})
-			)
-			.subscribe();
+	change(): void {
+		this.callAPI({
+			active: this.data.active,
+			useCount: this.useCount.value,
+			passportNumber: this.passportNumber.value,
+			name: this.name.value,
+			surname: this.surname.value,
+			patronymic: this.patronymic.value
+		}).subscribe(() => {
+			this.changeRequestCorrectnessState(false);
+			this.changeDataState('static');
+			this.cdr.detectChanges();
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
+		});
 	}
-	deleteClient(): void {
-		this.apiService
-			.putRequest(`admin/owner/${this.data.id}`, {
-				...this.data,
-				active: false
+	delete(): void {
+		this.data = {
+			...this.data,
+			active: false
+		};
+		this.callAPI({
+			...this.data,
+			active: false
+		}).subscribe(() => {
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
+		});
+	}
+	restore(): void {
+		this.data = {
+			...this.data,
+			active: true
+		};
+		this.callAPI({
+			...this.data,
+			active: true
+		}).subscribe(() => {
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
+		});
+	}
+	callAPI(newObject: Client): Observable<Client> {
+		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
+			catchError((err) => {
+				if (err.error.error === 'Bad Request') {
+					this.changeRequestCorrectnessState(true);
+					this.cdr.detectChanges();
+				} else {
+					const initialState: ModalOptions = {
+						class: 'modal-dialog-centered',
+						animated: true
+					};
+					this.bsModalRef = this.modalService.show(ErrorModalComponent, initialState);
+				}
+				return of(err);
 			})
-			.pipe(
-				mergeMap((res) => {
-					this.apiService.getRequest('admin/owner').subscribe((data: Client[]) => {
-						this.store.dispatch(getClientList({ clients: data }));
-					});
-					return of(res);
-				})
-			)
-			.subscribe();
+		);
 	}
 	closeModal(): void {
 		this.bsModalRef.hide();

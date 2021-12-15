@@ -1,4 +1,4 @@
-@import '../../../styles/colors';
+@use '../../../styles/colors' as colors;
 
 .dropdown-btn {
   border: 1px solid gray;
@@ -25,10 +25,10 @@
   font-size: 7px;
   position: relative;
   text-indent: -9999em;
-  border-top: 1.1em solid $very-light-blue;
-  border-right: 1.1em solid $very-light-blue;
-  border-bottom: 1.1em solid $very-light-blue;
-  border-left: 1.1em solid $light-blue;
+  border-top: 1.1em solid colors.$very-light-blue;
+  border-right: 1.1em solid colors.$very-light-blue;
+  border-bottom: 1.1em solid colors.$very-light-blue;
+  border-left: 1.1em solid colors.$light-blue;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

@@ -17,8 +17,6 @@ export class HistoryPageComponent implements OnInit {
 	historyKeys = ['Идентификатор', 'Дата', 'Карта', 'Пользователь'];
 	constructor(private apiService: ApiService, private store: Store<AppState>) {}
 	ngOnInit(): void {
-		this.apiService.getRequest('admin/history').subscribe((data: HistoryAction[]) => {
-			this.store.dispatch(getHistory({ history: data }));
-		});
+		this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));
 	}
 }

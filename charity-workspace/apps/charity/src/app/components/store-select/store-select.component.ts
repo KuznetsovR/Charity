@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from 'src/app/interfaces/store.entity';
 import { ApiService } from '../../services/api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-store-select',
@@ -8,15 +9,21 @@ import { ApiService } from '../../services/api.service';
 	styleUrls: ['./store-select.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StoreSelectComponent implements OnInit {
+export class StoreSelectComponent implements OnInit, OnDestroy {
 	@Input() selectedStore: Store | null = null;
 	@Output() store = new EventEmitter<Store>();
 	stores: Store[];
-
+	storesSubscription: Subscription;
 	constructor(private apiService: ApiService) {}
 	ngOnInit(): void {
-		this.apiService.getRequest('user/shop').subscribe((stores: Store[]) => (this.stores = stores));
+		this.storesSubscription = this.apiService
+			.getRequestWithoutParams('user/shop')
+			.subscribe((stores: Store[]) => (this.stores = stores));
 	}
+	ngOnDestroy(): void {
+		this.storesSubscription.unsubscribe();
+	}
+
 	selectStore(store: Store): void {
 		this.selectedStore = store;
 		this.store.emit(store);

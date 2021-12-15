@@ -1,4 +1,4 @@
-@import './../../../styles/colors';
+@use './../../../styles/colors' as colors;
 
 .add-card-page {
 	text-align: center;
@@ -15,7 +15,7 @@
       color: rgba(0,0,0,.6);
     }
     .nav-link.active{
-      color: $light-blue
+      color: colors.$light-blue
     }
 	}
 }

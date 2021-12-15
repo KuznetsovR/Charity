@@ -1,4 +1,5 @@
-@import './../../../styles/colors';
+@use './../../../styles/colors' as colors;
+@use './../../../styles/mixins/modal-btns.mixin' as mixins;
 .found-card-modal {
 	padding: 20px;
 	display: flex;
@@ -32,18 +33,14 @@
 	align-self: flex-end;
 }
 .edit-button {
-	height: 100%;
-	background-color: $light-blue;
-	color: #fff;
+	@include mixins.edit-button;
 }
 .delete-button {
-	margin-left: 10px;
-	height: 100%;
-	background-color: $light-red;
-	color: #fff;
-	border: 0;
+	@include mixins.delete-button;
 }
 .close-btn {
+	@include mixins.close-btn;
+}
+.restore-btn {
 	margin-left: 10px;
-	height: 100%;
 }
