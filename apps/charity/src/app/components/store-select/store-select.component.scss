@@ -1,4 +1,5 @@
 @use '../../../styles/colors' as colors;
+@use '../../../styles/mixins/spinner.mixin' as spinner-mixin;
 
 .dropdown-btn {
   border: 1px solid gray;
@@ -7,52 +8,20 @@
   width: 100%;
 }
 .loader-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 60px;
-  height: 70px;
-  margin: auto;
+  @include spinner-mixin.loader-wrapper
 }
 
 .loader,
 .loader:after {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  @include spinner-mixin.loader-and-pseudo-after
 }
 .loader {
-  margin: 10px auto;
-  font-size: 7px;
-  position: relative;
-  text-indent: -9999em;
-  border-top: 1.1em solid colors.$very-light-blue;
-  border-right: 1.1em solid colors.$very-light-blue;
-  border-bottom: 1.1em solid colors.$very-light-blue;
-  border-left: 1.1em solid colors.$light-blue;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation: load8 1.1s infinite linear;
-  animation: load8 1.1s infinite linear;
+  @include spinner-mixin.loader
 }
 @-webkit-keyframes load8 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+  @include spinner-mixin.load8
 }
 @keyframes load8 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+  @include spinner-mixin.load8
 }
 

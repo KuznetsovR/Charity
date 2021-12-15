@@ -1,5 +1,6 @@
-//@use './../../../styles/colors';
 @use 'apps/charity/src/styles/colors' as colors;
+@use '../../../styles/mixins/spinner.mixin' as spinner-mixin;
+
 .data-table-page {
 	margin: 20px;
 	display: flex;
@@ -65,4 +66,20 @@ table {
 	padding: 5px;
 	background: darkgray;
 	border-radius: 3px;
+}
+.loader-wrapper{
+  @include spinner-mixin.loader-wrapper
+}
+.loader,
+.loader:after {
+  @include spinner-mixin.loader-and-pseudo-after
+}
+.loader {
+  @include spinner-mixin.loader
+}
+@-webkit-keyframes load8 {
+  @include spinner-mixin.load8
+}
+@keyframes load8 {
+  @include spinner-mixin.load8
 }
