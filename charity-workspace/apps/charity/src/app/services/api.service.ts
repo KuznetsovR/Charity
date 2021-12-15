@@ -26,15 +26,15 @@ export class ApiService {
 	}
 
 	getRequest(path: string, actionParameters: QueryParameters, setNew: boolean): Observable<ResponseTypes> {
-		if (setNew === true) {
-			this.lastParams = actionParameters;
+		const parameters = { ...actionParameters };
+		for (const param in actionParameters) {
+			if (parameters[param] === '') {
+				delete parameters[param];
+			}
 		}
-		// const parameters = { ...actionParameters };
-		// for (const param in parameters) {
-		// 	if (parameters[param] === '') {
-		// 		delete parameters[param];
-		// 	}
-		// }
+		if (setNew === true) {
+			this.lastParams = parameters;
+		}
 		const params = new HttpParams({ fromObject: this.lastParams });
 		return this.http.get<ResponseTypes>(API_PATH + path, { headers: this.headers, params });
 	}
