@@ -11,7 +11,6 @@ import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ErrorModalComponent } from '../error-modal/error-modal.component';
-import { getCardList } from '../../state/actions/cards.actions';
 
 @Component({
 	selector: 'app-found-client-modal',
@@ -82,20 +81,27 @@ export class FoundClientModalComponent implements OnInit {
 		});
 	}
 	delete(): void {
+		this.data = {
+			...this.data,
+			active: false
+		};
 		this.callAPI({
 			...this.data,
 			active: false
 		}).subscribe(() => {
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
-
 	}
 	restore(): void {
+		this.data = {
+			...this.data,
+			active: true
+		};
 		this.callAPI({
 			...this.data,
 			active: true
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
+			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
 	callAPI(newObject: Client): Observable<Client> {

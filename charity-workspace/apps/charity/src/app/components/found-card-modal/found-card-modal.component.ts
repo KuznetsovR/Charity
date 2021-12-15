@@ -70,6 +70,10 @@ export class FoundCardModalComponent implements OnInit {
 		this.changeDataState('static');
 	}
 	delete(): void {
+		this.data = {
+			...this.data,
+			active: false
+		};
 		this.callAPI({
 			owner: this.data.owner.id,
 			number: this.data.number,
@@ -80,6 +84,10 @@ export class FoundCardModalComponent implements OnInit {
 		});
 	}
 	restore(): void {
+		this.data = {
+			...this.data,
+			active: true
+		};
 		this.callAPI({
 			owner: this.data.owner.id,
 			number: this.data.number,
