@@ -16,7 +16,6 @@ export class HistoryEffects {
 			mergeMap((action) =>
 				this.apiService.getRequest('admin/history', action.parameters, action.setNewParams).pipe(
 					map((history: HistoryAction[]) => {
-						console.log(123);
 						return getHistorySuccess({ history });
 					}),
 					catchError(() => {
