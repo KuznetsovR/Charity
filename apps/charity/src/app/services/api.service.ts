@@ -1,4 +1,3 @@
-// TODO: rewrite fetch to httpClient, promise to observable
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_PATH } from '../constants/api-path';
