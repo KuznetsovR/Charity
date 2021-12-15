@@ -65,22 +65,29 @@ export class SearchModalComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		let params;
 		switch (this.dataType) {
 			case 'client':
 				this.store.dispatch(getClientsList({ parameters: this.searchForm.value, setNewParams: true }));
 				break;
 			case 'card':
+				this.selectedStore
+					? (params = { ...this.searchForm.value, shop: this.selectedStore.id })
+					: (params = { ...this.searchForm.value });
 				this.store.dispatch(
 					getCardList({
-						parameters: { ...this.searchForm.value, shop: this.selectedStore.id },
+						parameters: params,
 						setNewParams: true
 					})
 				);
 				break;
 			case 'history':
+				this.selectedStore
+					? (params = { ...this.searchForm.value, shop: this.selectedStore.id })
+					: (params = { ...this.searchForm.value });
 				this.store.dispatch(
 					getHistory({
-						parameters: { ...this.searchForm.value, shop: this.selectedStore.id },
+						parameters: params,
 						setNewParams: true
 					})
 				);
