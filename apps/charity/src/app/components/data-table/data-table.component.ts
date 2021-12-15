@@ -6,6 +6,10 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
 import { HistoryAction } from '../../interfaces/historyAction';
+import { getClientsList } from '../../state/actions/clients.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../state/app-state';
+import { ApiService } from '../../services/api.service';
 
 @Component({
 	selector: 'app-data-table',
@@ -18,8 +22,9 @@ export class DataTableComponent implements OnChanges {
 	@Input() dataKeys: string[];
 	@Input() dataType: string;
 	isStateInitial = true;
+	searchFiltersApplied = false;
 	bsModalRef?: BsModalRef;
-	constructor(private modalService: BsModalService) {}
+	constructor(private modalService: BsModalService, private store: Store<AppState>, private apiService: ApiService) {}
 	openSearchModal(): void {
 		const initialState: ModalOptions = {
 			class: 'modal-dialog-centered',
@@ -34,6 +39,7 @@ export class DataTableComponent implements OnChanges {
 		if (!changes.data.isFirstChange()) {
 			this.isStateInitial = false;
 		}
+		this.searchFiltersApplied = Object.keys(this.apiService.lastParams).length === 0;
 	}
 
 	openModal(data: Card | Client): void {
@@ -54,5 +60,8 @@ export class DataTableComponent implements OnChanges {
 			default:
 				throw new Error('Unknown data type');
 		}
+	}
+	clearFilters(): void {
+		this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
 	}
 }

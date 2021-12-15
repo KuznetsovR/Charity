@@ -83,3 +83,10 @@ table {
 @keyframes load8 {
   @include spinner-mixin.load8
 }
+.clear-filters-btn{
+  margin-bottom: 10px;
+  height: 40px;
+  width: 180px;
+  color: colors.$light-blue;
+  margin-right: 20px;
+}

@@ -1,6 +1,9 @@
 <div class="data-table-page">
 	<div class="table-wrapper">
-		<button type="submit" class="search-button btn" (click)="openSearchModal()">Поиск</button>
+    <div class="btns-container">
+      <button class="btn clear-filters-btn" *ngIf="searchFiltersApplied" (click)="clearFilters()">Очистить фильтры</button>
+      <button class="search-button btn" (click)="openSearchModal()">Поиск</button>
+    </div>
 		<table>
 			<thead>
 				<tr>
