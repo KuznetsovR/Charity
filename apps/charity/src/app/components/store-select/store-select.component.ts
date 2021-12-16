@@ -17,7 +17,7 @@ export class StoreSelectComponent implements OnInit, OnDestroy {
 	constructor(private apiService: ApiService) {}
 	ngOnInit(): void {
 		this.storesSubscription = this.apiService
-			.getRequestWithoutParams('user/shop')
+			.getRequest('user/shop')
 			.subscribe((stores: Store[]) => (this.stores = stores));
 	}
 	ngOnDestroy(): void {
