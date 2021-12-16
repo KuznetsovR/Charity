@@ -10,6 +10,7 @@ import { getClientsList } from '../../state/actions/clients.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
+import { getCardList } from '../../state/actions/cards.actions';
 
 @Component({
 	selector: 'app-data-table',
@@ -39,7 +40,7 @@ export class DataTableComponent implements OnChanges {
 		if (!changes.data.isFirstChange()) {
 			this.isStateInitial = false;
 		}
-		this.searchFiltersApplied = Object.keys(this.apiService.lastParams).length === 0;
+		this.searchFiltersApplied = Object.keys(this.apiService.lastParams).length !== 0;
 	}
 
 	openModal(data: Card | Client): void {
@@ -62,6 +63,15 @@ export class DataTableComponent implements OnChanges {
 		}
 	}
 	clearFilters(): void {
-		this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
+		switch (this.dataType) {
+			case 'card':
+				this.store.dispatch(getCardList({ parameters: {}, setNewParams: true }));
+				break;
+			case 'client':
+				this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
+				break;
+			default:
+				throw new Error('Unknown data type');
+		}
 	}
 }
