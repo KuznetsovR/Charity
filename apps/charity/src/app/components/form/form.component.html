@@ -1,114 +1,96 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="dataForm">
 	<div class="input-group">
-		<div class="store-select-wrapper">
-			<app-store-select *ngIf="formInputs.includes('store')" (store)="selectStore($event)"></app-store-select>
+		<div class="client-inputs" *ngIf="action === 'Добавить клиента'">
+			<div class="input-wrapper">
+				<input
+					required
+					type="text"
+					placeholder="Введите Фамилию"
+					class="data-input"
+					formControlName="surname"
+					popover="Фамилия может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && surname.invalid"
+				/>
+			</div>
+
+			<div class="input-wrapper">
+				<input
+					required
+					type="text"
+					placeholder="Введите Имя"
+					class="data-input"
+					formControlName="name"
+					popover="Имя может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && name.invalid"
+				/>
+			</div>
+
+			<div class="input-wrapper">
+				<input
+					required
+					type="text"
+					placeholder="Введите Отчество"
+					class="data-input"
+					formControlName="patronymic"
+					popover="Отчество может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && patronymic.invalid"
+				/>
+			</div>
+			<div class="input-wrapper">
+				<input
+					required
+					type="text"
+					placeholder="Введите номер паспорта"
+					class="data-input"
+					formControlName="passportNumber"
+					popover="Номер паспорта содержит 10 цифр "
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
+				/>
+			</div>
 		</div>
 
-		<div class="input-wrapper" *ngIf="formInputs?.includes('number')">
-			<input
-				required
-				placeholder="Введите номер карты"
-				class="data-input"
-				formControlName="number"
-				popover="Номер карты содержит цифры и/или буквы"
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && number.invalid"
-			/>
+		<div class="card-inputs" *ngIf="action === 'Добавить карту'">
+			<div class="store-select-wrapper">
+				<app-store-select (store)="selectStore($event)"></app-store-select>
+			</div>
+
+			<div class="input-wrapper">
+				<input
+					required
+					placeholder="Введите номер карты"
+					class="data-input"
+					formControlName="number"
+					popover="Номер карты содержит цифры и/или буквы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && number.invalid"
+				/>
+			</div>
+			<div class="input-wrapper">
+				<input
+					required
+					type="text"
+					placeholder="Введите идентификатор владельца"
+					class="data-input"
+					formControlName="ownerId"
+					popover="Идентификатор состоит из цифр"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
+				/>
+			</div>
 		</div>
 
-		<div
-			class="input-wrapper"
-			*ngIf="formInputs?.includes('passportNumber')"
-			title="Номер паспорта содержит 10 цифр"
-		>
-			<input
-				required
-				type="text"
-				placeholder="Введите номер паспорта"
-				class="data-input"
-				formControlName="passportNumber"
-				popover="Номер паспорта содержит 10 цифр "
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
-			/>
-		</div>
-
-    <div
-      class="input-wrapper"
-      *ngIf="formInputs?.includes('ownerId')"
-    >
-      <input
-        required
-        type="text"
-        placeholder="Введите идентификатор владельца"
-        class="data-input"
-        formControlName="ownerId"
-        popover="Идентификатор состоит из цифр"
-        triggers="focus:focusout"
-        placement="left"
-        [class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
-      />
-    </div>
-
-		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-			<input
-				required
-				type="text"
-				placeholder="Введите Фамилию"
-				class="data-input"
-				formControlName="surname"
-				popover="Фамилия может состоять только из кириллицы"
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && surname.invalid"
-			/>
-		</div>
-
-		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-			<input
-				required
-				type="text"
-				placeholder="Введите Имя"
-				class="data-input"
-				formControlName="name"
-				popover="Имя может состоять только из кириллицы"
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && name.invalid"
-			/>
-		</div>
-
-		<div class="input-wrapper" *ngIf="formInputs?.includes('name')">
-			<input
-				required
-				type="text"
-				placeholder="Введите Отчество"
-				class="data-input"
-				formControlName="patronymic"
-				popover="Отчество может состоять только из кириллицы"
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && patronymic.invalid"
-			/>
-		</div>
-
-		<div class="input-wrapper" *ngIf="formInputs?.includes('reason')">
-			<input
-				required
-				type="text"
-				placeholder="Введите Причину удаления"
-				class="data-input"
-				formControlName="reason"
-				popover="Причина может содержать кириллицу, цифры и пробелы"
-				triggers="focus:focusout"
-				placement="left"
-				[class.invalid]="userTriedToSendInvalid && reason.invalid"
-			/>
-		</div>
 	</div>
 	<div class="btn-container">
-		<button type="submit" class="add-button btn">{{actionName}}</button>
+		<button type="submit" class="add-button btn">Добавить</button>
 	</div>
 </form>
