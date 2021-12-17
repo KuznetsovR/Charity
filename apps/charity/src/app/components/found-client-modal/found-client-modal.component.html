@@ -1,61 +1,90 @@
 <div class="found-client-modal">
-	<div class="info">
-		<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
-		<div *ngIf="modalState.dataState === 'static' else id">{{data.id}}</div>
-		<div [class.label-for-input]="modalState.dataState === 'changing'">Номер паспорта:</div>
-		<div *ngIf="modalState.dataState === 'static' else passportNumber">
-			{{changeClientForm.controls.passportNumber.value}}
-		</div>
-		<div [class.label-for-input]="modalState.dataState === 'changing'">Имя:</div>
-		<div *ngIf="modalState.dataState === 'static' else name">{{changeClientForm.controls.name.value}}</div>
-		<div [class.label-for-input]="modalState.dataState === 'changing'">Фамилия:</div>
-		<div *ngIf="modalState.dataState === 'static' else surname">{{changeClientForm.controls.surname.value}}</div>
-		<div [class.label-for-input]="modalState.dataState === 'changing'">Отчество:</div>
-		<div *ngIf="modalState.dataState === 'static' else patronymic">
-			{{changeClientForm.controls.patronymic.value}}
-		</div>
-		<div [class.label-for-input]="modalState.dataState === 'changing'">Кол-во использований:</div>
-		<div *ngIf="modalState.dataState === 'static' else useCount">{{data.useCount}}</div>
+	<form [formGroup]="changeClientForm" (ngSubmit)="change()" class="change-card-form">
+		<div class="info">
+			<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
+			<div *ngIf="modalState.dataState === 'static' else id">{{data.id}}</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Номер паспорта:</div>
+			<div *ngIf="modalState.dataState === 'static' else passportNumber">
+				{{changeClientForm.controls.passportNumber.value}}
+			</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Имя:</div>
+			<div *ngIf="modalState.dataState === 'static' else name">{{changeClientForm.controls.name.value}}</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Фамилия:</div>
+			<div *ngIf="modalState.dataState === 'static' else surname">
+				{{changeClientForm.controls.surname.value}}
+			</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Отчество:</div>
+			<div *ngIf="modalState.dataState === 'static' else patronymic">
+				{{changeClientForm.controls.patronymic.value}}
+			</div>
+			<div [class.label-for-input]="modalState.dataState === 'changing'">Кол-во использований:</div>
+			<div *ngIf="modalState.dataState === 'static' else useCount">{{data.useCount}}</div>
 
-		<form [formGroup]="changeClientForm" class="change-card-form">
 			<ng-template #id>
 				<input type="text" disabled [value]="data.id" />
 			</ng-template>
 			<ng-template #passportNumber>
-				<input type="text" formControlName="passportNumber" />
+				<input
+					type="text"
+					formControlName="passportNumber"
+					popover="Номер паспорта содержит 10 цифр "
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="modalState.isRequestBad && changeClientForm.controls.passportNumber.invalid"
+				/>
 			</ng-template>
 			<ng-template #name>
-				<input type="text" formControlName="name" />
+				<input
+					type="text"
+					formControlName="name"
+					popover="Имя может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="modalState.isRequestBad && changeClientForm.controls.name.invalid"
+				/>
 			</ng-template>
 			<ng-template #surname>
-				<input type="text" formControlName="surname" />
+				<input
+					type="text"
+					formControlName="surname"
+					popover="Фамилия может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="modalState.isRequestBad && changeClientForm.controls.surname.invalid"
+				/>
 			</ng-template>
 			<ng-template #patronymic>
-				<input type="text" formControlName="patronymic" />
+				<input
+					type="text"
+					formControlName="patronymic"
+					popover="Отчество может состоять только из кириллицы"
+					triggers="focus:focusout"
+					placement="left"
+					[class.invalid]="modalState.isRequestBad && changeClientForm.controls.patronymic.invalid"
+				/>
 			</ng-template>
 			<ng-template #useCount>
 				<input type="text" disabled [value]="data.useCount" />
 			</ng-template>
-		</form>
-	</div>
-	<div *ngIf="modalState.isRequestBad">Вы ввели неправильные данные, попробуйте ещё раз</div>
-	<div class="btns-container">
-		<button
-			*ngIf="modalState.dataState === 'static' else approveBtn"
-			class="edit-button btn"
-			(click)="changeDataState('changing')"
-		>
-			Изменить
-		</button>
-		<ng-template #approveBtn>
-			<button type="submit" class="btn btn-success" (click)="change()">Подтвердить изменения</button>
-		</ng-template>
-		<button class="delete-button btn btn-danger" (click)="delete()" *ngIf="data.active else restoreBtn">
-			Удалить
-		</button>
-		<ng-template #restoreBtn>
-			<button class="restore-btn btn btn-success" (click)="restore()">Восстановить</button>
-		</ng-template>
-		<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
-	</div>
+		</div>
+		<div class="btns-container">
+			<button
+				*ngIf="modalState.dataState === 'static' else approveBtn"
+				class="edit-button btn"
+				(click)="changeDataState('changing')"
+			>
+				Изменить
+			</button>
+			<ng-template #approveBtn>
+				<button type="submit" class="btn btn-success">Подтвердить изменения</button>
+			</ng-template>
+			<button class="delete-button btn btn-danger" (click)="delete()" *ngIf="data.active else restoreBtn">
+				Удалить
+			</button>
+			<ng-template #restoreBtn>
+				<button class="restore-btn btn btn-success" (click)="restore()">Восстановить</button>
+			</ng-template>
+			<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
+		</div>
+	</form>
 </div>

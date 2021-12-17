@@ -30,7 +30,8 @@
 .btns-container {
 	margin-top: 10px;
 	height: 40px;
-	align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 .edit-button {
 	@include mixins.edit-button;
@@ -43,4 +44,10 @@
 }
 .restore-btn {
 	margin-left: 10px;
+}
+.invalid {
+	border: 2px solid red;
+}
+.info > *{
+  margin: 3px;
 }

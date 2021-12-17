@@ -45,10 +45,11 @@ export class FoundClientModalComponent implements OnInit {
 	changeDataState(newState: 'changing' | 'static'): void {
 		this.modalState.dataState = newState;
 	}
-	changeRequestCorrectnessState(newState: boolean): void {
-		this.modalState.isRequestBad = newState;
-	}
 	change(): void {
+		if (this.changeClientForm.invalid) {
+			this.modalState.isRequestBad = true;
+			return;
+		}
 		this.callAPI({
 			active: this.data.active,
 			useCount: this.data.useCount,
@@ -57,7 +58,7 @@ export class FoundClientModalComponent implements OnInit {
 			surname: this.changeClientForm.controls.surname.value,
 			patronymic: this.changeClientForm.controls.patronymic.value
 		}).subscribe(() => {
-			this.changeRequestCorrectnessState(false);
+			this.modalState.isRequestBad = false;
 			this.changeDataState('static');
 			this.cdr.detectChanges();
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
@@ -85,7 +86,7 @@ export class FoundClientModalComponent implements OnInit {
 		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
 			catchError((err) => {
 				if (err.error.error === 'Bad Request') {
-					this.changeRequestCorrectnessState(true);
+					this.modalState.isRequestBad = true;
 					this.cdr.detectChanges();
 				} else {
 					this.bsModalRef.hide();

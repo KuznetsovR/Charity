@@ -37,8 +37,8 @@ export class FoundCardModalComponent implements OnInit {
 	) {}
 	ngOnInit(): void {
 		this.changeCardForm = new FormGroup({
-			ownerId: new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-			number: new FormControl(this.data.number, [Validators.required, Validators.pattern(/^\d{8,20}$/)])
+			ownerId: new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^\d+$/i)]),
+			number: new FormControl(this.data.number, [Validators.required, Validators.pattern(/^[A-Za-z\d]+$/)])
 		});
 		this.selectedStore = this.data.shop;
 	}
@@ -49,6 +49,10 @@ export class FoundCardModalComponent implements OnInit {
 		this.modalState.dataState = newState;
 	}
 	change(): void {
+		if (this.changeCardForm.invalid) {
+			this.modalState.isRequestBad = true;
+			return;
+		}
 		this.callAPI({
 			owner: this.changeCardForm.controls.ownerId.value,
 			number: this.changeCardForm.controls.number.value,
