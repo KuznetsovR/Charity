@@ -1,31 +1,42 @@
 <div class="found-client-modal">
 	<div class="info">
-		<div class="labels">
-			<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
-			<div [class.label-for-input]="modalState.dataState === 'changing'">Номер паспорта:</div>
-			<div [class.label-for-input]="modalState.dataState === 'changing'">Имя:</div>
-			<div [class.label-for-input]="modalState.dataState === 'changing'">Фамилия:</div>
-			<div [class.label-for-input]="modalState.dataState === 'changing'">Отчество:</div>
-			<div [class.label-for-input]="modalState.dataState === 'changing'">Кол-во использований:</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
+		<div *ngIf="modalState.dataState === 'static' else id">{{data.id}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Номер паспорта:</div>
+		<div *ngIf="modalState.dataState === 'static' else passportNumber">
+			{{changeClientForm.controls.passportNumber.value}}
 		</div>
-		<div class="values" *ngIf="modalState.dataState === 'static' else inputs">
-			<div>{{data.id}}</div>
-			<div>{{passportNumber.value}}</div>
-			<div>{{name.value}}</div>
-			<div>{{surname.value}}</div>
-			<div>{{patronymic.value}}</div>
-			<div>{{useCount.value}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Имя:</div>
+		<div *ngIf="modalState.dataState === 'static' else name">{{changeClientForm.controls.name.value}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Фамилия:</div>
+		<div *ngIf="modalState.dataState === 'static' else surname">{{changeClientForm.controls.surname.value}}</div>
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Отчество:</div>
+		<div *ngIf="modalState.dataState === 'static' else patronymic">
+			{{changeClientForm.controls.patronymic.value}}
 		</div>
-		<ng-template #inputs>
-			<form [formGroup]="changeClientForm" class="change-card-form">
+		<div [class.label-for-input]="modalState.dataState === 'changing'">Кол-во использований:</div>
+		<div *ngIf="modalState.dataState === 'static' else useCount">{{data.useCount}}</div>
+
+		<form [formGroup]="changeClientForm" class="change-card-form">
+			<ng-template #id>
 				<input type="text" disabled [value]="data.id" />
+			</ng-template>
+			<ng-template #passportNumber>
 				<input type="text" formControlName="passportNumber" />
+			</ng-template>
+			<ng-template #name>
 				<input type="text" formControlName="name" />
+			</ng-template>
+			<ng-template #surname>
 				<input type="text" formControlName="surname" />
+			</ng-template>
+			<ng-template #patronymic>
 				<input type="text" formControlName="patronymic" />
-				<input type="text" formControlName="useCount" disabled />
-			</form>
-		</ng-template>
+			</ng-template>
+			<ng-template #useCount>
+				<input type="text" disabled [value]="data.useCount" />
+			</ng-template>
+		</form>
 	</div>
 	<div *ngIf="modalState.isRequestBad">Вы ввели неправильные данные, попробуйте ещё раз</div>
 	<div class="btns-container">

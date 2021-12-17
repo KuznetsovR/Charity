@@ -1,13 +1,13 @@
 <div class="found-card-modal">
 	<div class="info">
 		<div [class.label-for-input]="modalState.dataState === 'changing'">Номер:</div>
-		<div *ngIf="modalState.dataState === 'static' else numberInput">{{number.value}}</div>
+		<div *ngIf="modalState.dataState === 'static' else numberInput">{{changeCardForm.controls.number.value}}</div>
 		<div [class.label-for-input]="modalState.dataState === 'changing'">ID:</div>
 		<div *ngIf="modalState.dataState === 'static' else identificator">{{data.id}}</div>
 		<div [class.label-for-input]="modalState.dataState === 'changing'">Магазин:</div>
 		<div *ngIf="modalState.dataState === 'static' else storeSelect">{{selectedStore.name}}</div>
 		<div [class.label-for-input]="modalState.dataState === 'changing'">Идентификатор Владельца:</div>
-		<div *ngIf="modalState.dataState === 'static' else ownerIdentificator">{{ownerId.value}}</div>
+		<div *ngIf="modalState.dataState === 'static' else ownerIdentificator">{{changeCardForm.controls.ownerId.value}}</div>
 		<div [class.label-for-input]="modalState.dataState === 'changing'">ФИО Владельца:</div>
 		<div *ngIf="modalState.dataState === 'static' else name">
 			{{data.owner.name}} {{data.owner.surname}} {{data.owner.patronymic}}

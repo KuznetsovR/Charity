@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Card } from 'src/app/interfaces/card.entity';
-import { FormControls } from '../form/form-entities';
 import { Store as Shop } from 'src/app/interfaces/store.entity';
 import { AppState } from '../../state/app-state';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -25,10 +24,6 @@ export class FoundCardModalComponent implements OnInit {
 	selectedStore: Shop;
 
 	changeCardForm: FormGroup;
-	number: FormControl;
-	ownerId: FormControl;
-	controls: FormControls = {};
-
 	modalState: ModalState = {
 		dataState: 'static',
 		isRequestBad: false
@@ -41,11 +36,10 @@ export class FoundCardModalComponent implements OnInit {
 		private modalService: BsModalService
 	) {}
 	ngOnInit(): void {
-		this.ownerId = new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]);
-		this.controls.ownerId = this.ownerId;
-		this.number = new FormControl(this.data.number, [Validators.required, Validators.pattern(/^\d{8,20}$/)]);
-		this.controls.number = this.number;
-		this.changeCardForm = new FormGroup(this.controls);
+		this.changeCardForm = new FormGroup({
+			ownerId: new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+			number: new FormControl(this.data.number, [Validators.required, Validators.pattern(/^\d{8,20}$/)])
+		});
 		this.selectedStore = this.data.shop;
 	}
 	selectStore(store: Shop): void {
@@ -54,13 +48,10 @@ export class FoundCardModalComponent implements OnInit {
 	changeDataState(newState: 'changing' | 'static'): void {
 		this.modalState.dataState = newState;
 	}
-	changeRequestCorrectnessState(newState: boolean): void {
-		this.modalState.isRequestBad = newState;
-	}
 	change(): void {
 		this.callAPI({
-			owner: this.ownerId.value,
-			number: this.number.value,
+			owner: this.changeCardForm.controls.ownerId.value,
+			number: this.changeCardForm.controls.number.value,
 			shop: this.selectedStore.id,
 			active: true
 		}).subscribe(() => {
@@ -102,14 +93,15 @@ export class FoundCardModalComponent implements OnInit {
 			catchError((err) => {
 				this.bsModalRef.hide();
 				if (err.error.error === 'Bad Request') {
-					this.changeRequestCorrectnessState(true);
+					this.modalState.isRequestBad = true;
 					this.cdr.detectChanges();
 				} else {
+					this.bsModalRef.hide();
 					const initialState: ModalOptions = {
 						class: 'modal-dialog-centered',
 						animated: true
 					};
-					this.bsModalRef = this.modalService.show(ErrorModalComponent, initialState);
+					this.modalService.show(ErrorModalComponent, initialState);
 				}
 				return of(err);
 			})
