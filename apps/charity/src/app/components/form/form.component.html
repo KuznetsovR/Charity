@@ -11,7 +11,7 @@
 					popover="Фамилия может состоять только из кириллицы"
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && surname.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.surname.invalid"
 				/>
 			</div>
 
@@ -25,7 +25,7 @@
 					popover="Имя может состоять только из кириллицы"
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && name.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.name.invalid"
 				/>
 			</div>
 
@@ -39,7 +39,7 @@
 					popover="Отчество может состоять только из кириллицы"
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && patronymic.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.patronymic.invalid"
 				/>
 			</div>
 			<div class="input-wrapper">
@@ -52,7 +52,7 @@
 					popover="Номер паспорта содержит 10 цифр "
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.passportNumber.invalid"
 				/>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 					popover="Номер карты содержит цифры и/или буквы"
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && number.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.number.invalid"
 				/>
 			</div>
 			<div class="input-wrapper">
@@ -84,7 +84,7 @@
 					popover="Идентификатор состоит из цифр"
 					triggers="focus:focusout"
 					placement="left"
-					[class.invalid]="userTriedToSendInvalid && passportNumber.invalid"
+					[class.invalid]="userTriedToSendInvalid && dataForm.controls.passportNumber.invalid"
 				/>
 			</div>
 		</div>
