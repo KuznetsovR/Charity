@@ -49,6 +49,10 @@ export class FoundCardModalComponent implements OnInit {
 		this.modalState.dataState = newState;
 	}
 	change(): void {
+		if (this.changeCardForm.invalid) {
+			this.modalState.isRequestBad = true;
+			return;
+		}
 		this.callAPI({
 			owner: this.changeCardForm.controls.ownerId.value,
 			number: this.changeCardForm.controls.number.value,
