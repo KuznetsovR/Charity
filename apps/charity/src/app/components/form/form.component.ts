@@ -22,7 +22,6 @@ export class FormComponent implements OnInit {
 	userTriedToSendInvalid = false;
 
 	selectedStore: Store | null = null;
-	stores: Store[];
 	constructor(private apiService: ApiService, private modalService: BsModalService) {}
 
 	ngOnInit(): void {
@@ -64,6 +63,10 @@ export class FormComponent implements OnInit {
 			this.userTriedToSendInvalid = true;
 			return;
 		}
+		const initialState: ModalOptions = {
+			class: 'modal-dialog-centered',
+			animated: true
+		};
 		switch (this.action) {
 			case 'Добавить карту':
 				this.apiService
@@ -76,24 +79,14 @@ export class FormComponent implements OnInit {
 					})
 					.pipe(
 						mergeMap((res) => {
-							const initialState: ModalOptions = {
-								class: 'modal-dialog-centered',
-								animated: true,
-								initialState: {
-									additionalText: 'Карта постоянного клиента успешно добавлена'
-								}
+							initialState.initialState = {
+								additionalText: 'Карта постоянного клиента успешно добавлена'
 							};
-							this.bsModalRef = this.modalService.show(SuccessModalComponent, initialState);
+							this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
 						}),
 						catchError((err) => {
-							if (err.error.error === 'Bad Request') {
-								const initialState: ModalOptions = {
-									class: 'modal-dialog-centered',
-									animated: true
-								};
-								this.bsModalRef = this.modalService.show(ErrorModalComponent, initialState);
-							}
+							this.modalService.show(ErrorModalComponent, initialState);
 							return of(err);
 						})
 					)
@@ -112,15 +105,15 @@ export class FormComponent implements OnInit {
 					})
 					.pipe(
 						mergeMap((res) => {
-							const initialState: ModalOptions = {
-								class: 'modal-dialog-centered',
-								animated: true,
-								initialState: {
-									additionalText: 'Постоянный клиент успешно добавлен'
-								}
+							initialState.initialState = {
+								additionalText: 'Постоянный клиент успешно добавлен'
 							};
-							this.bsModalRef = this.modalService.show(SuccessModalComponent, initialState);
+							this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
+						}),
+						catchError((err) => {
+							this.modalService.show(ErrorModalComponent, initialState);
+							return of(err);
 						})
 					)
 					.subscribe();
