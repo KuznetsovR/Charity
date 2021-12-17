@@ -6,7 +6,6 @@ import { getClientsList } from '../../state/actions/clients.actions';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Client } from 'src/app/interfaces/client.entity';
-import { FormControls } from '../form/form-entities';
 import { ModalState } from 'src/app/interfaces/modal-state.entity';
 import { AppState } from '../../state/app-state';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -28,36 +27,20 @@ export class FoundClientModalComponent implements OnInit {
 	) {}
 	data: Client;
 	changeClientForm: FormGroup;
-	useCount: FormControl;
-	passportNumber: FormControl;
-	name: FormControl;
-	surname: FormControl;
-	patronymic: FormControl;
-	controls: FormControls = {};
 	modalState: ModalState = {
 		dataState: 'static',
 		isRequestBad: false
 	};
 	ngOnInit(): void {
-		this.useCount = new FormControl(this.data.useCount, [Validators.required, Validators.pattern(/^[0-9]*$/gm)]);
-		this.controls.useCount = this.useCount;
-		this.passportNumber = new FormControl(this.data.passportNumber, [
-			Validators.required,
-			Validators.pattern(/^\d{10}$/)
-		]);
-		this.controls.passportNumber = this.passportNumber;
-
-		this.name = new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
-		this.controls.name = this.name;
-		this.surname = new FormControl(this.data.surname, [Validators.required, Validators.pattern(/^[а-яё]+$/i)]);
-		this.controls.surname = this.surname;
-		this.patronymic = new FormControl(this.data.patronymic, [
-			Validators.required,
-			Validators.pattern(/^[а-яё]+$/i)
-		]);
-		this.controls.patronymic = this.patronymic;
-
-		this.changeClientForm = new FormGroup(this.controls);
+		this.changeClientForm = new FormGroup({
+			passportNumber: new FormControl(this.data.passportNumber, [
+				Validators.required,
+				Validators.pattern(/^\d{10}$/)
+			]),
+			name: new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
+			surname: new FormControl(this.data.surname, [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
+			patronymic: new FormControl(this.data.patronymic, [Validators.required, Validators.pattern(/^[а-яё]+$/i)])
+		});
 	}
 	changeDataState(newState: 'changing' | 'static'): void {
 		this.modalState.dataState = newState;
@@ -68,11 +51,11 @@ export class FoundClientModalComponent implements OnInit {
 	change(): void {
 		this.callAPI({
 			active: this.data.active,
-			useCount: this.useCount.value,
-			passportNumber: this.passportNumber.value,
-			name: this.name.value,
-			surname: this.surname.value,
-			patronymic: this.patronymic.value
+			useCount: this.data.useCount,
+			passportNumber: this.changeClientForm.controls.passportNumber.value,
+			name: this.changeClientForm.controls.name.value,
+			surname: this.changeClientForm.controls.surname.value,
+			patronymic: this.changeClientForm.controls.patronymic.value
 		}).subscribe(() => {
 			this.changeRequestCorrectnessState(false);
 			this.changeDataState('static');
@@ -85,10 +68,7 @@ export class FoundClientModalComponent implements OnInit {
 			...this.data,
 			active: false
 		};
-		this.callAPI({
-			...this.data,
-			active: false
-		}).subscribe(() => {
+		this.callAPI(this.data).subscribe(() => {
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
@@ -97,10 +77,7 @@ export class FoundClientModalComponent implements OnInit {
 			...this.data,
 			active: true
 		};
-		this.callAPI({
-			...this.data,
-			active: true
-		}).subscribe(() => {
+		this.callAPI(this.data).subscribe(() => {
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
@@ -111,6 +88,7 @@ export class FoundClientModalComponent implements OnInit {
 					this.changeRequestCorrectnessState(true);
 					this.cdr.detectChanges();
 				} else {
+					this.bsModalRef.hide();
 					const initialState: ModalOptions = {
 						class: 'modal-dialog-centered',
 						animated: true
