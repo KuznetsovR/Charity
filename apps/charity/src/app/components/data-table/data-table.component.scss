@@ -1,5 +1,6 @@
-//@use './../../../styles/colors';
 @use 'apps/charity/src/styles/colors' as colors;
+@use '../../../styles/mixins/spinner.mixin' as spinner-mixin;
+
 .data-table-page {
 	margin: 20px;
 	display: flex;
@@ -40,6 +41,23 @@ table {
 					background-color: #cccccc;
 				}
 			}
+			&.not-found {
+				&:hover {
+					background: #fff;
+					cursor: auto;
+				}
+			}
+			&.loading {
+				&:hover {
+					background: #fff;
+					cursor: auto;
+				}
+			}
+			&.history-row {
+				&:hover {
+					cursor: auto;
+				}
+			}
 			&:nth-of-type(even) {
 				background-color: #eff7ff;
 				&.inactive {
@@ -65,4 +83,27 @@ table {
 	padding: 5px;
 	background: darkgray;
 	border-radius: 3px;
+}
+.loader-wrapper {
+	@include spinner-mixin.loader-wrapper;
+}
+.loader,
+.loader:after {
+	@include spinner-mixin.loader-and-pseudo-after;
+}
+.loader {
+	@include spinner-mixin.loader;
+}
+@-webkit-keyframes load8 {
+	@include spinner-mixin.load8;
+}
+@keyframes load8 {
+	@include spinner-mixin.load8;
+}
+.clear-filters-btn {
+	margin-bottom: 10px;
+	height: 40px;
+	width: 180px;
+	color: colors.$light-blue;
+	margin-right: 20px;
 }

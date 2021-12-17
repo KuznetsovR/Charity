@@ -1,6 +1,9 @@
 <div class="data-table-page">
 	<div class="table-wrapper">
-		<button type="submit" class="search-button btn" (click)="openSearchModal()">Поиск</button>
+    <div class="btns-container">
+      <button class="btn clear-filters-btn" *ngIf="searchFiltersApplied" (click)="clearFilters()">Очистить фильтры</button>
+      <button class="search-button btn" (click)="openSearchModal()">Поиск</button>
+    </div>
 		<table>
 			<thead>
 				<tr>
@@ -8,6 +11,16 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr *ngIf="data.length === 0 && isStateInitial === false" class="not-found">
+					<td [colSpan]="dataKeys.length">Не найдено</td>
+				</tr>
+				<tr *ngIf="data.length === 0 && isStateInitial === true" class="loading">
+					<td [colSpan]="dataKeys.length">
+						<div class="loader-wrapper">
+							<div class="loader">Loading...</div>
+						</div>
+					</td>
+				</tr>
 				<ng-container [ngSwitch]="dataType">
 					<ng-container *ngSwitchCase="'card'">
 						<tr
@@ -36,7 +49,7 @@
 						</tr>
 					</ng-container>
 					<ng-container *ngSwitchCase="'history'">
-						<tr *ngFor="let dataRow of data">
+						<tr *ngFor="let dataRow of data" class="history-row">
 							<td>{{dataRow.id}}</td>
 							<td>{{dataRow.date | date:'fullDate'}}</td>
 							<td>{{dataRow.card}}</td>
