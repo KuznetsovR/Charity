@@ -7,7 +7,7 @@
 			class="search-input"
 			formControlName="name"
 			*ngIf="dataType === 'client'"
-			placeholder="Введите имя"
+			placeholder="Имя"
 		/>
 		<input
 			type="text"
@@ -32,13 +32,13 @@
 			placeholder="Номер карты"
 		/>
 
-    <input
-      *ngIf="dataType === 'card'"
-      class="search-input"
-      type="text"
-      formControlName="owner"
-      placeholder="Владелец"
-    />
+		<input
+			*ngIf="dataType === 'card'"
+			class="search-input"
+			type="text"
+			formControlName="owner"
+			placeholder="Владелец"
+		/>
 
 		<input
 			*ngIf="dataType === 'client'"
@@ -50,26 +50,25 @@
 
 		<app-store-select *ngIf="dataType === 'card'" (store)="selectStore($event)"></app-store-select>
 
-    <input
-      *ngIf="dataType === 'history'"
-      class="search-input"
-      type="text"
-      formControlName="cardId"
-      placeholder="Идентификатор карты"
-    />
+		<input
+			*ngIf="dataType === 'history'"
+			class="search-input"
+			type="text"
+			formControlName="cardId"
+			placeholder="Идентификатор карты"
+		/>
 
-    <input
-      *ngIf="dataType === 'history'"
-      class="search-input"
-      type="text"
-      formControlName="customerId"
-      placeholder="Идентификатор владельца"
-    />
+		<input
+			*ngIf="dataType === 'history'"
+			class="search-input"
+			type="text"
+			formControlName="customerId"
+			placeholder="Идентификатор владельца"
+		/>
 
 		<div class="btn-wrapper">
 			<button type="submit" class="find-btn btn" [disabled]="searchForm.valid">Найти</button>
-      <button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
-
-    </div>
+			<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
+		</div>
 	</form>
 </div>
