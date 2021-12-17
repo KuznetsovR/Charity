@@ -46,6 +46,10 @@ export class FoundClientModalComponent implements OnInit {
 		this.modalState.dataState = newState;
 	}
 	change(): void {
+		if (this.changeClientForm.invalid) {
+			this.modalState.isRequestBad = true;
+			return;
+		}
 		this.callAPI({
 			active: this.data.active,
 			useCount: this.data.useCount,
@@ -79,10 +83,6 @@ export class FoundClientModalComponent implements OnInit {
 		});
 	}
 	callAPI(newObject: Client): Observable<Client> {
-		if (this.changeClientForm.invalid) {
-			this.modalState.isRequestBad = true;
-			return;
-		}
 		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
 			catchError((err) => {
 				if (err.error.error === 'Bad Request') {
