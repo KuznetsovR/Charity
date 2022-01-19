@@ -33,16 +33,12 @@ const routes: Routes = [
 		}
 	},
 	{
-		path: 'client',
+		path: 'client/:id',
 		component: ClientPageComponent
 	},
 	{
 		path: 'history',
 		component: HistoryPageComponent
-	},
-	{
-		path: '**',
-		redirectTo: '/history'
 	}
 ];
 
