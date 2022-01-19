@@ -7,6 +7,9 @@
 .btn-group.dropdown-btn-group {
   width: 100%;
 }
+.invalid{
+  border: 2px solid red;
+}
 .loader-wrapper {
   @include spinner-mixin.loader-wrapper
 }

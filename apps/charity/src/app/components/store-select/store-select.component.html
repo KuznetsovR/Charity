@@ -5,6 +5,7 @@
 		type="button"
 		class="btn dropdown-toggle dropdown-btn"
 		aria-controls="dropdown-animated"
+    [class.invalid]="invalid"
 	>
     {{ selectedStore?.name || 'Выберите магазин'}} <span class="caret"></span>
 	</button>

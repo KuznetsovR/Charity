@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
 	userTriedToSendInvalid = false;
 
 	selectedStore: Store | null = null;
+
 	constructor(private apiService: ApiService, private modalService: BsModalService) {}
 
 	ngOnInit(): void {

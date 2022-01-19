@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class StoreSelectComponent implements OnInit, OnDestroy {
 	@Input() selectedStore: Store | null = null;
+	@Input() invalid = false;
 	@Output() store = new EventEmitter<Store>();
 	stores: Store[];
 	storesSubscription: Subscription;
