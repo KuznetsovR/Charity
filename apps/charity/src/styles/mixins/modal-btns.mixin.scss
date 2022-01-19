@@ -13,6 +13,7 @@
 }
 @mixin edit-button {
 	height: 100%;
-	background-color: colors.$light-blue;
+  margin-left: 10px;
+  background-color: colors.$light-blue;
 	color: #fff;
 }
