@@ -31,9 +31,9 @@ export class SearchModalComponent implements OnInit {
 			case 'client':
 				this.searchForm = new FormGroup({
 					passport: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]),
-					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
-					surname: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
-					patronymic: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)])
+					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+					surname: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+					patronymic: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)])
 				});
 				break;
 			case 'history':

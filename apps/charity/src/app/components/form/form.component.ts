@@ -36,9 +36,9 @@ export class FormComponent implements OnInit {
 			case 'Добавить получателя':
 				this.dataForm = new FormGroup({
 					passportNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
-					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
-					surname: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
-					patronymic: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)])
+					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+					surname: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+					patronymic: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)])
 				});
 				break;
 			default:
