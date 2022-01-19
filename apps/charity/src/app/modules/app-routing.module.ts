@@ -6,6 +6,7 @@ import { CardsPageComponent } from '../pages/cards-page/cards-page.component';
 import { ClientsPageComponent } from '../pages/clients-page/clients-page.component';
 import { CardsResolver } from '../resolvers/cards.resolver';
 import { ClientsResolver } from '../resolvers/clients.resolver';
+import { ClientPageComponent } from '../pages/client-page/client-page.component';
 
 const routes: Routes = [
 	{
@@ -30,6 +31,10 @@ const routes: Routes = [
 		resolve: {
 			clients: ClientsResolver
 		}
+	},
+	{
+		path: 'client',
+		component: ClientPageComponent
 	},
 	{
 		path: 'history',
