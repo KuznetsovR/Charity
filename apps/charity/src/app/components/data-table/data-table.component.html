@@ -38,9 +38,8 @@
 					<ng-container *ngSwitchCase="'client'">
 						<tr
 							*ngFor="let dataRow of data"
-							(click)="openModal(dataRow)"
 							[class.inactive]="!dataRow.active"
-              routerLink='[/client, dataRow.id]'
+              [routerLink]="['/client', dataRow.id]"
             >
 							<td>
 								{{dataRow.passportNumber}}
@@ -53,6 +52,7 @@
 						<tr *ngFor="let dataRow of data" class="history-row">
 							<td>{{dataRow.id}}</td>
 							<td>{{dataRow.date | date:'fullDate'}}</td>
+							<td>Получатель</td>
 							<td>{{dataRow.card}}</td>
 							<td>{{dataRow.customer}}</td>
 						</tr>
