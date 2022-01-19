@@ -1,0 +1,60 @@
+@use './../../../styles/colors' as colors;
+@use './../../../styles/mixins/modal-btns.mixin' as mixins;
+h1{
+  width: 50%;
+  margin: 15px auto;
+}
+.found-client-page {
+  margin: 30px auto;
+  width: 50%;
+}
+.info {
+  display: grid;
+  grid-template-columns: fit-content(50%) fit-content(50%);
+  div{
+    margin: 5px 10px 5px 5px;
+  }
+}
+.labels {
+  padding-right: 15px;
+}
+.label-for-input {
+  padding: 8px 0;
+}
+.change-card-form {
+  input {
+    margin: 5px 0;
+  }
+}
+.store-select-wrapper {
+  display: flex;
+  align-items: center;
+}
+.selected-store {
+  margin-right: 10px;
+}
+.btns-container {
+  margin-top: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.edit-button {
+  @include mixins.edit-button;
+}
+.delete-button {
+  @include mixins.delete-button;
+}
+.restore-btn {
+  margin-left: 10px;
+}
+.invalid {
+  border: 2px solid red;
+}
+.info > *{
+  margin: 3px;
+}
+.inactive{
+  color: #ff0000;
+  font-weight: bold;
+}
