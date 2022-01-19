@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
 					ownerId: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/i)])
 				});
 				break;
-			case 'Добавить клиента':
+			case 'Добавить получателя':
 				this.dataForm = new FormGroup({
 					passportNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
 					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё]+$/i)]),
@@ -81,7 +81,7 @@ export class FormComponent implements OnInit {
 					.pipe(
 						mergeMap((res) => {
 							initialState.initialState = {
-								additionalText: 'Карта постоянного клиента успешно добавлена'
+								additionalText: 'Карта получателя успешно добавлена'
 							};
 							this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
@@ -93,7 +93,7 @@ export class FormComponent implements OnInit {
 					)
 					.subscribe();
 				break;
-			case 'Добавить клиента':
+			case 'Добавить получателя':
 				this.apiService
 					.postRequest('admin/owner', {
 						id: 0,
@@ -107,7 +107,7 @@ export class FormComponent implements OnInit {
 					.pipe(
 						mergeMap((res) => {
 							initialState.initialState = {
-								additionalText: 'Постоянный клиент успешно добавлен'
+								additionalText: 'Получатель успешно добавлен'
 							};
 							this.modalService.show(SuccessModalComponent, initialState);
 							return of(res);
