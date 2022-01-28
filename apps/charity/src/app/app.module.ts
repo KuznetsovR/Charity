@@ -36,6 +36,7 @@ import { CardsPageComponent } from './pages/cards-page/cards-page.component';
 import { ClientsPageComponent } from './pages/clients-page/clients-page.component';
 import { ClientsEffects } from './state/effects/clients.effects';
 import { HistoryEffects } from './state/effects/history.effects';
+import { ClientPageComponent } from './pages/client-page/client-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -54,7 +55,8 @@ registerLocaleData(localeRu, 'ru');
 		SuccessModalComponent,
 		ErrorModalComponent,
 		CardsPageComponent,
-		ClientsPageComponent
+		ClientsPageComponent,
+  ClientPageComponent
 	],
 	imports: [
 		AppRoutingModule,

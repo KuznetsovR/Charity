@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="dataForm">
 	<div class="input-group">
-		<div class="client-inputs" *ngIf="action === 'Добавить клиента'">
+		<div class="client-inputs" *ngIf="action === 'Добавить получателя'">
 			<div class="input-wrapper">
 				<input
 					required
@@ -59,7 +59,10 @@
 
 		<div class="card-inputs" *ngIf="action === 'Добавить карту'">
 			<div class="store-select-wrapper">
-				<app-store-select (store)="selectStore($event)"></app-store-select>
+				<app-store-select
+					(store)="selectStore($event)"
+					[invalid]="!selectedStore && userTriedToSendInvalid"
+				></app-store-select>
 			</div>
 
 			<div class="input-wrapper">
@@ -88,7 +91,6 @@
 				/>
 			</div>
 		</div>
-
 	</div>
 	<div class="btn-container">
 		<button type="submit" class="add-button btn">Добавить</button>
