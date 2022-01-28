@@ -1,5 +1,7 @@
-@use './../../../styles/colors' as colors;
-@use './../../../styles/mixins/modal-btns.mixin' as mixins;
+@use 'apps/charity/src/styles/colors' as colors;
+@use 'apps/charity/src/styles/mixins/modal-btns.mixin' as mixins;
+@use 'apps/charity/src/styles/mixins/spinner.mixin' as spinner-mixin;
+
 h1{
   width: 50%;
   margin: 15px auto;
@@ -57,4 +59,25 @@ h1{
 .inactive{
   color: #ff0000;
   font-weight: bold;
+}
+.loader-wrapper {
+  @include spinner-mixin.loader-wrapper;
+  width: 200px;
+  height: 210px;
+}
+.loader,
+.loader:after {
+  @include spinner-mixin.loader-and-pseudo-after;
+  width: 200px;
+  height: 200px;
+}
+.loader {
+  @include spinner-mixin.loader;
+  font-size: 15px;
+}
+@-webkit-keyframes load8 {
+  @include spinner-mixin.load8;
+}
+@keyframes load8 {
+  @include spinner-mixin.load8;
 }
