@@ -10,6 +10,8 @@ import { getClientsList } from '../../state/actions/clients.actions';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Card } from '../../interfaces/card.entity';
+import { getCardList } from '../../state/actions/cards.actions';
 
 @Component({
 	selector: 'app-client-page',
@@ -17,6 +19,8 @@ import { ActivatedRoute } from '@angular/router';
 	styleUrls: ['./client-page.component.scss']
 })
 export class ClientPageComponent implements OnInit {
+	cards$: Observable<readonly Card[]> = this.store.select('cards');
+	cardKeys = ['Номер', 'Магазин'];
 	data: Client;
 	constructor(
 		private store: Store<AppState>,
@@ -30,26 +34,28 @@ export class ClientPageComponent implements OnInit {
 		isRequestBad: false
 	};
 	ngOnInit(): void {
-		this.apiService
-			.getRequest(`admin/owner/${this.route.snapshot.paramMap.get('id')}`)
-			.subscribe((client: Client) => {
-				this.data = client;
-				this.changeClientForm = new FormGroup({
-					passportNumber: new FormControl(this.data.passportNumber, [
-						Validators.required,
-						Validators.pattern(/^\d{10}$/)
-					]),
-					name: new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-					surname: new FormControl(this.data.surname, [
-						Validators.required,
-						Validators.pattern(/^[а-яё ]+$/i)
-					]),
-					patronymic: new FormControl(this.data.patronymic, [
-						Validators.required,
-						Validators.pattern(/^[а-яё ]+$/i)
-					])
-				});
+		const clientId = this.route.snapshot.paramMap.get('id');
+		this.store.dispatch(
+			getCardList({
+				parameters: { owner: clientId },
+				setNewParams: true
+			})
+		);
+		this.apiService.getRequest(`admin/owner/${clientId}`).subscribe((client: Client) => {
+			this.data = client;
+			this.changeClientForm = new FormGroup({
+				passportNumber: new FormControl(this.data.passportNumber, [
+					Validators.required,
+					Validators.pattern(/^\d{10}$/)
+				]),
+				name: new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+				surname: new FormControl(this.data.surname, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+				patronymic: new FormControl(this.data.patronymic, [
+					Validators.required,
+					Validators.pattern(/^[а-яё ]+$/i)
+				])
 			});
+		});
 	}
 	changeDataState(newState: 'changing' | 'static'): void {
 		this.modalState.dataState = newState;

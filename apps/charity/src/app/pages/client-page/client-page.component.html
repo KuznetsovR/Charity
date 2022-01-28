@@ -1,6 +1,6 @@
 <app-header></app-header>
 <h1>Информация о получателе</h1>
-<div class="found-client-page" *ngIf="data">
+<div class="found-client-page" *ngIf="data else loading">
   <div *ngIf="!data.active" class="inactive">Неактивен</div>
   <form [formGroup]="changeClientForm" (ngSubmit)="change()" class="change-card-form">
     <div class="info">
@@ -90,4 +90,9 @@
       </ng-template>
     </div>
   </form>
+  <app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
 </div>
+
+<ng-template #loading>
+
+</ng-template>
