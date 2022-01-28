@@ -1,5 +1,7 @@
 <app-header [currentTab]="'cards'"></app-header>
 <div class="cards-page">
 	<h2 class="page-name">Найти карту получателя</h2>
-	<app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
+  <div class="grid">
+    <app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
+  </div>
 </div>

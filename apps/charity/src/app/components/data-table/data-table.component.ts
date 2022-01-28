@@ -22,6 +22,7 @@ export class DataTableComponent implements OnChanges {
 	@Input() data: Card[] | Client[] | HistoryAction[];
 	@Input() dataKeys: string[];
 	@Input() dataType: string;
+	@Input() forOneUser: boolean;
 	isStateInitial = true;
 	searchFiltersApplied = false;
 	bsModalRef?: BsModalRef;

@@ -1,20 +1,21 @@
 @use 'apps/charity/src/styles/colors' as colors;
 @use '../../../styles/mixins/spinner.mixin' as spinner-mixin;
 
-.data-table-page {
+.data-table {
 	margin: 20px;
 	display: flex;
 	justify-content: center;
 }
 .table-wrapper {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 }
 table {
+	width: 100%;
 	text-align: left;
 	border-collapse: collapse;
-	min-width: 70vw;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	td,
 	th {
