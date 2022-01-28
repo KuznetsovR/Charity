@@ -1,3 +1,7 @@
 <app-header [currentTab]="'history'"></app-header>
-<h2 class="page-name">История использования кодов</h2>
-<app-data-table [data]="history$ | async" [dataKeys]="historyKeys" [dataType]="'history'"></app-data-table>
+<div class="history-page">
+	<h2 class="page-name">История использования кодов</h2>
+	<div class="grid">
+		<app-data-table [data]="history$ | async" [dataKeys]="historyKeys" [dataType]="'history'"></app-data-table>
+	</div>
+</div>

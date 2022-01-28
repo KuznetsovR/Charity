@@ -1,5 +1,7 @@
 <app-header [currentTab]="'clients'"></app-header>
 <div class="clients-page">
   <h2 class="page-name">Найти получателя материальной помощи</h2>
-  <app-data-table [data]="clients$ | async" [dataKeys]="clientKeys" [dataType]="'client'"></app-data-table>
+  <div class="grid">
+    <app-data-table [data]="clients$ | async" [dataKeys]="clientKeys" [dataType]="'client'"></app-data-table>
+  </div>
 </div>
