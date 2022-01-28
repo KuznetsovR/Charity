@@ -20,7 +20,7 @@ import { getCardList } from '../../state/actions/cards.actions';
 })
 export class ClientPageComponent implements OnInit {
 	cards$: Observable<readonly Card[]> = this.store.select('cards');
-	cardKeys = ['Номер', 'Магазин'];
+	cardKeys = ['Номер', 'Владелец', 'Магазин'];
 	data: Client;
 	constructor(
 		private store: Store<AppState>,

@@ -71,7 +71,6 @@
       </ng-template>
     </div>
     <div class="btns-container">
-      <button class="btn btn-primary">Просмотреть карты этого получателя</button>
       <button
         *ngIf="modalState.dataState === 'static' else approveBtn"
         class="edit-button btn"
@@ -90,7 +89,7 @@
       </ng-template>
     </div>
   </form>
-  <app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'"></app-data-table>
+  <app-data-table [data]="cards$ | async" [dataKeys]="cardKeys" [dataType]="'card'" [forOneUser]="true"></app-data-table>
 </div>
 
 <ng-template #loading>

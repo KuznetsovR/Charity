@@ -81,3 +81,6 @@ h1{
 @keyframes load8 {
   @include spinner-mixin.load8;
 }
+table{
+  max-width: 50vw;
+}
