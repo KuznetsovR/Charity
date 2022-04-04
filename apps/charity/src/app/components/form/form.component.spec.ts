@@ -42,12 +42,7 @@ describe('FormComponent', () => {
 			});
 		});
 	});
-	describe('ngOnInit', () => {
-		it('can select store', () => {
-			component.formInputs = ['cardNumber', 'passportNumber', 'name', 'reason'];
-			component.ngOnInit();
-		});
-	});
+
 
 	describe('onSubmit', () => {
 		it('makes expected calls', () => {
@@ -60,16 +55,12 @@ describe('FormComponent', () => {
 			jest.spyOn(apiServiceStub, 'getRequest');
 			apiServiceStub.getRequest('somePath');
 
-			jest.spyOn(apiServiceStub, 'deleteRequest');
-			apiServiceStub.deleteRequest('somePath', {});
-
 			jest.spyOn(bsModalServiceStub, 'show');
 			bsModalServiceStub.show(FoundCardModalComponent);
 
 			component.onSubmit();
 			expect(apiServiceStub.postRequest).toHaveBeenCalled();
 			expect(apiServiceStub.getRequest).toHaveBeenCalled();
-			expect(apiServiceStub.deleteRequest).toHaveBeenCalled();
 			expect(bsModalServiceStub.show).toHaveBeenCalled();
 		});
 	});
