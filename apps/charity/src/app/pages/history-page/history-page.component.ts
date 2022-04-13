@@ -14,7 +14,7 @@ import { getHistory } from '../../state/actions/history.actions';
 })
 export class HistoryPageComponent implements OnInit {
 	history$: Observable<readonly HistoryAction[]> = this.store.select('history');
-	historyKeys = ['Идентификатор', 'Дата', 'Получатель', 'Карта', 'Благотворитель'];
+	historyKeys = ['Идентификатор', 'Дата', 'Карта', 'Благотворитель'];
 	constructor(private apiService: ApiService, private store: Store<AppState>) {}
 	ngOnInit(): void {
 		this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));

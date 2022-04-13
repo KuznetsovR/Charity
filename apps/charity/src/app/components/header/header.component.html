@@ -1,8 +1,9 @@
 <header class="header">
 	<div class="links-container">
-		<a routerLink="/add" [class.focus]="currentTab === 'add'" class="header-link">Добавить</a>
-		<a routerLink="/clients" [class.focus]="currentTab === 'clients'" class="header-link">Получатели</a>
-		<a routerLink="/cards" [class.focus]="currentTab === 'cards'" class="header-link">Карты</a>
-		<a routerLink="/history" [class.focus]="currentTab === 'history'" class="header-link">История</a>
+		<a routerLink="/add" routerLinkActive="focus" class="header-link">Добавить</a>
+<!--    [routerLinkActiveOptions]="exact: true" - точное совпадение пути-->
+		<a routerLink="/clients" routerLinkActive="focus" class="header-link">Получатели</a>
+		<a routerLink="/cards" routerLinkActive="focus" class="header-link">Карты</a>
+		<a routerLink="/history" routerLinkActive="focus" class="header-link">История</a>
 	</div>
 </header>
