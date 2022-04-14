@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
 import { getCardList } from '../../state/actions/cards.actions';
+import { getHistory } from '../../state/actions/history.actions';
 
 @Component({
 	selector: 'app-data-table',
@@ -70,6 +71,9 @@ export class DataTableComponent implements OnChanges {
 				break;
 			case 'client':
 				this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
+				break;
+			case 'history':
+				this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));
 				break;
 			default:
 				throw new Error('Unknown data type');
