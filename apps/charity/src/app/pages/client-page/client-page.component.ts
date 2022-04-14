@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
@@ -7,9 +7,9 @@ import { Client } from '../../interfaces/client.entity';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalState } from '../../interfaces/modal-state.entity';
 import { getClientsList } from '../../state/actions/clients.actions';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Card } from '../../interfaces/card.entity';
 import { getCardList } from '../../state/actions/cards.actions';
 
@@ -18,10 +18,11 @@ import { getCardList } from '../../state/actions/cards.actions';
 	templateUrl: './client-page.component.html',
 	styleUrls: ['./client-page.component.scss']
 })
-export class ClientPageComponent implements OnInit {
+export class ClientPageComponent implements OnInit, OnDestroy {
 	cards$: Observable<readonly Card[]> = this.store.select('cards');
 	cardKeys = ['Номер', 'Владелец', 'Магазин'];
 	data: Client;
+	subs = new Subscription();
 	constructor(
 		private store: Store<AppState>,
 		private apiService: ApiService,
@@ -34,32 +35,51 @@ export class ClientPageComponent implements OnInit {
 		isRequestBad: false
 	};
 	ngOnInit(): void {
-		const clientId = this.route.snapshot.paramMap.get('id');
+		this.subs.add(
+			this.route.params.subscribe((params: Params) => {
+				const clientId = params.id;
+				this.getClient(clientId);
+				this.getClientCards(clientId);
+			})
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.subs.unsubscribe();
+	}
+
+	getClient(clientId: string): void {
+		this.apiService.getRequest(`admin/owner/${clientId}`).subscribe((client: Client) => {
+			this.data = client;
+			this.initChangeClientForm();
+		});
+	}
+
+	initChangeClientForm(): void {
+		this.changeClientForm = new FormGroup({
+			passportNumber: new FormControl(this.data.passportNumber, [
+				Validators.required,
+				Validators.pattern(/^\d{10}$/)
+			]),
+			name: new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+			surname: new FormControl(this.data.surname, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
+			patronymic: new FormControl(this.data.patronymic, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)])
+		});
+	}
+
+	getClientCards(clientId: string): void {
 		this.store.dispatch(
 			getCardList({
 				parameters: { owner: clientId },
 				setNewParams: true
 			})
 		);
-		this.apiService.getRequest(`admin/owner/${clientId}`).subscribe((client: Client) => {
-			this.data = client;
-			this.changeClientForm = new FormGroup({
-				passportNumber: new FormControl(this.data.passportNumber, [
-					Validators.required,
-					Validators.pattern(/^\d{10}$/)
-				]),
-				name: new FormControl(this.data.name, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-				surname: new FormControl(this.data.surname, [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-				patronymic: new FormControl(this.data.patronymic, [
-					Validators.required,
-					Validators.pattern(/^[а-яё ]+$/i)
-				])
-			});
-		});
 	}
+
 	changeDataState(newState: 'changing' | 'static'): void {
 		this.modalState.dataState = newState;
 	}
+
 	change(): void {
 		if (this.changeClientForm.invalid) {
 			this.modalState.isRequestBad = true;
@@ -79,6 +99,7 @@ export class ClientPageComponent implements OnInit {
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
+
 	delete(): void {
 		this.data = {
 			...this.data,
@@ -86,6 +107,7 @@ export class ClientPageComponent implements OnInit {
 		};
 		this.callAPI(this.data).subscribe();
 	}
+
 	restore(): void {
 		this.data = {
 			...this.data,
@@ -95,6 +117,7 @@ export class ClientPageComponent implements OnInit {
 			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
+
 	callAPI(newObject: Client): Observable<Client> {
 		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
 			catchError((err) => {

@@ -52,7 +52,7 @@
 						<tr *ngFor="let dataRow of data" class="history-row">
 							<td>{{dataRow.id}}</td>
 							<td>{{dataRow.date | date:'fullDate'}}</td>
-							<td [routerLink]="['/client', dataRow.owner]">Получатель</td>
+<!--							<td [routerLink]="['/client', dataRow.owner]">Получатель</td>-->
 							<td>{{dataRow.card}}</td>
 							<td>{{dataRow.customer}}</td>
 						</tr>
