@@ -8,6 +8,8 @@ import { ApiService } from '../../services/api.service';
 import { Store } from 'src/app/interfaces/store.entity';
 import { getHistory } from '../../state/actions/history.actions';
 import { AppState } from '../../state/app-state';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { formatDate } from '@angular/common';
 
 @Component({
 	selector: 'app-search-modal',
@@ -19,8 +21,16 @@ export class SearchModalComponent implements OnInit {
 	selectedStore: Store;
 
 	searchForm: FormGroup;
-	constructor(public bsModalRef: BsModalRef, private apiService: ApiService, private store: StateStore<AppState>) {}
+
+	bsConfig = { containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' };
+	constructor(
+		public bsModalRef: BsModalRef,
+		private apiService: ApiService,
+		private store: StateStore<AppState>,
+		private localeService: BsLocaleService
+	) {}
 	ngOnInit(): void {
+		this.localeService.use('ru');
 		switch (this.dataType) {
 			case 'card':
 				this.searchForm = new FormGroup({
@@ -39,7 +49,8 @@ export class SearchModalComponent implements OnInit {
 			case 'history':
 				this.searchForm = new FormGroup({
 					cardId: new FormControl('', [Validators.required, Validators.pattern(/^\d$/)]),
-					customerId: new FormControl('', [Validators.required, Validators.pattern(/^\d$/)])
+					customerId: new FormControl('', [Validators.required, Validators.pattern(/^\d$/)]),
+					dates: new FormControl('', [Validators.required])
 				});
 				break;
 			default:
@@ -69,6 +80,9 @@ export class SearchModalComponent implements OnInit {
 				);
 				break;
 			case 'history':
+				params.startDateString = formatDate(params.dates[0], 'yyyy-MM-dd', 'en-US');
+				params.endDateString = formatDate(params.dates[1], 'yyyy-MM-dd', 'en-US');
+				delete params.dates;
 				this.store.dispatch(
 					getHistory({
 						parameters: params,

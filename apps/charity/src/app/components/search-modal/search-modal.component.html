@@ -66,6 +66,16 @@
 			placeholder="Идентификатор владельца"
 		/>
 
+		<input
+			type="text"
+			placeholder="Выбрать даты"
+			class="form-control search-input"
+			bsDaterangepicker
+      [bsConfig]="bsConfig"
+      formControlName="dates"
+      *ngIf="dataType === 'history'"
+		/>
+
 		<div class="btn-wrapper">
 			<button type="submit" class="find-btn btn" [disabled]="searchForm.valid">Найти</button>
 			<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
