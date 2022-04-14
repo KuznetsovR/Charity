@@ -37,9 +37,11 @@ import { ClientsPageComponent } from './pages/clients-page/clients-page.componen
 import { ClientsEffects } from './state/effects/clients.effects';
 import { HistoryEffects } from './state/effects/history.effects';
 import { ClientPageComponent } from './pages/client-page/client-page.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale, ruLocale } from 'ngx-bootstrap/chronos';
 
 registerLocaleData(localeRu, 'ru');
-
+defineLocale('ru', ruLocale);
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -56,7 +58,7 @@ registerLocaleData(localeRu, 'ru');
 		ErrorModalComponent,
 		CardsPageComponent,
 		ClientsPageComponent,
-  ClientPageComponent
+		ClientPageComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -69,6 +71,7 @@ registerLocaleData(localeRu, 'ru');
 		TabsModule.forRoot(),
 		BrowserModule,
 		PopoverModule.forRoot(),
+		BsDatepickerModule.forRoot(),
 		StoreModule.forRoot({
 			cards: cardsReducer,
 			clients: clientsReducer,
@@ -82,9 +85,7 @@ registerLocaleData(localeRu, 'ru');
 		HttpClientModule,
 		EffectsModule.forRoot([CardsEffects, ClientsEffects, HistoryEffects])
 	],
-	providers: [
-		{ provide: LOCALE_ID, useValue: 'ru' }
-	],
+	providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}
