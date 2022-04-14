@@ -1,5 +1,5 @@
 <div class="found-card-modal">
-	<form [formGroup]="changeCardForm" (ngSubmit)="change()" class="change-card-form">
+	<form [formGroup]="changeCardForm" class="change-card-form">
 		<div class="info">
 			<div [class.label-for-input]="modalState.dataState === 'changing'">Номер:</div>
 			<div *ngIf="modalState.dataState === 'static' else numberInput">
@@ -57,17 +57,20 @@
 				*ngIf="modalState.dataState === 'static' else approveBtn"
 				class="edit-button btn"
 				(click)="changeDataState('changing')"
+				[disabled]="!data.owner.active || !data.active"
 			>
 				Изменить
 			</button>
 			<ng-template #approveBtn>
-				<button type="submit" class="btn btn-success">Подтвердить изменения</button>
+				<button class="btn btn-success" (click)="change()">Подтвердить изменения</button>
 			</ng-template>
 			<button class="delete-button btn btn-danger" (click)="delete()" *ngIf="data.active else restoreBtn">
 				Удалить
 			</button>
 			<ng-template #restoreBtn>
-				<button class="restore-btn btn btn-success" (click)="restore()" [disabled]="!data.owner.active">Восстановить</button>
+				<button class="restore-btn btn btn-success" (click)="restore()" [disabled]="!data.owner.active">
+					Восстановить
+				</button>
 			</ng-template>
 			<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
 		</div>
