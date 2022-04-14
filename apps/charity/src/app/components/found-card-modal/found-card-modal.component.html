@@ -67,7 +67,7 @@
 				Удалить
 			</button>
 			<ng-template #restoreBtn>
-				<button class="restore-btn btn btn-success" (click)="restore()">Восстановить</button>
+				<button class="restore-btn btn btn-success" (click)="restore()" [disabled]="!data.owner.active">Восстановить</button>
 			</ng-template>
 			<button class="btn close-btn btn-secondary" (click)="closeModal()">Закрыть</button>
 		</div>
