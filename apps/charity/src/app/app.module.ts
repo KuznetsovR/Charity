@@ -13,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormComponent } from './components/form/form.component';
 import { FoundCardModalComponent } from './components/found-card-modal/found-card-modal.component';
-import { FoundClientModalComponent } from './components/found-client-modal/found-client-modal.component';
 import { StoreSelectComponent } from './components/store-select/store-select.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { DataTableComponent } from './components/data-table/data-table.component';
@@ -49,7 +48,6 @@ defineLocale('ru', ruLocale);
 		AddPageComponent,
 		FormComponent,
 		FoundCardModalComponent,
-		FoundClientModalComponent,
 		StoreSelectComponent,
 		DataTableComponent,
 		SearchModalComponent,

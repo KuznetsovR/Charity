@@ -2,13 +2,10 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
-import { ModalOptions } from 'ngx-bootstrap/modal';
 import { Client } from '../../interfaces/client.entity';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalState } from '../../interfaces/modal-state.entity';
-import { getClientsList } from '../../state/actions/clients.actions';
-import { Observable, of, Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Card } from '../../interfaces/card.entity';
 import { getCardList } from '../../state/actions/cards.actions';
@@ -18,7 +15,7 @@ import { getCardList } from '../../state/actions/cards.actions';
 	templateUrl: './client-page.component.html',
 	styleUrls: ['./client-page.component.scss']
 })
-export class ClientPageComponent implements OnInit, OnDestroy {
+export class ClientPageComponent implements OnInit {
 	cards$: Observable<readonly Card[]> = this.store.select('cards');
 	cardKeys = ['Номер', 'Владелец', 'Магазин'];
 	data: Client;
@@ -35,17 +32,11 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		isRequestBad: false
 	};
 	ngOnInit(): void {
-		this.subs.add(
-			this.route.params.subscribe((params: Params) => {
-				const clientId = params.id;
-				this.getClient(clientId);
-				this.getClientCards(clientId);
-			})
-		);
-	}
-
-	ngOnDestroy(): void {
-		this.subs.unsubscribe();
+		this.route.params.subscribe((params: Params) => {
+			const clientId = params.id;
+			this.getClient(clientId);
+			this.getClientCards(clientId);
+		});
 	}
 
 	getClient(clientId: string): void {
@@ -70,8 +61,7 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 	getClientCards(clientId: string): void {
 		this.store.dispatch(
 			getCardList({
-				parameters: { owner: clientId },
-				setNewParams: true
+				parameters: { owner: clientId }
 			})
 		);
 	}
@@ -95,39 +85,37 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		}).subscribe(() => {
 			this.modalState.isRequestBad = false;
 			this.changeDataState('static');
+			this.getClient(this.data.id.toString());
+			this.getClientCards(this.data.id.toString());
 			this.cdr.detectChanges();
-			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
 
 	delete(): void {
-		this.data = {
+		const newClient = {
 			...this.data,
 			active: false
 		};
-		this.callAPI(this.data).subscribe();
+		this.callAPI(newClient).subscribe(() => {
+			this.getClient(this.data.id.toString());
+			this.getClientCards(this.data.id.toString());
+		});
 	}
 
 	restore(): void {
-		this.data = {
+		const newClient = {
 			...this.data,
 			active: true
 		};
-		this.callAPI(this.data).subscribe(() => {
-			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
+		this.callAPI(newClient).subscribe((res: Client) => {
+			if (res.active !== null && res.active !== undefined) {
+				this.data = res;
+				this.getClientCards(this.data.id.toString());
+			}
 		});
 	}
 
 	callAPI(newObject: Client): Observable<Client> {
-		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
-			catchError((err) => {
-				const initialState: ModalOptions = {
-					class: 'modal-dialog-centered',
-					animated: true
-				};
-				// TODO: opening error modal here
-				return of(err);
-			})
-		);
+		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject) as Observable<Client>;
 	}
 }

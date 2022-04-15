@@ -14,7 +14,7 @@ export class ClientsEffects {
 		this.actions$.pipe(
 			ofType(getClientsList),
 			mergeMap((action) =>
-				this.apiService.getRequest('admin/owner', action.parameters, action.setNewParams).pipe(
+				this.apiService.getRequest('admin/owner', action.parameters).pipe(
 					map((clients: Client[]) => {
 						return getClientsListSuccess({ clients });
 					}),

@@ -4,7 +4,7 @@ import { QueryParameters } from '../../interfaces/queryParameters';
 
 export const getCardList = createAction(
 	'[Card List/API] Retrieve cards',
-	props<{ parameters: QueryParameters; setNewParams: boolean }>()
+	props<{ parameters: QueryParameters }>()
 );
 export const getCardListSuccess = createAction(
 	'[Card List/API] Retrieve cards Success',

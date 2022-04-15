@@ -4,7 +4,7 @@ import { QueryParameters } from '../../interfaces/queryParameters';
 
 export const getClientsList = createAction(
 	'[Client List/API] Retrieve clients',
-	props<{ parameters: QueryParameters; setNewParams: boolean }>()
+	props<{ parameters: QueryParameters; }>()
 );
 export const getClientsListSuccess = createAction(
 	'[Client List/API] Retrieve clients Success',

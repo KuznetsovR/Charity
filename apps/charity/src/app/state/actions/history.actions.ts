@@ -4,7 +4,7 @@ import { QueryParameters } from '../../interfaces/queryParameters';
 
 export const getHistory = createAction(
 	'[History/API] Retrieve history',
-	props<{ parameters: QueryParameters; setNewParams: boolean }>()
+	props<{ parameters: QueryParameters }>()
 );
 export const getHistorySuccess = createAction(
 	'[History/API] Retrieve history success',
