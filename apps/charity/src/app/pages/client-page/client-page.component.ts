@@ -2,13 +2,10 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
-import { ModalOptions } from 'ngx-bootstrap/modal';
 import { Client } from '../../interfaces/client.entity';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalState } from '../../interfaces/modal-state.entity';
-import { getClientsList } from '../../state/actions/clients.actions';
-import { Observable, of, Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Card } from '../../interfaces/card.entity';
 import { getCardList } from '../../state/actions/cards.actions';
@@ -95,8 +92,9 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		}).subscribe(() => {
 			this.modalState.isRequestBad = false;
 			this.changeDataState('static');
+			this.getClient(this.data.id.toString());
+			this.getClientCards(this.data.id.toString());
 			this.cdr.detectChanges();
-			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
 		});
 	}
 
@@ -104,6 +102,17 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		const newClient = {
 			...this.data,
 			active: false
+		};
+		this.callAPI(newClient).subscribe(() => {
+			this.getClient(this.data.id.toString());
+			this.getClientCards(this.data.id.toString());
+		});
+	}
+
+	restore(): void {
+		const newClient = {
+			...this.data,
+			active: true
 		};
 		this.callAPI(newClient).subscribe((res: Client) => {
 			if (res.active !== null && res.active !== undefined) {
@@ -113,26 +122,7 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	restore(): void {
-		this.data = {
-			...this.data,
-			active: true
-		};
-		this.callAPI(this.data).subscribe(() => {
-			this.store.dispatch(getClientsList({ parameters: {}, setNewParams: false }));
-		});
-	}
-
 	callAPI(newObject: Client): Observable<Client> {
-		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject).pipe(
-			catchError((err) => {
-				const initialState: ModalOptions = {
-					class: 'modal-dialog-centered',
-					animated: true
-				};
-				// TODO: opening error modal here
-				return of(err);
-			})
-		);
+		return this.apiService.putRequest(`admin/owner/${this.data.id}`, newObject) as Observable<Client>;
 	}
 }
