@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
 import { FoundClientModalComponent } from '../found-client-modal/found-client-modal.component';
@@ -12,6 +12,9 @@ import { AppState } from '../../state/app-state';
 import { ApiService } from '../../services/api.service';
 import { getCardList } from '../../state/actions/cards.actions';
 import { getHistory } from '../../state/actions/history.actions';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-data-table',
@@ -19,7 +22,7 @@ import { getHistory } from '../../state/actions/history.actions';
 	styleUrls: ['./data-table.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DataTableComponent implements OnChanges {
+export class DataTableComponent implements OnChanges, OnInit {
 	@Input() data: Card[] | Client[] | HistoryAction[];
 	@Input() dataKeys: string[];
 	@Input() dataType: string;
@@ -28,7 +31,26 @@ export class DataTableComponent implements OnChanges {
 	// state is initial only if there were no onChanges => it is initial only if server didnt respond
 	searchFiltersApplied = false;
 	bsModalRef?: BsModalRef;
-	constructor(private modalService: BsModalService, private store: Store<AppState>, private apiService: ApiService) {}
+
+	constructor(
+		private modalService: BsModalService,
+		private store: Store<AppState>,
+		private apiService: ApiService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {}
+	ngOnInit(): void {
+			this.route.queryParams.pipe().subscribe((params) => {
+				this.searchFiltersApplied = Object.keys(params).length !== 0;
+			})
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		if (!changes.data.isFirstChange()) {
+			this.isStateInitial = false;
+		}
+	}
+
 	openSearchModal(): void {
 		const initialState: ModalOptions = {
 			class: 'modal-dialog-centered',
@@ -38,12 +60,6 @@ export class DataTableComponent implements OnChanges {
 			}
 		};
 		this.bsModalRef = this.modalService.show(SearchModalComponent, initialState);
-	}
-	ngOnChanges(changes: SimpleChanges): void {
-		if (!changes.data.isFirstChange()) {
-			this.isStateInitial = false;
-		}
-		this.searchFiltersApplied = Object.keys(this.apiService.lastParams).length !== 0;
 	}
 
 	openModal(data: Card | Client): void {
@@ -66,6 +82,7 @@ export class DataTableComponent implements OnChanges {
 		}
 	}
 	clearFilters(): void {
+		this.router.navigate(['/clients'], {});
 		switch (this.dataType) {
 			case 'card':
 				this.store.dispatch(getCardList({ parameters: {}, setNewParams: true }));

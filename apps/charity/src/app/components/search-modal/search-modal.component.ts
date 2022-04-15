@@ -10,6 +10,7 @@ import { getHistory } from '../../state/actions/history.actions';
 import { AppState } from '../../state/app-state';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-search-modal',
@@ -27,7 +28,8 @@ export class SearchModalComponent implements OnInit {
 		public bsModalRef: BsModalRef,
 		private apiService: ApiService,
 		private store: StateStore<AppState>,
-		private localeService: BsLocaleService
+		private localeService: BsLocaleService,
+		private router: Router
 	) {}
 	ngOnInit(): void {
 		this.localeService.use('ru');
@@ -67,8 +69,16 @@ export class SearchModalComponent implements OnInit {
 		this.selectedStore
 			? (params = { ...this.searchForm.value, shop: this.selectedStore.id })
 			: (params = { ...this.searchForm.value });
+		for (const param in params) {
+			if (params[param] === '' && Object.prototype.hasOwnProperty.call(params, param)) {
+				delete params[param];
+			}
+		}
 		switch (this.dataType) {
 			case 'client':
+				this.router.navigate(['/clients'], {
+					queryParams: params
+				});
 				this.store.dispatch(getClientsList({ parameters: params, setNewParams: true }));
 				break;
 			case 'card':
