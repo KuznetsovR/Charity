@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FoundCardModalComponent } from '../found-card-modal/found-card-modal.component';
-import { FoundClientModalComponent } from '../found-client-modal/found-client-modal.component';
 import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Card } from 'src/app/interfaces/card.entity';
 import { Client } from 'src/app/interfaces/client.entity';
@@ -13,8 +12,6 @@ import { ApiService } from '../../services/api.service';
 import { getCardList } from '../../state/actions/cards.actions';
 import { getHistory } from '../../state/actions/history.actions';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-data-table',
@@ -40,9 +37,9 @@ export class DataTableComponent implements OnChanges, OnInit {
 		private router: Router
 	) {}
 	ngOnInit(): void {
-			this.route.queryParams.pipe().subscribe((params) => {
-				this.searchFiltersApplied = Object.keys(params).length !== 0;
-			})
+		this.route.queryParams.pipe().subscribe((params) => {
+			this.searchFiltersApplied = Object.keys(params).length !== 0;
+		});
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -70,16 +67,7 @@ export class DataTableComponent implements OnChanges, OnInit {
 				data
 			}
 		};
-		switch (this.dataType) {
-			case 'card':
-				this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
-				break;
-			case 'client':
-				this.bsModalRef = this.modalService.show(FoundClientModalComponent, initialState);
-				break;
-			default:
-				throw new Error('Unknown data type');
-		}
+		this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
 	}
 	clearFilters(): void {
 		this.router.navigate(['/clients'], {});
@@ -88,7 +76,7 @@ export class DataTableComponent implements OnChanges, OnInit {
 				this.store.dispatch(getCardList({ parameters: {}, setNewParams: true }));
 				break;
 			case 'client':
-				this.store.dispatch(getClientsList({ parameters: {}, setNewParams: true }));
+				this.store.dispatch(getClientsList({ parameters: {} }));
 				break;
 			case 'history':
 				this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));
