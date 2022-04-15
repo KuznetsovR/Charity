@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app-state';
 import { getHistory } from '../state/actions/history.actions';
@@ -8,13 +7,12 @@ import { getHistory } from '../state/actions/history.actions';
 @Injectable({
 	providedIn: 'root'
 })
-export class HistoryResolver implements Resolve<boolean> {
+export class HistoryResolver implements Resolve<void> {
 	constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
 
-	resolve(): Observable<boolean> {
+	resolve(): void {
 		this.route.queryParams.subscribe((params) => {
 			this.store.dispatch(getHistory({ parameters: params }));
 		});
-		return of(true);
 	}
 }
