@@ -101,11 +101,16 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 	}
 
 	delete(): void {
-		this.data = {
+		const newClient = {
 			...this.data,
 			active: false
 		};
-		this.callAPI(this.data).subscribe();
+		this.callAPI(newClient).subscribe((res: Client) => {
+			if (res.active !== null && res.active !== undefined) {
+				this.data = res;
+				this.getClientCards(this.data.id.toString());
+			}
+		});
 	}
 
 	restore(): void {
