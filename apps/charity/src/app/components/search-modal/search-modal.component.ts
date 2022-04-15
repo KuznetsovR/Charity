@@ -82,10 +82,12 @@ export class SearchModalComponent implements OnInit {
 				this.store.dispatch(getClientsList({ parameters: params }));
 				break;
 			case 'card':
+				this.router.navigate(['/cards'], {
+					queryParams: params
+				});
 				this.store.dispatch(
 					getCardList({
 						parameters: params,
-						setNewParams: true
 					})
 				);
 				break;

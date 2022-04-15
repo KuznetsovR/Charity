@@ -70,15 +70,17 @@ export class DataTableComponent implements OnChanges, OnInit {
 		this.bsModalRef = this.modalService.show(FoundCardModalComponent, initialState);
 	}
 	clearFilters(): void {
-		this.router.navigate(['/clients'], {});
 		switch (this.dataType) {
 			case 'card':
-				this.store.dispatch(getCardList({ parameters: {}, setNewParams: true }));
+				this.router.navigate(['/cards'], {});
+				this.store.dispatch(getCardList({ parameters: {} }));
 				break;
 			case 'client':
+				this.router.navigate(['/clients'], {});
 				this.store.dispatch(getClientsList({ parameters: {} }));
 				break;
 			case 'history':
+				this.router.navigate(['/history'], {});
 				this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));
 				break;
 			default:

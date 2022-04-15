@@ -59,7 +59,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.selectedStore.id,
 			active: true
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
+			this.store.dispatch(getCardList({ parameters: {} }));
 		});
 
 		this.changeDataState('static');
@@ -75,7 +75,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.data.shop.id,
 			active: false
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
+			this.store.dispatch(getCardList({ parameters: {} }));
 		});
 	}
 	restore(): void {
@@ -89,7 +89,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.data.shop.id,
 			active: true
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {}, setNewParams: false }));
+			this.store.dispatch(getCardList({ parameters: {} }));
 		});
 	}
 	callAPI(newObject: CardChangeDto): Observable<Client> {

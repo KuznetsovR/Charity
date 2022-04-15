@@ -68,7 +68,6 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		this.store.dispatch(
 			getCardList({
 				parameters: { owner: clientId },
-				setNewParams: true
 			})
 		);
 	}

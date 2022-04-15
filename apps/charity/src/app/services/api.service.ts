@@ -17,27 +17,12 @@ export class ApiService {
 		'Content-Type': 'application/json',
 		Authorization: 'Basic YWRtaW46YWRtaW4='
 	};
-	lastParams = null;
 	constructor(private router: Router, private http: HttpClient) {}
 
-	getRequest(path: string, actionParameters?: QueryParameters, setNew?: boolean): Observable<ResponseTypes> {
-		// if (actionParameters !== undefined && setNew !== undefined) {
-		// 	const parameters = { ...actionParameters };
-		// 	for (const param in parameters) {
-		// 		if (parameters[param] === '' && Object.prototype.hasOwnProperty.call(parameters, param)) {
-		// 			delete parameters[param];
-		// 		}
-		// 	}
-		// 	if (setNew === true) {
-		// 		this.lastParams = parameters;
-		// 	}
-		// 	const params = new HttpParams({ fromObject: this.lastParams });
-		// 	return this.http.get<ResponseTypes>(API_PATH + path, { headers: this.headers, params });
-		// }
+	getRequest(path: string, actionParameters?: QueryParameters): Observable<ResponseTypes> {
 		const parameters = { ...actionParameters };
 		const params = new HttpParams({ fromObject: parameters });
 		return this.http.get<ResponseTypes>(API_PATH + path, { headers: this.headers, params });
-		// return this.http.get<Store[]>(API_PATH + path, { headers: this.headers });
 	}
 
 	putRequest(path: string, newObject: Client | CardChangeDto): Observable<ResponseTypes> {
