@@ -11,11 +11,6 @@ import { HistoryResolver } from '../resolvers/history.resolver';
 
 const routes: Routes = [
 	{
-		path: '',
-		redirectTo: '/history',
-		pathMatch: 'full'
-	},
-	{
 		path: 'add',
 		component: AddPageComponent
 	},
@@ -43,6 +38,10 @@ const routes: Routes = [
 		resolve: {
 			history: HistoryResolver
 		}
+	},
+	{
+		path: '**',
+		redirectTo: '/history'
 	}
 ];
 
