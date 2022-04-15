@@ -13,6 +13,7 @@ import { Client } from '../../interfaces/client.entity';
 import { ModalState } from '../../interfaces/modal-state.entity';
 import { CardChangeDto } from '../../interfaces/card-change.dto';
 import { ErrorModalComponent } from '../error-modal/error-modal.component';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
 	selector: 'app-found-card-modal',
 	templateUrl: './found-card-modal.component.html',
@@ -22,6 +23,8 @@ import { ErrorModalComponent } from '../error-modal/error-modal.component';
 export class FoundCardModalComponent implements OnInit {
 	data: Card;
 	selectedStore: Shop;
+
+	clientId: string;
 
 	changeCardForm: FormGroup;
 	modalState: ModalState = {
@@ -33,9 +36,15 @@ export class FoundCardModalComponent implements OnInit {
 		private store: Store<AppState>,
 		private apiService: ApiService,
 		private bsModalRef: BsModalRef,
-		private modalService: BsModalService
+		private modalService: BsModalService,
+		private route: ActivatedRoute
 	) {}
 	ngOnInit(): void {
+		this.route.firstChild.params.subscribe((params: Params) => {
+			if (params.id !== null && params.id !== undefined) {
+				this.clientId = params.id;
+			}
+		});
 		this.changeCardForm = new FormGroup({
 			ownerId: new FormControl(this.data.owner.id, [Validators.required, Validators.pattern(/^\d+$/i)]),
 			number: new FormControl(this.data.number, [Validators.required, Validators.pattern(/^[A-Za-z\d]+$/)])
@@ -59,7 +68,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.selectedStore.id,
 			active: true
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {} }));
+			this.updateCards();
 		});
 
 		this.changeDataState('static');
@@ -69,13 +78,14 @@ export class FoundCardModalComponent implements OnInit {
 			...this.data,
 			active: false
 		};
+
 		this.callAPI({
 			owner: this.data.owner.id,
 			number: this.data.number,
 			shop: this.data.shop.id,
 			active: false
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {} }));
+			this.updateCards();
 		});
 	}
 	restore(): void {
@@ -89,7 +99,7 @@ export class FoundCardModalComponent implements OnInit {
 			shop: this.data.shop.id,
 			active: true
 		}).subscribe(() => {
-			this.store.dispatch(getCardList({ parameters: {} }));
+			this.updateCards();
 		});
 	}
 	callAPI(newObject: CardChangeDto): Observable<Client> {
@@ -110,6 +120,13 @@ export class FoundCardModalComponent implements OnInit {
 				return of(err);
 			})
 		);
+	}
+	updateCards(): void {
+		if (this.clientId !== null && this.clientId !== undefined) {
+			this.store.dispatch(getCardList({ parameters: { owner: this.clientId } }));
+		} else {
+			this.store.dispatch(getCardList({ parameters: {} }));
+		}
 	}
 	closeModal(): void {
 		this.bsModalRef.hide();

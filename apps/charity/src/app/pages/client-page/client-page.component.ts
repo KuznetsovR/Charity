@@ -15,7 +15,7 @@ import { getCardList } from '../../state/actions/cards.actions';
 	templateUrl: './client-page.component.html',
 	styleUrls: ['./client-page.component.scss']
 })
-export class ClientPageComponent implements OnInit, OnDestroy {
+export class ClientPageComponent implements OnInit {
 	cards$: Observable<readonly Card[]> = this.store.select('cards');
 	cardKeys = ['Номер', 'Владелец', 'Магазин'];
 	data: Client;
@@ -32,17 +32,11 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 		isRequestBad: false
 	};
 	ngOnInit(): void {
-		this.subs.add(
-			this.route.params.subscribe((params: Params) => {
-				const clientId = params.id;
-				this.getClient(clientId);
-				this.getClientCards(clientId);
-			})
-		);
-	}
-
-	ngOnDestroy(): void {
-		this.subs.unsubscribe();
+		this.route.params.subscribe((params: Params) => {
+			const clientId = params.id;
+			this.getClient(clientId);
+			this.getClientCards(clientId);
+		});
 	}
 
 	getClient(clientId: string): void {
@@ -67,7 +61,7 @@ export class ClientPageComponent implements OnInit, OnDestroy {
 	getClientCards(clientId: string): void {
 		this.store.dispatch(
 			getCardList({
-				parameters: { owner: clientId },
+				parameters: { owner: clientId }
 			})
 		);
 	}

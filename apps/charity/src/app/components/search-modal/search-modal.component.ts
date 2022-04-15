@@ -36,23 +36,23 @@ export class SearchModalComponent implements OnInit {
 		switch (this.dataType) {
 			case 'card':
 				this.searchForm = new FormGroup({
-					owner: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-					number: new FormControl('', [Validators.required, Validators.pattern(/^\d{8,20}$/)])
+					owner: new FormControl(''),
+					number: new FormControl('')
 				});
 				break;
 			case 'client':
 				this.searchForm = new FormGroup({
-					passport: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]),
-					name: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-					surname: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)]),
-					patronymic: new FormControl('', [Validators.required, Validators.pattern(/^[а-яё ]+$/i)])
+					passport: new FormControl(''),
+					name: new FormControl(''),
+					surname: new FormControl(''),
+					patronymic: new FormControl('')
 				});
 				break;
 			case 'history':
 				this.searchForm = new FormGroup({
-					cardId: new FormControl('', [Validators.required, Validators.pattern(/^\d$/)]),
-					customerId: new FormControl('', [Validators.required, Validators.pattern(/^\d$/)]),
-					dates: new FormControl('', [Validators.required])
+					cardId: new FormControl(''),
+					customerId: new FormControl(''),
+					dates: new FormControl('')
 				});
 				break;
 			default:
@@ -87,14 +87,19 @@ export class SearchModalComponent implements OnInit {
 				});
 				this.store.dispatch(
 					getCardList({
-						parameters: params,
+						parameters: params
 					})
 				);
 				break;
 			case 'history':
-				params.startDateString = formatDate(params.dates[0], 'yyyy-MM-dd', 'en-US');
-				params.endDateString = formatDate(params.dates[1], 'yyyy-MM-dd', 'en-US');
-				delete params.dates;
+				if (params.dates) {
+					params.startDateString = formatDate(params.dates[0], 'yyyy-MM-dd', 'en-US');
+					params.endDateString = formatDate(params.dates[1], 'yyyy-MM-dd', 'en-US');
+					delete params.dates;
+				}
+				this.router.navigate(['/history'], {
+					queryParams: params
+				});
 				this.store.dispatch(
 					getHistory({
 						parameters: params,
