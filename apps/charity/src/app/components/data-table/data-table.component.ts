@@ -25,6 +25,7 @@ export class DataTableComponent implements OnChanges {
 	@Input() dataType: string;
 	@Input() forOneUser: boolean;
 	isStateInitial = true;
+	// state is initial only if there were no onChanges => it is initial only if server didnt respond
 	searchFiltersApplied = false;
 	bsModalRef?: BsModalRef;
 	constructor(private modalService: BsModalService, private store: Store<AppState>, private apiService: ApiService) {}
