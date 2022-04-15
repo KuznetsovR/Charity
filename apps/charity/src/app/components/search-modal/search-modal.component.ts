@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store as StateStore } from '@ngrx/store';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { getCardList } from '../../state/actions/cards.actions';
@@ -102,8 +102,7 @@ export class SearchModalComponent implements OnInit {
 				});
 				this.store.dispatch(
 					getHistory({
-						parameters: params,
-						setNewParams: true
+						parameters: params
 					})
 				);
 				break;

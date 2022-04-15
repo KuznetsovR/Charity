@@ -81,7 +81,7 @@ export class DataTableComponent implements OnChanges, OnInit {
 				break;
 			case 'history':
 				this.router.navigate(['/history'], {});
-				this.store.dispatch(getHistory({ parameters: {}, setNewParams: true }));
+				this.store.dispatch(getHistory({ parameters: {} }));
 				break;
 			default:
 				throw new Error('Unknown data type');

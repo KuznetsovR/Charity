@@ -7,6 +7,7 @@ import { ClientsPageComponent } from '../pages/clients-page/clients-page.compone
 import { CardsResolver } from '../resolvers/cards.resolver';
 import { ClientsResolver } from '../resolvers/clients.resolver';
 import { ClientPageComponent } from '../pages/client-page/client-page.component';
+import { HistoryResolver } from '../resolvers/history.resolver';
 
 const routes: Routes = [
 	{
@@ -38,7 +39,10 @@ const routes: Routes = [
 	},
 	{
 		path: 'history',
-		component: HistoryPageComponent
+		component: HistoryPageComponent,
+		resolve: {
+			history: HistoryResolver
+		}
 	}
 ];
 
